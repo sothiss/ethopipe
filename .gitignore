@@ -49,3 +49,9 @@ git commit -m "Initial commit: Setup root directory structure and .gitignore"
 
 git remote add origin https://github.com/sothiss/ethopipe.git
 git push -u origin master
+
+# 1. Gather all unstaged structural files (.gitignore, pyproject.toml, index.html)
+git add .
+
+# 2. Commit the modifications with an explicit architectural note
+git commit -m "infrastructure: configure root files and index.html landing page entry point"
