@@ -49,5 +49,3 @@ git commit -m "Initial commit: Setup root directory structure and .gitignore"
 
 git remote add origin https://github.com/sothiss/ethopipe.git
 git push -u origin master
-
-#
