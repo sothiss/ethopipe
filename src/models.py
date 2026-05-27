@@ -1,8 +1,10 @@
-from pydantic import BaseModel, Field
-from typing import Literal, Optional
+from pydantic import BaseModel, Field, ConfigDict
+from typing import Literal, Optional, Union
 from datetime import datetime
 
 class EthologicalObservation(BaseModel):
+    model_config = ConfigDict(strict=True)
+
     # 1. Subject, Taxonomic, and Temporal Identification (Darwin Core Mapped)
     subject_id: str = Field(
         ..., 
@@ -38,7 +40,7 @@ class EthologicalObservation(BaseModel):
         ..., 
         description="Maps to dwc:measurementType. Categorical motor patterns grouped by stress, appeasement, and physiological reactivity [10-15]."
     )
-    behavior_value: str = Field(
+    behavior_value: Union[int, float, str] = Field(
         ..., 
         description="Maps to dwc:measurementValue. Quantitative or categorical behavior data, such as frequency counts or durations [5-7, 9]."
     )
@@ -74,7 +76,7 @@ class EthologicalObservation(BaseModel):
     )
     respiratory_rate_unit: Literal["breaths/min"] = Field(
         "breaths/min", 
-        description="Unit of measurement for respiratory rate."
+        description="Maps to dwc:measurementUnit. Unit of measurement for respiratory rate."
     )
 
     # 5. Methodological Classification (Darwin Core Mapped)
