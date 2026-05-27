@@ -9,10 +9,10 @@
 
 ## 🔬 Core Capabilities
 
-*   **Strict Operational Boundaries:** Leveraging Pydantic v2 for deterministic runtime type checks. Rejects implicit casting and enforces rigorous physiological limits (e.g., heart rates bounded strictly to $30\text{–}250\text{ BPM}$, body temperature to $35.0\text{–}40.0^\circ\text{C}$).
-*   **Darwin Core (DwC) Standardization:** Automatically maps validated outputs to DwC terms (`dwc:individualID`, `dwc:eventDate`, `dwc:locality`, `dwc:measurementType`, `dwc:measurementValue`, `dwc:measurementUnit`, and `dwc:basisOfRecord`), ensuring high interoperability with global biodiversity networks.
-*   **Behavioral Controlled Vocabulary:** Classifies motor patterns strictly against standardized ethograms, supporting categorized states such as stress displacement markers, appease behaviors, and high-reactivity postures (e.g., `licking_of_lips`, `looking_away`, `play_bow`, `lunges`, `cowers`).
-*   **Dual Ingestion Modes:** Engineered to process both manual ethogram logs (`HumanObservation`) and high-frequency physiological telemetry (`MachineObservation`).
+* **Strict Operational Boundaries:** Leveraging Pydantic v2 for deterministic runtime type checks. Rejects implicit casting and enforces rigorous physiological limits (e.g., heart rates bounded strictly to $30\text{–}250\text{ BPM}$, body temperature to $35.0\text{–}40.0^\circ\text{C}$).
+* **Darwin Core (DwC) Standardization:** Automatically maps validated outputs to DwC terms (`dwc:individualID`, `dwc:eventDate`, `dwc:locality`, `dwc:measurementType`, `dwc:measurementValue`, `dwc:measurementUnit`, and `dwc:basisOfRecord`), ensuring high interoperability with global biodiversity networks.
+* **Behavioral Controlled Vocabulary:** Classifies motor patterns strictly against standardized ethograms, supporting categorized states such as stress displacement markers, appease behaviors, and high-reactivity postures (e.g., `licking_of_lips`, `looking_away`, `play_bow`, `lunges`, `cowers`).
+* **Dual Ingestion Modes:** Engineered to process both manual ethogram logs (`HumanObservation`) and high-frequency physiological telemetry (`MachineObservation`).
 
 ---
 
@@ -33,18 +33,20 @@ flowchart TD
 
 ### Prerequisites
 
-*   Python 3.10 or higher
-*   Virtual environment manager (e.g., `venv` or `uv`)
+* Python 3.10 or higher
+* Virtual environment manager (e.g., `venv` or `uv`)
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/sothiss/ethopipe.git
    cd ethopipe
    ```
 
 2. Initialize a virtual environment and install dependencies:
+
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
@@ -101,6 +103,7 @@ EthoPipe is distributed under the **MIT License**. For details, please consult t
 ## 🤝 Contribution Guidelines
 
 We welcome contributions to standardize behavioral vocabularies further. When proposing changes:
+
 1. Ensure all new behavioral codings correspond to validated ethogram dictionaries.
 2. Maintain $100\%$ type coverage and write associated `pytest` suites.
 3. Submit a pull request mapping any novel attributes to appropriate Darwin Core properties.
