@@ -22,7 +22,7 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
 
     # Establish physiological/numerical type mappings to avoid strict validation failures
     int_fields = {"heart_rate", "respiratory_rate", "severity_score"}
-    float_fields = {"body_temp", "latitude", "longitude"}
+    float_fields = {"body_temp", "latitude", "longitude", "cortisol_level"}
 
     for field in int_fields:
         if field in mapped_row:
@@ -78,7 +78,36 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
                 except (ValueError, TypeError):
                     pass
 
+    # Strip and normalise string fields
+    string_fields = {"dog_size_category", "cortisol_unit", "cortisol_matrix", "observation_method"}
+    for field in string_fields:
+        if field in mapped_row:
+            val = mapped_row[field]
+            if isinstance(val, str):
+                mapped_row[field] = val.strip()
+
+    # Map Title Case behaviors from the data dictionary to their snake_case canonical values
+    BEHAVIOR_CANONICAL = {
+        "No Aggression": "no_aggression",
+        "Moderate Aggression": "moderate_aggression",
+        "Serious Aggression": "serious_aggression",
+        "Play Bow": "play_bow",
+        "Licking of Lips": "licking_of_lips",
+        "Looking Away": "looking_away",
+        "Stranger-Directed Aggression": "stranger_directed_aggression",
+        "Owner-Directed Aggression": "owner_directed_aggression",
+        "Dog-Directed Aggression/Fear": "dog_directed_aggression_fear",
+        "Trainability": "trainability",
+        "Separation-Related Behavior": "separation_related_behavior"
+    }
+    if "behavior_type" in mapped_row:
+        bt = mapped_row["behavior_type"]
+        if isinstance(bt, str):
+            bt_stripped = bt.strip()
+            mapped_row["behavior_type"] = BEHAVIOR_CANONICAL.get(bt_stripped, bt_stripped)
+
     return mapped_row
+
 
 
 def load_csv(
