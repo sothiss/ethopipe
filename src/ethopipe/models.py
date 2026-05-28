@@ -182,7 +182,7 @@ class EthologicalObservation(BaseModel):
 
     @model_validator(mode="after")
     def resolve_behavior_type_id(self) -> "EthologicalObservation":
-        if self.behavior_type_id is None and self.behavior_type is not None:
+        if (self.behavior_type_id is None or self.behavior_type_id == "") and self.behavior_type is not None:
             self.behavior_type_id = BEHAVIOR_ONTOLOGY_MAPPING.get(self.behavior_type)
         return self
 

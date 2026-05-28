@@ -84,7 +84,8 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
         if field in mapped_row:
             val = mapped_row[field]
             if isinstance(val, str):
-                mapped_row[field] = val.strip()
+                stripped = val.strip()
+                mapped_row[field] = stripped if stripped != "" else None
 
     # Map Title Case behaviors from the data dictionary to their snake_case canonical values
     BEHAVIOR_CANONICAL = {

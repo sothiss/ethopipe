@@ -248,3 +248,35 @@ def test_load_json_data_dictionary_integration(tmp_path, column_mapping):
     assert valid_obs[0].cortisol_level == 1.2
     assert valid_obs[0].cortisol_matrix == "hair"
 
+def test_ingestion_behavior_ontology_resolution(tmp_path, column_mapping):
+    """Verify that during CSV/JSON ingestion:
+    1. Unmapped behavior_type_id columns auto-populate correctly.
+    2. Explicitly mapped behavior_type_id columns are correctly read and cleaned.
+    """
+    local_mapping = dict(column_mapping)
+    local_mapping["BehaviorOntologyID"] = "behavior_type_id"
+
+    csv_content = (
+        "DogID,LocalTime,Locality,Behavior,Value,Rating,RecordBasis,Notes,BehaviorOntologyID\n"
+        "SUB-DOG-80,2026-05-27T10:00:00,Yard,barks,5,2,HumanObservation,Standard bark,\n"
+        "SUB-DOG-81,2026-05-27T10:00:00,Yard,play_bow,2,1,HumanObservation,Custom bow, http://custom.org/play_bow_uri \n"
+    )
+    csv_file = tmp_path / "test_ontology_ingestion.csv"
+    csv_file.write_text(csv_content, encoding="utf-8")
+
+    valid_obs, quarantine = load_csv(str(csv_file), local_mapping)
+
+    assert len(quarantine) == 0
+    assert len(valid_obs) == 2
+
+    # First row should auto-resolve 'barks' to GO:0071625
+    assert valid_obs[0].subject_id == "SUB-DOG-80"
+    assert valid_obs[0].behavior_type == "barks"
+    assert valid_obs[0].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0071625"
+
+    # Second row should retain the custom behavior_type_id, stripped of spaces
+    assert valid_obs[1].subject_id == "SUB-DOG-81"
+    assert valid_obs[1].behavior_type == "play_bow"
+    assert valid_obs[1].behavior_type_id == "http://custom.org/play_bow_uri"
+
+
