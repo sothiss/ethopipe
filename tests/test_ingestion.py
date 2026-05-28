@@ -14,7 +14,11 @@ def column_mapping() -> dict[str, str]:
         "Rating": "severity_score",
         "HeartRateBPM": "heart_rate",
         "RecordBasis": "observation_method",
-        "Notes": "narrative"
+        "Notes": "narrative",
+        "DogSizeCategory": "dog_size_category",
+        "CortisolLevel": "cortisol_level",
+        "CortisolUnit": "cortisol_unit",
+        "CortisolMatrix": "cortisol_matrix"
     }
 
 def test_load_csv_valid(tmp_path, column_mapping):
