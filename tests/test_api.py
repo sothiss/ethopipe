@@ -45,7 +45,19 @@ def get_api_test_payload() -> dict:
 def test_validate_endpoint_success(client):
     """Verify that /validate statelessly validates a raw payload and normalizes it."""
     payload = get_api_test_payload()
-    response = client.post("/validate", json=payload)
+    mapping = {
+        "DogID": "subject_id",
+        "LocalTime": "timestamp",
+        "Locality": "location",
+        "Behavior": "behavior_type",
+        "Value": "behavior_value",
+        "Rating": "severity_score",
+        "HeartRateBPM": "heart_rate",
+        "RecordBasis": "observation_method",
+        "Notes": "narrative",
+        "DogSizeCategory": "dog_size_category"
+    }
+    response = client.post(f"/validate?mapping={json.dumps(mapping)}", json=payload)
     
     assert response.status_code == 200
     data = response.json()
@@ -64,7 +76,19 @@ def test_validate_endpoint_failure(client):
     # Invalid heart rate (above max limit of 180 for Small dogs)
     payload["HeartRateBPM"] = 190
     
-    response = client.post("/validate", json=payload)
+    mapping = {
+        "DogID": "subject_id",
+        "LocalTime": "timestamp",
+        "Locality": "location",
+        "Behavior": "behavior_type",
+        "Value": "behavior_value",
+        "Rating": "severity_score",
+        "HeartRateBPM": "heart_rate",
+        "RecordBasis": "observation_method",
+        "Notes": "narrative",
+        "DogSizeCategory": "dog_size_category"
+    }
+    response = client.post(f"/validate?mapping={json.dumps(mapping)}", json=payload)
     assert response.status_code == 422
     
     errors = response.json()["detail"]["errors"]
@@ -75,7 +99,7 @@ def test_validate_endpoint_bad_json(client):
     """Verify that /validate returns 400 Bad Request for unparseable payloads."""
     response = client.post("/validate", content="{invalid-json}")
     assert response.status_code == 400
-    assert "payload must be a valid JSON object" in response.json()["detail"].lower()
+    assert "payload must be a valid json object" in response.json()["detail"].lower()
 
 
 def test_ingest_csv_endpoint(client):

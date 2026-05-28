@@ -37,7 +37,10 @@ def get_loader() -> BaseLoader:
     summary="Validate individual observation",
     description="Statelessly validates an individual raw observation and returns resolved Darwin Core terms.",
 )
-async def validate_observation(request: Request):
+async def validate_observation(
+    request: Request,
+    mapping: Optional[str] = Query(None),
+):
     """Parses a single raw JSON body, applies preprocessing, normalizes Title Case
 
     behaviors, and runs strict Pydantic model validation.
@@ -50,8 +53,18 @@ async def validate_observation(request: Request):
             detail="Payload must be a valid JSON object.",
         )
 
+    column_mapping = {}
+    if mapping:
+        try:
+            column_mapping = json.loads(mapping)
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="The 'mapping' query parameter must be valid JSON.",
+            )
+
     # Convert mapping keys or preprocessing rules statelessly
-    processed = _pre_process_row(data, {})
+    processed = _pre_process_row(data, column_mapping)
 
     try:
         observation = EthologicalObservation(**processed)
