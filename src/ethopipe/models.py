@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, model_validator
 from typing import Literal, Optional, Union
 from datetime import datetime
 
@@ -18,6 +18,10 @@ class EthologicalObservation(BaseModel):
         "Canis lupus familiaris", 
         description="Maps to dwc:scientificName. Fixed to the domestic dog [5-8]."
     )
+    dog_size_category: Optional[Literal["Toy", "Small", "Medium", "Large", "Giant", "Puppy"]] = Field(
+        None,
+        description="Dog size category used for size-adjusted physiological validation bounds [5-6]."
+    )
 
     # 2. Spatial Metadata (Darwin Core Mapped)
     location: str = Field(
@@ -35,7 +39,18 @@ class EthologicalObservation(BaseModel):
 
     # 3. Behavioral Measurements (Operational Definitions)
     behavior_type: Literal[
-        "barks", "lunges", "cowers", "stress_markers", "neutral", "play_bow", "licking_of_lips", "looking_away"
+        "barks", "lunges", "cowers", "stress_markers", "neutral", "play_bow", "licking_of_lips", "looking_away",
+        "No Aggression", "no_aggression",
+        "Moderate Aggression", "moderate_aggression",
+        "Serious Aggression", "serious_aggression",
+        "Play Bow",
+        "Licking of Lips",
+        "Looking Away",
+        "Stranger-Directed Aggression", "stranger_directed_aggression",
+        "Owner-Directed Aggression", "owner_directed_aggression",
+        "Dog-Directed Aggression/Fear", "dog_directed_aggression_fear",
+        "Trainability", "trainability",
+        "Separation-Related Behavior", "separation_related_behavior"
     ] = Field(
         ..., 
         description="Maps to dwc:measurementType. Categorical motor patterns grouped by stress, appeasement, and physiological reactivity [10-15]."
@@ -78,6 +93,19 @@ class EthologicalObservation(BaseModel):
         "breaths/min", 
         description="Maps to dwc:measurementUnit. Unit of measurement for respiratory rate."
     )
+    cortisol_level: Optional[float] = Field(
+        None,
+        ge=0.0,
+        description="Maps to dwc:measurementType 'cortisol'. Salivary, hair, fecal, or blood cortisol concentration [9]."
+    )
+    cortisol_unit: Literal["ng/mL"] = Field(
+        "ng/mL",
+        description="Maps to dwc:measurementUnit for cortisol levels."
+    )
+    cortisol_matrix: Optional[Literal["blood", "serum", "plasma", "saliva", "urine", "hair", "feces", "claws"]] = Field(
+        None,
+        description="Biological matrix used for the cortisol assay to enable standardized cross-study comparisons [9]."
+    )
 
     # 5. Methodological Classification (Darwin Core Mapped)
     observation_method: Literal["HumanObservation", "MachineObservation"] = Field(
@@ -90,3 +118,29 @@ class EthologicalObservation(BaseModel):
         ..., 
         description="Unstructured narrative report from which structured data was deterministically parsed [26, 27]."
     )
+
+    @model_validator(mode="after")
+    def validate_size_dependent_heart_rate(self) -> "EthologicalObservation":
+        if self.heart_rate is None or self.dog_size_category is None:
+            return self
+
+        size = self.dog_size_category
+        hr = self.heart_rate
+
+        limits = {
+            "Toy": (80, 200),
+            "Small": (70, 180),
+            "Medium": (50, 140),
+            "Large": (45, 120),
+            "Giant": (40, 110),
+            "Puppy": (100, 220),
+        }
+
+        min_val, max_val = limits[size]
+        if not (min_val <= hr <= max_val):
+            raise ValueError(
+                f"Heart rate {hr} BPM is out of veterinary bounds for a {size} dog ({min_val}-{max_val} BPM)."
+            )
+
+        return self
+
