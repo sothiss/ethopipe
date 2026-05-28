@@ -280,3 +280,48 @@ def test_ingestion_behavior_ontology_resolution(tmp_path, column_mapping):
     assert valid_obs[1].behavior_type_id == "http://custom.org/play_bow_uri"
 
 
+def test_new_vocabulary_behaviors_ingestion(tmp_path, column_mapping):
+    """Verify that the ingestion module correctly parses, maps, and normalizes the new behaviors."""
+    csv_content = (
+        "DogID,LocalTime,Locality,Behavior,Value,Rating,RecordBasis,Notes\n"
+        "SUB-DOG-90,2026-05-27T10:00:00,Yard,Growling,3,3,HumanObservation,Low-frequency growls.\n"
+        "SUB-DOG-91,2026-05-27T10:00:00,Yard,whining,5,,HumanObservation,Stressed whine.\n"
+        "SUB-DOG-92,2026-05-27T10:00:00,Yard,Panting,continuous,,HumanObservation,Non-thermoregulatory panting.\n"
+        "SUB-DOG-93,2026-05-27T10:00:00,Yard,yawning,2,,HumanObservation,Displacement yawning.\n"
+        "SUB-DOG-94,2026-05-27T10:00:00,Yard,Avoidance,1,,HumanObservation,Avoided direct social interaction.\n"
+    )
+    csv_file = tmp_path / "test_new_vocabulary.csv"
+    csv_file.write_text(csv_content, encoding="utf-8")
+
+    valid_obs, quarantine = load_csv(str(csv_file), column_mapping)
+
+    assert len(quarantine) == 0
+    assert len(valid_obs) == 5
+
+    # Check Growling (Title Case normalized to growling, resolved to GO:0071625)
+    assert valid_obs[0].subject_id == "SUB-DOG-90"
+    assert valid_obs[0].behavior_type == "growling"
+    assert valid_obs[0].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0071625"
+
+    # Check whining (remains whining, resolved to GO:0071625)
+    assert valid_obs[1].subject_id == "SUB-DOG-91"
+    assert valid_obs[1].behavior_type == "whining"
+    assert valid_obs[1].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0071625"
+
+    # Check Panting (Title Case normalized to panting, resolved to SYMP:0000345)
+    assert valid_obs[2].subject_id == "SUB-DOG-92"
+    assert valid_obs[2].behavior_type == "panting"
+    assert valid_obs[2].behavior_type_id == "http://purl.obolibrary.org/obo/SYMP_0000345"
+
+    # Check yawning (remains yawning, resolved to NBO:0000074)
+    assert valid_obs[3].subject_id == "SUB-DOG-93"
+    assert valid_obs[3].behavior_type == "yawning"
+    assert valid_obs[3].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000074"
+
+    # Check Avoidance (Title Case normalized to avoidance, resolved to NBO:0000635)
+    assert valid_obs[4].subject_id == "SUB-DOG-94"
+    assert valid_obs[4].behavior_type == "avoidance"
+    assert valid_obs[4].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000635"
+
+
+

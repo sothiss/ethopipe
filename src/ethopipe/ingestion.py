@@ -99,7 +99,12 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
         "Owner-Directed Aggression": "owner_directed_aggression",
         "Dog-Directed Aggression/Fear": "dog_directed_aggression_fear",
         "Trainability": "trainability",
-        "Separation-Related Behavior": "separation_related_behavior"
+        "Separation-Related Behavior": "separation_related_behavior",
+        "Growling": "growling",
+        "Whining": "whining",
+        "Panting": "panting",
+        "Yawning": "yawning",
+        "Avoidance": "avoidance"
     }
     if "behavior_type" in mapped_row:
         bt = mapped_row["behavior_type"]

@@ -19,6 +19,11 @@ BEHAVIOR_ONTOLOGY_MAPPING = {
     "dog_directed_aggression_fear": "http://purl.obolibrary.org/obo/GO_0002118",
     "trainability": "http://purl.obolibrary.org/obo/NBO_0000287",
     "separation_related_behavior": "http://purl.obolibrary.org/obo/NBO_0000535",
+    "growling": "http://purl.obolibrary.org/obo/GO_0071625",
+    "whining": "http://purl.obolibrary.org/obo/GO_0071625",
+    "panting": "http://purl.obolibrary.org/obo/SYMP_0000345",
+    "yawning": "http://purl.obolibrary.org/obo/NBO_0000074",
+    "avoidance": "http://purl.obolibrary.org/obo/NBO_0000635",
     
     # Title Case Mappings for robust lookup support
     "No Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
@@ -31,7 +36,12 @@ BEHAVIOR_ONTOLOGY_MAPPING = {
     "Owner-Directed Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
     "Dog-Directed Aggression/Fear": "http://purl.obolibrary.org/obo/GO_0002118",
     "Trainability": "http://purl.obolibrary.org/obo/NBO_0000287",
-    "Separation-Related Behavior": "http://purl.obolibrary.org/obo/NBO_0000535"
+    "Separation-Related Behavior": "http://purl.obolibrary.org/obo/NBO_0000535",
+    "Growling": "http://purl.obolibrary.org/obo/GO_0071625",
+    "Whining": "http://purl.obolibrary.org/obo/GO_0071625",
+    "Panting": "http://purl.obolibrary.org/obo/SYMP_0000345",
+    "Yawning": "http://purl.obolibrary.org/obo/NBO_0000074",
+    "Avoidance": "http://purl.obolibrary.org/obo/NBO_0000635"
 }
 
 class EthologicalObservation(BaseModel):
@@ -82,7 +92,12 @@ class EthologicalObservation(BaseModel):
         "Owner-Directed Aggression", "owner_directed_aggression",
         "Dog-Directed Aggression/Fear", "dog_directed_aggression_fear",
         "Trainability", "trainability",
-        "Separation-Related Behavior", "separation_related_behavior"
+        "Separation-Related Behavior", "separation_related_behavior",
+        "growling", "Growling",
+        "whining", "Whining",
+        "panting", "Panting",
+        "yawning", "Yawning",
+        "avoidance", "Avoidance"
     ] = Field(
         ..., 
         description="Maps to dwc:measurementType. Categorical motor patterns grouped by stress, appeasement, and physiological reactivity [10-15]."

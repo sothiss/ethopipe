@@ -242,3 +242,31 @@ def test_explicit_behavior_ontology_override():
     obs = EthologicalObservation(**payload)
     assert obs.behavior_type_id == "http://example.org/custom_bark_ontology_id"
 
+def test_new_vocabulary_behaviors_validation_and_resolution():
+    """Verify validation and ontology resolution for the newly added behaviors."""
+    payload = get_valid_payload()
+    
+    test_cases = [
+        ("growling", "Growling", "http://purl.obolibrary.org/obo/GO_0071625"),
+        ("whining", "Whining", "http://purl.obolibrary.org/obo/GO_0071625"),
+        ("panting", "Panting", "http://purl.obolibrary.org/obo/SYMP_0000345"),
+        ("yawning", "Yawning", "http://purl.obolibrary.org/obo/NBO_0000074"),
+        ("avoidance", "Avoidance", "http://purl.obolibrary.org/obo/NBO_0000635"),
+    ]
+    
+    for canonical, title_case, expected_uri in test_cases:
+        # Canonical validation and resolution
+        payload["behavior_type"] = canonical
+        payload["behavior_type_id"] = None
+        obs = EthologicalObservation(**payload)
+        assert obs.behavior_type == canonical
+        assert obs.behavior_type_id == expected_uri
+
+        # Title Case validation and resolution
+        payload["behavior_type"] = title_case
+        payload["behavior_type_id"] = None
+        obs_title = EthologicalObservation(**payload)
+        assert obs_title.behavior_type == title_case
+        assert obs_title.behavior_type_id == expected_uri
+
+
