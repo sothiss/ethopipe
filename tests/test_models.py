@@ -124,3 +124,92 @@ def test_observation_method_controlled_vocabulary():
     with pytest.raises(ValidationError) as exc_info:
         EthologicalObservation(**payload)
     assert "Input should be 'HumanObservation' or 'MachineObservation'" in str(exc_info.value)
+
+def test_size_adjusted_heart_rate():
+    """Verify that size-adjusted heart rate bounds are strictly enforced by model_validator."""
+    payload = get_valid_payload()
+    
+    # Toy dog: limit is 80 - 200 BPM
+    payload["dog_size_category"] = "Toy"
+    
+    # Under boundary
+    payload["heart_rate"] = 79
+    with pytest.raises(ValidationError) as exc_info:
+        EthologicalObservation(**payload)
+    assert "out of veterinary bounds" in str(exc_info.value)
+    
+    # Over boundary
+    payload["heart_rate"] = 201
+    with pytest.raises(ValidationError) as exc_info:
+        EthologicalObservation(**payload)
+    assert "out of veterinary bounds" in str(exc_info.value)
+    
+    # Within bounds should pass
+    payload["heart_rate"] = 150
+    obs = EthologicalObservation(**payload)
+    assert obs.heart_rate == 150
+
+    # Giant dog: limit is 40 - 110 BPM
+    payload["dog_size_category"] = "Giant"
+    
+    # Under boundary
+    payload["heart_rate"] = 39
+    with pytest.raises(ValidationError) as exc_info:
+        EthologicalObservation(**payload)
+    assert "out of veterinary bounds" in str(exc_info.value)
+    
+    # Over boundary
+    payload["heart_rate"] = 111
+    with pytest.raises(ValidationError) as exc_info:
+        EthologicalObservation(**payload)
+    assert "out of veterinary bounds" in str(exc_info.value)
+    
+    # Within bounds should pass
+    payload["heart_rate"] = 65
+    obs = EthologicalObservation(**payload)
+    assert obs.heart_rate == 65
+
+def test_cortisol_validation():
+    """Verify validation boundaries and matrix types for cortisol biomarker measurements."""
+    payload = get_valid_payload()
+    
+    # Valid cortisol payload
+    payload["cortisol_level"] = 3.5
+    payload["cortisol_matrix"] = "saliva"
+    obs = EthologicalObservation(**payload)
+    assert obs.cortisol_level == 3.5
+    assert obs.cortisol_matrix == "saliva"
+    assert obs.cortisol_unit == "ng/mL"
+    
+    # Negative cortisol level is invalid
+    payload["cortisol_level"] = -0.1
+    with pytest.raises(ValidationError):
+        EthologicalObservation(**payload)
+        
+    # Invalid cortisol matrix is rejected
+    payload["cortisol_level"] = 2.0
+    payload["cortisol_matrix"] = "invalid_matrix"
+    with pytest.raises(ValidationError):
+        EthologicalObservation(**payload)
+
+def test_expanded_behavior_controlled_vocabulary():
+    """Verify that all new data dictionary behaviors are validated correctly."""
+    payload = get_valid_payload()
+    
+    # Newly added behavioral terms (Title Case and snake_case)
+    new_behaviors = [
+        "No Aggression", "no_aggression",
+        "Moderate Aggression", "moderate_aggression",
+        "Serious Aggression", "serious_aggression",
+        "Stranger-Directed Aggression", "stranger_directed_aggression",
+        "Owner-Directed Aggression", "owner_directed_aggression",
+        "Dog-Directed Aggression/Fear", "dog_directed_aggression_fear",
+        "Trainability", "trainability",
+        "Separation-Related Behavior", "separation_related_behavior"
+    ]
+    
+    for behavior in new_behaviors:
+        payload["behavior_type"] = behavior
+        obs = EthologicalObservation(**payload)
+        assert obs.behavior_type == behavior
+
