@@ -139,7 +139,10 @@ def load_csv(
                 observation = EthologicalObservation(**processed)
                 valid_observations.append(observation)
             except ValidationError as e:
-                errors = [f"{err['loc'][0]}: {err['msg']}" for err in e.errors()]
+                errors = [
+                    f"{err['loc'][0] if err['loc'] else '__root__'}: {err['msg']}"
+                    for err in e.errors()
+                ]
                 quarantine[idx] = errors
 
     return valid_observations, quarantine
@@ -188,7 +191,10 @@ def load_json(
             observation = EthologicalObservation(**processed)
             valid_observations.append(observation)
         except ValidationError as e:
-            errors = [f"{err['loc'][0]}: {err['msg']}" for err in e.errors()]
+            errors = [
+                f"{err['loc'][0] if err['loc'] else '__root__'}: {err['msg']}"
+                for err in e.errors()
+            ]
             quarantine[idx] = errors
 
     return valid_observations, quarantine
