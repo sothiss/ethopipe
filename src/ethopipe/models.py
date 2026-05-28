@@ -18,7 +18,7 @@ BEHAVIOR_ONTOLOGY_MAPPING = {
     "owner_directed_aggression": "http://purl.obolibrary.org/obo/GO_0002118",
     "dog_directed_aggression_fear": "http://purl.obolibrary.org/obo/GO_0002118",
     "trainability": "http://purl.obolibrary.org/obo/NBO_0000287",
-    "separation_related_behavior": "http://purl.obolibrary.org/obo/NBO_0000244",
+    "separation_related_behavior": "http://purl.obolibrary.org/obo/NBO_0000535",
     
     # Title Case Mappings for robust lookup support
     "No Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
@@ -31,7 +31,7 @@ BEHAVIOR_ONTOLOGY_MAPPING = {
     "Owner-Directed Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
     "Dog-Directed Aggression/Fear": "http://purl.obolibrary.org/obo/GO_0002118",
     "Trainability": "http://purl.obolibrary.org/obo/NBO_0000287",
-    "Separation-Related Behavior": "http://purl.obolibrary.org/obo/NBO_0000244"
+    "Separation-Related Behavior": "http://purl.obolibrary.org/obo/NBO_0000535"
 }
 
 class EthologicalObservation(BaseModel):
