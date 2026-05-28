@@ -1,10 +1,9 @@
-"""Rule-Based Narrative Extractor for EthoPipe to parse unstructured reports."""
-
-import hashlib
 import logging
 import re
 from datetime import datetime
-from typing import Any, Optional, Union
+from typing import Optional, Union
+
+from pydantic import ValidationError
 
 from ethopipe.models import EthologicalObservation
 
