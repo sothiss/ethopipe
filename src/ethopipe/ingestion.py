@@ -79,7 +79,7 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
                     pass
 
     # Strip and normalise string fields
-    string_fields = {"dog_size_category", "cortisol_unit", "cortisol_matrix", "observation_method"}
+    string_fields = {"dog_size_category", "cortisol_unit", "cortisol_matrix", "observation_method", "behavior_type_id"}
     for field in string_fields:
         if field in mapped_row:
             val = mapped_row[field]

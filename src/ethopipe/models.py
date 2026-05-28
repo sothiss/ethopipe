@@ -2,6 +2,38 @@ from pydantic import BaseModel, Field, ConfigDict, model_validator
 from typing import Literal, Optional, Union
 from datetime import datetime
 
+BEHAVIOR_ONTOLOGY_MAPPING = {
+    "barks": "http://purl.obolibrary.org/obo/GO_0071625",
+    "lunges": "http://purl.obolibrary.org/obo/GO_0002118",
+    "cowers": "http://purl.obolibrary.org/obo/NBO_0000244",
+    "stress_markers": "http://purl.obolibrary.org/obo/NBO_0000000",
+    "neutral": "http://purl.obolibrary.org/obo/NBO_0000311",
+    "play_bow": "http://purl.obolibrary.org/obo/NBO_0000109",
+    "licking_of_lips": "http://purl.obolibrary.org/obo/NBO_0000038",
+    "looking_away": "http://purl.obolibrary.org/obo/NBO_0000039",
+    "no_aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "moderate_aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "serious_aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "stranger_directed_aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "owner_directed_aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "dog_directed_aggression_fear": "http://purl.obolibrary.org/obo/GO_0002118",
+    "trainability": "http://purl.obolibrary.org/obo/NBO_0000287",
+    "separation_related_behavior": "http://purl.obolibrary.org/obo/NBO_0000244",
+    
+    # Title Case Mappings for robust lookup support
+    "No Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "Moderate Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "Serious Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "Play Bow": "http://purl.obolibrary.org/obo/NBO_0000109",
+    "Licking of Lips": "http://purl.obolibrary.org/obo/NBO_0000038",
+    "Looking Away": "http://purl.obolibrary.org/obo/NBO_0000039",
+    "Stranger-Directed Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "Owner-Directed Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
+    "Dog-Directed Aggression/Fear": "http://purl.obolibrary.org/obo/GO_0002118",
+    "Trainability": "http://purl.obolibrary.org/obo/NBO_0000287",
+    "Separation-Related Behavior": "http://purl.obolibrary.org/obo/NBO_0000244"
+}
+
 class EthologicalObservation(BaseModel):
     model_config = ConfigDict(strict=True)
 
@@ -63,6 +95,10 @@ class EthologicalObservation(BaseModel):
         None, 
         ge=1, le=5, 
         description="A standardized intensity scale mapping minor displacement cues (1) to overt physiological or behavioral reactivity (5) [14, 15]."
+    )
+    behavior_type_id: Optional[str] = Field(
+        None,
+        description="Maps to dwc:measurementTypeID. Standardized ontology URI for the behavioral category."
     )
 
     # 4. Physiological Measurements (Veterinary Validated Bounds)
@@ -142,5 +178,11 @@ class EthologicalObservation(BaseModel):
                 f"Heart rate {hr} BPM is out of veterinary bounds for a {size} dog ({min_val}-{max_val} BPM)."
             )
 
+        return self
+
+    @model_validator(mode="after")
+    def resolve_behavior_type_id(self) -> "EthologicalObservation":
+        if self.behavior_type_id is None and self.behavior_type is not None:
+            self.behavior_type_id = BEHAVIOR_ONTOLOGY_MAPPING.get(self.behavior_type)
         return self
 

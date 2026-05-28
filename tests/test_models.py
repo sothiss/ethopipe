@@ -213,3 +213,32 @@ def test_expanded_behavior_controlled_vocabulary():
         obs = EthologicalObservation(**payload)
         assert obs.behavior_type == behavior
 
+def test_automatic_behavior_ontology_resolution():
+    """Verify that the model auto-populates behavior_type_id using BEHAVIOR_ONTOLOGY_MAPPING."""
+    payload = get_valid_payload()
+    
+    # 1. Test standard 'barks' vocalization
+    payload["behavior_type"] = "barks"
+    payload["behavior_type_id"] = None
+    obs = EthologicalObservation(**payload)
+    assert obs.behavior_type_id == "http://purl.obolibrary.org/obo/GO_0071625"
+
+    # 2. Test standard 'play_bow' behavior
+    payload["behavior_type"] = "play_bow"
+    obs = EthologicalObservation(**payload)
+    assert obs.behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000109"
+
+    # 3. Test Title Case behavior
+    payload["behavior_type"] = "Stranger-Directed Aggression"
+    obs = EthologicalObservation(**payload)
+    assert obs.behavior_type_id == "http://purl.obolibrary.org/obo/GO_0002118"
+
+def test_explicit_behavior_ontology_override():
+    """Verify that passing an explicit behavior_type_id overrides default mapping."""
+    payload = get_valid_payload()
+    payload["behavior_type"] = "barks"
+    payload["behavior_type_id"] = "http://example.org/custom_bark_ontology_id"
+    
+    obs = EthologicalObservation(**payload)
+    assert obs.behavior_type_id == "http://example.org/custom_bark_ontology_id"
+
