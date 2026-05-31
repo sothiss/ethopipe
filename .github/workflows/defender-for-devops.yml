@@ -36,7 +36,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@692973e3d937129bcbf406c5517fec2272e8221d # v4.1.7
+    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
     - uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
       with:
         dotnet-version: |
