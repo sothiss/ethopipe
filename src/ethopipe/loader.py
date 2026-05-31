@@ -6,13 +6,18 @@ import hashlib
 import logging
 import os
 from abc import ABC, abstractmethod
-from typing import Any, Optional, Union
+from typing import Any, Optional, TYPE_CHECKING
 
 from ethopipe.models import EthologicalObservation
 
+if TYPE_CHECKING:
+    from google.cloud.firestore import AsyncClient as FirestoreAsyncClient
+else:
+    FirestoreAsyncClient = Any
+
 try:
     from google.cloud import firestore
-except ModuleNotFoundError:  # pragma: no cover - exercised in environments without Firestore dependency
+except ModuleNotFoundError:  # pragma: no cover
     firestore = None
 
 logger = logging.getLogger("ethopipe.loader")
@@ -62,7 +67,7 @@ class FirestoreLoader(BaseLoader):
     def __init__(
         self,
         collection_name: str = "observations",
-        client: Optional[Any] = None,
+        client: Optional[FirestoreAsyncClient] = None,
     ):
         """Initializes the FirestoreLoader.
 
@@ -75,7 +80,7 @@ class FirestoreLoader(BaseLoader):
         self._client = client
 
     @property
-    def client(self) -> Any:
+    def client(self) -> FirestoreAsyncClient:
         """Lazy-loaded firestore.AsyncClient.
 
         Automatically detects FIRESTORE_EMULATOR_HOST environment variable to support
