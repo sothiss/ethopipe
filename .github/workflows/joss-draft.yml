@@ -1,5 +1,9 @@
 name: Generate JOSS Draft PDF
 
+permissions:
+    contents: read
+    actions: read
+
 on:
     push:
         branches: ["master", "main"]
