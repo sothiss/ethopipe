@@ -104,7 +104,14 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
         "Whining": "whining",
         "Panting": "panting",
         "Yawning": "yawning",
-        "Avoidance": "avoidance"
+        "Avoidance": "avoidance",
+        "Lip Licking": "lip_licking",
+        "Trembling": "trembling",
+        "Pacing": "pacing",
+        "Vocalization Whine": "vocalization_whine",
+        "Posture Freeze": "posture_freeze",
+        "Tail Tuck": "tail_tuck",
+        "Avoidance Social": "avoidance_social"
     }
     if "behavior_type" in mapped_row:
         bt = mapped_row["behavior_type"]
