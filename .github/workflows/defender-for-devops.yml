@@ -36,16 +36,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-    - uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
+    - uses: actions/checkout@v4 # v4.1.7
+    - uses: actions/setup-dotnet@v4 # v4.3.0
       with:
         dotnet-version: |
           5.0.x
           6.0.x
     - name: Run Microsoft Security DevOps
-      uses: microsoft/security-devops-action@c0f73835fa1f80fc12cc96ea7f9185735705f433 # v1.12.0
+      uses: microsoft/security-devops-action@v1 # v1.12.0
       id: msdo
     - name: Upload results to Security tab
-      uses: github/codeql-action/upload-sarif@d1eb1207b45130d2edf64a0aa1c93be23510592f # v4
+      uses: github/codeql-action/upload-sarif@v4 # v4
       with:
         sarif_file: ${{ steps.msdo.outputs.sarifFile }}
