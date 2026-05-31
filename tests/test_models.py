@@ -249,9 +249,16 @@ def test_new_vocabulary_behaviors_validation_and_resolution():
     test_cases = [
         ("growling", "Growling", "http://purl.obolibrary.org/obo/GO_0071625"),
         ("whining", "Whining", "http://purl.obolibrary.org/obo/GO_0071625"),
-        ("panting", "Panting", "http://purl.obolibrary.org/obo/SYMP_0000345"),
+        ("panting", "Panting", "http://purl.obolibrary.org/obo/GO_0001659"),
         ("yawning", "Yawning", "http://purl.obolibrary.org/obo/NBO_0000074"),
         ("avoidance", "Avoidance", "http://purl.obolibrary.org/obo/NBO_0000635"),
+        ("lip_licking", "Lip Licking", "http://purl.obolibrary.org/obo/NBO_0000216"),
+        ("trembling", "Trembling", "http://purl.obolibrary.org/obo/VT_0002236"),
+        ("pacing", "Pacing", "http://purl.obolibrary.org/obo/NBO_0000100"),
+        ("vocalization_whine", "Vocalization Whine", "http://purl.obolibrary.org/obo/NBO_0000233"),
+        ("posture_freeze", "Posture Freeze", "http://purl.obolibrary.org/obo/NBO_0000282"),
+        ("tail_tuck", "Tail Tuck", "http://purl.obolibrary.org/obo/VT_0000030"),
+        ("avoidance_social", "Avoidance Social", "http://purl.obolibrary.org/obo/NBO_0000171"),
     ]
     
     for canonical, title_case, expected_uri in test_cases:
@@ -261,12 +268,69 @@ def test_new_vocabulary_behaviors_validation_and_resolution():
         obs = EthologicalObservation(**payload)
         assert obs.behavior_type == canonical
         assert obs.behavior_type_id == expected_uri
-
+ 
         # Title Case validation and resolution
         payload["behavior_type"] = title_case
         payload["behavior_type_id"] = None
         obs_title = EthologicalObservation(**payload)
         assert obs_title.behavior_type == title_case
         assert obs_title.behavior_type_id == expected_uri
+
+
+def test_canonical_behavior_semantic_models():
+    """Verify that CanonicalBehavior enum and associated semantic models validate correctly."""
+    from ethopipe.models import CanonicalBehavior, BehavioralObservation, EthogramExtractionLog
+
+    # Check Enum elements
+    assert CanonicalBehavior.LIP_LICKING == "lip_licking"
+    assert CanonicalBehavior.TREMBLING == "trembling"
+    assert CanonicalBehavior.PACING == "pacing"
+    assert CanonicalBehavior.VOCALIZATION_WHINE == "vocalization_whine"
+    assert CanonicalBehavior.POSTURE_FREEZE == "posture_freeze"
+    assert CanonicalBehavior.PANTING == "panting"
+    assert CanonicalBehavior.TAIL_TUCK == "tail_tuck"
+    assert CanonicalBehavior.AVOIDANCE_SOCIAL == "avoidance_social"
+
+    # Valid BehavioralObservation payload
+    obs_payload = {
+        "behavior": "lip_licking",
+        "ontology_uri": "NBO:0000216",
+        "source_text": "Subject was licking lips",
+        "confidence_score": 0.95
+    }
+
+    obs = BehavioralObservation(**obs_payload)
+    assert obs.behavior == CanonicalBehavior.LIP_LICKING
+    assert obs.ontology_uri == "NBO:0000216"
+    assert obs.confidence_score == 0.95
+
+    # Invalid confidence score raises ValidationError
+    obs_payload["confidence_score"] = 1.05
+    with pytest.raises(ValidationError):
+        BehavioralObservation(**obs_payload)
+
+    # Valid EthogramExtractionLog payload
+    log_payload = {
+        "observations": [
+            {
+                "behavior": "posture_freeze",
+                "ontology_uri": "NBO:0000282",
+                "source_text": "Subject froze stiffly",
+                "confidence_score": 0.88
+            },
+            {
+                "behavior": "tail_tuck",
+                "ontology_uri": "VT:0000030",
+                "source_text": "dog tucked its tail",
+                "confidence_score": 0.90
+            }
+        ]
+    }
+
+    log = EthogramExtractionLog(**log_payload)
+    assert len(log.observations) == 2
+    assert log.observations[0].behavior == CanonicalBehavior.POSTURE_FREEZE
+    assert log.observations[1].behavior == CanonicalBehavior.TAIL_TUCK
+
 
 

@@ -110,3 +110,54 @@ def test_multiple_behaviors_extraction():
     assert obs_list[1].heart_rate == 110
     assert obs_list[1].severity_score == 4
     assert obs_list[1].dog_size_category == "Small"
+
+
+def test_new_canonical_behaviors_extraction():
+    """Verify narrative extraction and normalization for the new canonical canine behaviors."""
+    ts = datetime.now()
+
+    # Trembling (continuous)
+    obs_tremble = extract_from_narrative(
+        "Subject dog was trembling continuously.", "SUB-DOG-704", ts, "Room B"
+    )
+    assert len(obs_tremble) == 1
+    assert obs_tremble[0].behavior_type == "trembling"
+    assert obs_tremble[0].behavior_value == "continuous"
+    assert obs_tremble[0].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0002236"
+
+    # Pacing (numeric count)
+    obs_pacing = extract_from_narrative(
+        "Canine paced twice in circle.", "SUB-DOG-704", ts, "Room B"
+    )
+    assert len(obs_pacing) == 1
+    assert obs_pacing[0].behavior_type == "pacing"
+    assert obs_pacing[0].behavior_value == 2
+    assert obs_pacing[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000100"
+
+    # Posture Freeze (written count)
+    obs_freeze = extract_from_narrative(
+        "Subject exhibited posture freeze once.", "SUB-DOG-704", ts, "Room B"
+    )
+    assert len(obs_freeze) == 1
+    assert obs_freeze[0].behavior_type == "posture_freeze"
+    assert obs_freeze[0].behavior_value == 1
+    assert obs_freeze[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000282"
+
+    # Tail Tuck (thrice)
+    obs_tail = extract_from_narrative(
+        "Tail tucked thrice when barrier removed.", "SUB-DOG-704", ts, "Room B"
+    )
+    assert len(obs_tail) == 1
+    assert obs_tail[0].behavior_type == "tail_tuck"
+    assert obs_tail[0].behavior_value == 3
+    assert obs_tail[0].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0000030"
+
+    # Avoidance Social (avoided)
+    obs_avoid = extract_from_narrative(
+        "Subject avoided direct social interaction.", "SUB-DOG-704", ts, "Room B"
+    )
+    assert len(obs_avoid) == 1
+    assert obs_avoid[0].behavior_type == "avoidance_social"
+    assert obs_avoid[0].behavior_value == 1
+    assert obs_avoid[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000171"
+
