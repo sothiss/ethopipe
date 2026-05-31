@@ -308,10 +308,10 @@ def test_new_vocabulary_behaviors_ingestion(tmp_path, column_mapping):
     assert valid_obs[1].behavior_type == "whining"
     assert valid_obs[1].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0071625"
 
-    # Check Panting (Title Case normalized to panting, resolved to SYMP:0000345)
+    # Check Panting (Title Case normalized to panting, resolved to GO:0001659)
     assert valid_obs[2].subject_id == "SUB-DOG-92"
     assert valid_obs[2].behavior_type == "panting"
-    assert valid_obs[2].behavior_type_id == "http://purl.obolibrary.org/obo/SYMP_0000345"
+    assert valid_obs[2].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0001659"
 
     # Check yawning (remains yawning, resolved to NBO:0000074)
     assert valid_obs[3].subject_id == "SUB-DOG-93"
@@ -322,6 +322,49 @@ def test_new_vocabulary_behaviors_ingestion(tmp_path, column_mapping):
     assert valid_obs[4].subject_id == "SUB-DOG-94"
     assert valid_obs[4].behavior_type == "avoidance"
     assert valid_obs[4].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000635"
+
+
+def test_canonical_behaviors_ingestion_normalization(tmp_path, column_mapping):
+    """Verify that CSV ingestion normalized and maps all new canonical canine behavior enums."""
+    csv_content = (
+        "DogID,LocalTime,Locality,Behavior,Value,Rating,RecordBasis,Notes\n"
+        "SUB-DOG-100,2026-05-27T10:00:00,Yard,Lip Licking,5,,HumanObservation,Lips licked.\n"
+        "SUB-DOG-101,2026-05-27T10:00:00,Yard,Trembling,3,4,HumanObservation,Stressed trembling.\n"
+        "SUB-DOG-102,2026-05-27T10:00:00,Yard,pacing,continuous,,HumanObservation,Stereotypic pacing.\n"
+        "SUB-DOG-103,2026-05-27T10:00:00,Yard,Vocalization Whine,1,,HumanObservation,Whining observed.\n"
+        "SUB-DOG-104,2026-05-27T10:00:00,Yard,Posture Freeze,1,,HumanObservation,Freezing posture.\n"
+        "SUB-DOG-105,2026-05-27T10:00:00,Yard,Tail Tuck,thrice,,HumanObservation,Clamped tail tucked.\n"
+        "SUB-DOG-106,2026-05-27T10:00:00,Yard,Avoidance Social,2,,HumanObservation,Avoided social stimulus.\n"
+    )
+    csv_file = tmp_path / "test_canonical_vocab.csv"
+    csv_file.write_text(csv_content, encoding="utf-8")
+
+    valid_obs, quarantine = load_csv(str(csv_file), column_mapping)
+
+    assert len(quarantine) == 0
+    assert len(valid_obs) == 7
+
+    assert valid_obs[0].behavior_type == "lip_licking"
+    assert valid_obs[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000216"
+
+    assert valid_obs[1].behavior_type == "trembling"
+    assert valid_obs[1].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0002236"
+
+    assert valid_obs[2].behavior_type == "pacing"
+    assert valid_obs[2].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000100"
+
+    assert valid_obs[3].behavior_type == "vocalization_whine"
+    assert valid_obs[3].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000233"
+
+    assert valid_obs[4].behavior_type == "posture_freeze"
+    assert valid_obs[4].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000282"
+
+    assert valid_obs[5].behavior_type == "tail_tuck"
+    assert valid_obs[5].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0000030"
+
+    assert valid_obs[6].behavior_type == "avoidance_social"
+    assert valid_obs[6].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000171"
+
 
 
 
