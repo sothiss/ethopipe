@@ -1,0 +1,33 @@
+name: Generate JOSS Draft PDF
+
+on:
+    push:
+        branches: ["master", "main"]
+        paths:
+            - "paper.md"
+            - "paper.bib"
+            - ".github/workflows/joss-draft.yml"
+    pull_request:
+        paths:
+            - "paper.md"
+            - "paper.bib"
+
+jobs:
+    build-draft:
+        runs-on: ubuntu-latest
+        name: Compile JOSS Manuscript
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Generate PDF using Open Journals Toolchain
+              uses: openjournals/openjournals-draft-action@master
+              with:
+                  journal: joss
+                  paper-path: paper.md
+
+            - name: Upload PDF Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ethopipe-joss-draft
+                  path: paper.pdf
