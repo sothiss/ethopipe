@@ -81,7 +81,7 @@ class FirestoreLoader(BaseLoader):
 
     @property
     def client(self) -> FirestoreAsyncClient:
-        """Lazy-loaded firestore.AsyncClient.
+        """Lazy-loaded Firestore AsyncClient.
 
         Automatically detects FIRESTORE_EMULATOR_HOST environment variable to support
         safe, local development and regression testing.
