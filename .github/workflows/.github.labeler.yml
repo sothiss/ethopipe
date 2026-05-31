@@ -1,14 +1,15 @@
-# .github/labeler.yml
-documentation:
-  - changed-files:
-    - any-glob-match-pattern: 'docs/**'
-    - any-glob-match-pattern: '*.md'
+name: "Pull Request Labeler"
+on:
+  - pull_request_target
 
-bug:
-  - changed-files:
-    - any-glob-match-pattern: 'src/**'
-
-feature:
-  - changed-files:
-    - any-glob-match-pattern: 'src/**'
-    - any-glob-match-pattern: 'tests/**'
+jobs:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Labeler
+        uses: actions/labeler@v5
+        with:
+          configuration-path: .github/labeler.yml
