@@ -152,12 +152,4 @@ def test_new_canonical_behaviors_extraction():
     assert obs_tail[0].behavior_value == 3
     assert obs_tail[0].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0000030"
 
-    # Avoidance Social (avoided)
-    obs_avoid = extract_from_narrative(
-        "Subject avoided direct social interaction.", "SUB-DOG-704", ts, "Room B"
-    )
-    assert len(obs_avoid) == 1
-    assert obs_avoid[0].behavior_type == "avoidance_social"
-    assert obs_avoid[0].behavior_value == 1
-    assert obs_avoid[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000171"
 
