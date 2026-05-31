@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, ConfigDict, model_validator
-from typing import Literal, Optional, Union
+from typing import Literal, Optional, Union, List
 from datetime import datetime
+from enum import Enum
 
 BEHAVIOR_ONTOLOGY_MAPPING = {
     "barks": "http://purl.obolibrary.org/obo/GO_0071625",
@@ -21,9 +22,16 @@ BEHAVIOR_ONTOLOGY_MAPPING = {
     "separation_related_behavior": "http://purl.obolibrary.org/obo/NBO_0000535",
     "growling": "http://purl.obolibrary.org/obo/GO_0071625",
     "whining": "http://purl.obolibrary.org/obo/GO_0071625",
-    "panting": "http://purl.obolibrary.org/obo/SYMP_0000345",
+    "panting": "http://purl.obolibrary.org/obo/GO_0001659",
     "yawning": "http://purl.obolibrary.org/obo/NBO_0000074",
     "avoidance": "http://purl.obolibrary.org/obo/NBO_0000635",
+    "lip_licking": "http://purl.obolibrary.org/obo/NBO_0000216",
+    "trembling": "http://purl.obolibrary.org/obo/VT_0002236",
+    "pacing": "http://purl.obolibrary.org/obo/NBO_0000100",
+    "vocalization_whine": "http://purl.obolibrary.org/obo/NBO_0000233",
+    "posture_freeze": "http://purl.obolibrary.org/obo/NBO_0000282",
+    "tail_tuck": "http://purl.obolibrary.org/obo/VT_0000030",
+    "avoidance_social": "http://purl.obolibrary.org/obo/NBO_0000171",
     
     # Title Case Mappings for robust lookup support
     "No Aggression": "http://purl.obolibrary.org/obo/GO_0002118",
@@ -39,9 +47,16 @@ BEHAVIOR_ONTOLOGY_MAPPING = {
     "Separation-Related Behavior": "http://purl.obolibrary.org/obo/NBO_0000535",
     "Growling": "http://purl.obolibrary.org/obo/GO_0071625",
     "Whining": "http://purl.obolibrary.org/obo/GO_0071625",
-    "Panting": "http://purl.obolibrary.org/obo/SYMP_0000345",
+    "Panting": "http://purl.obolibrary.org/obo/GO_0001659",
     "Yawning": "http://purl.obolibrary.org/obo/NBO_0000074",
-    "Avoidance": "http://purl.obolibrary.org/obo/NBO_0000635"
+    "Avoidance": "http://purl.obolibrary.org/obo/NBO_0000635",
+    "Lip Licking": "http://purl.obolibrary.org/obo/NBO_0000216",
+    "Trembling": "http://purl.obolibrary.org/obo/VT_0002236",
+    "Pacing": "http://purl.obolibrary.org/obo/NBO_0000100",
+    "Vocalization Whine": "http://purl.obolibrary.org/obo/NBO_0000233",
+    "Posture Freeze": "http://purl.obolibrary.org/obo/NBO_0000282",
+    "Tail Tuck": "http://purl.obolibrary.org/obo/VT_0000030",
+    "Avoidance Social": "http://purl.obolibrary.org/obo/NBO_0000171"
 }
 
 class EthologicalObservation(BaseModel):
@@ -97,7 +112,14 @@ class EthologicalObservation(BaseModel):
         "whining", "Whining",
         "panting", "Panting",
         "yawning", "Yawning",
-        "avoidance", "Avoidance"
+        "avoidance", "Avoidance",
+        "lip_licking", "Lip Licking",
+        "trembling", "Trembling",
+        "pacing", "Pacing",
+        "vocalization_whine", "Vocalization Whine",
+        "posture_freeze", "Posture Freeze",
+        "tail_tuck", "Tail Tuck",
+        "avoidance_social", "Avoidance Social"
     ] = Field(
         ..., 
         description="Maps to dwc:measurementType. Categorical motor patterns grouped by stress, appeasement, and physiological reactivity [10-15]."
@@ -200,4 +222,68 @@ class EthologicalObservation(BaseModel):
         if (self.behavior_type_id is None or self.behavior_type_id == "") and self.behavior_type is not None:
             self.behavior_type_id = BEHAVIOR_ONTOLOGY_MAPPING.get(self.behavior_type)
         return self
+
+
+class CanonicalBehavior(str, Enum):
+    """
+    Strict enumerations for mapped canine behaviors. 
+    Prevents the agent from hallucinating non-standard behavioral identifiers.
+    """
+    LIP_LICKING = "lip_licking"
+    TREMBLING = "trembling"
+    PACING = "pacing"
+    VOCALIZATION_WHINE = "vocalization_whine"
+    POSTURE_FREEZE = "posture_freeze"
+    PANTING = "panting"
+    TAIL_TUCK = "tail_tuck"
+    AVOIDANCE_SOCIAL = "avoidance_social"
+
+
+class BehavioralObservation(BaseModel):
+    """
+    Model representing a single deterministic behavioral observation.
+    Semantic agents must map unstructured text strictly to these fields based on the operational definitions.
+    """
+    behavior: CanonicalBehavior = Field(
+        ...,
+        description=(
+            "The canonical identifier mapped from the unstructured text. "
+            "Strict operational boundaries apply: "
+            "1. lip_licking: Tongue sweeps nose/lips without food. "
+            "2. trembling: High-frequency body shaking/shivering. "
+            "3. pacing: Stereotypic locomotion back and forth or circular. "
+            "4. vocalization_whine: High-pitched tonal sound. "
+            "5. posture_freeze: Complete, stiff immobility while alert. "
+            "6. panting: Rapid open-mouth breathing indicating arousal. "
+            "7. tail_tuck: Tail clamped downward between hind legs. "
+            "8. avoidance_social: Physical retreat or gaze aversion from stimuli."
+        )
+    )
+    ontology_uri: str = Field(
+        ...,
+        description=(
+            "The precise ontological target URI associated with the behavior. "
+            "Mapping: lip_licking=NBO:0000216, trembling=VT:0002236, pacing=NBO:0000100, "
+            "vocalization_whine=NBO:0000233, posture_freeze=NBO:0000282, "
+            "panting=GO:0001659, tail_tuck=VT:0000030, avoidance_social=NBO:0000171."
+        )
+    )
+    source_text: str = Field(
+        ...,
+        description="The exact raw substring extracted from the handler notes that triggered this classification."
+    )
+    confidence_score: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="The semantic agent's confidence score (0.0 to 1.0) regarding the accuracy of this behavioral mapping."
+    )
+
+
+class EthogramExtractionLog(BaseModel):
+    """Root model for parsing a complete unstructured handler log."""
+    observations: List[BehavioralObservation] = Field(
+        default_factory=list,
+        description="A comprehensive array of all deterministic behavioral observations isolated from the text."
+    )
 

@@ -85,6 +85,41 @@ BEHAVIOR_RULES = {
         re.compile(r"(?i)\b(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\s+(?:loo(?:k|ks|ked|king)?\s*away)\b"),
         re.compile(r"(?i)\b(?:loo(?:k|ks|ked|king)?\s*away)\s+(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\b"),
         re.compile(r"(?i)\b(?:loo(?:k|ks|ked|king)?\s*away)\b")
+    ],
+    "lip_licking": [
+        re.compile(r"(?i)\b(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\s+(?:lic(?:k|ks|ked|king)?\s*(?:of\s*)?lips?|lip\s*lic(?:k|ks|ked|king)?)\b"),
+        re.compile(r"(?i)\b(?:lic(?:k|ks|ked|king)?\s*(?:of\s*)?lips?|lip\s*lic(?:k|ks|ked|king)?)\s+(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\b"),
+        re.compile(r"(?i)\b(?:lic(?:k|ks|ked|king)?\s*(?:of\s*)?lips?|lip\s*lic(?:k|ks|ked|king)?)\b")
+    ],
+    "vocalization_whine": [
+        re.compile(r"(?i)\b(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\s+whin(?:e|es|ed|ing)?\b"),
+        re.compile(r"(?i)\bwhin(?:e|es|ed|ing)?\s+(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\b"),
+        re.compile(r"(?i)\bwhin(?:e|es|ed|ing)?\b")
+    ],
+    "avoidance_social": [
+        re.compile(r"(?i)\b(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\s+avoid(?:s|ed|ing|ance)?\b"),
+        re.compile(r"(?i)\bavoid(?:s|ed|ing|ance)?\s+(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\b"),
+        re.compile(r"(?i)\bavoid(?:s|ed|ing|ance)?\b")
+    ],
+    "trembling": [
+        re.compile(r"(?i)\b(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\s+(?:trembl(?:e|es|ed|ing)|shak(?:e|es|ed|ing)|shiver(?:s|ed|ing)?)\b"),
+        re.compile(r"(?i)\b(?:trembl(?:e|es|ed|ing)|shak(?:e|es|ed|ing)|shiver(?:s|ed|ing)?)\s+(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\b"),
+        re.compile(r"(?i)\b(?:trembl(?:e|es|ed|ing)|shak(?:e|es|ed|ing)|shiver(?:s|ed|ing)?)\b")
+    ],
+    "pacing": [
+        re.compile(r"(?i)\b(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\s+(?:pac(?:e|es|ed|ing)|circl(?:e|es|ed|ing)?)\b"),
+        re.compile(r"(?i)\b(?:pac(?:e|es|ed|ing)|circl(?:e|es|ed|ing)?)\s+(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\b"),
+        re.compile(r"(?i)\b(?:pac(?:e|es|ed|ing)|circl(?:e|es|ed|ing)?)\b")
+    ],
+    "posture_freeze": [
+        re.compile(r"(?i)\b(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\s+(?:freez(?:e|es|ing)|froze(?:n)?|stiff\s+immobility)\b"),
+        re.compile(r"(?i)\b(?:freez(?:e|es|ing)|froze(?:n)?|stiff\s+immobility)\s+(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\b"),
+        re.compile(r"(?i)\b(?:freez(?:e|es|ing)|froze(?:n)?|stiff\s+immobility)\b")
+    ],
+    "tail_tuck": [
+        re.compile(r"(?i)\b(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\s+(?:tail\s*tuc(?:k|ks|ked|king)|tuc(?:k|ks|ked|king)\s*tail|clamp(?:s|ed|ing)?\s*tail)\b"),
+        re.compile(r"(?i)\b(?:tail\s*tuc(?:k|ks|ked|king)|tuc(?:k|ks|ked|king)\s*tail|clamp(?:s|ed|ing)?\s*tail)\s+(\d+|once|twice|thrice|one|two|three|four|five|continuous(?:ly)?)\b"),
+        re.compile(r"(?i)\b(?:tail\s*tuc(?:k|ks|ked|king)|tuc(?:k|ks|ked|king)\s*tail|clamp(?:s|ed|ing)?\s*tail)\b")
     ]
 }
 
