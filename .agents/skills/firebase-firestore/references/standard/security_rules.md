@@ -174,7 +174,7 @@ function isValidList(list, maxSize) {
 //
 // Validate optional string (if present, must be string and within length)
 function isValidOptionalString(field, minLen, maxLen) {
-  return !('field' in request.resource.data) ||
+  return !(field in request.resource.data) ||
          (request.resource.data[field] is string &&
           request.resource.data[field].size() >= minLen &&
           request.resource.data[field].size() <= maxLen);
