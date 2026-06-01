@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "sothiss", email = "sothiss@example.com"}
+    {name = "Alice Severi Gonçalves", email = "harley.girlu2@gmail.com"}
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -32,6 +32,7 @@ dev = [
     "pytest-cov>=4.0.0",
     "black>=23.0.0",
     "ruff>=0.1.0",
+    "httpx>=0.20.0",
 ]
 
 [tool.hatch.build.targets.wheel]

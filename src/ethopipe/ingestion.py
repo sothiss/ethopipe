@@ -5,10 +5,12 @@ import json
 from datetime import datetime
 from typing import Any, Optional
 from pydantic import ValidationError
-from ethopipe.models import EthologicalObservation
+from ethopipe.models import EthologicalObservation, QuarantineRecord
 
 
-def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) -> dict[str, Any]:
+def _pre_process_row(
+    raw_row: dict[str, Any], column_mapping: dict[str, str]
+) -> dict[str, Any]:
     """Translates raw dict keys and performs type pre-processing to accommodate
 
     ConfigDict(strict=True) on Pydantic models.
@@ -22,7 +24,7 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
 
     # Establish physiological/numerical type mappings to avoid strict validation failures
     int_fields = {"heart_rate", "respiratory_rate", "severity_score"}
-    float_fields = {"body_temp", "latitude", "longitude"}
+    float_fields = {"body_temp", "latitude", "longitude", "cortisol_level"}
 
     for field in int_fields:
         if field in mapped_row:
@@ -78,12 +80,61 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
                 except (ValueError, TypeError):
                     pass
 
+    # Strip and normalise string fields
+    string_fields = {
+        "dog_size_category",
+        "cortisol_unit",
+        "cortisol_matrix",
+        "observation_method",
+        "behavior_type_id",
+    }
+    for field in string_fields:
+        if field in mapped_row:
+            val = mapped_row[field]
+            if isinstance(val, str):
+                stripped = val.strip()
+                mapped_row[field] = stripped if stripped != "" else None
+
+    # Map Title Case behaviors from the data dictionary to their snake_case canonical values
+    BEHAVIOR_CANONICAL = {
+        "No Aggression": "no_aggression",
+        "Moderate Aggression": "moderate_aggression",
+        "Serious Aggression": "serious_aggression",
+        "Play Bow": "play_bow",
+        "Licking of Lips": "licking_of_lips",
+        "Looking Away": "looking_away",
+        "Stranger-Directed Aggression": "stranger_directed_aggression",
+        "Owner-Directed Aggression": "owner_directed_aggression",
+        "Dog-Directed Aggression/Fear": "dog_directed_aggression_fear",
+        "Trainability": "trainability",
+        "Separation-Related Behavior": "separation_related_behavior",
+        "Growling": "growling",
+        "Whining": "whining",
+        "Panting": "panting",
+        "Yawning": "yawning",
+        "Avoidance": "avoidance",
+        "Lip Licking": "lip_licking",
+        "Trembling": "trembling",
+        "Pacing": "pacing",
+        "Vocalization Whine": "vocalization_whine",
+        "Posture Freeze": "posture_freeze",
+        "Tail Tuck": "tail_tuck",
+        "Avoidance Social": "avoidance_social",
+    }
+    if "behavior_type" in mapped_row:
+        bt = mapped_row["behavior_type"]
+        if isinstance(bt, str):
+            bt_stripped = bt.strip()
+            mapped_row["behavior_type"] = BEHAVIOR_CANONICAL.get(
+                bt_stripped, bt_stripped
+            )
+
     return mapped_row
 
 
 def load_csv(
     file_path: str, column_mapping: dict[str, str]
-) -> tuple[list[EthologicalObservation], dict[int, list[str]]]:
+) -> tuple[list[EthologicalObservation], list[QuarantineRecord]]:
     """Ingests dog records from a CSV file, applies column mapping, validates
 
     against EthologicalObservation schema, and isolates errant lines.
@@ -94,13 +145,12 @@ def load_csv(
           Pydantic model fields.
 
     Returns:
-        tuple[list[EthologicalObservation], dict[int, list[str]]]:
+        tuple[list[EthologicalObservation], list[QuarantineRecord]]:
             1. Validated EthologicalObservation list
-            2. Quarantine dictionary mapping 1-indexed row numbers to error
-            lists.
+            2. Quarantine list of QuarantineRecord objects.
     """
     valid_observations = []
-    quarantine: dict[int, list[str]] = {}
+    quarantine: list[QuarantineRecord] = []
 
     with open(file_path, mode="r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -110,15 +160,25 @@ def load_csv(
                 observation = EthologicalObservation(**processed)
                 valid_observations.append(observation)
             except ValidationError as e:
-                errors = [f"{err['loc'][0]}: {err['msg']}" for err in e.errors()]
-                quarantine[idx] = errors
+                errors = [
+                    f"{err['loc'][0] if err['loc'] else '__root__'}: {err['msg']}"
+                    for err in e.errors()
+                ]
+                quarantine.append(
+                    QuarantineRecord(
+                        raw_payload=row,
+                        errors=errors,
+                        ingested_at=datetime.now(),
+                        original_index=idx,
+                    )
+                )
 
     return valid_observations, quarantine
 
 
 def load_json(
     file_path: str, column_mapping: Optional[dict[str, str]] = None
-) -> tuple[list[EthologicalObservation], dict[int, list[str]]]:
+) -> tuple[list[EthologicalObservation], list[QuarantineRecord]]:
     """Ingests dog records from a JSON file, applies column mapping, validates
 
     against EthologicalObservation schema, and isolates errant objects.
@@ -129,29 +189,49 @@ def load_json(
           model fields.
 
     Returns:
-        tuple[list[EthologicalObservation], dict[int, list[str]]]:
+        tuple[list[EthologicalObservation], list[QuarantineRecord]]:
             1. Validated EthologicalObservation list
-            2. Quarantine dictionary mapping 1-indexed item indices to error
-            lists.
+            2. Quarantine list of QuarantineRecord objects.
     """
     valid_observations = []
-    quarantine: dict[int, list[str]] = {}
+    quarantine: list[QuarantineRecord] = []
     mapping = column_mapping or {}
 
     with open(file_path, mode="r", encoding="utf-8") as f:
         try:
             data = json.load(f)
         except json.JSONDecodeError as e:
-            quarantine[0] = [f"JSON parsing failed: {str(e)}"]
+            quarantine.append(
+                QuarantineRecord(
+                    raw_payload={"error": "JSON Decode Error"},
+                    errors=[f"JSON parsing failed: {str(e)}"],
+                    ingested_at=datetime.now(),
+                    original_index=0,
+                )
+            )
             return [], quarantine
 
     if not isinstance(data, list):
-        quarantine[0] = ["Expected JSON file to contain a list of records"]
+        quarantine.append(
+            QuarantineRecord(
+                raw_payload={"error": "Invalid JSON format"},
+                errors=["Expected JSON file to contain a list of records"],
+                ingested_at=datetime.now(),
+                original_index=0,
+            )
+        )
         return [], quarantine
 
     for idx, item in enumerate(data, start=1):
         if not isinstance(item, dict):
-            quarantine[idx] = ["Expected record to be a JSON object (dict)"]
+            quarantine.append(
+                QuarantineRecord(
+                    raw_payload={"item": item},
+                    errors=["Expected record to be a JSON object (dict)"],
+                    ingested_at=datetime.now(),
+                    original_index=idx,
+                )
+            )
             continue
 
         processed = _pre_process_row(item, mapping)
@@ -159,7 +239,17 @@ def load_json(
             observation = EthologicalObservation(**processed)
             valid_observations.append(observation)
         except ValidationError as e:
-            errors = [f"{err['loc'][0]}: {err['msg']}" for err in e.errors()]
-            quarantine[idx] = errors
+            errors = [
+                f"{err['loc'][0] if err['loc'] else '__root__'}: {err['msg']}"
+                for err in e.errors()
+            ]
+            quarantine.append(
+                QuarantineRecord(
+                    raw_payload=item,
+                    errors=errors,
+                    ingested_at=datetime.now(),
+                    original_index=idx,
+                )
+            )
 
     return valid_observations, quarantine

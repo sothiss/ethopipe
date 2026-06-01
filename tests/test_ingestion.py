@@ -3,6 +3,7 @@ from datetime import datetime
 import pytest
 from ethopipe.ingestion import load_csv, load_json
 
+
 @pytest.fixture
 def column_mapping() -> dict[str, str]:
     return {
@@ -14,8 +15,13 @@ def column_mapping() -> dict[str, str]:
         "Rating": "severity_score",
         "HeartRateBPM": "heart_rate",
         "RecordBasis": "observation_method",
-        "Notes": "narrative"
+        "Notes": "narrative",
+        "DogSizeCategory": "dog_size_category",
+        "CortisolLevel": "cortisol_level",
+        "CortisolUnit": "cortisol_unit",
+        "CortisolMatrix": "cortisol_matrix",
     }
+
 
 def test_load_csv_valid(tmp_path, column_mapping):
     """Verify that a well-formed CSV file is successfully ingested and translated."""
@@ -49,6 +55,7 @@ def test_load_csv_valid(tmp_path, column_mapping):
     assert valid_obs[1].severity_score is None
     assert valid_obs[1].heart_rate == 78
 
+
 def test_load_csv_quarantine(tmp_path, column_mapping):
     """Verify that malformed rows in a CSV are quarantined without halting ingestion."""
     csv_content = (
@@ -71,14 +78,17 @@ def test_load_csv_quarantine(tmp_path, column_mapping):
 
     # Errant rows 2, 3, and 4 should be quarantined
     assert len(quarantine) == 3
-    assert 2 in quarantine
-    assert 3 in quarantine
-    assert 4 in quarantine
+    quarantine_indices = {q.original_index for q in quarantine}
+    assert 2 in quarantine_indices
+    assert 3 in quarantine_indices
+    assert 4 in quarantine_indices
 
     # Verify descriptions in quarantine logs
-    assert any("behavior_type" in err for err in quarantine[2])
-    assert any("heart_rate" in err for err in quarantine[3])
-    assert any("heart_rate" in err for err in quarantine[4])
+    q_dict = {q.original_index: q.errors for q in quarantine}
+    assert any("behavior_type" in err for err in q_dict[2])
+    assert any("heart_rate" in err for err in q_dict[3])
+    assert any("heart_rate" in err for err in q_dict[4])
+
 
 def test_load_json_valid(tmp_path, column_mapping):
     """Verify that a standard JSON list is successfully parsed and validated."""
@@ -92,7 +102,7 @@ def test_load_json_valid(tmp_path, column_mapping):
             "Rating": 3,
             "HeartRateBPM": 140,
             "RecordBasis": "HumanObservation",
-            "Notes": "Subject cowered behind observer for 10 seconds."
+            "Notes": "Subject cowered behind observer for 10 seconds.",
         },
         {
             "DogID": "SUB-DOG-11",
@@ -103,8 +113,8 @@ def test_load_json_valid(tmp_path, column_mapping):
             "Rating": 1,
             "HeartRateBPM": 72,
             "RecordBasis": "HumanObservation",
-            "Notes": "Relaxed body posture."
-        }
+            "Notes": "Relaxed body posture.",
+        },
     ]
     json_file = tmp_path / "test_valid.json"
     json_file.write_text(json.dumps(json_data), encoding="utf-8")
@@ -115,6 +125,7 @@ def test_load_json_valid(tmp_path, column_mapping):
     assert len(valid_obs) == 2
     assert valid_obs[0].subject_id == "SUB-DOG-10"
     assert valid_obs[1].subject_id == "SUB-DOG-11"
+
 
 def test_load_json_quarantine(tmp_path, column_mapping):
     """Verify that bad elements in a JSON array are isolated and logged."""
@@ -128,7 +139,7 @@ def test_load_json_quarantine(tmp_path, column_mapping):
             "Rating": 3,
             "HeartRateBPM": 140,
             "RecordBasis": "HumanObservation",
-            "Notes": "Valid row."
+            "Notes": "Valid row.",
         },
         "not-a-dict-item",  # Should trigger non-dict quarantine
         {
@@ -140,8 +151,8 @@ def test_load_json_quarantine(tmp_path, column_mapping):
             "Rating": 3,
             "HeartRateBPM": 260,  # HR too high
             "RecordBasis": "HumanObservation",
-            "Notes": "Bad HR."
-        }
+            "Notes": "Bad HR.",
+        },
     ]
     json_file = tmp_path / "test_quarantine.json"
     json_file.write_text(json.dumps(json_data), encoding="utf-8")
@@ -152,8 +163,10 @@ def test_load_json_quarantine(tmp_path, column_mapping):
     assert valid_obs[0].subject_id == "SUB-DOG-10"
 
     assert len(quarantine) == 2
-    assert quarantine[2] == ["Expected record to be a JSON object (dict)"]
-    assert any("heart_rate" in err for err in quarantine[3])
+    q_dict = {q.original_index: q.errors for q in quarantine}
+    assert q_dict[2] == ["Expected record to be a JSON object (dict)"]
+    assert any("heart_rate" in err for err in q_dict[3])
+
 
 def test_load_json_corrupted(tmp_path):
     """Verify that completely unparseable JSON files return a file-level error."""
@@ -161,7 +174,206 @@ def test_load_json_corrupted(tmp_path):
     json_file.write_text("{invalid-json-schema", encoding="utf-8")
 
     valid_obs, quarantine = load_json(str(json_file))
-    
+
     assert len(valid_obs) == 0
-    assert 0 in quarantine
-    assert any("JSON parsing failed" in err for err in quarantine[0])
+    assert len(quarantine) == 1
+    assert quarantine[0].original_index == 0
+    assert any("JSON parsing failed" in err for err in quarantine[0].errors)
+
+
+def test_load_csv_data_dictionary_integration(tmp_path, column_mapping):
+    """Verify end-to-end CSV ingestion with size category, cortisol levels, and Title Case normalisation."""
+    csv_content = (
+        "DogID,LocalTime,Locality,Behavior,Value,Rating,HeartRateBPM,RecordBasis,Notes,DogSizeCategory,CortisolLevel,CortisolMatrix\n"
+        "SUB-DOG-50,2026-05-27T10:00:00,Yard,No Aggression,1,1,85,HumanObservation,Observed no aggression.,Toy,2.4,saliva\n"
+        "SUB-DOG-51,2026-05-27T10:00:00,Yard,Licking of Lips,3,2,195,HumanObservation,Stressed licking.,Toy,3.1,saliva\n"
+        "SUB-DOG-52,2026-05-27T10:00:00,Yard,Play Bow,2,1,75,HumanObservation,Toy dog with too low HR.,Toy,1.8,saliva\n"
+    )
+    csv_file = tmp_path / "test_data_dict.csv"
+    csv_file.write_text(csv_content, encoding="utf-8")
+
+    valid_obs, quarantine = load_csv(str(csv_file), column_mapping)
+
+    # Valid rows 1 and 2 should pass
+    # Row 3 (SUB-DOG-52) is a Toy dog with HR 75 BPM, which is below the size-adjusted min limit of 80 BPM! Should be quarantined.
+    assert len(valid_obs) == 2
+    assert len(quarantine) == 1
+    assert quarantine[0].original_index == 3
+    assert any("out of veterinary bounds" in err for err in quarantine[0].errors)
+
+    # Assert Title Case behavior was successfully canonicalized to snake_case in _pre_process_row
+    assert valid_obs[0].behavior_type == "no_aggression"
+    assert valid_obs[0].dog_size_category == "Toy"
+    assert valid_obs[0].cortisol_level == 2.4
+    assert valid_obs[0].cortisol_matrix == "saliva"
+
+    assert valid_obs[1].behavior_type == "licking_of_lips"
+    assert valid_obs[1].heart_rate == 195
+
+
+def test_load_json_data_dictionary_integration(tmp_path, column_mapping):
+    """Verify end-to-end JSON ingestion with size category, cortisol levels, and Title Case normalisation."""
+    json_data = [
+        {
+            "DogID": "SUB-DOG-60",
+            "LocalTime": "2026-05-27T12:00:00",
+            "Locality": "Room C",
+            "Behavior": "Stranger-Directed Aggression",
+            "Value": "1 occurrence",
+            "Rating": 3,
+            "HeartRateBPM": 60,
+            "RecordBasis": "HumanObservation",
+            "Notes": "Growled at stranger.",
+            "DogSizeCategory": "Giant",
+            "CortisolLevel": "1.2",
+            "CortisolMatrix": "hair",
+        },
+        {
+            "DogID": "SUB-DOG-61",
+            "LocalTime": "2026-05-27T12:00:00",
+            "Locality": "Room C",
+            "Behavior": "Play Bow",
+            "Value": "2 bows",
+            "Rating": 1,
+            "HeartRateBPM": 120,  # Giant dog with HR 120 (max for Giant is 110)
+            "RecordBasis": "HumanObservation",
+            "Notes": "Too high HR for Giant.",
+            "DogSizeCategory": "Giant",
+            "CortisolLevel": "0.8",
+            "CortisolMatrix": "hair",
+        },
+    ]
+    json_file = tmp_path / "test_data_dict.json"
+    json_file.write_text(json.dumps(json_data), encoding="utf-8")
+
+    valid_obs, quarantine = load_json(str(json_file), column_mapping)
+
+    # SUB-DOG-60 should pass (HR 60 is within Giant bounds 40-110)
+    # SUB-DOG-61 should be quarantined (HR 120 is above Giant bounds 40-110)
+    assert len(valid_obs) == 1
+    assert len(quarantine) == 1
+    assert quarantine[0].original_index == 2
+    assert any("out of veterinary bounds" in err for err in quarantine[0].errors)
+
+    assert valid_obs[0].subject_id == "SUB-DOG-60"
+    assert valid_obs[0].behavior_type == "stranger_directed_aggression"
+    assert valid_obs[0].cortisol_level == 1.2
+    assert valid_obs[0].cortisol_matrix == "hair"
+
+
+def test_ingestion_behavior_ontology_resolution(tmp_path, column_mapping):
+    """Verify that during CSV/JSON ingestion:
+    1. Unmapped behavior_type_id columns auto-populate correctly.
+    2. Explicitly mapped behavior_type_id columns are correctly read and cleaned.
+    """
+    local_mapping = dict(column_mapping)
+    local_mapping["BehaviorOntologyID"] = "behavior_type_id"
+
+    csv_content = (
+        "DogID,LocalTime,Locality,Behavior,Value,Rating,RecordBasis,Notes,BehaviorOntologyID\n"
+        "SUB-DOG-80,2026-05-27T10:00:00,Yard,barks,5,2,HumanObservation,Standard bark,\n"
+        "SUB-DOG-81,2026-05-27T10:00:00,Yard,play_bow,2,1,HumanObservation,Custom bow, http://custom.org/play_bow_uri \n"
+    )
+    csv_file = tmp_path / "test_ontology_ingestion.csv"
+    csv_file.write_text(csv_content, encoding="utf-8")
+
+    valid_obs, quarantine = load_csv(str(csv_file), local_mapping)
+
+    assert len(quarantine) == 0
+    assert len(valid_obs) == 2
+
+    # First row should auto-resolve 'barks' to GO:0071625
+    assert valid_obs[0].subject_id == "SUB-DOG-80"
+    assert valid_obs[0].behavior_type == "barks"
+    assert valid_obs[0].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0071625"
+
+    # Second row should retain the custom behavior_type_id, stripped of spaces
+    assert valid_obs[1].subject_id == "SUB-DOG-81"
+    assert valid_obs[1].behavior_type == "play_bow"
+    assert valid_obs[1].behavior_type_id == "http://custom.org/play_bow_uri"
+
+
+def test_new_vocabulary_behaviors_ingestion(tmp_path, column_mapping):
+    """Verify that the ingestion module correctly parses, maps, and normalizes the new behaviors."""
+    csv_content = (
+        "DogID,LocalTime,Locality,Behavior,Value,Rating,RecordBasis,Notes\n"
+        "SUB-DOG-90,2026-05-27T10:00:00,Yard,Growling,3,3,HumanObservation,Low-frequency growls.\n"
+        "SUB-DOG-91,2026-05-27T10:00:00,Yard,whining,5,,HumanObservation,Stressed whine.\n"
+        "SUB-DOG-92,2026-05-27T10:00:00,Yard,Panting,continuous,,HumanObservation,Non-thermoregulatory panting.\n"
+        "SUB-DOG-93,2026-05-27T10:00:00,Yard,yawning,2,,HumanObservation,Displacement yawning.\n"
+        "SUB-DOG-94,2026-05-27T10:00:00,Yard,Avoidance,1,,HumanObservation,Avoided direct social interaction.\n"
+    )
+    csv_file = tmp_path / "test_new_vocabulary.csv"
+    csv_file.write_text(csv_content, encoding="utf-8")
+
+    valid_obs, quarantine = load_csv(str(csv_file), column_mapping)
+
+    assert len(quarantine) == 0
+    assert len(valid_obs) == 5
+
+    # Check Growling (Title Case normalized to growling, resolved to GO:0071625)
+    assert valid_obs[0].subject_id == "SUB-DOG-90"
+    assert valid_obs[0].behavior_type == "growling"
+    assert valid_obs[0].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0071625"
+
+    # Check whining (remains whining, resolved to GO:0071625)
+    assert valid_obs[1].subject_id == "SUB-DOG-91"
+    assert valid_obs[1].behavior_type == "whining"
+    assert valid_obs[1].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0071625"
+
+    # Check Panting (Title Case normalized to panting, resolved to GO:0001659)
+    assert valid_obs[2].subject_id == "SUB-DOG-92"
+    assert valid_obs[2].behavior_type == "panting"
+    assert valid_obs[2].behavior_type_id == "http://purl.obolibrary.org/obo/GO_0001659"
+
+    # Check yawning (remains yawning, resolved to NBO:0000074)
+    assert valid_obs[3].subject_id == "SUB-DOG-93"
+    assert valid_obs[3].behavior_type == "yawning"
+    assert valid_obs[3].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000074"
+
+    # Check Avoidance (Title Case normalized to avoidance, resolved to NBO:0000635)
+    assert valid_obs[4].subject_id == "SUB-DOG-94"
+    assert valid_obs[4].behavior_type == "avoidance"
+    assert valid_obs[4].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000635"
+
+
+def test_canonical_behaviors_ingestion_normalization(tmp_path, column_mapping):
+    """Verify that CSV ingestion normalized and maps all new canonical canine behavior enums."""
+    csv_content = (
+        "DogID,LocalTime,Locality,Behavior,Value,Rating,RecordBasis,Notes\n"
+        "SUB-DOG-100,2026-05-27T10:00:00,Yard,Lip Licking,5,,HumanObservation,Lips licked.\n"
+        "SUB-DOG-101,2026-05-27T10:00:00,Yard,Trembling,3,4,HumanObservation,Stressed trembling.\n"
+        "SUB-DOG-102,2026-05-27T10:00:00,Yard,pacing,continuous,,HumanObservation,Stereotypic pacing.\n"
+        "SUB-DOG-103,2026-05-27T10:00:00,Yard,Vocalization Whine,1,,HumanObservation,Whining observed.\n"
+        "SUB-DOG-104,2026-05-27T10:00:00,Yard,Posture Freeze,1,,HumanObservation,Freezing posture.\n"
+        "SUB-DOG-105,2026-05-27T10:00:00,Yard,Tail Tuck,thrice,,HumanObservation,Clamped tail tucked.\n"
+        "SUB-DOG-106,2026-05-27T10:00:00,Yard,Avoidance Social,2,,HumanObservation,Avoided social stimulus.\n"
+    )
+    csv_file = tmp_path / "test_canonical_vocab.csv"
+    csv_file.write_text(csv_content, encoding="utf-8")
+
+    valid_obs, quarantine = load_csv(str(csv_file), column_mapping)
+
+    assert len(quarantine) == 0
+    assert len(valid_obs) == 7
+
+    assert valid_obs[0].behavior_type == "lip_licking"
+    assert valid_obs[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000216"
+
+    assert valid_obs[1].behavior_type == "trembling"
+    assert valid_obs[1].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0002236"
+
+    assert valid_obs[2].behavior_type == "pacing"
+    assert valid_obs[2].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000100"
+
+    assert valid_obs[3].behavior_type == "vocalization_whine"
+    assert valid_obs[3].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000233"
+
+    assert valid_obs[4].behavior_type == "posture_freeze"
+    assert valid_obs[4].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000282"
+
+    assert valid_obs[5].behavior_type == "tail_tuck"
+    assert valid_obs[5].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0000030"
+
+    assert valid_obs[6].behavior_type == "avoidance_social"
+    assert valid_obs[6].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000171"
