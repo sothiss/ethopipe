@@ -192,11 +192,15 @@ async def ingest_json(
     # Batch persist validated records
     loaded_ids = await loader.load_observations_batch(valid_obs)
 
+    # Batch persist quarantine records
+    quarantine_ids = await loader.load_quarantine_batch(quarantine)
+
     return {
         "status": "success" if not quarantine else "partial_success",
         "processed_count": len(valid_obs) + len(quarantine),
         "valid_count": len(valid_obs),
         "quarantine_count": len(quarantine),
         "loaded_ids": loaded_ids,
-        "quarantine": quarantine,
+        "quarantine_ids": quarantine_ids,
+        "quarantine": {str(q.original_index): q.errors for q in quarantine},
     }

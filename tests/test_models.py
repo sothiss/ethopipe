@@ -333,4 +333,28 @@ def test_canonical_behavior_semantic_models():
     assert log.observations[1].behavior == CanonicalBehavior.TAIL_TUCK
 
 
+def test_quarantine_record_validation():
+    """Verify that QuarantineRecord validates successfully and enforces strict types."""
+    from ethopipe.models import QuarantineRecord
+
+    payload = {
+        "raw_payload": {"subject_id": "DOG1", "heart_rate": "invalid_hr"},
+        "errors": ["heart_rate: Input should be a valid integer"],
+        "ingested_at": datetime.now(),
+        "original_index": 5
+    }
+
+    rec = QuarantineRecord(**payload)
+    assert rec.raw_payload == {"subject_id": "DOG1", "heart_rate": "invalid_hr"}
+    assert len(rec.errors) == 1
+    assert rec.errors[0] == "heart_rate: Input should be a valid integer"
+    assert rec.original_index == 5
+
+    # Test type enforcement
+    payload["original_index"] = "not-an-int"
+    with pytest.raises(ValidationError):
+        QuarantineRecord(**payload)
+
+
+
 

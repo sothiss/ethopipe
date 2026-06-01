@@ -10,7 +10,7 @@ from ethopipe.loader import (
     FirestoreLoader,
     generate_observation_doc_id,
 )
-from ethopipe.models import EthologicalObservation
+from ethopipe.models import EthologicalObservation, QuarantineRecord
 
 
 def get_test_payload() -> dict:
@@ -189,4 +189,84 @@ def test_firestore_loader_missing_dependency():
         assert "google-cloud-firestore is required" in str(exc_info.value)
     finally:
         loader.firestore = orig_firestore
+
+
+def test_firestore_loader_quarantine_batch_load():
+    """Verify that a batch of quarantine records is loaded atomically using Firestore WriteBatch."""
+    mock_client = MagicMock()
+    mock_collection = MagicMock()
+    mock_document = MagicMock()
+    mock_batch = MagicMock()
+
+    # Configure mock AsyncBatch commit
+    mock_batch.commit = AsyncMock()
+    mock_collection.document.return_value = mock_document
+    mock_client.collection.return_value = mock_collection
+    mock_client.batch.return_value = mock_batch
+
+    loader = FirestoreLoader(
+        collection_name="observations_test",
+        quarantine_collection_name="quarantine_test",
+        client=mock_client
+    )
+
+    records = [
+        QuarantineRecord(
+            raw_payload={"DogID": "D1", "HR": "invalid"},
+            errors=["heart_rate: Input should be a valid integer"],
+            ingested_at=datetime.now(),
+            original_index=1
+        ),
+        QuarantineRecord(
+            raw_payload={"DogID": "D2", "HR": "invalid2"},
+            errors=["heart_rate: Input should be a valid integer"],
+            ingested_at=datetime.now(),
+            original_index=2
+        )
+    ]
+
+    doc_ids = asyncio.run(loader.load_quarantine_batch(records))
+    assert len(doc_ids) == 2
+    assert mock_client.collection.call_count == 2
+    mock_client.collection.assert_called_with("quarantine_test")
+    assert mock_batch.set.call_count == 2
+    mock_batch.commit.assert_called_once()
+
+
+def test_csv_loader_quarantine_batch_load(tmp_path):
+    """Verify that CSVLoader appends quarantine records correctly, serializing dict/list fields."""
+    csv_file = tmp_path / "test.csv"
+    loader = CSVLoader(str(csv_file))
+
+    records = [
+        QuarantineRecord(
+            raw_payload={"DogID": "D1", "HR": "invalid"},
+            errors=["heart_rate: Input should be a valid integer"],
+            ingested_at=datetime.now(),
+            original_index=1
+        ),
+        QuarantineRecord(
+            raw_payload={"DogID": "D2", "HR": "invalid2"},
+            errors=["heart_rate: Input should be a valid integer"],
+            ingested_at=datetime.now(),
+            original_index=2
+        )
+    ]
+
+    doc_ids = asyncio.run(loader.load_quarantine_batch(records))
+    assert len(doc_ids) == 2
+    
+    quarantine_csv = tmp_path / "test_quarantine.csv"
+    assert quarantine_csv.exists()
+
+    import json
+    with open(quarantine_csv, mode="r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+        assert len(rows) == 2
+        assert json.loads(rows[0]["raw_payload"]) == {"DogID": "D1", "HR": "invalid"}
+        assert json.loads(rows[0]["errors"]) == ["heart_rate: Input should be a valid integer"]
+        assert int(rows[0]["original_index"]) == 1
+        assert int(rows[1]["original_index"]) == 2
+
 
