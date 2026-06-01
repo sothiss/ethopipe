@@ -6,19 +6,16 @@ import hashlib
 import logging
 import os
 from abc import ABC, abstractmethod
-from typing import Any, Optional, TYPE_CHECKING
+from typing import Any, Optional
 
 from ethopipe.models import EthologicalObservation
 
-if TYPE_CHECKING:
-    from google.cloud.firestore import AsyncClient as FirestoreAsyncClient
-else:
-    FirestoreAsyncClient = Any
-
 try:
     from google.cloud import firestore
+    from google.cloud.firestore import AsyncClient as FirestoreAsyncClient
 except ModuleNotFoundError:  # pragma: no cover
     firestore = None
+    FirestoreAsyncClient = Any
 
 logger = logging.getLogger("ethopipe.loader")
 
@@ -73,7 +70,7 @@ class FirestoreLoader(BaseLoader):
 
         Args:
             collection_name: Target Firestore collection. Defaults to "observations".
-            client: Optional pre-configured firestore.AsyncClient. If None,
+            client: Optional pre-configured FirestoreAsyncClient. If None,
               auto-initializes.
         """
         self.collection_name = collection_name

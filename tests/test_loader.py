@@ -173,3 +173,20 @@ def test_csv_loader_batch_append(tmp_path):
         assert rows[0]["subject_id"] == "SUB-DOG-201"
         assert rows[1]["subject_id"] == "SUB-DOG-202"
         assert rows[2]["subject_id"] == "SUB-DOG-203"
+
+
+def test_firestore_loader_missing_dependency():
+    """Verify FirestoreLoader raises ModuleNotFoundError when firestore is not installed."""
+    from ethopipe import loader
+    # Backup the original firestore module reference
+    orig_firestore = loader.firestore
+    try:
+        loader.firestore = None
+        # Create loader with no pre-configured client
+        loader_instance = FirestoreLoader(collection_name="test")
+        with pytest.raises(ModuleNotFoundError) as exc_info:
+            _ = loader_instance.client
+        assert "google-cloud-firestore is required" in str(exc_info.value)
+    finally:
+        loader.firestore = orig_firestore
+
