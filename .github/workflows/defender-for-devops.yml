@@ -40,8 +40,8 @@ jobs:
     - uses: actions/setup-dotnet@v4 # v4.3.0
       with:
         dotnet-version: |
-          5.0.x
           6.0.x
+          8.0.x
     - name: Run Microsoft Security DevOps
       uses: microsoft/security-devops-action@v1 # v1.12.0
       id: msdo
