@@ -75,14 +75,16 @@ def test_load_csv_quarantine(tmp_path, column_mapping):
 
     # Errant rows 2, 3, and 4 should be quarantined
     assert len(quarantine) == 3
-    assert 2 in quarantine
-    assert 3 in quarantine
-    assert 4 in quarantine
+    quarantine_indices = {q.original_index for q in quarantine}
+    assert 2 in quarantine_indices
+    assert 3 in quarantine_indices
+    assert 4 in quarantine_indices
 
     # Verify descriptions in quarantine logs
-    assert any("behavior_type" in err for err in quarantine[2])
-    assert any("heart_rate" in err for err in quarantine[3])
-    assert any("heart_rate" in err for err in quarantine[4])
+    q_dict = {q.original_index: q.errors for q in quarantine}
+    assert any("behavior_type" in err for err in q_dict[2])
+    assert any("heart_rate" in err for err in q_dict[3])
+    assert any("heart_rate" in err for err in q_dict[4])
 
 def test_load_json_valid(tmp_path, column_mapping):
     """Verify that a standard JSON list is successfully parsed and validated."""
@@ -156,8 +158,9 @@ def test_load_json_quarantine(tmp_path, column_mapping):
     assert valid_obs[0].subject_id == "SUB-DOG-10"
 
     assert len(quarantine) == 2
-    assert quarantine[2] == ["Expected record to be a JSON object (dict)"]
-    assert any("heart_rate" in err for err in quarantine[3])
+    q_dict = {q.original_index: q.errors for q in quarantine}
+    assert q_dict[2] == ["Expected record to be a JSON object (dict)"]
+    assert any("heart_rate" in err for err in q_dict[3])
 
 def test_load_json_corrupted(tmp_path):
     """Verify that completely unparseable JSON files return a file-level error."""
@@ -167,8 +170,9 @@ def test_load_json_corrupted(tmp_path):
     valid_obs, quarantine = load_json(str(json_file))
     
     assert len(valid_obs) == 0
-    assert 0 in quarantine
-    assert any("JSON parsing failed" in err for err in quarantine[0])
+    assert len(quarantine) == 1
+    assert quarantine[0].original_index == 0
+    assert any("JSON parsing failed" in err for err in quarantine[0].errors)
 
 def test_load_csv_data_dictionary_integration(tmp_path, column_mapping):
     """Verify end-to-end CSV ingestion with size category, cortisol levels, and Title Case normalisation."""
