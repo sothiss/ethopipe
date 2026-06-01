@@ -8,7 +8,9 @@ from pydantic import ValidationError
 from ethopipe.models import EthologicalObservation, QuarantineRecord
 
 
-def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) -> dict[str, Any]:
+def _pre_process_row(
+    raw_row: dict[str, Any], column_mapping: dict[str, str]
+) -> dict[str, Any]:
     """Translates raw dict keys and performs type pre-processing to accommodate
 
     ConfigDict(strict=True) on Pydantic models.
@@ -79,7 +81,13 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
                     pass
 
     # Strip and normalise string fields
-    string_fields = {"dog_size_category", "cortisol_unit", "cortisol_matrix", "observation_method", "behavior_type_id"}
+    string_fields = {
+        "dog_size_category",
+        "cortisol_unit",
+        "cortisol_matrix",
+        "observation_method",
+        "behavior_type_id",
+    }
     for field in string_fields:
         if field in mapped_row:
             val = mapped_row[field]
@@ -111,16 +119,17 @@ def _pre_process_row(raw_row: dict[str, Any], column_mapping: dict[str, str]) ->
         "Vocalization Whine": "vocalization_whine",
         "Posture Freeze": "posture_freeze",
         "Tail Tuck": "tail_tuck",
-        "Avoidance Social": "avoidance_social"
+        "Avoidance Social": "avoidance_social",
     }
     if "behavior_type" in mapped_row:
         bt = mapped_row["behavior_type"]
         if isinstance(bt, str):
             bt_stripped = bt.strip()
-            mapped_row["behavior_type"] = BEHAVIOR_CANONICAL.get(bt_stripped, bt_stripped)
+            mapped_row["behavior_type"] = BEHAVIOR_CANONICAL.get(
+                bt_stripped, bt_stripped
+            )
 
     return mapped_row
-
 
 
 def load_csv(

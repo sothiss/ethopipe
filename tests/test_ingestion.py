@@ -3,6 +3,7 @@ from datetime import datetime
 import pytest
 from ethopipe.ingestion import load_csv, load_json
 
+
 @pytest.fixture
 def column_mapping() -> dict[str, str]:
     return {
@@ -18,8 +19,9 @@ def column_mapping() -> dict[str, str]:
         "DogSizeCategory": "dog_size_category",
         "CortisolLevel": "cortisol_level",
         "CortisolUnit": "cortisol_unit",
-        "CortisolMatrix": "cortisol_matrix"
+        "CortisolMatrix": "cortisol_matrix",
     }
+
 
 def test_load_csv_valid(tmp_path, column_mapping):
     """Verify that a well-formed CSV file is successfully ingested and translated."""
@@ -52,6 +54,7 @@ def test_load_csv_valid(tmp_path, column_mapping):
     assert valid_obs[1].subject_id == "SUB-DOG-02"
     assert valid_obs[1].severity_score is None
     assert valid_obs[1].heart_rate == 78
+
 
 def test_load_csv_quarantine(tmp_path, column_mapping):
     """Verify that malformed rows in a CSV are quarantined without halting ingestion."""
@@ -86,6 +89,7 @@ def test_load_csv_quarantine(tmp_path, column_mapping):
     assert any("heart_rate" in err for err in q_dict[3])
     assert any("heart_rate" in err for err in q_dict[4])
 
+
 def test_load_json_valid(tmp_path, column_mapping):
     """Verify that a standard JSON list is successfully parsed and validated."""
     json_data = [
@@ -98,7 +102,7 @@ def test_load_json_valid(tmp_path, column_mapping):
             "Rating": 3,
             "HeartRateBPM": 140,
             "RecordBasis": "HumanObservation",
-            "Notes": "Subject cowered behind observer for 10 seconds."
+            "Notes": "Subject cowered behind observer for 10 seconds.",
         },
         {
             "DogID": "SUB-DOG-11",
@@ -109,8 +113,8 @@ def test_load_json_valid(tmp_path, column_mapping):
             "Rating": 1,
             "HeartRateBPM": 72,
             "RecordBasis": "HumanObservation",
-            "Notes": "Relaxed body posture."
-        }
+            "Notes": "Relaxed body posture.",
+        },
     ]
     json_file = tmp_path / "test_valid.json"
     json_file.write_text(json.dumps(json_data), encoding="utf-8")
@@ -121,6 +125,7 @@ def test_load_json_valid(tmp_path, column_mapping):
     assert len(valid_obs) == 2
     assert valid_obs[0].subject_id == "SUB-DOG-10"
     assert valid_obs[1].subject_id == "SUB-DOG-11"
+
 
 def test_load_json_quarantine(tmp_path, column_mapping):
     """Verify that bad elements in a JSON array are isolated and logged."""
@@ -134,7 +139,7 @@ def test_load_json_quarantine(tmp_path, column_mapping):
             "Rating": 3,
             "HeartRateBPM": 140,
             "RecordBasis": "HumanObservation",
-            "Notes": "Valid row."
+            "Notes": "Valid row.",
         },
         "not-a-dict-item",  # Should trigger non-dict quarantine
         {
@@ -146,8 +151,8 @@ def test_load_json_quarantine(tmp_path, column_mapping):
             "Rating": 3,
             "HeartRateBPM": 260,  # HR too high
             "RecordBasis": "HumanObservation",
-            "Notes": "Bad HR."
-        }
+            "Notes": "Bad HR.",
+        },
     ]
     json_file = tmp_path / "test_quarantine.json"
     json_file.write_text(json.dumps(json_data), encoding="utf-8")
@@ -162,17 +167,19 @@ def test_load_json_quarantine(tmp_path, column_mapping):
     assert q_dict[2] == ["Expected record to be a JSON object (dict)"]
     assert any("heart_rate" in err for err in q_dict[3])
 
+
 def test_load_json_corrupted(tmp_path):
     """Verify that completely unparseable JSON files return a file-level error."""
     json_file = tmp_path / "corrupted.json"
     json_file.write_text("{invalid-json-schema", encoding="utf-8")
 
     valid_obs, quarantine = load_json(str(json_file))
-    
+
     assert len(valid_obs) == 0
     assert len(quarantine) == 1
     assert quarantine[0].original_index == 0
     assert any("JSON parsing failed" in err for err in quarantine[0].errors)
+
 
 def test_load_csv_data_dictionary_integration(tmp_path, column_mapping):
     """Verify end-to-end CSV ingestion with size category, cortisol levels, and Title Case normalisation."""
@@ -203,6 +210,7 @@ def test_load_csv_data_dictionary_integration(tmp_path, column_mapping):
     assert valid_obs[1].behavior_type == "licking_of_lips"
     assert valid_obs[1].heart_rate == 195
 
+
 def test_load_json_data_dictionary_integration(tmp_path, column_mapping):
     """Verify end-to-end JSON ingestion with size category, cortisol levels, and Title Case normalisation."""
     json_data = [
@@ -218,7 +226,7 @@ def test_load_json_data_dictionary_integration(tmp_path, column_mapping):
             "Notes": "Growled at stranger.",
             "DogSizeCategory": "Giant",
             "CortisolLevel": "1.2",
-            "CortisolMatrix": "hair"
+            "CortisolMatrix": "hair",
         },
         {
             "DogID": "SUB-DOG-61",
@@ -227,13 +235,13 @@ def test_load_json_data_dictionary_integration(tmp_path, column_mapping):
             "Behavior": "Play Bow",
             "Value": "2 bows",
             "Rating": 1,
-            "HeartRateBPM": 120, # Giant dog with HR 120 (max for Giant is 110)
+            "HeartRateBPM": 120,  # Giant dog with HR 120 (max for Giant is 110)
             "RecordBasis": "HumanObservation",
             "Notes": "Too high HR for Giant.",
             "DogSizeCategory": "Giant",
             "CortisolLevel": "0.8",
-            "CortisolMatrix": "hair"
-        }
+            "CortisolMatrix": "hair",
+        },
     ]
     json_file = tmp_path / "test_data_dict.json"
     json_file.write_text(json.dumps(json_data), encoding="utf-8")
@@ -251,6 +259,7 @@ def test_load_json_data_dictionary_integration(tmp_path, column_mapping):
     assert valid_obs[0].behavior_type == "stranger_directed_aggression"
     assert valid_obs[0].cortisol_level == 1.2
     assert valid_obs[0].cortisol_matrix == "hair"
+
 
 def test_ingestion_behavior_ontology_resolution(tmp_path, column_mapping):
     """Verify that during CSV/JSON ingestion:
@@ -368,7 +377,3 @@ def test_canonical_behaviors_ingestion_normalization(tmp_path, column_mapping):
 
     assert valid_obs[6].behavior_type == "avoidance_social"
     assert valid_obs[6].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000171"
-
-
-
-

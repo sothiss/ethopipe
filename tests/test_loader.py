@@ -31,7 +31,7 @@ def get_test_payload() -> dict:
         "respiratory_rate": 20,
         "respiratory_rate_unit": "breaths/min",
         "observation_method": "HumanObservation",
-        "narrative": "Subject exhibited displacement yawning when stranger approached."
+        "narrative": "Subject exhibited displacement yawning when stranger approached.",
     }
 
 
@@ -39,14 +39,14 @@ def test_deterministic_doc_id_generation():
     """Verify that generate_observation_doc_id produces consistent and deterministic SHA-256 hashes."""
     payload = get_test_payload()
     obs = EthologicalObservation(**payload)
-    
+
     doc_id_1 = generate_observation_doc_id(obs)
     doc_id_2 = generate_observation_doc_id(obs)
-    
+
     # Assert consistency
     assert doc_id_1 == doc_id_2
     assert len(doc_id_1) == 64  # SHA-256 hash length in hex
-    
+
     # Verify that changing a parameter alters the hash
     obs.behavior_type = "panting"
     doc_id_3 = generate_observation_doc_id(obs)
@@ -89,17 +89,19 @@ def test_firestore_loader_batch_load():
     mock_client.collection.return_value = mock_collection
     mock_client.batch.return_value = mock_batch
 
-    loader = FirestoreLoader(collection_name="observations_batch_test", client=mock_client)
+    loader = FirestoreLoader(
+        collection_name="observations_batch_test", client=mock_client
+    )
 
     payload_1 = get_test_payload()
     payload_1["subject_id"] = "SUB-DOG-101"
-    
+
     payload_2 = get_test_payload()
     payload_2["subject_id"] = "SUB-DOG-102"
 
     obs_list = [
         EthologicalObservation(**payload_1),
-        EthologicalObservation(**payload_2)
+        EthologicalObservation(**payload_2),
     ]
 
     doc_ids = asyncio.run(loader.load_observations_batch(obs_list))
@@ -138,13 +140,13 @@ def test_csv_loader_batch_append(tmp_path):
 
     payload_1 = get_test_payload()
     payload_1["subject_id"] = "SUB-DOG-201"
-    
+
     payload_2 = get_test_payload()
     payload_2["subject_id"] = "SUB-DOG-202"
 
     obs_list = [
         EthologicalObservation(**payload_1),
-        EthologicalObservation(**payload_2)
+        EthologicalObservation(**payload_2),
     ]
 
     # Write initial batch
@@ -156,7 +158,7 @@ def test_csv_loader_batch_append(tmp_path):
     payload_3 = get_test_payload()
     payload_3["subject_id"] = "SUB-DOG-203"
     obs_single = EthologicalObservation(**payload_3)
-    
+
     asyncio.run(loader.load_observation(obs_single))
 
     with open(csv_file, mode="r", encoding="utf-8") as f:
@@ -177,6 +179,7 @@ def test_csv_loader_batch_append(tmp_path):
 def test_firestore_loader_missing_dependency():
     """Verify FirestoreLoader raises ModuleNotFoundError when firestore is not installed."""
     from ethopipe import loader
+
     # Backup the original firestore module reference
     orig_firestore = loader.firestore
     try:
@@ -206,7 +209,7 @@ def test_firestore_loader_quarantine_batch_load():
     loader = FirestoreLoader(
         collection_name="observations_test",
         quarantine_collection_name="quarantine_test",
-        client=mock_client
+        client=mock_client,
     )
 
     records = [
@@ -214,14 +217,14 @@ def test_firestore_loader_quarantine_batch_load():
             raw_payload={"DogID": "D1", "HR": "invalid"},
             errors=["heart_rate: Input should be a valid integer"],
             ingested_at=datetime.now(),
-            original_index=1
+            original_index=1,
         ),
         QuarantineRecord(
             raw_payload={"DogID": "D2", "HR": "invalid2"},
             errors=["heart_rate: Input should be a valid integer"],
             ingested_at=datetime.now(),
-            original_index=2
-        )
+            original_index=2,
+        ),
     ]
 
     doc_ids = asyncio.run(loader.load_quarantine_batch(records))
@@ -242,29 +245,31 @@ def test_csv_loader_quarantine_batch_load(tmp_path):
             raw_payload={"DogID": "D1", "HR": "invalid"},
             errors=["heart_rate: Input should be a valid integer"],
             ingested_at=datetime.now(),
-            original_index=1
+            original_index=1,
         ),
         QuarantineRecord(
             raw_payload={"DogID": "D2", "HR": "invalid2"},
             errors=["heart_rate: Input should be a valid integer"],
             ingested_at=datetime.now(),
-            original_index=2
-        )
+            original_index=2,
+        ),
     ]
 
     doc_ids = asyncio.run(loader.load_quarantine_batch(records))
     assert len(doc_ids) == 2
-    
+
     quarantine_csv = tmp_path / "test_quarantine.csv"
     assert quarantine_csv.exists()
 
     import json
+
     with open(quarantine_csv, mode="r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         rows = list(reader)
         assert len(rows) == 2
         assert json.loads(rows[0]["raw_payload"]) == {"DogID": "D1", "HR": "invalid"}
-        assert json.loads(rows[0]["errors"]) == ["heart_rate: Input should be a valid integer"]
+        assert json.loads(rows[0]["errors"]) == [
+            "heart_rate: Input should be a valid integer"
+        ]
         assert int(rows[0]["original_index"]) == 1
         assert int(rows[1]["original_index"]) == 2
-

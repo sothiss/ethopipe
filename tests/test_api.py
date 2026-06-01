@@ -13,10 +13,14 @@ class MockLoader(BaseLoader):
     async def load_observation(self, observation: EthologicalObservation) -> str:
         return "mock-doc-single-id"
 
-    async def load_observations_batch(self, observations: list[EthologicalObservation]) -> list[str]:
+    async def load_observations_batch(
+        self, observations: list[EthologicalObservation]
+    ) -> list[str]:
         return [f"mock-doc-batch-id-{i}" for i in range(len(observations))]
 
-    async def load_quarantine_batch(self, quarantine_records: list[QuarantineRecord]) -> list[str]:
+    async def load_quarantine_batch(
+        self, quarantine_records: list[QuarantineRecord]
+    ) -> list[str]:
         return [f"mock-quarantine-batch-id-{i}" for i in range(len(quarantine_records))]
 
 
@@ -41,7 +45,7 @@ def get_api_test_payload() -> dict:
         "HeartRateBPM": 85,
         "RecordBasis": "HumanObservation",
         "Notes": "Growled during visual stimulus.",
-        "DogSizeCategory": "Small"
+        "DogSizeCategory": "Small",
     }
 
 
@@ -58,13 +62,13 @@ def test_validate_endpoint_success(client):
         "HeartRateBPM": "heart_rate",
         "RecordBasis": "observation_method",
         "Notes": "narrative",
-        "DogSizeCategory": "dog_size_category"
+        "DogSizeCategory": "dog_size_category",
     }
     response = client.post(f"/validate?mapping={json.dumps(mapping)}", json=payload)
-    
+
     assert response.status_code == 200
     data = response.json()
-    
+
     # Assert Title Case was normalized to snake_case
     assert data["behavior_type"] == "growling"
     # Assert ontology URI was auto-resolved
@@ -78,7 +82,7 @@ def test_validate_endpoint_failure(client):
     payload = get_api_test_payload()
     # Invalid heart rate (above max limit of 180 for Small dogs)
     payload["HeartRateBPM"] = 190
-    
+
     mapping = {
         "DogID": "subject_id",
         "LocalTime": "timestamp",
@@ -89,11 +93,11 @@ def test_validate_endpoint_failure(client):
         "HeartRateBPM": "heart_rate",
         "RecordBasis": "observation_method",
         "Notes": "narrative",
-        "DogSizeCategory": "dog_size_category"
+        "DogSizeCategory": "dog_size_category",
     }
     response = client.post(f"/validate?mapping={json.dumps(mapping)}", json=payload)
     assert response.status_code == 422
-    
+
     errors = response.json()["detail"]["errors"]
     assert any("out of veterinary bounds" in err for err in errors)
 
@@ -124,14 +128,14 @@ def test_ingest_csv_endpoint(client):
         "HeartRateBPM": "heart_rate",
         "RecordBasis": "observation_method",
         "Notes": "narrative",
-        "DogSizeCategory": "dog_size_category"
+        "DogSizeCategory": "dog_size_category",
     }
 
     # Pass mapping as query string
     response = client.post(
         f"/ingest/csv?mapping={json.dumps(mapping)}",
         content=csv_payload,
-        headers={"Content-Type": "text/plain"}
+        headers={"Content-Type": "text/plain"},
     )
 
     assert response.status_code == 200
@@ -172,7 +176,7 @@ def test_ingest_json_endpoint(client):
             "HeartRateBPM": 80,
             "RecordBasis": "HumanObservation",
             "Notes": "Standard yawning.",
-            "DogSizeCategory": "Medium"
+            "DogSizeCategory": "Medium",
         },
         {
             "DogID": "SUB-DOG-602",
@@ -184,8 +188,8 @@ def test_ingest_json_endpoint(client):
             "HeartRateBPM": 40,  # Below min HR (50) for Medium dogs
             "RecordBasis": "HumanObservation",
             "Notes": "Low HR.",
-            "DogSizeCategory": "Medium"
-        }
+            "DogSizeCategory": "Medium",
+        },
     ]
 
     mapping = {
@@ -198,12 +202,11 @@ def test_ingest_json_endpoint(client):
         "HeartRateBPM": "heart_rate",
         "RecordBasis": "observation_method",
         "Notes": "narrative",
-        "DogSizeCategory": "dog_size_category"
+        "DogSizeCategory": "dog_size_category",
     }
 
     response = client.post(
-        f"/ingest/json?mapping={json.dumps(mapping)}",
-        json=json_payload
+        f"/ingest/json?mapping={json.dumps(mapping)}", json=json_payload
     )
 
     assert response.status_code == 200
