@@ -3,12 +3,13 @@
 import asyncio
 import csv
 import hashlib
+import json
 import logging
 import os
 from abc import ABC, abstractmethod
 from typing import Any, Optional
 
-from ethopipe.models import EthologicalObservation
+from ethopipe.models import EthologicalObservation, QuarantineRecord
 
 try:
     from google.cloud import firestore
@@ -56,6 +57,19 @@ class BaseLoader(ABC):
             list[str]: The list of loaded record identifiers.
         """
         pass
+
+    @abstractmethod
+    async def load_quarantine_batch(self, quarantine_records: list[QuarantineRecord]) -> list[str]:
+        """Persists a batch of quarantine records.
+
+        Args:
+            quarantine_records: List of QuarantineRecord objects.
+
+        Returns:
+            list[str]: List of successfully committed record/document IDs.
+        """
+        pass
+
 
 
 class FirestoreLoader(BaseLoader):
