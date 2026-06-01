@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 
 from ethopipe.api import app, get_loader
 from ethopipe.loader import BaseLoader
-from ethopipe.models import EthologicalObservation
+from ethopipe.models import EthologicalObservation, QuarantineRecord
 
 
 class MockLoader(BaseLoader):
@@ -15,6 +15,9 @@ class MockLoader(BaseLoader):
 
     async def load_observations_batch(self, observations: list[EthologicalObservation]) -> list[str]:
         return [f"mock-doc-batch-id-{i}" for i in range(len(observations))]
+
+    async def load_quarantine_batch(self, quarantine_records: list[QuarantineRecord]) -> list[str]:
+        return [f"mock-quarantine-batch-id-{i}" for i in range(len(quarantine_records))]
 
 
 @pytest.fixture
@@ -143,6 +146,10 @@ def test_ingest_csv_endpoint(client):
     assert len(res_data["loaded_ids"]) == 1
     assert "mock-doc-batch-id-0" in res_data["loaded_ids"]
 
+    # Quarantine ids should be populated
+    assert len(res_data["quarantine_ids"]) == 2
+    assert "mock-quarantine-batch-id-0" in res_data["quarantine_ids"]
+
     # Row 2 is quarantined (invalid_behavior)
     assert "2" in res_data["quarantine"]
     assert any("behavior_type" in err for err in res_data["quarantine"]["2"])
@@ -211,6 +218,11 @@ def test_ingest_json_endpoint(client):
     assert len(res_data["loaded_ids"]) == 1
     assert "mock-doc-batch-id-0" in res_data["loaded_ids"]
 
+    # Quarantine ids should be populated
+    assert len(res_data["quarantine_ids"]) == 1
+    assert "mock-quarantine-batch-id-0" in res_data["quarantine_ids"]
+
     # Record 2 is quarantined
     assert "2" in res_data["quarantine"]
+    assert any("out of veterinary bounds" in err for err in res_data["quarantine"]["2"])
     assert any("out of veterinary bounds" in err for err in res_data["quarantine"]["2"])
