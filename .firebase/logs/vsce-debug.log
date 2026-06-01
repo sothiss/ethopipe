@@ -892,3 +892,39 @@ I0601 15:40:39.473350   49260 load.go:109] Finished reloading
 [debug] [2026-06-01T18:40:40.041Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
 [debug] [2026-06-01T18:40:40.085Z] I0601 15:40:40.085483   49260 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe eb2a] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0601 15:40:40.085483   49260 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe eb2a] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-06-01T19:23:58.504Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2026-06-01T19:23:58.505Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-01T19:23:58.507Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-01T19:23:58.507Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-01T19:23:58.508Z] Checked if tokens are valid: false, expires at: 1780341008010
+[debug] [2026-06-01T19:23:58.508Z] Checked if tokens are valid: false, expires at: 1780341008010
+[debug] [2026-06-01T19:23:58.508Z] > refreshing access token with scopes: []
+[debug] [2026-06-01T19:23:58.510Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-06-01T19:23:58.510Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-06-01T19:23:58.513Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2026-06-01T19:23:58.513Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-01T19:23:58.514Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-01T19:23:58.514Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-01T19:23:58.515Z] Checked if tokens are valid: false, expires at: 1780341008010
+[debug] [2026-06-01T19:23:58.515Z] Checked if tokens are valid: false, expires at: 1780341008010
+[debug] [2026-06-01T19:23:58.515Z] > refreshing access token with scopes: []
+[debug] [2026-06-01T19:23:58.515Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-06-01T19:23:58.515Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-06-01T19:23:58.684Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-06-01T19:23:58.684Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-06-01T19:23:58.704Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-01T19:23:58.706Z] Checked if tokens are valid: true, expires at: 1780345437685
+[debug] [2026-06-01T19:23:58.707Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-01T19:23:58.721Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-06-01T19:23:58.721Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-06-01T19:23:58.741Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-01T19:23:58.742Z] Checked if tokens are valid: true, expires at: 1780345437722
+[debug] [2026-06-01T19:23:58.742Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-01T19:23:59.377Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-01T19:23:59.377Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-06-01T19:23:59.387Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-01T19:23:59.388Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Stopping SQL Connect toolkit
+[warn] !  SQL Connect Emulator has exited upon receiving signal: SIGINT 
