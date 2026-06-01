@@ -225,4 +225,3 @@ def test_ingest_json_endpoint(client):
     # Record 2 is quarantined
     assert "2" in res_data["quarantine"]
     assert any("out of veterinary bounds" in err for err in res_data["quarantine"]["2"])
-    assert any("out of veterinary bounds" in err for err in res_data["quarantine"]["2"])
