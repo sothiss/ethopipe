@@ -10,7 +10,7 @@ from pydantic import ValidationError
 
 from ethopipe.ingestion import _pre_process_row, load_csv, load_json
 from ethopipe.loader import BaseLoader, CSVLoader, FirestoreLoader
-from ethopipe.models import EthologicalObservation, QuarantineRecord
+from ethopipe.models import EthologicalObservation
 
 app = FastAPI(
     title="EthoPipe REST API",

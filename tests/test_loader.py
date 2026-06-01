@@ -1,6 +1,5 @@
 import asyncio
 import csv
-import os
 from datetime import datetime
 from unittest.mock import AsyncMock, MagicMock
 
@@ -268,5 +267,4 @@ def test_csv_loader_quarantine_batch_load(tmp_path):
         assert json.loads(rows[0]["errors"]) == ["heart_rate: Input should be a valid integer"]
         assert int(rows[0]["original_index"]) == 1
         assert int(rows[1]["original_index"]) == 2
-
 
