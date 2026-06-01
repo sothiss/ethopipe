@@ -47,7 +47,9 @@ class BaseLoader(ABC):
         pass
 
     @abstractmethod
-    async def load_observations_batch(self, observations: list[EthologicalObservation]) -> list[str]:
+    async def load_observations_batch(
+        self, observations: list[EthologicalObservation]
+    ) -> list[str]:
         """Loads a batch of validated observations.
 
         Args:
@@ -59,7 +61,9 @@ class BaseLoader(ABC):
         pass
 
     @abstractmethod
-    async def load_quarantine_batch(self, quarantine_records: list[QuarantineRecord]) -> list[str]:
+    async def load_quarantine_batch(
+        self, quarantine_records: list[QuarantineRecord]
+    ) -> list[str]:
         """Persists a batch of quarantine records.
 
         Args:
@@ -69,7 +73,6 @@ class BaseLoader(ABC):
             list[str]: List of successfully committed record/document IDs.
         """
         pass
-
 
 
 class FirestoreLoader(BaseLoader):
@@ -109,7 +112,9 @@ class FirestoreLoader(BaseLoader):
             # Check for emulator settings to allow offline/local testing
             emulator_host = os.environ.get("FIRESTORE_EMULATOR_HOST")
             if emulator_host:
-                logger.info(f"Connecting to local Firestore emulator at {emulator_host}")
+                logger.info(
+                    f"Connecting to local Firestore emulator at {emulator_host}"
+                )
             self._client = firestore.AsyncClient()
         return self._client
 
@@ -126,7 +131,7 @@ class FirestoreLoader(BaseLoader):
         """
         doc_id = generate_observation_doc_id(observation)
         doc_ref = self.client.collection(self.collection_name).document(doc_id)
-        
+
         # model_dump() converts datetime fields to native Pydantic structures.
         # Firestore handles datetime, float, int, and string types natively.
         data = observation.model_dump()
@@ -134,7 +139,9 @@ class FirestoreLoader(BaseLoader):
         logger.debug(f"Successfully loaded observation {doc_id} to Firestore.")
         return doc_id
 
-    async def load_observations_batch(self, observations: list[EthologicalObservation]) -> list[str]:
+    async def load_observations_batch(
+        self, observations: list[EthologicalObservation]
+    ) -> list[str]:
         """Persists a batch of observations atomically using Firestore WriteBatch.
 
         Accommodates Firestore's maximum limits of 500 writes per batch by automatically
@@ -171,10 +178,14 @@ class FirestoreLoader(BaseLoader):
             await batch.commit()
             committed_ids.extend(doc_ids[-batch_counter:])
 
-        logger.info(f"Successfully loaded batch of {len(committed_ids)} observations to Firestore.")
+        logger.info(
+            f"Successfully loaded batch of {len(committed_ids)} observations to Firestore."
+        )
         return committed_ids
 
-    async def load_quarantine_batch(self, quarantine_records: list[QuarantineRecord]) -> list[str]:
+    async def load_quarantine_batch(
+        self, quarantine_records: list[QuarantineRecord]
+    ) -> list[str]:
         """Persists a batch of quarantine records atomically using Firestore WriteBatch.
 
         Accommodates Firestore's maximum limits of 500 writes per batch by automatically
@@ -200,7 +211,9 @@ class FirestoreLoader(BaseLoader):
             raw_key = f"{raw_payload_str}_{timestamp_str}_{rec.original_index}"
             doc_id = hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
 
-            doc_ref = self.client.collection(self.quarantine_collection_name).document(doc_id)
+            doc_ref = self.client.collection(self.quarantine_collection_name).document(
+                doc_id
+            )
             batch.set(doc_ref, rec.model_dump())
             doc_ids.append(doc_id)
             batch_counter += 1
@@ -215,7 +228,9 @@ class FirestoreLoader(BaseLoader):
             await batch.commit()
             committed_ids.extend(doc_ids[-batch_counter:])
 
-        logger.info(f"Successfully loaded batch of {len(committed_ids)} quarantine records to Firestore.")
+        logger.info(
+            f"Successfully loaded batch of {len(committed_ids)} quarantine records to Firestore."
+        )
         return committed_ids
 
 
@@ -238,12 +253,16 @@ class CSVLoader(BaseLoader):
         else:
             self.quarantine_file_path = quarantine_file_path
 
-    def _write_observation_sync(self, observation: EthologicalObservation, mode: str = "a") -> str:
+    def _write_observation_sync(
+        self, observation: EthologicalObservation, mode: str = "a"
+    ) -> str:
         """Synchronous implementation to append or write an observation to the CSV.
 
         Automatically initializes headers if the file does not exist.
         """
-        file_exists = os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0
+        file_exists = (
+            os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0
+        )
         data = observation.model_dump()
         headers = list(data.keys())
 
@@ -258,12 +277,16 @@ class CSVLoader(BaseLoader):
 
         return generate_observation_doc_id(observation)
 
-    def _write_batch_sync(self, observations: list[EthologicalObservation], mode: str = "a") -> list[str]:
+    def _write_batch_sync(
+        self, observations: list[EthologicalObservation], mode: str = "a"
+    ) -> list[str]:
         """Synchronous implementation to write a batch of observations to the CSV."""
         if not observations:
             return []
 
-        file_exists = os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0
+        file_exists = (
+            os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0
+        )
         data_dicts = [obs.model_dump() for obs in observations]
         headers = list(data_dicts[0].keys())
 
@@ -277,13 +300,18 @@ class CSVLoader(BaseLoader):
 
         return [generate_observation_doc_id(obs) for obs in observations]
 
-    def _write_quarantine_batch_sync(self, quarantine_records: list[QuarantineRecord], mode: str = "a") -> list[str]:
+    def _write_quarantine_batch_sync(
+        self, quarantine_records: list[QuarantineRecord], mode: str = "a"
+    ) -> list[str]:
         """Synchronous implementation to write a batch of quarantine records to the CSV."""
         if not quarantine_records:
             return []
 
-        file_exists = os.path.exists(self.quarantine_file_path) and os.path.getsize(self.quarantine_file_path) > 0
-        
+        file_exists = (
+            os.path.exists(self.quarantine_file_path)
+            and os.path.getsize(self.quarantine_file_path) > 0
+        )
+
         data_dicts = []
         for rec in quarantine_records:
             data = rec.model_dump()
@@ -295,7 +323,9 @@ class CSVLoader(BaseLoader):
         headers = list(data_dicts[0].keys())
         write_header = not file_exists or mode == "w"
 
-        with open(self.quarantine_file_path, mode=mode, encoding="utf-8", newline="") as f:
+        with open(
+            self.quarantine_file_path, mode=mode, encoding="utf-8", newline=""
+        ) as f:
             writer = csv.DictWriter(f, fieldnames=headers)
             if write_header:
                 writer.writeheader()
@@ -317,17 +347,22 @@ class CSVLoader(BaseLoader):
         """
         return await asyncio.to_thread(self._write_observation_sync, observation, "a")
 
-    async def load_observations_batch(self, observations: list[EthologicalObservation]) -> list[str]:
+    async def load_observations_batch(
+        self, observations: list[EthologicalObservation]
+    ) -> list[str]:
         """Asynchronously writes/appends a batch of observations to the CSV.
 
         Offloads blocking file system I/O to a background thread.
         """
         return await asyncio.to_thread(self._write_batch_sync, observations, "a")
 
-    async def load_quarantine_batch(self, quarantine_records: list[QuarantineRecord]) -> list[str]:
+    async def load_quarantine_batch(
+        self, quarantine_records: list[QuarantineRecord]
+    ) -> list[str]:
         """Asynchronously writes/appends a batch of quarantine records to the CSV.
 
         Offloads blocking file system I/O to a background thread.
         """
-        return await asyncio.to_thread(self._write_quarantine_batch_sync, quarantine_records, "a")
-
+        return await asyncio.to_thread(
+            self._write_quarantine_batch_sync, quarantine_records, "a"
+        )

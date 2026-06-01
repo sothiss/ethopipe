@@ -17,7 +17,7 @@ def test_vitals_extraction():
         subject_id="SUB-DOG-701",
         timestamp=ts,
         location="Facility Yard A",
-        dog_size_category="Medium"
+        dog_size_category="Medium",
     )
 
     # Since no explicit behavior was matched, it falls back to 'neutral' to record vitals
@@ -87,7 +87,7 @@ def test_multiple_behaviors_extraction():
         subject_id="SUB-DOG-703",
         timestamp=ts,
         location="Facility Yard B",
-        dog_size_category="Small"
+        dog_size_category="Small",
     )
 
     # Asserts that two unique observations were extracted and created
@@ -122,7 +122,9 @@ def test_new_canonical_behaviors_extraction():
     assert len(obs_tremble) == 1
     assert obs_tremble[0].behavior_type == "trembling"
     assert obs_tremble[0].behavior_value == "continuous"
-    assert obs_tremble[0].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0002236"
+    assert (
+        obs_tremble[0].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0002236"
+    )
 
     # Pacing (numeric count)
     obs_pacing = extract_from_narrative(
@@ -131,7 +133,9 @@ def test_new_canonical_behaviors_extraction():
     assert len(obs_pacing) == 1
     assert obs_pacing[0].behavior_type == "pacing"
     assert obs_pacing[0].behavior_value == 2
-    assert obs_pacing[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000100"
+    assert (
+        obs_pacing[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000100"
+    )
 
     # Posture Freeze (written count)
     obs_freeze = extract_from_narrative(
@@ -140,7 +144,9 @@ def test_new_canonical_behaviors_extraction():
     assert len(obs_freeze) == 1
     assert obs_freeze[0].behavior_type == "posture_freeze"
     assert obs_freeze[0].behavior_value == 1
-    assert obs_freeze[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000282"
+    assert (
+        obs_freeze[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000282"
+    )
 
     # Tail Tuck (thrice)
     obs_tail = extract_from_narrative(
@@ -150,4 +156,3 @@ def test_new_canonical_behaviors_extraction():
     assert obs_tail[0].behavior_type == "tail_tuck"
     assert obs_tail[0].behavior_value == 3
     assert obs_tail[0].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0000030"
-
