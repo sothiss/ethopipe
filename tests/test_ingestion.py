@@ -191,8 +191,8 @@ def test_load_csv_data_dictionary_integration(tmp_path, column_mapping):
     # Row 3 (SUB-DOG-52) is a Toy dog with HR 75 BPM, which is below the size-adjusted min limit of 80 BPM! Should be quarantined.
     assert len(valid_obs) == 2
     assert len(quarantine) == 1
-    assert 3 in quarantine
-    assert any("out of veterinary bounds" in err for err in quarantine[3])
+    assert quarantine[0].original_index == 3
+    assert any("out of veterinary bounds" in err for err in quarantine[0].errors)
 
     # Assert Title Case behavior was successfully canonicalized to snake_case in _pre_process_row
     assert valid_obs[0].behavior_type == "no_aggression"
@@ -244,8 +244,8 @@ def test_load_json_data_dictionary_integration(tmp_path, column_mapping):
     # SUB-DOG-61 should be quarantined (HR 120 is above Giant bounds 40-110)
     assert len(valid_obs) == 1
     assert len(quarantine) == 1
-    assert 2 in quarantine
-    assert any("out of veterinary bounds" in err for err in quarantine[2])
+    assert quarantine[0].original_index == 2
+    assert any("out of veterinary bounds" in err for err in quarantine[0].errors)
 
     assert valid_obs[0].subject_id == "SUB-DOG-60"
     assert valid_obs[0].behavior_type == "stranger_directed_aggression"
