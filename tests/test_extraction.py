@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from ethopipe.extraction import extract_from_narrative
-from ethopipe.models import EthologicalObservation
 
 
 def test_vitals_extraction():
@@ -151,5 +150,4 @@ def test_new_canonical_behaviors_extraction():
     assert obs_tail[0].behavior_type == "tail_tuck"
     assert obs_tail[0].behavior_value == 3
     assert obs_tail[0].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0000030"
-
 
