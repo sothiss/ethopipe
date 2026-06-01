@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Apply labels based on file changes
-        uses: actions/labeler@v5
+        uses: actions/labeler@8558b10f2771ec8e0f6c21e6fc85e50529d89a4e # v5.0.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           configuration-path: .github/labeler.yml
