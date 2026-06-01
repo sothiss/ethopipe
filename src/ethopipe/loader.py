@@ -78,16 +78,19 @@ class FirestoreLoader(BaseLoader):
     def __init__(
         self,
         collection_name: str = "observations",
+        quarantine_collection_name: str = "quarantine",
         client: Optional[FirestoreAsyncClient] = None,
     ):
         """Initializes the FirestoreLoader.
 
         Args:
             collection_name: Target Firestore collection. Defaults to "observations".
+            quarantine_collection_name: Target Firestore collection for quarantined data. Defaults to "quarantine".
             client: Optional pre-configured FirestoreAsyncClient. If None,
               auto-initializes.
         """
         self.collection_name = collection_name
+        self.quarantine_collection_name = quarantine_collection_name
         self._client = client
 
     @property
@@ -171,17 +174,69 @@ class FirestoreLoader(BaseLoader):
         logger.info(f"Successfully loaded batch of {len(committed_ids)} observations to Firestore.")
         return committed_ids
 
+    async def load_quarantine_batch(self, quarantine_records: list[QuarantineRecord]) -> list[str]:
+        """Persists a batch of quarantine records atomically using Firestore WriteBatch.
+
+        Accommodates Firestore's maximum limits of 500 writes per batch by automatically
+        chunking larger datasets.
+
+        Args:
+            quarantine_records: List of QuarantineRecord objects.
+
+        Returns:
+            list[str]: List of successfully committed deterministic document IDs.
+        """
+        if not quarantine_records:
+            return []
+
+        doc_ids = []
+        batch = self.client.batch()
+        batch_counter = 0
+        committed_ids = []
+
+        for rec in quarantine_records:
+            timestamp_str = rec.ingested_at.isoformat()
+            raw_payload_str = json.dumps(rec.raw_payload, sort_keys=True)
+            raw_key = f"{raw_payload_str}_{timestamp_str}_{rec.original_index}"
+            doc_id = hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
+
+            doc_ref = self.client.collection(self.quarantine_collection_name).document(doc_id)
+            batch.set(doc_ref, rec.model_dump())
+            doc_ids.append(doc_id)
+            batch_counter += 1
+
+            if batch_counter == 500:
+                await batch.commit()
+                committed_ids.extend(doc_ids[-batch_counter:])
+                batch = self.client.batch()
+                batch_counter = 0
+
+        if batch_counter > 0:
+            await batch.commit()
+            committed_ids.extend(doc_ids[-batch_counter:])
+
+        logger.info(f"Successfully loaded batch of {len(committed_ids)} quarantine records to Firestore.")
+        return committed_ids
+
 
 class CSVLoader(BaseLoader):
     """Loader to export and append validated observations to a local CSV file."""
 
-    def __init__(self, file_path: str):
+    def __init__(self, file_path: str, quarantine_file_path: Optional[str] = None):
         """Initializes the CSVLoader.
 
         Args:
             file_path: Absolute or relative path to the target CSV file.
+            quarantine_file_path: Optional path to the CSV file for quarantined data.
         """
         self.file_path = file_path
+        if quarantine_file_path is None:
+            if file_path.endswith(".csv"):
+                self.quarantine_file_path = file_path[:-4] + "_quarantine.csv"
+            else:
+                self.quarantine_file_path = file_path + "_quarantine"
+        else:
+            self.quarantine_file_path = quarantine_file_path
 
     def _write_observation_sync(self, observation: EthologicalObservation, mode: str = "a") -> str:
         """Synchronous implementation to append or write an observation to the CSV.
@@ -222,6 +277,39 @@ class CSVLoader(BaseLoader):
 
         return [generate_observation_doc_id(obs) for obs in observations]
 
+    def _write_quarantine_batch_sync(self, quarantine_records: list[QuarantineRecord], mode: str = "a") -> list[str]:
+        """Synchronous implementation to write a batch of quarantine records to the CSV."""
+        if not quarantine_records:
+            return []
+
+        file_exists = os.path.exists(self.quarantine_file_path) and os.path.getsize(self.quarantine_file_path) > 0
+        
+        data_dicts = []
+        for rec in quarantine_records:
+            data = rec.model_dump()
+            # Serialize dict/list fields as JSON strings for CSV storage
+            data["raw_payload"] = json.dumps(data["raw_payload"])
+            data["errors"] = json.dumps(data["errors"])
+            data_dicts.append(data)
+
+        headers = list(data_dicts[0].keys())
+        write_header = not file_exists or mode == "w"
+
+        with open(self.quarantine_file_path, mode=mode, encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=headers)
+            if write_header:
+                writer.writeheader()
+            writer.writerows(data_dicts)
+
+        # Generate deterministic IDs for the quarantine records
+        doc_ids = []
+        for rec in quarantine_records:
+            timestamp_str = rec.ingested_at.isoformat()
+            raw_payload_str = json.dumps(rec.raw_payload, sort_keys=True)
+            raw_key = f"{raw_payload_str}_{timestamp_str}_{rec.original_index}"
+            doc_ids.append(hashlib.sha256(raw_key.encode("utf-8")).hexdigest())
+        return doc_ids
+
     async def load_observation(self, observation: EthologicalObservation) -> str:
         """Asynchronously writes/appends a single observation to the CSV.
 
@@ -235,3 +323,11 @@ class CSVLoader(BaseLoader):
         Offloads blocking file system I/O to a background thread.
         """
         return await asyncio.to_thread(self._write_batch_sync, observations, "a")
+
+    async def load_quarantine_batch(self, quarantine_records: list[QuarantineRecord]) -> list[str]:
+        """Asynchronously writes/appends a batch of quarantine records to the CSV.
+
+        Offloads blocking file system I/O to a background thread.
+        """
+        return await asyncio.to_thread(self._write_quarantine_batch_sync, quarantine_records, "a")
+
