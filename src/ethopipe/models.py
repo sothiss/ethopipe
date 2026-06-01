@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict, model_validator
-from typing import Literal, Optional, Union, List
+from typing import Literal, Optional, Union, List, Any
 from datetime import datetime
 from enum import Enum
 
@@ -286,4 +286,27 @@ class EthogramExtractionLog(BaseModel):
         default_factory=list,
         description="A comprehensive array of all deterministic behavioral observations isolated from the text."
     )
+
+
+class QuarantineRecord(BaseModel):
+    """Model representing a Pydantic-validated quarantined observation."""
+    model_config = ConfigDict(strict=True)
+
+    raw_payload: dict[str, Any] = Field(
+        ...,
+        description="The raw payload parsed from the source record before column mapping."
+    )
+    errors: List[str] = Field(
+        ...,
+        description="Detailed validation or parsing error messages."
+    )
+    ingested_at: datetime = Field(
+        ...,
+        description="Timestamp when the ingestion attempt occurred."
+    )
+    original_index: Optional[int] = Field(
+        None,
+        description="1-based index or line number in the source file/batch."
+    )
+
 
