@@ -579,3 +579,25 @@ Generated sources: main\relation.gql [14318B] main\query.gql [5099B] main\mutati
 [debug] [2026-06-01T17:20:41.801Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
 [debug] [2026-06-01T17:20:42.125Z] I0601 14:20:42.125115   25964 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 47c2] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0601 14:20:42.125115   25964 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 47c2] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-06-01T17:26:30.811Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2026-06-01T17:26:30.811Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-01T17:26:30.822Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-01T17:26:30.823Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-01T17:26:30.824Z] Checked if tokens are valid: true, expires at: 1780337689901
+[debug] [2026-06-01T17:26:30.824Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-01T17:26:30.825Z] Checked if tokens are valid: true, expires at: 1780337689901
+[debug] [2026-06-01T17:26:30.826Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-01T17:26:30.851Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2026-06-01T17:26:30.851Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-01T17:26:30.852Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-01T17:26:30.853Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-01T17:26:30.853Z] Checked if tokens are valid: true, expires at: 1780337689901
+[debug] [2026-06-01T17:26:30.853Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-01T17:26:30.854Z] Checked if tokens are valid: true, expires at: 1780337689901
+[debug] [2026-06-01T17:26:30.855Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-01T17:26:31.476Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-01T17:26:31.476Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-06-01T17:26:31.514Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-01T17:26:31.514Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
