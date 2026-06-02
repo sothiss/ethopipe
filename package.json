@@ -1,7 +1,10 @@
 {
   "dependencies": {
+    "@google-cloud/access-approval": "^4.2.2",
+    "@google-cloud/access-context-manager": "^4.2.2",
     "@google-cloud/dms": "^4.1.2",
     "@google-cloud/dns": "^5.3.2",
+    "@google-cloud/iam-credentials": "^4.2.2",
     "@google-cloud/workflows": "^5.1.1"
   }
 }
