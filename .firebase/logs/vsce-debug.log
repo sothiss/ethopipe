@@ -1222,3 +1222,226 @@ I0602 12:32:10.329474   38504 dev.go:104] Listening on address (HTTP + gRPC): 12
 [debug] [2026-06-02T15:32:12.470Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
 [debug] [2026-06-02T15:32:12.588Z] I0602 12:32:12.571804   38504 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe b7cd] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 12:32:12.571804   38504 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe b7cd] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-06-02T15:34:10.650Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2026-06-02T15:34:10.651Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-02T15:34:10.655Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-02T15:34:10.655Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-02T15:34:10.656Z] Checked if tokens are valid: true, expires at: 1780416013871
+[debug] [2026-06-02T15:34:10.657Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-02T15:34:10.659Z] Checked if tokens are valid: true, expires at: 1780416013871
+[debug] [2026-06-02T15:34:10.661Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-02T15:34:10.678Z] [Firebase Plugin] Value of process.env.MONOSPACE_ENV: undefined
+[debug] [2026-06-02T15:34:10.679Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-02T15:34:10.680Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-02T15:34:10.681Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-02T15:34:10.681Z] Checked if tokens are valid: true, expires at: 1780416013871
+[debug] [2026-06-02T15:34:10.682Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-02T15:34:10.683Z] Checked if tokens are valid: true, expires at: 1780416013871
+[debug] [2026-06-02T15:34:10.684Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-02T15:34:11.342Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-02T15:34:11.342Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-06-02T15:34:11.357Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-02T15:34:11.357Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Stopping SQL Connect toolkit
+[warn] !  SQL Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-06-02T15:59:59.546Z] [Firebase Plugin] Activating Firebase extension.
+[info] [Firebase Plugin] Checked firebase-tools, is up to date!
+[debug] [2026-06-02T16:00:05.507Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-02T16:00:05.510Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-02T16:00:05.511Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-02T16:00:05.514Z] Checked if tokens are valid: false, expires at: 1780416013871
+[debug] [2026-06-02T16:00:05.514Z] Checked if tokens are valid: false, expires at: 1780416013871
+[debug] [2026-06-02T16:00:05.515Z] > refreshing access token with scopes: []
+[debug] [2026-06-02T16:00:05.517Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-06-02T16:00:05.517Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-06-02T16:00:05.536Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting SQL Connect toolkit (version 3.4.9) on port 50001
+[debug] [2026-06-02T16:00:23.495Z] I0602 13:00:23.482510   68416 control.go:100] [projects/emulator/locations/emulator/services/ethopipe c7fc] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:00:23.482510   68416 control.go:100] [projects/emulator/locations/emulator/services/ethopipe c7fc] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T16:00:23.496Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-06-02T16:00:23.496Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-06-02T16:00:23.496Z] Starting SQL Connect Emulator with command {"binary":"C:\\Users\\alice\\.cache\\firebase\\emulators\\dataconnect-emulator-3.4.9.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=c:\\Developer\\ethopipe\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting SQL Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\alice\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-3.4.9.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=c:\\\\Developer\\\\ethopipe\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: SQL Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"SQL Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2026-06-02T16:00:25.078Z] I0602 13:00:23.557135   68456 load.go:31] Reloading schema and connectors...
+I0602 13:00:23.577679   68456 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 9d23] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+I0602 13:00:23.598211   68456 collector.go:107] schema extensions wrote into "c:\\Developer\\ethopipe\\dataconnect\\.dataconnect\\schema"
+Generated sources: main\implicit.gql [1261B] main\input.gql [29168B] main\relation.gql [14318B] main\query.gql [5099B] main\mutation.gql [13679B] prelude.gql [84995B] 
+I0602 13:00:23.598211   68456 load.go:109] Finished reloading
+I0602 13:00:23.616232   68456 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:00:23.557135   68456 load.go:31] Reloading schema and connectors...\nI0602 13:00:23.577679   68456 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 9d23] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \nI0602 13:00:23.598211   68456 collector.go:107] schema extensions wrote into \"c:\\\\Developer\\\\ethopipe\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: main\\implicit.gql [1261B] main\\input.gql [29168B] main\\relation.gql [14318B] main\\query.gql [5099B] main\\mutation.gql [13679B] prelude.gql [84995B] \nI0602 13:00:23.598211   68456 load.go:109] Finished reloading\nI0602 13:00:23.616232   68456 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-06-02T16:00:25.404Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-06-02T16:00:25.404Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-06-02T16:00:25.464Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-02T16:00:25.465Z] Checked if tokens are valid: true, expires at: 1780419624404
+[debug] [2026-06-02T16:00:25.466Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-02T16:00:26.575Z] I0602 13:00:26.142519   68456 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 9d23] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:00:26.142519   68456 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 9d23] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-06-02T16:00:26.704Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-02T16:00:26.705Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Stopping SQL Connect toolkit
+[warn] !  SQL Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-06-02T16:16:54.016Z] [Firebase Plugin] Activating Firebase extension.
+[info] [Firebase Plugin] Checked firebase-tools, is up to date!
+[debug] [2026-06-02T16:16:57.582Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-02T16:16:57.585Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-02T16:16:57.586Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-02T16:16:57.589Z] Checked if tokens are valid: true, expires at: 1780419624404
+[debug] [2026-06-02T16:16:57.590Z] Checked if tokens are valid: true, expires at: 1780419624404
+[debug] [2026-06-02T16:16:57.590Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-02T16:16:57.592Z] Checked if tokens are valid: true, expires at: 1780419624404
+[debug] [2026-06-02T16:16:57.594Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-02T16:16:57.608Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting SQL Connect toolkit (version 3.4.9) on port 50001
+[debug] [2026-06-02T16:16:58.278Z] I0602 13:16:58.254971   68396 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 95d5] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:16:58.254971   68396 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 95d5] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T16:16:58.280Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-06-02T16:16:58.280Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-06-02T16:16:58.280Z] Starting SQL Connect Emulator with command {"binary":"C:\\Users\\alice\\.cache\\firebase\\emulators\\dataconnect-emulator-3.4.9.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=c:\\Developer\\ethopipe\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting SQL Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\alice\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-3.4.9.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=c:\\\\Developer\\\\ethopipe\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: SQL Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"SQL Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2026-06-02T16:16:58.369Z] I0602 13:16:58.347244   45132 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:16:58.347244   45132 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-06-02T16:16:58.456Z] I0602 13:16:58.428050   45132 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 380c] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:16:58.428050   45132 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 380c] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T16:16:58.460Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-02T16:16:58.461Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-06-02T16:16:58.523Z] I0602 13:16:58.522251   45132 collector.go:107] schema extensions wrote into "c:\\Developer\\ethopipe\\dataconnect\\.dataconnect\\schema"
+Generated sources: main\input.gql [29168B] main\relation.gql [14318B] main\query.gql [5099B] main\mutation.gql [13679B] main\implicit.gql [1261B] prelude.gql [84995B] 
+I0602 13:16:58.522251   45132 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:16:58.522251   45132 collector.go:107] schema extensions wrote into \"c:\\\\Developer\\\\ethopipe\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: main\\input.gql [29168B] main\\relation.gql [14318B] main\\query.gql [5099B] main\\mutation.gql [13679B] main\\implicit.gql [1261B] prelude.gql [84995B] \nI0602 13:16:58.522251   45132 load.go:109] Finished reloading\n"}}
+[debug] [2026-06-02T16:16:58.560Z] I0602 13:16:58.559331   45132 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:16:58.559331   45132 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-06-02T16:16:58.988Z] I0602 13:16:58.987701   45132 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 380c] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 13:16:58.987701   45132 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 380c] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
+[info] [Firebase Plugin] Stopping SQL Connect toolkit
+[warn] !  SQL Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-06-02T17:42:23.708Z] [Firebase Plugin] Activating Firebase extension.
+[info] [Firebase Plugin] Checked firebase-tools, is up to date!
+[debug] [2026-06-02T17:42:26.830Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-02T17:42:26.833Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-02T17:42:26.833Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-02T17:42:26.836Z] Checked if tokens are valid: false, expires at: 1780419624404
+[debug] [2026-06-02T17:42:26.836Z] Checked if tokens are valid: false, expires at: 1780419624404
+[debug] [2026-06-02T17:42:26.836Z] > refreshing access token with scopes: []
+[debug] [2026-06-02T17:42:26.838Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-06-02T17:42:26.838Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-06-02T17:42:26.849Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting SQL Connect toolkit (version 3.4.9) on port 50001
+[debug] [2026-06-02T17:42:27.403Z] I0602 14:42:27.389372    6220 control.go:100] [projects/emulator/locations/emulator/services/ethopipe a0c5] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 14:42:27.389372    6220 control.go:100] [projects/emulator/locations/emulator/services/ethopipe a0c5] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T17:42:27.404Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-06-02T17:42:27.404Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-06-02T17:42:27.404Z] Starting SQL Connect Emulator with command {"binary":"C:\\Users\\alice\\.cache\\firebase\\emulators\\dataconnect-emulator-3.4.9.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=c:\\Developer\\ethopipe\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting SQL Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\alice\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-3.4.9.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=c:\\\\Developer\\\\ethopipe\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: SQL Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"SQL Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2026-06-02T17:42:27.446Z] I0602 14:42:27.445038   43460 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 14:42:27.445038   43460 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-06-02T17:42:27.471Z] I0602 14:42:27.470180   43460 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 98d8] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 14:42:27.470180   43460 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 98d8] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T17:42:27.507Z] I0602 14:42:27.493737   43460 collector.go:107] schema extensions wrote into "c:\\Developer\\ethopipe\\dataconnect\\.dataconnect\\schema"
+Generated sources: main\relation.gql [14318B] main\query.gql [5099B] main\mutation.gql [13679B] prelude.gql [84995B] main\implicit.gql [1261B] main\input.gql [29168B] 
+I0602 14:42:27.494238   43460 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 14:42:27.493737   43460 collector.go:107] schema extensions wrote into \"c:\\\\Developer\\\\ethopipe\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: main\\relation.gql [14318B] main\\query.gql [5099B] main\\mutation.gql [13679B] prelude.gql [84995B] main\\implicit.gql [1261B] main\\input.gql [29168B] \nI0602 14:42:27.494238   43460 load.go:109] Finished reloading\n"}}
+[debug] [2026-06-02T17:42:28.138Z] I0602 14:42:27.518348   43460 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 14:42:27.518348   43460 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-06-02T17:42:28.190Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-06-02T17:42:28.190Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-06-02T17:42:28.221Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-02T17:42:28.223Z] Checked if tokens are valid: true, expires at: 1780425747190
+[debug] [2026-06-02T17:42:28.223Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-02T17:42:28.560Z] I0602 14:42:28.560142   43460 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 98d8] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 14:42:28.560142   43460 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 98d8] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-06-02T17:42:28.881Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-02T17:42:28.881Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[warn] !  dataconnect: Fatal error occurred: 
+   SQL Connect Emulator has exited with code: 3221225786, 
+   stopping all running emulators {"metadata":{"emulator":{"name":"dataconnect"},"message":"Fatal error occurred: \n   SQL Connect Emulator has exited with code: 3221225786, \n   stopping all running emulators"}}
+[debug] [2026-06-02T18:36:17.838Z] [Firebase Plugin] Activating Firebase extension.
+[info] [Firebase Plugin] Checked firebase-tools, is up to date!
+[debug] [2026-06-02T18:36:22.513Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-02T18:36:22.517Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-02T18:36:22.518Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-02T18:36:22.521Z] Checked if tokens are valid: true, expires at: 1780428932888
+[debug] [2026-06-02T18:36:22.521Z] Checked if tokens are valid: true, expires at: 1780428932888
+[debug] [2026-06-02T18:36:22.522Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-02T18:36:22.524Z] Checked if tokens are valid: true, expires at: 1780428932888
+[debug] [2026-06-02T18:36:22.525Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[info] [Firebase Plugin] Starting SQL Connect toolkit (version 3.4.9) on port 50001
+[debug] [2026-06-02T18:36:23.538Z] I0602 15:36:23.520807   29800 control.go:100] [projects/emulator/locations/emulator/services/ethopipe cb6b] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:36:23.520807   29800 control.go:100] [projects/emulator/locations/emulator/services/ethopipe cb6b] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T18:36:23.539Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-06-02T18:36:23.539Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-06-02T18:36:23.540Z] Starting SQL Connect Emulator with command {"binary":"C:\\Users\\alice\\.cache\\firebase\\emulators\\dataconnect-emulator-3.4.9.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=c:\\Developer\\ethopipe\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting SQL Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\alice\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-3.4.9.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=c:\\\\Developer\\\\ethopipe\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: SQL Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"SQL Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2026-06-02T18:36:23.665Z] I0602 15:36:23.629986   40972 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:36:23.629986   40972 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-06-02T18:36:23.771Z] I0602 15:36:23.749799   40972 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 585f] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:36:23.749799   40972 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 585f] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T18:36:24.805Z] I0602 15:36:24.078412   40972 collector.go:107] schema extensions wrote into "c:\\Developer\\ethopipe\\dataconnect\\.dataconnect\\schema"
+Generated sources: prelude.gql [84995B] main\input.gql [29168B] main\relation.gql [14318B] main\query.gql [5099B] main\mutation.gql [13679B] main\implicit.gql [1261B] 
+I0602 15:36:24.169027   40972 load.go:109] Finished reloading
+I0602 15:36:24.302648   40972 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:36:24.078412   40972 collector.go:107] schema extensions wrote into \"c:\\\\Developer\\\\ethopipe\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: prelude.gql [84995B] main\\input.gql [29168B] main\\relation.gql [14318B] main\\query.gql [5099B] main\\mutation.gql [13679B] main\\implicit.gql [1261B] \nI0602 15:36:24.169027   40972 load.go:109] Finished reloading\nI0602 15:36:24.302648   40972 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-06-02T18:36:24.929Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-02T18:36:24.929Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-06-02T18:36:27.066Z] I0602 15:36:25.566429   40972 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 585f] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:36:25.566429   40972 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 585f] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
+[info] [Firebase Plugin] Stopping SQL Connect toolkit
+[warn] !  SQL Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-06-02T18:50:28.105Z] [Firebase Plugin] Activating Firebase extension.
+[info] [Firebase Plugin] Checked firebase-tools, is up to date!
+[debug] [2026-06-02T18:50:31.266Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-06-02T18:50:31.269Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-06-02T18:50:31.270Z] > authorizing via signed-in user (harley.girlu2@gmail.com)
+[debug] [2026-06-02T18:50:31.272Z] Checked if tokens are valid: true, expires at: 1780428932888
+[debug] [2026-06-02T18:50:31.273Z] Checked if tokens are valid: true, expires at: 1780428932888
+[debug] [2026-06-02T18:50:31.273Z] [Firebase Plugin] User found:  harley.girlu2@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-06-02T18:50:31.274Z] Checked if tokens are valid: true, expires at: 1780428932888
+[debug] [2026-06-02T18:50:31.276Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-06-02T18:50:31.287Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting SQL Connect toolkit (version 3.4.9) on port 50001
+[debug] [2026-06-02T18:50:31.987Z] I0602 15:50:31.972816   44516 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 6aa7] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:50:31.972816   44516 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 6aa7] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T18:50:31.988Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-06-02T18:50:31.989Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-06-02T18:50:31.989Z] Starting SQL Connect Emulator with command {"binary":"C:\\Users\\alice\\.cache\\firebase\\emulators\\dataconnect-emulator-3.4.9.exe","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=c:\\Developer\\ethopipe\\dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting SQL Connect Emulator with command {\"binary\":\"C:\\\\Users\\\\alice\\\\.cache\\\\firebase\\\\emulators\\\\dataconnect-emulator-3.4.9.exe\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=c:\\\\Developer\\\\ethopipe\\\\dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: SQL Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"SQL Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[debug] [2026-06-02T18:50:32.068Z] I0602 15:50:32.054533   41148 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:50:32.054533   41148 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-06-02T18:50:32.129Z] I0602 15:50:32.103225   41148 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 79a5] UpdateResources(): done
+Main schema: sources: schema\schema.gql [2044B] 
+Connector "example": sources: example\mutations.gql [1276B] example\queries.gql [1879B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:50:32.103225   41148 control.go:100] [projects/emulator/locations/emulator/services/ethopipe 79a5] UpdateResources(): done\nMain schema: sources: schema\\schema.gql [2044B] \nConnector \"example\": sources: example\\mutations.gql [1276B] example\\queries.gql [1879B] \n"}}
+[debug] [2026-06-02T18:50:32.240Z] I0602 15:50:32.239177   41148 collector.go:107] schema extensions wrote into "c:\\Developer\\ethopipe\\dataconnect\\.dataconnect\\schema"
+Generated sources: main\relation.gql [14318B] main\query.gql [5099B] main\mutation.gql [13679B] prelude.gql [84995B] main\implicit.gql [1261B] main\input.gql [29168B] 
+I0602 15:50:32.239177   41148 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:50:32.239177   41148 collector.go:107] schema extensions wrote into \"c:\\\\Developer\\\\ethopipe\\\\dataconnect\\\\.dataconnect\\\\schema\"\nGenerated sources: main\\relation.gql [14318B] main\\query.gql [5099B] main\\mutation.gql [13679B] prelude.gql [84995B] main\\implicit.gql [1261B] main\\input.gql [29168B] \nI0602 15:50:32.239177   41148 load.go:109] Finished reloading\n"}}
+[debug] [2026-06-02T18:50:32.452Z] I0602 15:50:32.325426   41148 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:50:32.325426   41148 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-06-02T18:50:32.679Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-06-02T18:50:32.680Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-06-02T18:50:33.230Z] I0602 15:50:32.959904   41148 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 79a5] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0602 15:50:32.959904   41148 engine.go:209] [projects/emulator/locations/emulator/services/ethopipe 79a5] ExecuteGraphqlRead query IntrospectionQuery: succeeded. \n"}}
