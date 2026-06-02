@@ -1,34 +1,4 @@
 {
-  "name": "EthoPipe Development Environment",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  },
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.testing.pytestEnabled": true,
-        "python.testing.unittestEnabled": false,
-        "python.testing.pytestArgs": [
-          "tests"
-        ],
-        "[python]": {
-          "editor.defaultFormatter": "charliermarsh.ruff",
-          "editor.formatOnSave": true,
-          "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
-          }
-        }
-      },
-      "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "charliermarsh.ruff",
-        "graphql.vscode-graphql"
-      ]
-    }
-  },
-  "postCreateCommand": "pip install -e .[dev]",
-  "remoteUser": "root"
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {}
 }
