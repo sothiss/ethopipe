@@ -30,5 +30,8 @@
     }
   },
   "postCreateCommand": "pip install -e .[dev]",
+  "mounts": [
+    "source=${localEnv:APPDATA}/gcloud,target=/root/.config/gcloud,type=bind,consistency=cached"
+  ],
   "remoteUser": "root"
 }
