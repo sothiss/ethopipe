@@ -21,7 +21,7 @@ jobs:
         name: Compile JOSS Manuscript
         steps:
             - name: Checkout repository
-              uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
             - name: Generate PDF using Open Journals Toolchain
               uses: openjournals/openjournals-draft-action@85a18372e48f551d8af9ddb7a747de685fbbb01c # master (2024-07-17)
