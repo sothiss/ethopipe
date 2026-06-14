@@ -137,7 +137,7 @@ async def chat(request: ChatRequestModel):
       yield "data: [DONE]\n\n"
     except Exception:
       logger.exception("Error while streaming chat response")
-      error_content = "\\n\\nAn internal error has occurred."
+      error_content = "\n\nAn internal error has occurred."
       error_dict = {"type": "FINAL_RESPONSE", "content": error_content}
       yield "data: " + json.dumps(error_dict) + "\n\n"
       yield "data: [DONE]\n\n"
