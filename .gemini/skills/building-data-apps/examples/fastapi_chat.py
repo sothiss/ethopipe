@@ -133,8 +133,8 @@ async def chat(request: ChatRequestModel):
             )
 
       yield "data: [DONE]\n\n"
-    except Exception as e:
-      error_content = f"\\n\\n**API Error**: {str(e)}"
+    except Exception:
+      error_content = "\n\n**API Error**: An internal error occurred."
       error_dict = {"type": "FINAL_RESPONSE", "content": error_content}
       yield "data: " + json.dumps(error_dict) + "\n\n"
       yield "data: [DONE]\n\n"
