@@ -12,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import json
+import logging
 import os
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from google.cloud import geminidataanalytics_v1beta as gemini
 from pydantic import BaseModel
 
+logger = logging.getLogger(__name__)
 app = FastAPI()
 client = gemini.DataChatServiceClient()
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT", "<PROJECT_ID>")
@@ -133,8 +135,9 @@ async def chat(request: ChatRequestModel):
             )
 
       yield "data: [DONE]\n\n"
-    except Exception as e:
-      error_content = f"\\n\\n**API Error**: {str(e)}"
+    except Exception:
+      logger.exception("Error while streaming chat response")
+      error_content = "\\n\\nAn internal error has occurred."
       error_dict = {"type": "FINAL_RESPONSE", "content": error_content}
       yield "data: " + json.dumps(error_dict) + "\n\n"
       yield "data: [DONE]\n\n"
