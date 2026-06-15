@@ -25,7 +25,11 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "charliermarsh.ruff",
-        "graphql.vscode-graphql"
+        "graphql.vscode-graphql",
+        "googlecloudtools.cloudcode",
+        "google.gemini-cli-vscode-ide-companion",
+        "google.geminicodeassist",
+        "googlecloudtools.datacloud"
       ]
     }
   },
