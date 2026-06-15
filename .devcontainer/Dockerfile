@@ -1,0 +1,24 @@
+# Start from a sterile, minimal Linux environment with Python 3.11 pre-installed
+# This matches the standard Ubuntu environments used by GitHub Actions
+FROM python:3.12-slim-bookworm
+
+# Set environment variables to ensure Python outputs deterministically 
+# and doesn't write local cache files that cause sync issues
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install Git and essential system build tools required for scientific packages
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
+    git \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory strictly to /workspace
+WORKDIR /workspace
+
+# Upgrade pip to the latest version to prevent package resolution errors
+RUN pip install --no-cache-dir --upgrade pip
+
+# Note: When the container boots, it will mount your local files into /workspace.
+# We will instruct the devcontainer.json to install your pyproject.toml 
+# dependencies automatically after mounting.

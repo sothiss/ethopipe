@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "googlecloudtools.cloudcode",
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "google.gemini-cli-vscode-ide-companion",
+        "google.geminicodeassist",
+        "googlecloudtools.datacloud"
+    ]
+}

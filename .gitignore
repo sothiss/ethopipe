@@ -1,0 +1,39 @@
+# ====================================================================
+# ETHOPIPE SCIENTIFIC WORKSPACE FIREWALL (.gitignore)
+# ====================================================================
+
+# 1. Python In-Container Virtual Environments & Packages
+.venv/
+venv/
+ENV/
+env/
+wheels/
+*.egg-info/
++downloads/
+
+# 2. Ephemeral Runtime Execution Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.cache/
+.coverage
+.htmlcov/
+
+# 3. Security Boundary Gateways (Cryptographic Keys & Secret Tokens)
+.env
+.env.*
+*credentials*.json
+*secret*.json
+.gcloud/
+.firebase/
+
+# 4. Local IDE State & Version Control Noise
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+.history/
+*.code-workspace
+.DS_Store
+Thumbs.db
