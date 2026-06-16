@@ -273,3 +273,100 @@ def test_csv_loader_quarantine_batch_load(tmp_path):
         ]
         assert int(rows[0]["original_index"]) == 1
         assert int(rows[1]["original_index"]) == 2
+
+
+def test_firestore_loader_batch_concurrency():
+    """Verify that a batch of >500 observations is chunked and committed concurrently."""
+    mock_client = MagicMock()
+    mock_collection = MagicMock()
+    mock_document = MagicMock()
+
+    # Mock collection and document
+    mock_collection.document.return_value = mock_document
+    mock_client.collection.return_value = mock_collection
+
+    # Track batches created
+    batches = []
+    def make_batch():
+        b = MagicMock()
+        b.commit = AsyncMock()
+        batches.append(b)
+        return b
+    mock_client.batch.side_effect = make_batch
+
+    loader = FirestoreLoader(collection_name="concurrency_test", client=mock_client)
+
+    # Generate 501 identical payload observations (using differing subject IDs)
+    payload = get_test_payload()
+    obs_list = []
+    for idx in range(501):
+        p = payload.copy()
+        p["subject_id"] = f"SUB-DOG-{idx}"
+        obs_list.append(EthologicalObservation(**p))
+
+    doc_ids = asyncio.run(loader.load_observations_batch(obs_list))
+
+    # Check that 2 batches were created and both committed
+    assert len(batches) == 2
+    assert batches[0].commit.call_count == 1
+    assert batches[1].commit.call_count == 1
+    assert len(doc_ids) == 501
+
+
+def test_firestore_loader_retry_mechanism(monkeypatch):
+    """Verify that the retry mechanism retries transient exceptions and succeeds if they resolve."""
+    from google.api_core.exceptions import ServiceUnavailable
+
+    mock_client = MagicMock()
+    mock_collection = MagicMock()
+    mock_document = MagicMock()
+
+    # Simulate 2 ServiceUnavailable failures then 1 success
+    mock_set = AsyncMock(side_effect=[
+        ServiceUnavailable("Transient error"),
+        ServiceUnavailable("Transient error"),
+        "Success"
+    ])
+    mock_document.set = mock_set
+    mock_collection.document.return_value = mock_document
+    mock_client.collection.return_value = mock_collection
+
+    # Reduce sleep time for fast testing
+    monkeypatch.setattr(asyncio, "sleep", AsyncMock())
+
+    loader = FirestoreLoader(collection_name="retry_test", client=mock_client)
+    obs = EthologicalObservation(**get_test_payload())
+
+    doc_id = asyncio.run(loader.load_observation(obs))
+    expected_doc_id = generate_observation_doc_id(obs)
+
+    assert doc_id == expected_doc_id
+    assert mock_set.call_count == 3
+
+
+def test_firestore_loader_retry_failure(monkeypatch):
+    """Verify that the retry mechanism eventually raises the exception if it persists."""
+    from google.api_core.exceptions import ServiceUnavailable
+
+    mock_client = MagicMock()
+    mock_collection = MagicMock()
+    mock_document = MagicMock()
+
+    # Simulate continuous failures
+    mock_set = AsyncMock(side_effect=ServiceUnavailable("Persistent transient error"))
+    mock_document.set = mock_set
+    mock_collection.document.return_value = mock_document
+    mock_client.collection.return_value = mock_collection
+
+    # Reduce sleep time for fast testing
+    monkeypatch.setattr(asyncio, "sleep", AsyncMock())
+
+    loader = FirestoreLoader(collection_name="retry_test", client=mock_client)
+    obs = EthologicalObservation(**get_test_payload())
+
+    with pytest.raises(ServiceUnavailable):
+        asyncio.run(loader.load_observation(obs))
+
+    # Should have been called max_retries = 5 times
+    assert mock_set.call_count == 5
+
