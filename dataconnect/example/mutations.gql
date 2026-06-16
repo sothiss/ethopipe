@@ -1,6 +1,6 @@
 # EthoPipe Data Connect Mutations
 
-mutation UpsertSubject($id: String!, $species: String!, $dogSizeCategory: String) @auth(level: PUBLIC) {
+mutation UpsertSubject($id: String!, $species: String!, $dogSizeCategory: String) @auth(level: PUBLIC, insecureReason: "Public upsert allowed for testing.") {
   subject_upsert(data: {
     id: $id
     species: $species
@@ -30,7 +30,7 @@ mutation CreateObservation(
   $cortisolMatrix: String
   $observationMethod: String!
   $narrative: String!
-) @auth(level: PUBLIC) {
+) @auth(level: PUBLIC, insecureReason: "Public insert allowed for testing.") {
   observation_insert(data: {
     id: $id
     subjectId: $subjectId
@@ -62,7 +62,7 @@ mutation CreateQuarantineRecord(
   $errors: String!
   $ingestedAt: Timestamp!
   $originalIndex: Int
-) @auth(level: PUBLIC) {
+) @auth(level: PUBLIC, insecureReason: "Public insert allowed for testing.") {
   quarantineRecord_insert(data: {
     id: $id
     rawPayload: $rawPayload
