@@ -8,6 +8,5 @@ schemas:
         database: "fdcdb"
         cloudSql:
           instanceId: "ethopipe-fdc"
-          # schemaValidation: "STRICT"     # STRICT mode makes Postgres schema match Data Connect exactly.
-          # schemaValidation: "COMPATIBLE" # COMPATIBLE mode makes Postgres schema compatible with Data Connect.
+          schemaValidation: "COMPATIBLE" # COMPATIBLE mode makes Postgres schema compatible with Data Connect.
 connectorDirs: ["./example"]
