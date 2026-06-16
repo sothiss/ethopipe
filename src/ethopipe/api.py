@@ -6,6 +6,7 @@ import tempfile
 from typing import Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, status
+from fastapi.responses import FileResponse
 from pydantic import ValidationError
 
 from ethopipe.ingestion import _pre_process_row, load_csv, load_json
@@ -29,6 +30,24 @@ def get_loader() -> BaseLoader:
         csv_path = os.environ.get("ETL_CSV_PATH", "web_observations.csv")
         return CSVLoader(csv_path)
     return FirestoreLoader()
+
+
+@app.get(
+    "/",
+    response_class=FileResponse,
+    summary="Root HTML Interface",
+    description="Serves the primary index.html landing page for the Transparency Project.",
+)
+async def read_root():
+    """Serves the primary index.html landing page for the Transparency Project."""
+    base_dir = os.path.dirname(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    )
+    index_path = os.path.join(base_dir, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    raise HTTPException(status_code=404, detail="index.html template not found.")
+
 
 
 @app.post(
