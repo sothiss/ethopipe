@@ -14,8 +14,20 @@ If a user is not using a supported framework, they can use the generated SDK dir
 Here's an example of how to use it with the first 5 operations:
 
 ```js
-import { listMovies, listUsers, listUserReviews, getMovieById, searchMovie, createMovie, upsertUser, addReview, deleteReview } from '@dataconnect/generated';
+import { createMovie, upsertUser, addReview, deleteReview, listMovies, listUsers, listUserReviews, getMovieById, searchMovie } from '@dataconnect/generated';
 
+
+// Operation CreateMovie:  For variables, look at type CreateMovieVars in ../index.d.ts
+const { data } = await CreateMovie(dataConnect, createMovieVars);
+
+// Operation UpsertUser:  For variables, look at type UpsertUserVars in ../index.d.ts
+const { data } = await UpsertUser(dataConnect, upsertUserVars);
+
+// Operation AddReview:  For variables, look at type AddReviewVars in ../index.d.ts
+const { data } = await AddReview(dataConnect, addReviewVars);
+
+// Operation DeleteReview:  For variables, look at type DeleteReviewVars in ../index.d.ts
+const { data } = await DeleteReview(dataConnect, deleteReviewVars);
 
 // Operation ListMovies: 
 const { data } = await ListMovies(dataConnect);
@@ -31,18 +43,6 @@ const { data } = await GetMovieById(dataConnect, getMovieByIdVars);
 
 // Operation SearchMovie:  For variables, look at type SearchMovieVars in ../index.d.ts
 const { data } = await SearchMovie(dataConnect, searchMovieVars);
-
-// Operation CreateMovie:  For variables, look at type CreateMovieVars in ../index.d.ts
-const { data } = await CreateMovie(dataConnect, createMovieVars);
-
-// Operation UpsertUser:  For variables, look at type UpsertUserVars in ../index.d.ts
-const { data } = await UpsertUser(dataConnect, upsertUserVars);
-
-// Operation AddReview:  For variables, look at type AddReviewVars in ../index.d.ts
-const { data } = await AddReview(dataConnect, addReviewVars);
-
-// Operation DeleteReview:  For variables, look at type DeleteReviewVars in ../index.d.ts
-const { data } = await DeleteReview(dataConnect, deleteReviewVars);
 
 
 ```

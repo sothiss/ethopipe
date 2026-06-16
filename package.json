@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@dataconnect/generated": "file:src/dataconnect-generated",
     "@google-cloud/access-approval": "^4.2.2",
     "@google-cloud/access-context-manager": "^4.2.2",
     "@google-cloud/api-gateway": "^4.2.2",
