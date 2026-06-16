@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED=1 \
 WORKDIR /app
 
 # Copy packaging configuration and source files
-COPY pyproject.toml README.md ./
+COPY pyproject.toml README.md index.html ./
 COPY src/ ./src/
 
 # Upgrade pip, install uvicorn for server capability, and install the package
