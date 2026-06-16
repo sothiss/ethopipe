@@ -228,3 +228,12 @@ def test_ingest_json_endpoint(client):
     # Record 2 is quarantined
     assert "2" in res_data["quarantine"]
     assert any("out of veterinary bounds" in err for err in res_data["quarantine"]["2"])
+
+
+def test_root_endpoint_serves_index_html(client):
+    """Verify that the root endpoint (/) returns the index.html landing page."""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    assert "The Transparency Project" in response.text
+
