@@ -1,6 +1,6 @@
 # EthoPipe Data Connect Queries
 
-query ListObservations @auth(level: PUBLIC) {
+query ListObservations @auth(level: PUBLIC, insecureReason: "Anyone can list all observations.") {
   observations {
     id
     timestamp
@@ -30,7 +30,7 @@ query ListObservations @auth(level: PUBLIC) {
   }
 }
 
-query GetSubjectObservations($subjectId: String!) @auth(level: PUBLIC) {
+query GetSubjectObservations($subjectId: String!) @auth(level: PUBLIC, insecureReason: "Anyone can get subject observations.") {
   observations(where: { subjectId: { eq: $subjectId } }) {
     id
     timestamp
@@ -55,7 +55,7 @@ query GetSubjectObservations($subjectId: String!) @auth(level: PUBLIC) {
   }
 }
 
-query ListSubjects @auth(level: PUBLIC) {
+query ListSubjects @auth(level: PUBLIC, insecureReason: "Anyone can list all subjects.") {
   subjects {
     id
     species
@@ -63,7 +63,7 @@ query ListSubjects @auth(level: PUBLIC) {
   }
 }
 
-query ListQuarantineRecords @auth(level: PUBLIC) {
+query ListQuarantineRecords @auth(level: PUBLIC, insecureReason: "Anyone can list all quarantine records.") {
   quarantineRecords {
     id
     rawPayload
