@@ -1,219 +1,116 @@
 extend type Mutation {
   """
-  ✨ Insert a single `Movie` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  ✨ Insert a single `Observation` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
   """
-  movie_insert(
+  observation_insert(
     """
     Data object to insert into the table.
     """
-    data: Movie_Data!
-  ): Movie_KeyOutput! @fdc_generated(from: "Movie", purpose: INSERT_SINGLE)
+    data: Observation_Data!
+  ): Observation_KeyOutput! @fdc_generated(from: "Observation", purpose: INSERT_SINGLE)
   """
-  ✨ Insert a single `MovieMetadata` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  ✨ Insert a single `QuarantineRecord` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
   """
-  movieMetadata_insert(
+  quarantineRecord_insert(
     """
     Data object to insert into the table.
     """
-    data: MovieMetadata_Data!
-  ): MovieMetadata_KeyOutput! @fdc_generated(from: "MovieMetadata", purpose: INSERT_SINGLE)
+    data: QuarantineRecord_Data!
+  ): QuarantineRecord_KeyOutput! @fdc_generated(from: "QuarantineRecord", purpose: INSERT_SINGLE)
   """
-  ✨ Insert a single `Review` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  ✨ Insert a single `Subject` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
   """
-  review_insert(
+  subject_insert(
     """
     Data object to insert into the table.
     """
-    data: Review_Data!
-  ): Review_KeyOutput! @fdc_generated(from: "Review", purpose: INSERT_SINGLE)
+    data: Subject_Data!
+  ): Subject_KeyOutput! @fdc_generated(from: "Subject", purpose: INSERT_SINGLE)
   """
-  ✨ Insert a single `User` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  ✨ Insert `Observation` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
   """
-  user_insert(
-    """
-    Data object to insert into the table.
-    """
-    data: User_Data!
-  ): User_KeyOutput! @fdc_generated(from: "User", purpose: INSERT_SINGLE)
-  """
-  ✨ Insert `Movie` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
-  """
-  movie_insertMany(
+  observation_insertMany(
     """
     List of data objects to insert into the table.
     """
-    data: [Movie_Data!]!
-  ): [Movie_KeyOutput!]! @fdc_generated(from: "Movie", purpose: INSERT_MULTIPLE)
+    data: [Observation_Data!]!
+  ): [Observation_KeyOutput!]! @fdc_generated(from: "Observation", purpose: INSERT_MULTIPLE)
   """
-  ✨ Insert `MovieMetadata` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  ✨ Insert `QuarantineRecord` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
   """
-  movieMetadata_insertMany(
+  quarantineRecord_insertMany(
     """
     List of data objects to insert into the table.
     """
-    data: [MovieMetadata_Data!]!
-  ): [MovieMetadata_KeyOutput!]! @fdc_generated(from: "MovieMetadata", purpose: INSERT_MULTIPLE)
+    data: [QuarantineRecord_Data!]!
+  ): [QuarantineRecord_KeyOutput!]! @fdc_generated(from: "QuarantineRecord", purpose: INSERT_MULTIPLE)
   """
-  ✨ Insert `Review` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  ✨ Insert `Subject` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
   """
-  review_insertMany(
+  subject_insertMany(
     """
     List of data objects to insert into the table.
     """
-    data: [Review_Data!]!
-  ): [Review_KeyOutput!]! @fdc_generated(from: "Review", purpose: INSERT_MULTIPLE)
+    data: [Subject_Data!]!
+  ): [Subject_KeyOutput!]! @fdc_generated(from: "Subject", purpose: INSERT_MULTIPLE)
   """
-  ✨ Insert `User` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  ✨ Insert or update a single `Observation` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Observation`.
   """
-  user_insertMany(
-    """
-    List of data objects to insert into the table.
-    """
-    data: [User_Data!]!
-  ): [User_KeyOutput!]! @fdc_generated(from: "User", purpose: INSERT_MULTIPLE)
-  """
-  ✨ Insert or update a single `Movie` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Movie`.
-  """
-  movie_upsert(
+  observation_upsert(
     """
     Data object to insert or update if it already exists.
     """
-    data: Movie_Data!
-  ): Movie_KeyOutput! @fdc_generated(from: "Movie", purpose: UPSERT_SINGLE)
+    data: Observation_Data!
+  ): Observation_KeyOutput! @fdc_generated(from: "Observation", purpose: UPSERT_SINGLE)
   """
-  ✨ Insert or update a single `MovieMetadata` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `MovieMetadata`.
+  ✨ Insert or update a single `QuarantineRecord` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `QuarantineRecord`.
   """
-  movieMetadata_upsert(
+  quarantineRecord_upsert(
     """
     Data object to insert or update if it already exists.
     """
-    data: MovieMetadata_Data!
-  ): MovieMetadata_KeyOutput! @fdc_generated(from: "MovieMetadata", purpose: UPSERT_SINGLE)
+    data: QuarantineRecord_Data!
+  ): QuarantineRecord_KeyOutput! @fdc_generated(from: "QuarantineRecord", purpose: UPSERT_SINGLE)
   """
-  ✨ Insert or update a single `Review` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Review`.
+  ✨ Insert or update a single `Subject` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Subject`.
   """
-  review_upsert(
+  subject_upsert(
     """
     Data object to insert or update if it already exists.
     """
-    data: Review_Data!
-  ): Review_KeyOutput! @fdc_generated(from: "Review", purpose: UPSERT_SINGLE)
+    data: Subject_Data!
+  ): Subject_KeyOutput! @fdc_generated(from: "Subject", purpose: UPSERT_SINGLE)
   """
-  ✨ Insert or update a single `User` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `User`.
+  ✨ Insert or update `Observation` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Observation`.
   """
-  user_upsert(
-    """
-    Data object to insert or update if it already exists.
-    """
-    data: User_Data!
-  ): User_KeyOutput! @fdc_generated(from: "User", purpose: UPSERT_SINGLE)
-  """
-  ✨ Insert or update `Movie` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Movie`.
-  """
-  movie_upsertMany(
+  observation_upsertMany(
     """
     List of data objects to insert or update if it already exists.
     """
-    data: [Movie_Data!]!
-  ): [Movie_KeyOutput!]! @fdc_generated(from: "Movie", purpose: UPSERT_MULTIPLE)
+    data: [Observation_Data!]!
+  ): [Observation_KeyOutput!]! @fdc_generated(from: "Observation", purpose: UPSERT_MULTIPLE)
   """
-  ✨ Insert or update `MovieMetadata` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `MovieMetadata`.
+  ✨ Insert or update `QuarantineRecord` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `QuarantineRecord`.
   """
-  movieMetadata_upsertMany(
+  quarantineRecord_upsertMany(
     """
     List of data objects to insert or update if it already exists.
     """
-    data: [MovieMetadata_Data!]!
-  ): [MovieMetadata_KeyOutput!]! @fdc_generated(from: "MovieMetadata", purpose: UPSERT_MULTIPLE)
+    data: [QuarantineRecord_Data!]!
+  ): [QuarantineRecord_KeyOutput!]! @fdc_generated(from: "QuarantineRecord", purpose: UPSERT_MULTIPLE)
   """
-  ✨ Insert or update `Review` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Review`.
+  ✨ Insert or update `Subject` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Subject`.
   """
-  review_upsertMany(
+  subject_upsertMany(
     """
     List of data objects to insert or update if it already exists.
     """
-    data: [Review_Data!]!
-  ): [Review_KeyOutput!]! @fdc_generated(from: "Review", purpose: UPSERT_MULTIPLE)
+    data: [Subject_Data!]!
+  ): [Subject_KeyOutput!]! @fdc_generated(from: "Subject", purpose: UPSERT_MULTIPLE)
   """
-  ✨ Insert or update `User` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `User`.
+  ✨ Update a single `Observation` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Observation` or `null` if not found.
   """
-  user_upsertMany(
-    """
-    List of data objects to insert or update if it already exists.
-    """
-    data: [User_Data!]!
-  ): [User_KeyOutput!]! @fdc_generated(from: "User", purpose: UPSERT_MULTIPLE)
-  """
-  ✨ Update a single `Movie` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Movie` or `null` if not found.
-  """
-  movie_update(
-    """
-    The unique ID of the object.
-    """
-    id: UUID
-
-    """
-    The key used to identify the object.
-    """
-    key: Movie_Key
-
-    """
-    Fetch the first row based on the filters and ordering.
-    """
-    first: Movie_FirstRow
-
-    """
-    Data object containing fields to be updated.
-    """
-    data: Movie_Data!
-  ): Movie_KeyOutput @fdc_generated(from: "Movie", purpose: UPDATE_SINGLE)
-  """
-  ✨ Update a single `MovieMetadata` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `MovieMetadata` or `null` if not found.
-  """
-  movieMetadata_update(
-    """
-    The unique ID of the object.
-    """
-    id: UUID
-
-    """
-    The key used to identify the object.
-    """
-    key: MovieMetadata_Key
-
-    """
-    Fetch the first row based on the filters and ordering.
-    """
-    first: MovieMetadata_FirstRow
-
-    """
-    Data object containing fields to be updated.
-    """
-    data: MovieMetadata_Data!
-  ): MovieMetadata_KeyOutput @fdc_generated(from: "MovieMetadata", purpose: UPDATE_SINGLE)
-  """
-  ✨ Update a single `Review` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Review` or `null` if not found.
-  """
-  review_update(
-    """
-    The key used to identify the object.
-    """
-    key: Review_Key
-
-    """
-    Fetch the first row based on the filters and ordering.
-    """
-    first: Review_FirstRow
-
-    """
-    Data object containing fields to be updated.
-    """
-    data: Review_Data!
-  ): Review_KeyOutput @fdc_generated(from: "Review", purpose: UPDATE_SINGLE)
-  """
-  ✨ Update a single `User` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `User` or `null` if not found.
-  """
-  user_update(
+  observation_update(
     """
     The unique ID of the object.
     """
@@ -227,150 +124,22 @@ extend type Mutation {
     """
     The key used to identify the object.
     """
-    key: User_Key
+    key: Observation_Key
 
     """
     Fetch the first row based on the filters and ordering.
     """
-    first: User_FirstRow
+    first: Observation_FirstRow
 
     """
     Data object containing fields to be updated.
     """
-    data: User_Data!
-  ): User_KeyOutput @fdc_generated(from: "User", purpose: UPDATE_SINGLE)
+    data: Observation_Data!
+  ): Observation_KeyOutput @fdc_generated(from: "Observation", purpose: UPDATE_SINGLE)
   """
-  ✨ Update `Movie` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  ✨ Update a single `QuarantineRecord` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `QuarantineRecord` or `null` if not found.
   """
-  movie_updateMany(
-    """
-    Filter condition to specify which rows to update.
-    """
-    where: Movie_Filter
-
-    """
-    Set to true to update all rows.
-    """
-    all: Boolean = false
-
-    """
-    Data object containing fields to update.
-    """
-    data: Movie_Data!
-  ): Int! @fdc_generated(from: "Movie", purpose: UPDATE_MULTIPLE)
-  """
-  ✨ Update `MovieMetadata` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
-  """
-  movieMetadata_updateMany(
-    """
-    Filter condition to specify which rows to update.
-    """
-    where: MovieMetadata_Filter
-
-    """
-    Set to true to update all rows.
-    """
-    all: Boolean = false
-
-    """
-    Data object containing fields to update.
-    """
-    data: MovieMetadata_Data!
-  ): Int! @fdc_generated(from: "MovieMetadata", purpose: UPDATE_MULTIPLE)
-  """
-  ✨ Update `Review` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
-  """
-  review_updateMany(
-    """
-    Filter condition to specify which rows to update.
-    """
-    where: Review_Filter
-
-    """
-    Set to true to update all rows.
-    """
-    all: Boolean = false
-
-    """
-    Data object containing fields to update.
-    """
-    data: Review_Data!
-  ): Int! @fdc_generated(from: "Review", purpose: UPDATE_MULTIPLE)
-  """
-  ✨ Update `User` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
-  """
-  user_updateMany(
-    """
-    Filter condition to specify which rows to update.
-    """
-    where: User_Filter
-
-    """
-    Set to true to update all rows.
-    """
-    all: Boolean = false
-
-    """
-    Data object containing fields to update.
-    """
-    data: User_Data!
-  ): Int! @fdc_generated(from: "User", purpose: UPDATE_MULTIPLE)
-  """
-  ✨ Delete a single `Movie` based on `id`, `key` or `first` and return its key (or `null` if not found).
-  """
-  movie_delete(
-    """
-    The unique ID of the object.
-    """
-    id: UUID
-
-    """
-    The key used to identify the object.
-    """
-    key: Movie_Key
-
-    """
-    Fetch the first row based on the filters and ordering.
-    """
-    first: Movie_FirstRow
-  ): Movie_KeyOutput @fdc_generated(from: "Movie", purpose: DELETE_SINGLE)
-  """
-  ✨ Delete a single `MovieMetadata` based on `id`, `key` or `first` and return its key (or `null` if not found).
-  """
-  movieMetadata_delete(
-    """
-    The unique ID of the object.
-    """
-    id: UUID
-
-    """
-    The key used to identify the object.
-    """
-    key: MovieMetadata_Key
-
-    """
-    Fetch the first row based on the filters and ordering.
-    """
-    first: MovieMetadata_FirstRow
-  ): MovieMetadata_KeyOutput @fdc_generated(from: "MovieMetadata", purpose: DELETE_SINGLE)
-  """
-  ✨ Delete a single `Review` based on `id`, `key` or `first` and return its key (or `null` if not found).
-  """
-  review_delete(
-    """
-    The key used to identify the object.
-    """
-    key: Review_Key
-
-    """
-    Fetch the first row based on the filters and ordering.
-    """
-    first: Review_FirstRow
-  ): Review_KeyOutput @fdc_generated(from: "Review", purpose: DELETE_SINGLE)
-  """
-  ✨ Delete a single `User` based on `id`, `key` or `first` and return its key (or `null` if not found).
-  """
-  user_delete(
+  quarantineRecord_update(
     """
     The unique ID of the object.
     """
@@ -384,67 +153,216 @@ extend type Mutation {
     """
     The key used to identify the object.
     """
-    key: User_Key
+    key: QuarantineRecord_Key
 
     """
     Fetch the first row based on the filters and ordering.
     """
-    first: User_FirstRow
-  ): User_KeyOutput @fdc_generated(from: "User", purpose: DELETE_SINGLE)
+    first: QuarantineRecord_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: QuarantineRecord_Data!
+  ): QuarantineRecord_KeyOutput @fdc_generated(from: "QuarantineRecord", purpose: UPDATE_SINGLE)
   """
-  ✨ Delete `Movie` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  ✨ Update a single `Subject` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Subject` or `null` if not found.
   """
-  movie_deleteMany(
+  subject_update(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Subject_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Subject_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Subject_Data!
+  ): Subject_KeyOutput @fdc_generated(from: "Subject", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update `Observation` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  observation_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Observation_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Observation_Data!
+  ): Int! @fdc_generated(from: "Observation", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `QuarantineRecord` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  quarantineRecord_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: QuarantineRecord_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: QuarantineRecord_Data!
+  ): Int! @fdc_generated(from: "QuarantineRecord", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Subject` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  subject_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Subject_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Subject_Data!
+  ): Int! @fdc_generated(from: "Subject", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Delete a single `Observation` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  observation_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Observation_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Observation_FirstRow
+  ): Observation_KeyOutput @fdc_generated(from: "Observation", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `QuarantineRecord` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  quarantineRecord_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: QuarantineRecord_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: QuarantineRecord_FirstRow
+  ): QuarantineRecord_KeyOutput @fdc_generated(from: "QuarantineRecord", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Subject` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  subject_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: Subject_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Subject_FirstRow
+  ): Subject_KeyOutput @fdc_generated(from: "Subject", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete `Observation` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  observation_deleteMany(
     """
     Filter condition to specify which rows to delete.
     """
-    where: Movie_Filter
+    where: Observation_Filter
 
     """
     Set to true to delete all rows.
     """
     all: Boolean = false
-  ): Int! @fdc_generated(from: "Movie", purpose: DELETE_MULTIPLE)
+  ): Int! @fdc_generated(from: "Observation", purpose: DELETE_MULTIPLE)
   """
-  ✨ Delete `MovieMetadata` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  ✨ Delete `QuarantineRecord` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
   """
-  movieMetadata_deleteMany(
+  quarantineRecord_deleteMany(
     """
     Filter condition to specify which rows to delete.
     """
-    where: MovieMetadata_Filter
+    where: QuarantineRecord_Filter
 
     """
     Set to true to delete all rows.
     """
     all: Boolean = false
-  ): Int! @fdc_generated(from: "MovieMetadata", purpose: DELETE_MULTIPLE)
+  ): Int! @fdc_generated(from: "QuarantineRecord", purpose: DELETE_MULTIPLE)
   """
-  ✨ Delete `Review` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  ✨ Delete `Subject` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
   """
-  review_deleteMany(
+  subject_deleteMany(
     """
     Filter condition to specify which rows to delete.
     """
-    where: Review_Filter
+    where: Subject_Filter
 
     """
     Set to true to delete all rows.
     """
     all: Boolean = false
-  ): Int! @fdc_generated(from: "Review", purpose: DELETE_MULTIPLE)
-  """
-  ✨ Delete `User` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
-  """
-  user_deleteMany(
-    """
-    Filter condition to specify which rows to delete.
-    """
-    where: User_Filter
-
-    """
-    Set to true to delete all rows.
-    """
-    all: Boolean = false
-  ): Int! @fdc_generated(from: "User", purpose: DELETE_MULTIPLE)
+  ): Int! @fdc_generated(from: "Subject", purpose: DELETE_MULTIPLE)
 }
