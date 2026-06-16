@@ -31,6 +31,52 @@ def generate_observation_doc_id(obs: EthologicalObservation) -> str:
     return hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
 
 
+async def retry_firestore_operation(
+    coro_func, *args, max_retries: int = 5, initial_backoff: float = 0.5, **kwargs
+) -> Any:
+    """Executes a Firestore async operation with exponential backoff and jitter for transient errors."""
+    import random
+
+    if firestore is None:
+        raise ModuleNotFoundError(
+            "google-cloud-firestore is required for Firestore operations."
+        )
+
+    from google.api_core.exceptions import (
+        Aborted,
+        DeadlineExceeded,
+        ResourceExhausted,
+        ServiceUnavailable,
+    )
+
+    backoff = initial_backoff
+    retriable_exceptions = (
+        ServiceUnavailable,
+        DeadlineExceeded,
+        Aborted,
+        ResourceExhausted,
+    )
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            return await coro_func(*args, **kwargs)
+        except retriable_exceptions as e:
+            if attempt == max_retries:
+                logger.error(
+                    f"Firestore operation failed after {max_retries} attempts: {e}"
+                )
+                raise
+            # Apply exponential backoff with random jitter
+            sleep_time = backoff * (0.5 + random.random())
+            logger.warning(
+                f"Firestore operation encountered transient error: {e}. "
+                f"Retrying in {sleep_time:.2f} seconds (Attempt {attempt}/{max_retries})..."
+            )
+            await asyncio.sleep(sleep_time)
+            backoff *= 2
+
+
+
 class BaseLoader(ABC):
     """Abstract Base Class defining the standard interface for EthoPipe Loaders."""
 
@@ -135,7 +181,7 @@ class FirestoreLoader(BaseLoader):
         # model_dump() converts datetime fields to native Pydantic structures.
         # Firestore handles datetime, float, int, and string types natively.
         data = observation.model_dump()
-        await doc_ref.set(data)
+        await retry_firestore_operation(doc_ref.set, data)
         logger.debug(f"Successfully loaded observation {doc_id} to Firestore.")
         return doc_id
 
@@ -145,7 +191,7 @@ class FirestoreLoader(BaseLoader):
         """Persists a batch of observations atomically using Firestore WriteBatch.
 
         Accommodates Firestore's maximum limits of 500 writes per batch by automatically
-        chunking larger datasets.
+        chunking larger datasets and committing chunks concurrently.
 
         Args:
             observations: List of validated EthologicalObservation objects.
@@ -156,27 +202,30 @@ class FirestoreLoader(BaseLoader):
         if not observations:
             return []
 
-        doc_ids = []
-        batch = self.client.batch()
-        batch_counter = 0
+        chunk_size = 500
+        chunks = [
+            observations[i : i + chunk_size]
+            for i in range(0, len(observations), chunk_size)
+        ]
+
+        async def commit_chunk(chunk):
+            batch = self.client.batch()
+            doc_ids = []
+            for obs in chunk:
+                doc_id = generate_observation_doc_id(obs)
+                doc_ref = self.client.collection(self.collection_name).document(doc_id)
+                batch.set(doc_ref, obs.model_dump())
+                doc_ids.append(doc_id)
+
+            await retry_firestore_operation(batch.commit)
+            return doc_ids
+
+        tasks = [commit_chunk(chunk) for chunk in chunks]
+        results = await asyncio.gather(*tasks)
+
         committed_ids = []
-
-        for obs in observations:
-            doc_id = generate_observation_doc_id(obs)
-            doc_ref = self.client.collection(self.collection_name).document(doc_id)
-            batch.set(doc_ref, obs.model_dump())
-            doc_ids.append(doc_id)
-            batch_counter += 1
-
-            if batch_counter == 500:
-                await batch.commit()
-                committed_ids.extend(doc_ids[-batch_counter:])
-                batch = self.client.batch()
-                batch_counter = 0
-
-        if batch_counter > 0:
-            await batch.commit()
-            committed_ids.extend(doc_ids[-batch_counter:])
+        for res in results:
+            committed_ids.extend(res)
 
         logger.info(
             f"Successfully loaded batch of {len(committed_ids)} observations to Firestore."
@@ -189,7 +238,7 @@ class FirestoreLoader(BaseLoader):
         """Persists a batch of quarantine records atomically using Firestore WriteBatch.
 
         Accommodates Firestore's maximum limits of 500 writes per batch by automatically
-        chunking larger datasets.
+        chunking larger datasets and committing chunks concurrently.
 
         Args:
             quarantine_records: List of QuarantineRecord objects.
@@ -200,33 +249,36 @@ class FirestoreLoader(BaseLoader):
         if not quarantine_records:
             return []
 
-        doc_ids = []
-        batch = self.client.batch()
-        batch_counter = 0
+        chunk_size = 500
+        chunks = [
+            quarantine_records[i : i + chunk_size]
+            for i in range(0, len(quarantine_records), chunk_size)
+        ]
+
+        async def commit_chunk(chunk):
+            batch = self.client.batch()
+            doc_ids = []
+            for rec in chunk:
+                timestamp_str = rec.ingested_at.isoformat()
+                raw_payload_str = json.dumps(rec.raw_payload, sort_keys=True)
+                raw_key = f"{raw_payload_str}_{timestamp_str}_{rec.original_index}"
+                doc_id = hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
+
+                doc_ref = self.client.collection(
+                    self.quarantine_collection_name
+                ).document(doc_id)
+                batch.set(doc_ref, rec.model_dump())
+                doc_ids.append(doc_id)
+
+            await retry_firestore_operation(batch.commit)
+            return doc_ids
+
+        tasks = [commit_chunk(chunk) for chunk in chunks]
+        results = await asyncio.gather(*tasks)
+
         committed_ids = []
-
-        for rec in quarantine_records:
-            timestamp_str = rec.ingested_at.isoformat()
-            raw_payload_str = json.dumps(rec.raw_payload, sort_keys=True)
-            raw_key = f"{raw_payload_str}_{timestamp_str}_{rec.original_index}"
-            doc_id = hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
-
-            doc_ref = self.client.collection(self.quarantine_collection_name).document(
-                doc_id
-            )
-            batch.set(doc_ref, rec.model_dump())
-            doc_ids.append(doc_id)
-            batch_counter += 1
-
-            if batch_counter == 500:
-                await batch.commit()
-                committed_ids.extend(doc_ids[-batch_counter:])
-                batch = self.client.batch()
-                batch_counter = 0
-
-        if batch_counter > 0:
-            await batch.commit()
-            committed_ids.extend(doc_ids[-batch_counter:])
+        for res in results:
+            committed_ids.extend(res)
 
         logger.info(
             f"Successfully loaded batch of {len(committed_ids)} quarantine records to Firestore."
