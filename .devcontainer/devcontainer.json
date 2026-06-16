@@ -1,44 +1,8 @@
 {
-  "name": "EthoPipe Development Environment",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  },
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.testing.pytestEnabled": true,
-        "python.testing.unittestEnabled": false,
-        "python.testing.pytestArgs": [
-          "tests"
-        ],
-        "[python]": {
-          "editor.defaultFormatter": "ms-python.python",
-          "editor.formatOnSave": true,
-          "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
-          }
-        }
-      },
-      "extensions": [
+    "name": "EthoPipe Deterministic Environment",
+    "dockerFile": "Dockerfile",
+    "extensions": [
         "ms-python.python",
-        "ms-python.vscode-pylance",
-        "charliermarsh.ruff",
-        "graphql.vscode-graphql",
-        "googlecloudtools.cloudcode",
-        "google.gemini-cli-vscode-ide-companion",
-        "google.geminicodeassist",
-        "googlecloudtools.datacloud"
-      ]
-    }
-  },
-  "postCreateCommand": "pip install -e .[dev]",
-  "mounts": [
-    "source=${localEnv:APPDATA}/gcloud,target=/root/.config/gcloud,type=bind,consistency=cached"
-  ],
-  "remoteUser": "root",
-  "remoteEnv": {
-    "GOOGLE_APPLICATION_CREDENTIALS": "/root/.config/gcloud/application_default_credentials.json"
-  }
+        "njpwerner.autodocstring"
+    ]
 }
