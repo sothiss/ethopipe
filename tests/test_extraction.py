@@ -123,7 +123,7 @@ def test_new_canonical_behaviors_extraction():
     assert obs_tremble[0].behavior_type == "trembling"
     assert obs_tremble[0].behavior_value == "continuous"
     assert (
-        obs_tremble[0].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0002236"
+        obs_tremble[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000589"
     )
 
     # Pacing (numeric count)
@@ -134,7 +134,7 @@ def test_new_canonical_behaviors_extraction():
     assert obs_pacing[0].behavior_type == "pacing"
     assert obs_pacing[0].behavior_value == 2
     assert (
-        obs_pacing[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000100"
+        obs_pacing[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000622"
     )
 
     # Posture Freeze (written count)

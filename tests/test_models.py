@@ -278,8 +278,8 @@ def test_new_vocabulary_behaviors_validation_and_resolution():
         ("yawning", "Yawning", "http://purl.obolibrary.org/obo/NBO_0000074"),
         ("avoidance", "Avoidance", "http://purl.obolibrary.org/obo/NBO_0000635"),
         ("lip_licking", "Lip Licking", "http://purl.obolibrary.org/obo/NBO_0000216"),
-        ("trembling", "Trembling", "http://purl.obolibrary.org/obo/VT_0002236"),
-        ("pacing", "Pacing", "http://purl.obolibrary.org/obo/NBO_0000100"),
+        ("trembling", "Trembling", "http://purl.obolibrary.org/obo/NBO_0000589"),
+        ("pacing", "Pacing", "http://purl.obolibrary.org/obo/NBO_0000622"),
         (
             "vocalization_whine",
             "Vocalization Whine",

@@ -361,10 +361,10 @@ def test_canonical_behaviors_ingestion_normalization(tmp_path, column_mapping):
     assert valid_obs[0].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000216"
 
     assert valid_obs[1].behavior_type == "trembling"
-    assert valid_obs[1].behavior_type_id == "http://purl.obolibrary.org/obo/VT_0002236"
+    assert valid_obs[1].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000589"
 
     assert valid_obs[2].behavior_type == "pacing"
-    assert valid_obs[2].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000100"
+    assert valid_obs[2].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000622"
 
     assert valid_obs[3].behavior_type == "vocalization_whine"
     assert valid_obs[3].behavior_type_id == "http://purl.obolibrary.org/obo/NBO_0000233"
