@@ -1,0 +1,10 @@
+# actionlint configuration
+# https://github.com/rhysd/actionlint/blob/main/docs/config.md
+
+self-hosted-runner:
+  # Configure custom runner labels if needed
+  labels: []
+
+secrets:
+  # Define custom secrets used in workflows to prevent "Context access might be invalid" warnings
+  - CODECOV_TOKEN
