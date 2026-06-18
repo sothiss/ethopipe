@@ -28,6 +28,7 @@ __pycache__/
 *secret*.json
 .gcloud/
 .firebase/
+firebase-debug.log
 
 # 4. Local IDE State & Version Control Noise
 .vscode/*
