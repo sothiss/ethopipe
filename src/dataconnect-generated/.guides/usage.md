@@ -14,35 +14,29 @@ If a user is not using a supported framework, they can use the generated SDK dir
 Here's an example of how to use it with the first 5 operations:
 
 ```js
-import { createMovie, upsertUser, addReview, deleteReview, listMovies, listUsers, listUserReviews, getMovieById, searchMovie } from '@dataconnect/generated';
+import { upsertSubject, createObservation, createQuarantineRecord, listObservations, getSubjectObservations, listSubjects, listQuarantineRecords } from '@dataconnect/generated';
 
 
-// Operation CreateMovie:  For variables, look at type CreateMovieVars in ../index.d.ts
-const { data } = await CreateMovie(dataConnect, createMovieVars);
+// Operation UpsertSubject:  For variables, look at type UpsertSubjectVars in ../index.d.ts
+const { data } = await UpsertSubject(dataConnect, upsertSubjectVars);
 
-// Operation UpsertUser:  For variables, look at type UpsertUserVars in ../index.d.ts
-const { data } = await UpsertUser(dataConnect, upsertUserVars);
+// Operation CreateObservation:  For variables, look at type CreateObservationVars in ../index.d.ts
+const { data } = await CreateObservation(dataConnect, createObservationVars);
 
-// Operation AddReview:  For variables, look at type AddReviewVars in ../index.d.ts
-const { data } = await AddReview(dataConnect, addReviewVars);
+// Operation CreateQuarantineRecord:  For variables, look at type CreateQuarantineRecordVars in ../index.d.ts
+const { data } = await CreateQuarantineRecord(dataConnect, createQuarantineRecordVars);
 
-// Operation DeleteReview:  For variables, look at type DeleteReviewVars in ../index.d.ts
-const { data } = await DeleteReview(dataConnect, deleteReviewVars);
+// Operation ListObservations: 
+const { data } = await ListObservations(dataConnect);
 
-// Operation ListMovies: 
-const { data } = await ListMovies(dataConnect);
+// Operation GetSubjectObservations:  For variables, look at type GetSubjectObservationsVars in ../index.d.ts
+const { data } = await GetSubjectObservations(dataConnect, getSubjectObservationsVars);
 
-// Operation ListUsers: 
-const { data } = await ListUsers(dataConnect);
+// Operation ListSubjects: 
+const { data } = await ListSubjects(dataConnect);
 
-// Operation ListUserReviews: 
-const { data } = await ListUserReviews(dataConnect);
-
-// Operation GetMovieById:  For variables, look at type GetMovieByIdVars in ../index.d.ts
-const { data } = await GetMovieById(dataConnect, getMovieByIdVars);
-
-// Operation SearchMovie:  For variables, look at type SearchMovieVars in ../index.d.ts
-const { data } = await SearchMovie(dataConnect, searchMovieVars);
+// Operation ListQuarantineRecords: 
+const { data } = await ListQuarantineRecords(dataConnect);
 
 
 ```
