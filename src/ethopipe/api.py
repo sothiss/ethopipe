@@ -223,3 +223,94 @@ async def ingest_json(
         "quarantine_ids": quarantine_ids,
         "quarantine": {str(q.original_index): q.errors for q in quarantine},
     }
+
+
+@app.post(
+    "/gcp/trigger",
+    status_code=status.HTTP_200_OK,
+    summary="Trigger ETL from Google Cloud Storage file",
+    description="Invoked by Eventarc, Pub/Sub, or manual webhook when a new narrative is uploaded to GCS. Downloads file, parses via Vertex AI, and persists.",
+)
+async def gcp_trigger(
+    request: Request,
+    loader: BaseLoader = Depends(get_loader),
+):
+    """Downloads an unstructured note from GCS, extracts behavioral records using
+
+    Vertex AI, and saves the validated observations to Firestore/CSV.
+    """
+    from datetime import datetime
+    import re
+    from ethopipe.gcp import download_gcs_file, process_narrative_with_gcp
+
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Payload must be a valid JSON object.",
+        )
+
+    # Eventarc GCS wrapping puts the actual GCS notification fields under "data"
+    gcs_data = data.get("data", data) if isinstance(data, dict) else {}
+
+    bucket = gcs_data.get("bucket") or data.get("bucket")
+    name = gcs_data.get("name") or data.get("name") or gcs_data.get("object") or data.get("object")
+
+    if not bucket or not name:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Both 'bucket' and 'name' (GCS blob path) are required in the payload.",
+        )
+
+    # Extract metadata from body or fallback to defaults
+    subject_id = data.get("subject_id") or gcs_data.get("subject_id")
+    if not subject_id:
+        # Attempt to isolate Subject ID from GCS filename
+        match = re.search(r"SUB-DOG-[a-zA-Z0-9]+", name)
+        subject_id = match.group(0) if match else "SUB-DOG-UNKNOWN"
+
+    timestamp_str = data.get("timestamp") or gcs_data.get("timestamp")
+    timestamp = datetime.now()
+    if timestamp_str:
+        try:
+            timestamp = datetime.fromisoformat(timestamp_str)
+        except ValueError:
+            pass
+
+    location = data.get("location") or gcs_data.get("location") or "GCS Cloud Storage"
+    dog_size_category = data.get("dog_size_category") or gcs_data.get("dog_size_category")
+    observation_method = (
+        data.get("observation_method") or gcs_data.get("observation_method") or "HumanObservation"
+    )
+
+    try:
+        narrative = download_gcs_file(bucket, name)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to download GCS file: {str(e)}",
+        )
+
+    observations = await process_narrative_with_gcp(
+        narrative=narrative,
+        subject_id=subject_id,
+        timestamp=timestamp,
+        location=location,
+        dog_size_category=dog_size_category,
+        observation_method=observation_method,
+    )
+
+    if observations:
+        loaded_ids = await loader.load_observations_batch(observations)
+    else:
+        loaded_ids = []
+
+    return {
+        "status": "success",
+        "bucket": bucket,
+        "blob": name,
+        "extracted_count": len(observations),
+        "loaded_ids": loaded_ids,
+    }
+
