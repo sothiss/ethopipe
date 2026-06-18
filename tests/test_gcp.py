@@ -5,7 +5,6 @@ from unittest.mock import MagicMock, AsyncMock, patch
 import pytest
 import httpx
 from fastapi.testclient import TestClient
-from pydantic import ValidationError
 
 from ethopipe.api import app
 from ethopipe.models import EthologicalObservation

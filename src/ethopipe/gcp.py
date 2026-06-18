@@ -8,7 +8,7 @@ import re
 import json
 import logging
 from datetime import datetime
-from typing import Any, Optional, Union, List
+from typing import Any, Optional, Union
 
 import httpx
 import google.auth
@@ -17,7 +17,6 @@ from google.cloud import storage
 
 from ethopipe.models import (
     EthologicalObservation,
-    BehavioralObservation,
     EthogramExtractionLog,
 )
 from ethopipe.extraction import (
