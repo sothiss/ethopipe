@@ -153,42 +153,6 @@ export interface UpsertSubjectVariables {
   dogSizeCategory?: string | null;
 }
 
-interface UpsertSubjectRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: UpsertSubjectVariables): MutationRef<UpsertSubjectData, UpsertSubjectVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: UpsertSubjectVariables): MutationRef<UpsertSubjectData, UpsertSubjectVariables>;
-  operationName: string;
-}
-export const upsertSubjectRef: UpsertSubjectRef;
-
-export function upsertSubject(vars: UpsertSubjectVariables): MutationPromise<UpsertSubjectData, UpsertSubjectVariables>;
-export function upsertSubject(dc: DataConnect, vars: UpsertSubjectVariables): MutationPromise<UpsertSubjectData, UpsertSubjectVariables>;
-
-interface CreateObservationRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateObservationVariables): MutationRef<CreateObservationData, CreateObservationVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateObservationVariables): MutationRef<CreateObservationData, CreateObservationVariables>;
-  operationName: string;
-}
-export const createObservationRef: CreateObservationRef;
-
-export function createObservation(vars: CreateObservationVariables): MutationPromise<CreateObservationData, CreateObservationVariables>;
-export function createObservation(dc: DataConnect, vars: CreateObservationVariables): MutationPromise<CreateObservationData, CreateObservationVariables>;
-
-interface CreateQuarantineRecordRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateQuarantineRecordVariables): MutationRef<CreateQuarantineRecordData, CreateQuarantineRecordVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateQuarantineRecordVariables): MutationRef<CreateQuarantineRecordData, CreateQuarantineRecordVariables>;
-  operationName: string;
-}
-export const createQuarantineRecordRef: CreateQuarantineRecordRef;
-
-export function createQuarantineRecord(vars: CreateQuarantineRecordVariables): MutationPromise<CreateQuarantineRecordData, CreateQuarantineRecordVariables>;
-export function createQuarantineRecord(dc: DataConnect, vars: CreateQuarantineRecordVariables): MutationPromise<CreateQuarantineRecordData, CreateQuarantineRecordVariables>;
-
 interface ListObservationsRef {
   /* Allow users to create refs without passing in DataConnect */
   (): QueryRef<ListObservationsData, undefined>;
@@ -236,4 +200,40 @@ export const listQuarantineRecordsRef: ListQuarantineRecordsRef;
 
 export function listQuarantineRecords(options?: ExecuteQueryOptions): QueryPromise<ListQuarantineRecordsData, undefined>;
 export function listQuarantineRecords(dc: DataConnect, options?: ExecuteQueryOptions): QueryPromise<ListQuarantineRecordsData, undefined>;
+
+interface UpsertSubjectRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: UpsertSubjectVariables): MutationRef<UpsertSubjectData, UpsertSubjectVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: UpsertSubjectVariables): MutationRef<UpsertSubjectData, UpsertSubjectVariables>;
+  operationName: string;
+}
+export const upsertSubjectRef: UpsertSubjectRef;
+
+export function upsertSubject(vars: UpsertSubjectVariables): MutationPromise<UpsertSubjectData, UpsertSubjectVariables>;
+export function upsertSubject(dc: DataConnect, vars: UpsertSubjectVariables): MutationPromise<UpsertSubjectData, UpsertSubjectVariables>;
+
+interface CreateObservationRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateObservationVariables): MutationRef<CreateObservationData, CreateObservationVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateObservationVariables): MutationRef<CreateObservationData, CreateObservationVariables>;
+  operationName: string;
+}
+export const createObservationRef: CreateObservationRef;
+
+export function createObservation(vars: CreateObservationVariables): MutationPromise<CreateObservationData, CreateObservationVariables>;
+export function createObservation(dc: DataConnect, vars: CreateObservationVariables): MutationPromise<CreateObservationData, CreateObservationVariables>;
+
+interface CreateQuarantineRecordRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: CreateQuarantineRecordVariables): MutationRef<CreateQuarantineRecordData, CreateQuarantineRecordVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: CreateQuarantineRecordVariables): MutationRef<CreateQuarantineRecordData, CreateQuarantineRecordVariables>;
+  operationName: string;
+}
+export const createQuarantineRecordRef: CreateQuarantineRecordRef;
+
+export function createQuarantineRecord(vars: CreateQuarantineRecordVariables): MutationPromise<CreateQuarantineRecordData, CreateQuarantineRecordVariables>;
+export function createQuarantineRecord(dc: DataConnect, vars: CreateQuarantineRecordVariables): MutationPromise<CreateQuarantineRecordData, CreateQuarantineRecordVariables>;
 

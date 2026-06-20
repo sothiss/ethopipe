@@ -14,17 +14,8 @@ If a user is not using a supported framework, they can use the generated SDK dir
 Here's an example of how to use it with the first 5 operations:
 
 ```js
-import { upsertSubject, createObservation, createQuarantineRecord, listObservations, getSubjectObservations, listSubjects, listQuarantineRecords } from '@dataconnect/generated';
+import { listObservations, getSubjectObservations, listSubjects, listQuarantineRecords, upsertSubject, createObservation, createQuarantineRecord } from '@dataconnect/generated';
 
-
-// Operation UpsertSubject:  For variables, look at type UpsertSubjectVars in ../index.d.ts
-const { data } = await UpsertSubject(dataConnect, upsertSubjectVars);
-
-// Operation CreateObservation:  For variables, look at type CreateObservationVars in ../index.d.ts
-const { data } = await CreateObservation(dataConnect, createObservationVars);
-
-// Operation CreateQuarantineRecord:  For variables, look at type CreateQuarantineRecordVars in ../index.d.ts
-const { data } = await CreateQuarantineRecord(dataConnect, createQuarantineRecordVars);
 
 // Operation ListObservations: 
 const { data } = await ListObservations(dataConnect);
@@ -37,6 +28,15 @@ const { data } = await ListSubjects(dataConnect);
 
 // Operation ListQuarantineRecords: 
 const { data } = await ListQuarantineRecords(dataConnect);
+
+// Operation UpsertSubject:  For variables, look at type UpsertSubjectVars in ../index.d.ts
+const { data } = await UpsertSubject(dataConnect, upsertSubjectVars);
+
+// Operation CreateObservation:  For variables, look at type CreateObservationVars in ../index.d.ts
+const { data } = await CreateObservation(dataConnect, createObservationVars);
+
+// Operation CreateQuarantineRecord:  For variables, look at type CreateQuarantineRecordVars in ../index.d.ts
+const { data } = await CreateQuarantineRecord(dataConnect, createQuarantineRecordVars);
 
 
 ```
