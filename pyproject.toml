@@ -1,0 +1,25 @@
+[project]
+name = "ethology-pipeline"
+version = "0.1.0"
+description = "Open-science ethological data ingestion pipeline"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Alice Severi Gonçalves" }
+]
+license = "MIT"
+license-files = ["LICENSE"]
+
+dependencies = [
+  "fastapi",
+  "pydantic",
+  "pandas",
+  "uvicorn",
+  "pytest"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.black]
+line-length = 88
