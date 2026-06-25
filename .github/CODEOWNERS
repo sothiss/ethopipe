@@ -1,7 +1,6 @@
-* @sothiss
 /src/pipeline/ @sothiss
 /tests/ @sothiss
 /.github/ @sothiss
-README.md @sothiss
-pyproject.toml @sothiss
-``
+/README.MD @sothiss
+/pyproject.toml @sothiss
+* @sothiss
