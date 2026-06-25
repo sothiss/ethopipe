@@ -1,0 +1,26 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local environment/config
+.env
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Antigravity / local agent folders
+.agents/
+.gemini/
+rules/
+skills/
+
+# OS files
+.DS_Store
+Thumbs.db
