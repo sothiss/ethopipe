@@ -1,5 +1,5 @@
 [project]
-name = "ethology-pipeline"
+name = "ethopipe"
 version = "0.1.0"
 description = "Open-science ethological data ingestion pipeline"
 readme = "README.md"
