@@ -748,13 +748,20 @@
                 title = 'Error';
             }
 
-            alertBox.innerHTML = `
-                <div class="alert ${cssClass}">
-                    <div>
-                        <strong>${title}:</strong> ${message}
-                    </div>
-                </div>
-            `;
+            alertBox.innerHTML = ''; // Clear previous alerts
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${cssClass}`;
+
+            const innerDiv = document.createElement('div');
+
+            const strongEl = document.createElement('strong');
+            strongEl.textContent = `${title}:`;
+
+            innerDiv.appendChild(strongEl);
+            innerDiv.appendChild(document.createTextNode(` ${message}`));
+
+            alertDiv.appendChild(innerDiv);
+            alertBox.appendChild(alertDiv);
         }
 
         function incrementCount(id, amount) {
