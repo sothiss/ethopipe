@@ -59,3 +59,21 @@ def test_ingest_incident_authenticated(monkeypatch):
     assert response.json()["incident"]["heart_rate"] == incident_data["heart_rate"]
     assert response.json()["incident"]["behavior_type"] == incident_data["behavior_type"]
     assert response.json()["incident"]["handler_notes"] == incident_data["handler_notes"]
+
+
+def test_ingest_incident_unconfigured_credentials(monkeypatch):
+    monkeypatch.delenv("API_USERNAME", raising=False)
+    monkeypatch.delenv("API_PASSWORD", raising=False)
+    incident_data = {
+        "animal_id": str(uuid4()),
+        "heart_rate": 80,
+        "behavior_type": "neutral",
+        "handler_notes": "Calm baseline observation."
+    }
+    response = client.post(
+        "/ingest",
+        json=incident_data,
+        auth=("admin", "secret")
+    )
+    assert response.status_code == 500
+    assert response.json() == {"detail": "Authentication credentials are not configured on the server"}
