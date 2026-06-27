@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from src.pipeline.models import EthologicalIncident
+from .models import EthologicalIncident
 
 app = FastAPI(title="EthoPipe API")
 
