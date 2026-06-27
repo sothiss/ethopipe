@@ -1,4 +1,4 @@
-from src.pipeline.models import EthologicalIncident
+from .models import EthologicalIncident
 
 
 def normalize_incident(data: dict) -> EthologicalIncident:
