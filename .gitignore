@@ -14,7 +14,7 @@ __pycache__/
 # IDE/editor
 .vscode/
 .idea/
-build
+build/
 
 # Antigravity / local agent folders
 .agents/
