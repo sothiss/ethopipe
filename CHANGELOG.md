@@ -12,9 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `.gitignore` to block accidental commits of credentials and keys (`*.key`, `*.pem`, `secrets.*`, `credentials.*`).
 - Configured `.github/CODEOWNERS` with rules mapping scientific-validity modules, schema specifications, and test fixtures to the lead developer.
 - Created `CODE_OF_CONDUCT.md` in the repository root.
-- Created `docs/AI_USAGE.md` documenting guidelines and disclosures for AI coding assistance.
-- Created `docs/SCHEMA.md` detailing the ethological incident data models and constraints.
-- Created `docs/VALIDATION.md` detailing strict validation parameters, veterinary physiological boundaries, and Darwin Core mapping.
+- Created `docs/ai-usage.md` documenting guidelines and disclosures for AI coding assistance.
+- Created `docs/schema.md` detailing the ethological incident data models and constraints.
+- Created `docs/validation.md` detailing strict validation parameters, veterinary physiological boundaries, and Darwin Core mapping.
 
 ## [0.1.0] - 2026-06-30
 

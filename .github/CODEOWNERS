@@ -17,9 +17,9 @@
 /src/pipeline/schema* @sothiss
 /src/pipeline/validation* @sothiss
 /tests/fixtures* @sothiss
-/docs/ai-usage* @sothiss
-/docs/SCHEMA.md @sothiss
-/docs/VALIDATION.md @sothiss
+/docs/ai-usage.md @sothiss
+/docs/schema.md @sothiss
+/docs/validation.md @sothiss
 
 # Forward-compatible paths if module is renamed to 'ethopipe'
 /src/ethopipe/models* @sothiss
