@@ -26,6 +26,8 @@ We have extensive documentation, research papers, and architectural specificatio
 We recommend using a virtual environment.
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 pip install -e .
