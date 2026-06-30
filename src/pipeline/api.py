@@ -13,7 +13,7 @@ security = HTTPBasic()
 
 def get_current_username(
     credentials: Annotated[HTTPBasicCredentials, Depends(security)]
-):
+) -> str:
     expected_username = os.getenv("API_USERNAME")
     expected_password = os.getenv("API_PASSWORD")
 
