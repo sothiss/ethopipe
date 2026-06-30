@@ -17,26 +17,34 @@ There are many ways you can help:
 We require a few tools to ensure code quality and reproducibility.
 
 1. **Fork and Clone the Repository:**
-   `git clone https://github.com/your-username/EthoPipe.git`
-   `cd EthoPipe`
+   ```bash
+   git clone https://github.com/sothiss/EthoPipe.git
+   cd EthoPipe
+   ```
 
 2. **Set up a Virtual Environment:**
    Set up your preferred virtual environment (e.g. venv, conda).
 
 3. **Install Dependencies:**
-   `pip install -r requirements.txt`
-   `pip install -e .`
+   ```bash
+   pip install -r requirements.txt
+   pip install -e .
+   ```
 
 4. **Install Pre-commit Hooks:**
    We use `pre-commit` to run Black and Ruff on every commit to maintain consistent code formatting and quality.
-   `pre-commit install`
+   ```bash
+   pre-commit install
+   ```
 
 ## Development Guidelines
 
 - **Determinism is Key:** We aim for strict schema validation. All features should be deterministic and reproducible.
 - **Pydantic Strict Mode:** For new/updated Pydantic models, set `model_config = ConfigDict(strict=True)` (Pydantic v2).
 - **Testing:** We practice test-driven development. Ensure any new feature includes adequate test coverage in the `tests/` directory. Run tests locally using `pytest`:
-  `pytest tests/`
+  ```bash
+  pytest tests/
+  ```
 - **Code Formatting:** Our pre-commit hooks will automatically format your code with Black and lint it with Ruff.
 
 ## Submitting Changes
