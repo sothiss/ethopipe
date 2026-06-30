@@ -27,3 +27,8 @@ skills/
 Thumbs.db
 desktop.ini
 
+# Secrets and credentials
+*.key
+*.pem
+secrets.*
+credentials.*

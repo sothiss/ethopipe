@@ -1,6 +1,28 @@
+# Default ownership for all repository files
+* @sothiss
+
+# Core packaging and configuration files
+/pyproject.toml @sothiss
+/requirements.txt @sothiss
+/README.MD @sothiss
+/.github/ @sothiss
+
+# General directory ownership
 /src/pipeline/ @sothiss
 /tests/ @sothiss
-/.github/ @sothiss
-/README.MD @sothiss
-/pyproject.toml @sothiss
-* @sothiss
+
+# Scientific-validity, schema, and parser files (High-Risk)
+/src/pipeline/models* @sothiss
+/src/pipeline/parser* @sothiss
+/src/pipeline/schema* @sothiss
+/src/pipeline/validation* @sothiss
+/tests/fixtures* @sothiss
+/docs/ai-usage* @sothiss
+/docs/SCHEMA.md @sothiss
+/docs/VALIDATION.md @sothiss
+
+# Forward-compatible paths if module is renamed to 'ethopipe'
+/src/ethopipe/models* @sothiss
+/src/ethopipe/parser* @sothiss
+/src/ethopipe/schema* @sothiss
+/src/ethopipe/validation* @sothiss
