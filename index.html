@@ -32,7 +32,7 @@
 
         body {
             background-color: var(--bg-color);
-            background-image: 
+            background-image:
                 radial-gradient(at 10% 20%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
                 radial-gradient(at 90% 80%, rgba(129, 140, 248, 0.08) 0px, transparent 50%);
             color: var(--text-primary);
@@ -426,10 +426,10 @@
 
         <!-- Main Layout -->
         <div class="dashboard-grid">
-            
+
             <!-- Left Side: Telemetry & Config -->
             <div style="display: flex; flex-direction: column; gap: 2rem;">
-                
+
                 <!-- Telemetry -->
                 <div class="card">
                     <h2 class="card-title">
@@ -453,7 +453,7 @@
                             <span class="telemetry-label">Quarantine</span>
                         </div>
                     </div>
-                    
+
                     <!-- Mapping Configuration -->
                     <div class="form-group">
                         <label class="form-label" for="mapping-editor">Key Translation Mapping (JSON)</label>
@@ -465,7 +465,7 @@
             <!-- Right Side: Sandbox & Live Validator -->
             <div class="card" style="display: flex; flex-direction: column;">
                 <h2 class="card-title">Canine Behavioral Data Sandbox</h2>
-                
+
                 <div class="tab-group">
                     <button class="tab-btn active" id="tab-csv" onclick="setMode('csv')">CSV Ingestion</button>
                     <button class="tab-btn" id="tab-json" onclick="setMode('json')">JSON List Ingestion</button>
@@ -606,7 +606,7 @@
             document.getElementById('payload-label').innerText = mode === 'csv' ? 'Raw CSV Data Payload' : 'Raw JSON Array Payload';
 
             const select = document.getElementById('endpoint-select');
-            
+
             // Enable/disable appropriate db options
             const options = select.options;
             options[1].disabled = mode !== 'csv';
@@ -698,10 +698,10 @@
                 }
 
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     outputBox.innerText = JSON.stringify(data, null, 2);
-                    
+
                     if (endpoint === '/validate') {
                         showAlert('success', 'Stateless validation succeeded! Mapped to Darwin Core structure.');
                         incrementCount('stats-validated', 1);

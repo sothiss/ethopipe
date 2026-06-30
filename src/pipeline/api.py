@@ -1,6 +1,8 @@
 import os
 import secrets
-from fastapi import FastAPI, Depends, HTTPException, status
+from typing import Annotated
+
+from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from src.pipeline.models import EthologicalIncident
@@ -8,7 +10,10 @@ from src.pipeline.models import EthologicalIncident
 app = FastAPI(title="EthoPipe API")
 security = HTTPBasic()
 
-def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
+
+def get_current_username(
+    credentials: Annotated[HTTPBasicCredentials, Depends(security)]
+):
     expected_username = os.getenv("API_USERNAME")
     expected_password = os.getenv("API_PASSWORD")
 
@@ -43,7 +48,9 @@ def read_root() -> dict:
 
 
 @app.post("/ingest")
-def ingest_incident(data: EthologicalIncident, username: str = Depends(get_current_username)) -> dict:
+def ingest_incident(
+    data: EthologicalIncident, username: Annotated[str, Depends(get_current_username)]
+) -> dict:
     return {
         "status": "valid",
         "incident": data.model_dump(),
