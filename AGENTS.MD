@@ -1,7 +1,7 @@
 # AI Agent Governance & System Prompt Directory (AGENTS.md)
 
 ## 1. Declarative Framework and Purpose
-In accordance with open-science reproducibility criteria and transparent data lineage practices, this document formalizes the operational parameters, boundaries, and system instructions of the artificial intelligence agents deployed across the EthoPipe software ecosystem. 
+In accordance with open-science reproducibility criteria and transparent data lineage practices, this document formalizes the operational parameters, boundaries, and system instructions of the artificial intelligence agents deployed across the EthoPipe software ecosystem.
 
 By hardcoding these personas, configurations, and programmatic invariants, we mitigate the stochastic risks inherent to Large Language Models (LLMs) and ensure that all semantic parsing and software assistance maintain a zero-variance, auditable execution path.
 
