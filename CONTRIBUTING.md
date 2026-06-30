@@ -33,8 +33,8 @@ We require a few tools to ensure code quality and reproducibility.
 
 ## Development Guidelines
 
-- **Determinism is Key:** We enforce strict schema validation. All features must be fully deterministic and reproducible.
-- **Pydantic Strict Mode:** When working with Pydantic models, ensure you use `ConfigDict(strict=True)`.
+- **Determinism is Key:** We aim for strict schema validation. All features should be deterministic and reproducible.
+- **Pydantic Strict Mode:** For new/updated Pydantic models, set `model_config = ConfigDict(strict=True)` (Pydantic v2).
 - **Testing:** We practice test-driven development. Ensure any new feature includes adequate test coverage in the `tests/` directory. Run tests locally using `pytest`:
   `pytest tests/`
 - **Code Formatting:** Our pre-commit hooks will automatically format your code with Black and lint it with Ruff.
