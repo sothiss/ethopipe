@@ -49,7 +49,8 @@ def read_root() -> dict:
 
 @app.post("/ingest")
 def ingest_incident(
-    data: EthologicalIncident, username: Annotated[str, Depends(get_current_username)]
+    data: EthologicalIncident,
+    username: Annotated[str, Depends(get_current_username)],
 ) -> dict:
     return {
         "status": "valid",
