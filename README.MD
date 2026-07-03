@@ -44,6 +44,10 @@ We welcome contributions! Please refer to the `CONTRIBUTING.md` file for details
 - `docs/` - Project documentation, specifications, and papers
 - `.github/workflows/` - CI/CD pipelines
 
+## Acknowledgements
+
+- **[GitBook](https://www.gitbook.com/)** for supporting this project by providing access to their community plan.
+
 ## Author
 Alice Severi Gonçalves
 
