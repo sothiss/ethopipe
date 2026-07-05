@@ -5,7 +5,7 @@ from typing import Annotated
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
-from src.pipeline.models import EthologicalIncident
+from src.pipeline.models import CanineObservation
 
 app = FastAPI(title="EthoPipe API")
 security = HTTPBasic()
@@ -49,10 +49,10 @@ def read_root() -> dict:
 
 @app.post("/ingest")
 def ingest_incident(
-    data: EthologicalIncident,
+    data: CanineObservation,
     username: Annotated[str, Depends(get_current_username)],
 ) -> dict:
     return {
         "status": "valid",
-        "incident": data.model_dump(),
+        "incident": data.model_dump(by_alias=True),
     }
