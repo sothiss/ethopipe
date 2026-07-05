@@ -1,574 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
     <meta name="google-site-verification" content="BP1opAuH6Z7a_0cHbIhyshB6rdHS5RFFQyXcNkB8_vg" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>The Transparency Project 1.0 - EthoPipe ETL Engine</title>
-    <!-- Google Fonts Outfit & JetBrains Mono for Code -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#404659",
+                        "on-tertiary-fixed": "#002113",
+                        "outline": "#76777d",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c6c6cd",
+                        "tertiary": "#000301",
+                        "primary-fixed": "#dce2f9",
+                        "on-tertiary-container": "#009768",
+                        "telemetry-purple": "#818CF8",
+                        "background": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "on-secondary-container": "#004d6a",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "tertiary-container": "#002214",
+                        "error": "#ba1a1a",
+                        "slate-deep": "#0B0F19",
+                        "primary-fixed-dim": "#c0c6dd",
+                        "inverse-surface": "#2d3133",
+                        "active-emerald": "#10B981",
+                        "on-surface-variant": "#45464c",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed": "#151b2c",
+                        "scientific-blue": "#38BDF8",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#585e72",
+                        "surface-container-high": "#e6e8ea",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#191c1e",
+                        "on-secondary-fixed": "#001e2c",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#c4e7ff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary-fixed-dim": "#7bd0ff",
+                        "primary": "#00010a",
+                        "inverse-primary": "#c0c6dd",
+                        "surface-dim": "#d8dadc",
+                        "surface": "#f7f9fb",
+                        "on-primary-container": "#7e8499",
+                        "secondary": "#00668a",
+                        "tertiary-fixed": "#6ffbbe",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#40c2fd",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-container": "#161c2d",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-compact": "8px",
+                        "gutter": "16px",
+                        "container-max": "1440px",
+                        "stack-default": "16px",
+                        "margin": "24px"
+                    },
+                    "fontFamily": {
+                        "data-label": ["JetBrains Mono"],
+                        "button-label": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Outfit"],
+                        "data-display": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "button-label": ["14px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "data-display": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
     <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(22, 28, 45, 0.65);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --primary-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
-            --accent-blue: #0284c7;
-            --accent-green: #10b981;
-            --accent-orange: #f59e0b;
-            --accent-red: #ef4444;
-            --glass-blur: blur(16px);
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        .scroll-hidden::-webkit-scrollbar { display: none; }
+        .scroll-hidden { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Glassmorphism Refinement */
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
-
-        body {
-            background-color: var(--bg-color);
-            background-image:
-                radial-gradient(at 10% 20%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
-                radial-gradient(at 90% 80%, rgba(129, 140, 248, 0.08) 0px, transparent 50%);
-            color: var(--text-primary);
-            font-family: 'Outfit', sans-serif;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Container Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-            width: 100%;
-            flex-grow: 1;
-        }
-
-        /* Glassmorphic Navbar */
-        header {
-            background: var(--card-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.25rem 2rem;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        .logo-group {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--primary-gradient);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            color: #fff;
-            font-size: 1.25rem;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.025em;
-        }
-
-        .badge {
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            color: #38bdf8;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Grid System */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        @media (min-width: 992px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr 2fr;
-            }
-        }
-
-        /* Card Styles */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        
+        /* Reference Card Style */
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e0e3e5;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
-        .card:hover {
-            box-shadow: 0 12px 40px 0 rgba(56, 189, 248, 0.05);
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 0.75rem;
-        }
-
-        /* Live Telemetry Panels */
-        .telemetry-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .telemetry-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .telemetry-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #38bdf8;
-            margin-bottom: 0.25rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .telemetry-label {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .pulse {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse-animation 2s infinite;
-        }
-
-        @keyframes pulse-animation {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-            }
-        }
-
-        /* Form elements */
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .tab-group {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 0.25rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            padding: 0.5rem 1rem;
-            font-weight: 600;
-            font-size: 0.875rem;
-            border-radius: 6px;
-            cursor: pointer;
-            flex-grow: 1;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .tab-btn.active {
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        textarea, select {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 0.75rem;
-            width: 100%;
-            transition: border-color 0.2s;
-        }
-
-        textarea:focus, select:focus {
-            outline: none;
-            border-color: #38bdf8;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        .btn {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            cursor: pointer;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 0.85rem 1.5rem;
-            width: 100%;
-            transition: opacity 0.2s, transform 0.1s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Results panel */
-        .results-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .results-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            flex-grow: 1;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            padding: 1.25rem;
-            overflow-y: auto;
-            max-height: 480px;
-            white-space: pre-wrap;
-        }
-
-        /* Output Alerts */
-        .alert {
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-
-        .alert-success {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            color: #a7f3d0;
-        }
-
-        .alert-warning {
-            background: rgba(245, 158, 11, 0.15);
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            color: #fde68a;
-        }
-
-        .alert-error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
-        }
-
-        /* Reference table */
-        .ref-table-wrapper {
-            margin-top: 2rem;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.875rem;
-            text-align: left;
-        }
-
-        th, td {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 0.75rem 1rem;
-        }
-
-        th {
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-        }
-
-        td code {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-            color: #38bdf8;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 3rem;
-            padding: 1.5rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .spinner {
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border-left-color: #fff;
-            animation: spin 1s linear infinite;
-            display: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
     </style>
 </head>
-<body>
-
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="logo-group">
-                <div class="logo-icon">E</div>
-                <h1>The Transparency Project 1.0</h1>
-            </div>
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span class="badge">Active</span>
-            </div>
-        </header>
-
-        <!-- Main Layout -->
-        <div class="dashboard-grid">
-
-            <!-- Left Side: Telemetry & Config -->
-            <div style="display: flex; flex-direction: column; gap: 2rem;">
-
-                <!-- Telemetry -->
-                <div class="card">
-                    <h2 class="card-title">
-                        <span class="pulse"></span> Telemetry Status
-                    </h2>
-                    <div class="telemetry-row">
-                        <div class="telemetry-item">
-                            <span class="telemetry-value">42ms</span>
-                            <span class="telemetry-label">Latency</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-value" id="stats-validated">0</span>
-                            <span class="telemetry-label">Ingested</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-value">100%</span>
-                            <span class="telemetry-label">Uptime</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-value" id="stats-quarantined">0</span>
-                            <span class="telemetry-label">Quarantine</span>
-                        </div>
-                    </div>
-
-                    <!-- Mapping Configuration -->
-                    <div class="form-group">
-                        <label class="form-label" for="mapping-editor">Key Translation Mapping (JSON)</label>
-                        <textarea id="mapping-editor" rows="7"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Side: Sandbox & Live Validator -->
-            <div class="card" style="display: flex; flex-direction: column;">
-                <h2 class="card-title">Canine Behavioral Data Sandbox</h2>
-
-                <div class="tab-group">
-                    <button class="tab-btn active" id="tab-csv" onclick="setMode('csv')">CSV Ingestion</button>
-                    <button class="tab-btn" id="tab-json" onclick="setMode('json')">JSON List Ingestion</button>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="payload-editor" id="payload-label">Raw Data Payload</label>
-                    <textarea id="payload-editor" rows="8"></textarea>
-                </div>
-
-                <div class="form-group" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 1rem; align-items: flex-end;">
-                    <div>
-                        <label class="form-label" for="endpoint-select">ETL Ingestion Target</label>
-                        <select id="endpoint-select" onchange="updateEndpoint()">
-                            <option value="/validate">POST /validate (Stateless Validation)</option>
-                            <option value="/ingest/csv">POST /ingest/csv (Database Load)</option>
-                            <option value="/ingest/json" disabled>POST /ingest/json (Database Load)</option>
-                        </select>
-                    </div>
-                    <button class="btn" id="run-btn" onclick="runPipeline()">
-                        <div class="spinner" id="btn-spinner"></div>
-                        <span>Run ETL Pipeline</span>
-                    </button>
-                </div>
-
-                <!-- Results Output -->
-                <div class="results-container">
-                    <label class="form-label">Pipeline Ingestion Logs & Output</label>
-                    <div id="alert-box"></div>
-                    <div class="results-box" id="output-box">// Output results will appear here after executing the pipeline.</div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Reference Table -->
-        <div class="card" style="margin-top: 2rem;">
-            <h2 class="card-title">Darwin Core (DwC) Mapping Reference</h2>
-            <div class="ref-table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>EthoPipe Variable</th>
-                            <th>Darwin Core Term</th>
-                            <th>Description</th>
-                            <th>Controlled Vocabulary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>subject_id</code></td>
-                            <td><code>dwc:individualID</code></td>
-                            <td>Unique subject identifier</td>
-                            <td>Format: <code>SUB-DOG-###</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>timestamp</code></td>
-                            <td><code>dwc:eventDate</code></td>
-                            <td>ISO 8601 observation date-time</td>
-                            <td><code>YYYY-MM-DDTHH:MM:SS</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>species</code></td>
-                            <td><code>dwc:scientificName</code></td>
-                            <td>Canonical taxonomic classification</td>
-                            <td><code>Canis lupus familiaris</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>location</code></td>
-                            <td><code>dwc:locality</code></td>
-                            <td>Geographic locality descriptor</td>
-                            <td>Assessment Facility Room, Yard, etc.</td>
-                        </tr>
-                        <tr>
-                            <td><code>behavior_type</code></td>
-                            <td><code>dwc:measurementType</code></td>
-                            <td>Categorical behavior motor pattern</td>
-                            <td>Standardized Ethogram codes</td>
-                        </tr>
-                        <tr>
-                            <td><code>behavior_value</code></td>
-                            <td><code>dwc:measurementValue</code></td>
-                            <td>Quantitative count or score</td>
-                            <td>Numeric value or string</td>
-                        </tr>
-                        <tr>
-                            <td><code>observation_method</code></td>
-                            <td><code>dwc:basisOfRecord</code></td>
-                            <td>Ingestion telemetry category</td>
-                            <td><code>HumanObservation</code> | <code>MachineObservation</code></td>
-                        </tr>
-                    </tbody>
-                </table>
+<body class="bg-background font-body-md text-on-background">
+    <!-- Header: Glassmorphic Navbar -->
+    <header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin h-16 glass-nav border-b border-white/10">
+        <div class="flex items-center gap-6">
+            <span class="font-headline-md text-headline-md font-bold text-scientific-blue tracking-tighter">BIOSTREAM_CORE</span>
+            <div class="hidden md:flex items-center gap-2 px-3 py-1 bg-tertiary-container/40 rounded border border-active-emerald/30">
+                <span class="w-2 h-2 rounded-full bg-active-emerald animate-pulse"></span>
+                <span class="font-data-label text-[10px] text-active-emerald uppercase tracking-widest">LIVE_LINK:ESTABLISHED</span>
             </div>
         </div>
+        <div class="flex items-center gap-6">
+            <div class="relative hidden lg:block">
+                <input class="bg-white/5 border border-white/10 text-white font-data-label text-data-label h-9 rounded-full px-5 pr-10 focus:ring-1 focus:ring-scientific-blue focus:bg-white/10 transition-all focus:outline-none w-72" placeholder="QUERY_RECORDS..." type="text"/>
+                <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-white/40 text-[20px]">search</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button class="text-white/60 hover:text-scientific-blue p-2 rounded-full hover:bg-white/5 transition-all">
+                    <span class="material-symbols-outlined">tune</span>
+                </button>
+                <button class="text-white/60 hover:text-scientific-blue p-2 rounded-full hover:bg-white/5 transition-all">
+                    <span class="material-symbols-outlined">analytics</span>
+                </button>
+                <button class="text-white/60 hover:text-scientific-blue p-2 rounded-full hover:bg-white/5 transition-all">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+                <div class="ml-2 h-9 w-9 rounded-full overflow-hidden border-2 border-scientific-blue/40 ring-4 ring-scientific-blue/5">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzy2usRfHq5yWl27WN4VLipH0UxCFBq9vQq8wEN8xdmNSX49S838g5ge7YUO_neRPvMS-2Wtfi00bGT9bucZ46ojEhr_xx3XoUw9HgDiYOYvM--FbSfG9muHQ-alaVMVvgxlGzta3D5S19xk1auZ8hC77lgHisxv7FpHWfyj7FzRadT4pF6UICyfEY4yq9UkxQUszE90ZN_lwSKyI05cocQK9H4qmlgFq7AY-fYa-osvPR7enEYFpNyuK-KcMShQzCxAuf30MMFaM"/>
+                </div>
+            </div>
+        </div>
+    </header>
 
-        <footer>
-            The Transparency Project 1.0 - EthoPipe Open Science ETL Engine. Powered by FastAPI, Pydantic & Firestore.
-        </footer>
-    </div>
+    <!-- SideNavBar -->
+    <nav class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 flex flex-col py-gutter bg-slate-deep border-r border-white/5 z-40 hidden md:flex">
+        <div class="px-6 mb-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-scientific-blue/10 flex items-center justify-center rounded-xl border border-scientific-blue/20">
+                    <span class="material-symbols-outlined text-scientific-blue" style="font-variation-settings: 'FILL' 1;">dataset</span>
+                </div>
+                <div>
+                    <h2 class="font-headline-md text-[18px] font-black text-white leading-none">DARWIN_CORE</h2>
+                    <p class="font-data-label text-[10px] text-white/40 mt-1">v4.2-STABLE</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex-grow space-y-1 px-3">
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-lg transition-all" href="#">
+                <span class="material-symbols-outlined text-[20px]">sensors</span>
+                <span class="font-button-label text-button-label uppercase tracking-wider">Telemetry</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-scientific-blue bg-scientific-blue/10 rounded-lg border-l-4 border-scientific-blue transition-all" href="#">
+                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+                <span class="font-button-label text-button-label uppercase tracking-wider">ETL Pipelines</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-lg transition-all" href="#">
+                <span class="material-symbols-outlined text-[20px]">storage</span>
+                <span class="font-button-label text-button-label uppercase tracking-wider">Data Lakes</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 rounded-lg transition-all" href="#">
+                <span class="material-symbols-outlined text-[20px]">schema</span>
+                <span class="font-button-label text-button-label uppercase tracking-wider">Mapping Refs</span>
+            </a>
+        </div>
+        <div class="mt-auto px-4 space-y-1 border-t border-white/5 pt-4">
+            <a class="flex items-center gap-3 px-4 py-2 text-white/40 hover:text-scientific-blue transition-colors" href="#">
+                <span class="material-symbols-outlined text-[18px]">description</span>
+                <span class="font-button-label text-[12px]">Docs</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-2 text-white/40 hover:text-scientific-blue transition-colors" href="#">
+                <span class="material-symbols-outlined text-[18px]">help_center</span>
+                <span class="font-button-label text-[12px]">Support</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Canvas -->
+    <main class="md:ml-64 mt-16 p-margin min-h-screen">
+        <section class="max-w-container-max mx-auto space-y-margin">
+            <!-- Dashboard Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-outline-variant/30">
+                <div>
+                    <p class="font-data-label text-[11px] text-secondary mb-1 uppercase tracking-[0.2em] font-bold">The Transparency Project 1.0</p>
+                    <h1 class="font-headline-lg text-headline-lg text-primary leading-tight">Canine Behavioral Data Sandbox</h1>
+                </div>
+                <div class="flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-outline-variant shadow-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-active-emerald shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                    <span class="font-data-label text-data-label text-on-surface uppercase font-bold">Active Engine</span>
+                </div>
+            </div>
+
+            <!-- Telemetry Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                <div class="stat-card p-gutter rounded-xl flex flex-col justify-between h-32 relative overflow-hidden group">
+                    <div class="z-10">
+                        <span class="font-data-label text-[11px] text-outline uppercase font-bold tracking-wider">Latency</span>
+                        <div class="font-headline-lg text-[28px] font-black text-slate-deep mt-1">42<span class="text-[16px] font-normal text-outline ml-1">ms</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 text-active-emerald">
+                        <span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+                        <span class="font-data-label text-[10px] font-bold">OPTIMAL</span>
+                    </div>
+                    <div class="absolute right-[-15px] bottom-[-15px] text-slate-deep/5 group-hover:text-scientific-blue/10 transition-colors">
+                        <span class="material-symbols-outlined text-[100px]">speed</span>
+                    </div>
+                </div>
+                <div class="stat-card p-gutter rounded-xl flex flex-col justify-between h-32 relative overflow-hidden group">
+                    <div class="z-10">
+                        <span class="font-data-label text-[11px] text-outline uppercase font-bold tracking-wider">Ingested</span>
+                        <div class="font-headline-lg text-[28px] font-black text-slate-deep mt-1" id="stats-validated">0</div>
+                    </div>
+                    <div class="flex items-center gap-1 text-active-emerald">
+                        <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                        <span class="font-data-label text-[10px] font-bold">STABLE</span>
+                    </div>
+                    <div class="absolute right-[-15px] bottom-[-15px] text-slate-deep/5 group-hover:text-scientific-blue/10 transition-colors">
+                        <span class="material-symbols-outlined text-[100px]">database</span>
+                    </div>
+                </div>
+                <div class="stat-card p-gutter rounded-xl flex flex-col justify-between h-32 relative overflow-hidden border-b-active-emerald border-b-4 group">
+                    <div class="z-10">
+                        <span class="font-data-label text-[11px] text-outline uppercase font-bold tracking-wider">Uptime</span>
+                        <div class="font-headline-lg text-[28px] font-black text-active-emerald mt-1">100<span class="text-[16px] font-normal text-active-emerald/60 ml-1">%</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 text-active-emerald">
+                        <span class="w-1.5 h-1.5 rounded-full bg-active-emerald animate-pulse"></span>
+                        <span class="font-data-label text-[10px] font-bold">ONLINE</span>
+                    </div>
+                    <div class="absolute right-[-15px] bottom-[-15px] text-active-emerald/5 group-hover:text-active-emerald/10 transition-colors">
+                        <span class="material-symbols-outlined text-[100px]">cloud_done</span>
+                    </div>
+                </div>
+                <div class="stat-card p-gutter rounded-xl flex flex-col justify-between h-32 relative overflow-hidden group">
+                    <div class="z-10">
+                        <span class="font-data-label text-[11px] text-outline uppercase font-bold tracking-wider">Quarantine</span>
+                        <div class="font-headline-lg text-[28px] font-black text-slate-deep mt-1" id="stats-quarantined">0</div>
+                    </div>
+                    <div class="flex items-center gap-1 text-outline">
+                        <span class="material-symbols-outlined text-[16px]">verified_user</span>
+                        <span class="font-data-label text-[10px] font-bold uppercase">Nominal</span>
+                    </div>
+                    <div class="absolute right-[-15px] bottom-[-15px] text-slate-deep/5 group-hover:text-scientific-blue/10 transition-colors">
+                        <span class="material-symbols-outlined text-[100px]">security</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bento Two-Column Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+                <!-- Left Column: Data Editors -->
+                <div class="lg:col-span-8 flex flex-col gap-gutter">
+                    <!-- Data Payload Editor -->
+                    <div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col h-[400px]">
+                        <div class="flex items-center justify-between px-gutter py-3.5 border-b border-outline-variant bg-surface-container-low">
+                            <div class="flex items-center gap-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary">code</span>
+                                    <span class="font-data-label text-data-label font-black text-primary uppercase">Raw_Data_Payload</span>
+                                </div>
+                                <div class="flex p-0.5 bg-surface-container rounded-lg border border-outline-variant/30">
+                                    <button id="tab-json" onclick="setMode('json')" class="px-4 py-1 rounded-md text-outline hover:text-primary font-data-label text-[11px] transition-colors">JSON_INGEST</button>
+                                    <button id="tab-csv" onclick="setMode('csv')" class="px-4 py-1 rounded-md text-outline hover:text-primary font-data-label text-[11px] transition-colors">CSV_INGEST</button>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <button onclick="navigator.clipboard.writeText(document.getElementById('payload-editor').value)" class="p-2 hover:bg-surface-container rounded-lg text-outline hover:text-primary transition-all" title="Copy Content">
+                                    <span class="material-symbols-outlined text-[20px]">content_copy</span>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea id="payload-editor" class="flex-grow p-4 bg-[#0d1117] text-[#c9d1d9] font-mono text-[14px] leading-relaxed resize-none border-none outline-none focus:ring-0 scroll-hidden selection:bg-scientific-blue/30" spellcheck="false"></textarea>
+                    </div>
+
+                    <!-- Mapping Configuration Editor -->
+                    <div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col h-[230px]">
+                        <div class="flex items-center justify-between px-gutter py-3 border-b border-outline-variant bg-surface-container-low">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-secondary">schema</span>
+                                <span class="font-data-label text-data-label font-black text-primary uppercase">Key_Translation_Mapping_JSON</span>
+                            </div>
+                        </div>
+                        <textarea id="mapping-editor" class="flex-grow p-4 bg-[#0d1117] text-[#c9d1d9] font-mono text-[14px] leading-relaxed resize-none border-none outline-none focus:ring-0 scroll-hidden selection:bg-scientific-blue/30" spellcheck="false"></textarea>
+                    </div>
+                </div>
+
+                <!-- Right Column: ETL Configuration -->
+                <div class="lg:col-span-4 flex flex-col gap-gutter">
+                    <!-- Target Selection -->
+                    <div class="bg-white border border-outline-variant rounded-xl p-gutter shadow-sm">
+                        <div class="flex items-center justify-between mb-gutter border-b border-outline-variant/30 pb-3">
+                            <h3 class="font-data-label text-[11px] font-black text-primary tracking-widest uppercase">Target_Endpoint</h3>
+                            <span class="px-2 py-0.5 bg-surface-container rounded text-[10px] text-outline font-bold">API v2.0</span>
+                        </div>
+                        <div class="space-y-3">
+                            <!-- Validate Card -->
+                            <div id="card-validate" onclick="setEndpoint('/validate')" class="p-4 bg-surface-container-low rounded-xl border border-outline-variant hover:border-scientific-blue group cursor-pointer transition-all">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-data-label text-[10px] px-2 py-0.5 bg-active-emerald text-white rounded-full">POST</span>
+                                    <span id="icon-validate" class="material-symbols-outlined text-[20px] text-outline">radio_button_unchecked</span>
+                                </div>
+                                <code class="font-data-display text-[13px] block text-primary font-bold">/validate</code>
+                                <p class="text-[11px] text-outline mt-1 font-body-sm italic">Schema verification only</p>
+                            </div>
+                            <!-- Ingest Card -->
+                            <div id="card-ingest" onclick="setEndpoint('ingest')" class="p-4 bg-white rounded-xl border-2 border-scientific-blue ring-4 ring-scientific-blue/5 shadow-md relative overflow-hidden group cursor-pointer transition-all">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-data-label text-[10px] px-2 py-0.5 bg-scientific-blue text-white rounded-full">POST</span>
+                                    <span id="icon-ingest" class="material-symbols-outlined text-[20px] text-scientific-blue">check_circle</span>
+                                </div>
+                                <code id="ingest-endpoint-path" class="font-data-display text-[13px] block text-primary font-bold">/ingest/json</code>
+                                <p id="ingest-endpoint-desc" class="text-[11px] text-outline mt-1 font-body-sm italic">Direct object database load</p>
+                                <div class="absolute right-[-10px] top-[-10px] opacity-[0.05]">
+                                    <span class="material-symbols-outlined text-[60px]">cloud_upload</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pipeline Action -->
+                    <div class="bg-slate-deep rounded-xl p-6 border border-white/5 shadow-2xl relative overflow-hidden">
+                        <div class="relative z-10">
+                            <p class="font-data-label text-[10px] text-white/40 uppercase tracking-[0.2em] mb-4 text-center">Pipeline_Execution_Unit</p>
+                            <button id="run-btn" onclick="runPipeline()" class="w-full bg-scientific-blue hover:bg-scientific-blue/90 text-slate-deep py-4 rounded-lg flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-lg shadow-scientific-blue/20">
+                                <span class="material-symbols-outlined font-bold" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                                <span id="run-btn-text" class="font-button-label text-button-label uppercase tracking-[0.15em] font-black">Run ETL Pipeline</span>
+                            </button>
+                        </div>
+                        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+                    </div>
+
+                    <!-- Console Output -->
+                    <div class="bg-primary-container p-gutter h-[225px] rounded-xl border border-outline-variant relative overflow-hidden flex flex-col">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <span id="console-pulse" class="w-1.5 h-1.5 rounded-full bg-outline animate-pulse"></span>
+                                <span class="font-data-label text-[10px] text-on-primary-container/60 uppercase tracking-widest font-bold">Execution_Logs</span>
+                            </div>
+                            <span class="material-symbols-outlined text-[16px] text-on-primary-container/40">terminal</span>
+                        </div>
+                        <div id="alert-box" class="mb-2"></div>
+                        <div class="font-data-display text-[12px] text-on-primary-container/40 italic flex-grow overflow-auto scroll-hidden" id="output-box">
+                            // Output results will appear here after executing the pipeline...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Darwin Core Mapping Table -->
+            <div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+                <div class="px-gutter py-4 border-b border-outline-variant flex items-center justify-between bg-surface-container-low">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">account_tree</span>
+                        <h2 class="font-headline-md text-[18px] text-slate-deep uppercase tracking-tighter font-bold">Darwin Core (DwC) Mapping Reference</h2>
+                    </div>
+                    <span class="font-data-label text-[10px] text-outline bg-white px-3 py-1 rounded-full border border-outline-variant font-bold">NODE:DWC_CORE_001</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-surface-container text-left border-b border-outline-variant">
+                                <th class="px-gutter py-4 font-data-label text-[11px] text-outline uppercase tracking-wider">EthoPipe Variable</th>
+                                <th class="px-gutter py-4 font-data-label text-[11px] text-outline uppercase tracking-wider">Darwin Core Term</th>
+                                <th class="px-gutter py-4 font-data-label text-[11px] text-outline uppercase tracking-wider">Description</th>
+                                <th class="px-gutter py-4 font-data-label text-[11px] text-outline uppercase tracking-wider">Controlled Vocabulary</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant font-data-display text-[13px] text-primary">
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-gutter py-4 text-secondary font-bold">subject_id</td>
+                                <td class="px-gutter py-4 text-scientific-blue">dwc:individualID</td>
+                                <td class="px-gutter py-4 font-body-sm text-outline">Unique subject identifier</td>
+                                <td class="px-gutter py-4"><span class="px-2 py-1 bg-surface-container text-[11px] rounded border border-outline-variant font-bold">SUB-DOG-###</span></td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-gutter py-4 text-secondary font-bold">timestamp</td>
+                                <td class="px-gutter py-4 text-scientific-blue">dwc:eventDate</td>
+                                <td class="px-gutter py-4 font-body-sm text-outline">ISO 8601 observation date-time</td>
+                                <td class="px-gutter py-4"><span class="px-2 py-1 bg-surface-container text-[11px] rounded border border-outline-variant font-bold">YYYY-MM-DDTHH:MM:SS</span></td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-gutter py-4 text-secondary font-bold">species</td>
+                                <td class="px-gutter py-4 text-scientific-blue">dwc:scientificName</td>
+                                <td class="px-gutter py-4 font-body-sm text-outline">Canonical taxonomic classification</td>
+                                <td class="px-gutter py-4"><span class="px-2 py-1 bg-surface-container text-[11px] rounded border border-outline-variant italic font-bold">Canis lupus familiaris</span></td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-gutter py-4 text-secondary font-bold">location</td>
+                                <td class="px-gutter py-4 text-scientific-blue">dwc:locality</td>
+                                <td class="px-gutter py-4 font-body-sm text-outline">Geographic locality descriptor</td>
+                                <td class="px-gutter py-4 text-outline text-[11px]">Assessment Facility Room, Yard, etc.</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-gutter py-4 text-secondary font-bold">behavior_type</td>
+                                <td class="px-gutter py-4 text-scientific-blue">dwc:measurementType</td>
+                                <td class="px-gutter py-4 font-body-sm text-outline">Categorical behavior motor pattern</td>
+                                <td class="px-gutter py-4 text-outline text-[11px]">Standardized Ethogram codes</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors">
+                                <td class="px-gutter py-4 text-secondary font-bold">observation_method</td>
+                                <td class="px-gutter py-4 text-scientific-blue">dwc:basisOfRecord</td>
+                                <td class="px-gutter py-4 font-body-sm text-outline">Ingestion telemetry category</td>
+                                <td class="px-gutter py-4 flex gap-2">
+                                    <span class="px-2 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] rounded font-bold">HumanObservation</span>
+                                    <span class="px-2 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] rounded font-bold">MachineObservation</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="mt-24 pt-12 border-t border-outline-variant/30 pb-12 flex flex-col md:flex-row justify-between items-center opacity-60 max-w-container-max mx-auto px-margin">
+                <div class="flex flex-col items-center md:items-start gap-2">
+                    <p class="font-data-label text-[11px] text-outline uppercase tracking-[0.2em] font-bold">The Transparency Project 1.0</p>
+                    <p class="font-body-sm text-[12px] text-outline">EthoPipe Open Science ETL Engine — Open Access Research Architecture</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-2 mt-6 md:mt-0">
+                    <p class="font-data-label text-[11px] text-outline uppercase font-bold">Powered by FastAPI &amp; Firestore</p>
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-[18px]">verified</span>
+                        <span class="material-symbols-outlined text-[18px]">policy</span>
+                        <span class="material-symbols-outlined text-[18px]">terminal</span>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </main>
+
+    <!-- Visual Polish Overlay -->
+    <div class="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
 
     <script>
-        let currentMode = 'csv';
+        let currentMode = 'json';
+        let selectedEndpoint = '/ingest/json';
 
         const defaults = {
             csv: {
@@ -595,49 +498,78 @@
 
         // Initialize values
         document.getElementById('mapping-editor').value = JSON.stringify(defaults.mapping, null, 2);
-        setMode('csv');
+        setMode('json');
 
         function setMode(mode) {
             currentMode = mode;
-            document.getElementById('tab-csv').classList.toggle('active', mode === 'csv');
-            document.getElementById('tab-json').classList.toggle('active', mode === 'json');
-
-            document.getElementById('payload-editor').value = defaults[mode].payload;
-            document.getElementById('payload-label').innerText = mode === 'csv' ? 'Raw CSV Data Payload' : 'Raw JSON Array Payload';
-
-            const select = document.getElementById('endpoint-select');
-
-            // Enable/disable appropriate db options
-            const options = select.options;
-            options[1].disabled = mode !== 'csv';
-            options[2].disabled = mode !== 'json';
-
-            // Select recommended endpoint
-            if (select.value !== '/validate') {
-                select.value = mode === 'csv' ? '/ingest/csv' : '/ingest/json';
+            
+            // Toggle active tab classes
+            const tabJson = document.getElementById('tab-json');
+            const tabCsv = document.getElementById('tab-csv');
+            
+            if (mode === 'json') {
+                tabJson.className = "px-4 py-1.5 bg-white shadow-sm rounded-md text-scientific-blue font-data-label text-[11px] font-bold";
+                tabCsv.className = "px-4 py-1.5 text-outline hover:text-primary transition-colors font-data-label text-[11px]";
+                
+                document.getElementById('ingest-endpoint-path').innerText = '/ingest/json';
+                document.getElementById('ingest-endpoint-desc').innerText = 'Direct object database load';
+            } else {
+                tabCsv.className = "px-4 py-1.5 bg-white shadow-sm rounded-md text-scientific-blue font-data-label text-[11px] font-bold";
+                tabJson.className = "px-4 py-1.5 text-outline hover:text-primary transition-colors font-data-label text-[11px]";
+                
+                document.getElementById('ingest-endpoint-path').innerText = '/ingest/csv';
+                document.getElementById('ingest-endpoint-desc').innerText = 'Direct CSV database load';
             }
 
-            updateEndpoint();
+            document.getElementById('payload-editor').value = defaults[mode].payload;
+            
+            // Refresh endpoint selection classes
+            setEndpoint(selectedEndpoint === '/validate' ? '/validate' : 'ingest');
         }
 
-        function updateEndpoint() {
-            const select = document.getElementById('endpoint-select');
-            const runBtn = document.getElementById('run-btn');
-            if (select.value === '/validate') {
-                runBtn.querySelector('span').innerText = 'Validate Payload';
+        function setEndpoint(endpoint) {
+            const cardValidate = document.getElementById('card-validate');
+            const cardIngest = document.getElementById('card-ingest');
+            const iconValidate = document.getElementById('icon-validate');
+            const iconIngest = document.getElementById('icon-ingest');
+            const runBtnSpan = document.getElementById('run-btn-text');
+
+            if (endpoint === '/validate') {
+                selectedEndpoint = '/validate';
+                // Select validate card
+                cardValidate.className = "p-4 bg-white rounded-xl border-2 border-scientific-blue ring-4 ring-scientific-blue/5 shadow-md relative overflow-hidden group cursor-pointer transition-all";
+                iconValidate.className = "material-symbols-outlined text-[20px] text-scientific-blue";
+                iconValidate.innerText = "check_circle";
+
+                // Deselect ingest card
+                cardIngest.className = "p-4 bg-surface-container-low rounded-xl border border-outline-variant hover:border-scientific-blue group cursor-pointer transition-all";
+                iconIngest.className = "material-symbols-outlined text-[20px] text-outline";
+                iconIngest.innerText = "radio_button_unchecked";
+
+                runBtnSpan.innerText = 'Validate Payload';
             } else {
-                runBtn.querySelector('span').innerText = 'Run ETL Pipeline';
+                selectedEndpoint = currentMode === 'csv' ? '/ingest/csv' : '/ingest/json';
+                // Select ingest card
+                cardIngest.className = "p-4 bg-white rounded-xl border-2 border-scientific-blue ring-4 ring-scientific-blue/5 shadow-md relative overflow-hidden group cursor-pointer transition-all";
+                iconIngest.className = "material-symbols-outlined text-[20px] text-scientific-blue";
+                iconIngest.innerText = "check_circle";
+
+                // Deselect validate card
+                cardValidate.className = "p-4 bg-surface-container-low rounded-xl border border-outline-variant hover:border-scientific-blue group cursor-pointer transition-all";
+                iconValidate.className = "material-symbols-outlined text-[20px] text-outline";
+                iconValidate.innerText = "radio_button_unchecked";
+
+                runBtnSpan.innerText = 'Run ETL Pipeline';
             }
         }
 
         async function runPipeline() {
-            const select = document.getElementById('endpoint-select');
             const runBtn = document.getElementById('run-btn');
-            const spinner = document.getElementById('btn-spinner');
             const outputBox = document.getElementById('output-box');
             const alertBox = document.getElementById('alert-box');
+            const consolePulse = document.getElementById('console-pulse');
 
-            const endpoint = select.value;
+            const endpoint = selectedEndpoint;
             const payload = document.getElementById('payload-editor').value;
             const mappingRaw = document.getElementById('mapping-editor').value;
 
@@ -651,23 +583,24 @@
             }
 
             runBtn.disabled = true;
-            spinner.style.display = 'block';
+            runBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> <span class="font-button-label text-button-label uppercase tracking-[0.15em] font-black">Processing...</span>';
             outputBox.innerText = '// Processing payload... Please wait.';
+            outputBox.className = "font-data-display text-[12px] text-on-primary-container/60 flex-grow overflow-auto scroll-hidden";
             alertBox.innerHTML = '';
+            if (consolePulse) {
+                consolePulse.className = "w-1.5 h-1.5 rounded-full bg-scientific-blue animate-pulse";
+            }
 
             try {
                 let response;
                 const url = `${endpoint}?mapping=${encodeURIComponent(JSON.stringify(mappingObj))}`;
 
                 if (endpoint === '/validate') {
-                    // For stateless validation, pass the first item of JSON as single item if JSON mode,
-                    // or parse a single CSV line if CSV mode.
                     let bodyData = {};
                     if (currentMode === 'json') {
                         const arr = JSON.parse(payload);
                         bodyData = arr[0] || {};
                     } else {
-                        // Parse first data row of CSV
                         const lines = payload.trim().split('\n');
                         if (lines.length > 1) {
                             const headers = lines[0].split(',');
@@ -701,12 +634,12 @@
 
                 if (response.ok) {
                     outputBox.innerText = JSON.stringify(data, null, 2);
+                    outputBox.className = "font-data-display text-[12px] text-active-emerald flex-grow overflow-auto scroll-hidden";
 
                     if (endpoint === '/validate') {
                         showAlert('success', 'Stateless validation succeeded! Mapped to Darwin Core structure.');
                         incrementCount('stats-validated', 1);
                     } else {
-                        // Ingest responses
                         if (data.status === 'success') {
                             showAlert('success', `ETL Pipeline Run Succeeded! Ingested ${data.valid_count} records safely.`);
                             incrementCount('stats-validated', data.valid_count);
@@ -716,51 +649,76 @@
                             incrementCount('stats-quarantined', data.quarantine_count);
                         }
                     }
+                    if (consolePulse) {
+                        consolePulse.className = "w-1.5 h-1.5 rounded-full bg-active-emerald animate-pulse";
+                    }
                 } else {
-                    // Validation errors or 4xx/5xx errors
                     outputBox.innerText = JSON.stringify(data, null, 2);
+                    outputBox.className = "font-data-display text-[12px] text-error flex-grow overflow-auto scroll-hidden";
                     if (response.status === 422) {
                         showAlert('error', 'Validation rejected. Input fails physiological or taxonomic constraints.');
                     } else {
                         showAlert('error', `Server error: ${data.detail || 'Failed to process request.'}`);
                     }
+                    if (consolePulse) {
+                        consolePulse.className = "w-1.5 h-1.5 rounded-full bg-error animate-pulse";
+                    }
                 }
 
             } catch(e) {
                 outputBox.innerText = `// Connection Error:\n${e.message}`;
+                outputBox.className = "font-data-display text-[12px] text-error flex-grow overflow-auto scroll-hidden";
                 showAlert('error', 'Network Connection Failed. Ensure the EthoPipe backend is running locally.');
+                if (consolePulse) {
+                    consolePulse.className = "w-1.5 h-1.5 rounded-full bg-error animate-pulse";
+                }
             } finally {
                 runBtn.disabled = false;
-                spinner.style.display = 'none';
+                
+                // Reset button text
+                const runBtnSpan = document.getElementById('run-btn-text');
+                if (endpoint === '/validate') {
+                    runBtn.className = "w-full bg-active-emerald hover:bg-active-emerald/90 text-slate-deep py-4 rounded-lg flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-lg shadow-active-emerald/20";
+                    runBtn.innerHTML = '<span class="material-symbols-outlined font-bold">check_circle</span> <span id="run-btn-text" class="font-button-label text-button-label uppercase tracking-[0.15em] font-black">Validate Payload</span>';
+                } else {
+                    runBtn.className = "w-full bg-active-emerald hover:bg-active-emerald/90 text-slate-deep py-4 rounded-lg flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-lg shadow-active-emerald/20";
+                    runBtn.innerHTML = '<span class="material-symbols-outlined font-bold">check_circle</span> <span id="run-btn-text" class="font-button-label text-button-label uppercase tracking-[0.15em] font-black">Run ETL Pipeline</span>';
+                }
+                
+                setTimeout(() => {
+                    // Reset back to scientific blue
+                    runBtn.className = "w-full bg-scientific-blue hover:bg-scientific-blue/90 text-slate-deep py-4 rounded-lg flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-lg shadow-scientific-blue/20";
+                    if (endpoint === '/validate') {
+                        runBtn.innerHTML = '<span class="material-symbols-outlined font-bold" style="font-variation-settings: \'FILL\' 1;">bolt</span> <span id="run-btn-text" class="font-button-label text-button-label uppercase tracking-[0.15em] font-black">Validate Payload</span>';
+                    } else {
+                        runBtn.innerHTML = '<span class="material-symbols-outlined font-bold" style="font-variation-settings: \'FILL\' 1;">bolt</span> <span id="run-btn-text" class="font-button-label text-button-label uppercase tracking-[0.15em] font-black">Run ETL Pipeline</span>';
+                    }
+                }, 2000);
             }
         }
 
         function showAlert(type, message) {
             const alertBox = document.getElementById('alert-box');
-            let cssClass = 'alert-success';
+            let cssClass = 'bg-active-emerald/10 border border-active-emerald/20 text-active-emerald';
             let title = 'Success';
 
             if (type === 'warning') {
-                cssClass = 'alert-warning';
+                cssClass = 'bg-yellow-500/15 border border-yellow-500/25 text-yellow-200';
                 title = 'Partial Ingestion';
             } else if (type === 'error') {
-                cssClass = 'alert-error';
+                cssClass = 'bg-error/10 border border-error/20 text-error';
                 title = 'Error';
             }
 
             alertBox.textContent = ''; // Clear previous alerts
             const alertDiv = document.createElement('div');
-            alertDiv.className = `alert ${cssClass}`;
-
-            const innerDiv = document.createElement('div');
+            alertDiv.className = `p-3 rounded-lg text-[12px] font-bold ${cssClass}`;
 
             const strongEl = document.createElement('strong');
             strongEl.textContent = `${title}:`;
 
-            innerDiv.appendChild(strongEl);
-            innerDiv.appendChild(document.createTextNode(` ${message}`));
-
-            alertDiv.appendChild(innerDiv);
+            alertDiv.appendChild(strongEl);
+            alertDiv.appendChild(document.createTextNode(` ${message}`));
             alertBox.appendChild(alertDiv);
         }
 
@@ -771,6 +729,20 @@
                 el.innerText = current + amount;
             }
         }
+
+        // Smooth Scroll Reveal Simulation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.stat-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.4s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
     </script>
 </body>
 </html>
