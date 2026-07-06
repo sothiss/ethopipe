@@ -10,7 +10,7 @@ model_config = ConfigDict(strict=True)
 Any type coercion (e.g., parsing a string `"80"` into an integer `80` or accepting malformed UUID strings) is rejected at the entry point to preserve datatype precision.
 
 ## 2. Veterinary Physiological Clamping
-To prevent corrupted entries or data contamination, physiological metrics must comply with peer-reviewed veterinary benchmarks. 
+To prevent corrupted entries or data contamination, physiological metrics must comply with peer-reviewed veterinary benchmarks.
 
 ### Canine Heart Rate Constraints
 The absolute boundaries for canine heart rates are clamped strictly:
