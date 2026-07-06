@@ -1,3 +1,4 @@
+import logging
 import os
 import secrets
 from typing import Annotated
@@ -9,6 +10,7 @@ from src.pipeline.models import CanineObservation
 
 app = FastAPI(title="EthoPipe API")
 security = HTTPBasic()
+logger = logging.getLogger(__name__)
 
 
 def get_current_username(
@@ -18,9 +20,10 @@ def get_current_username(
     expected_password = os.getenv("API_PASSWORD")
 
     if not expected_username or not expected_password:
+        logger.error("Authentication credentials are not configured on the server")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Authentication credentials are not configured on the server",
+            detail="Internal Server Error",
         )
 
     current_username_bytes = credentials.username.encode("utf8")

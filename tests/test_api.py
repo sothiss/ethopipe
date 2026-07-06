@@ -71,7 +71,7 @@ def test_ingest_incident_unconfigured_credentials(monkeypatch):
     response = client.post("/ingest", json=payload, auth=("admin", "secret"))
     assert response.status_code == 500
     assert response.json() == {
-        "detail": "Authentication credentials are not configured on the server",
+        "detail": "Internal Server Error",
     }
 
 
