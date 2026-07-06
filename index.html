@@ -117,14 +117,14 @@
         }
         .scroll-hidden::-webkit-scrollbar { display: none; }
         .scroll-hidden { -ms-overflow-style: none; scrollbar-width: none; }
-        
+
         /* Glassmorphism Refinement */
         .glass-nav {
             background: rgba(11, 15, 25, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
-        
+
         /* Reference Card Style */
         .stat-card {
             background: #ffffff;
@@ -502,27 +502,27 @@
 
         function setMode(mode) {
             currentMode = mode;
-            
+
             // Toggle active tab classes
             const tabJson = document.getElementById('tab-json');
             const tabCsv = document.getElementById('tab-csv');
-            
+
             if (mode === 'json') {
                 tabJson.className = "px-4 py-1.5 bg-white shadow-sm rounded-md text-scientific-blue font-data-label text-[11px] font-bold";
                 tabCsv.className = "px-4 py-1.5 text-outline hover:text-primary transition-colors font-data-label text-[11px]";
-                
+
                 document.getElementById('ingest-endpoint-path').innerText = '/ingest/json';
                 document.getElementById('ingest-endpoint-desc').innerText = 'Direct object database load';
             } else {
                 tabCsv.className = "px-4 py-1.5 bg-white shadow-sm rounded-md text-scientific-blue font-data-label text-[11px] font-bold";
                 tabJson.className = "px-4 py-1.5 text-outline hover:text-primary transition-colors font-data-label text-[11px]";
-                
+
                 document.getElementById('ingest-endpoint-path').innerText = '/ingest/csv';
                 document.getElementById('ingest-endpoint-desc').innerText = 'Direct CSV database load';
             }
 
             document.getElementById('payload-editor').value = defaults[mode].payload;
-            
+
             // Refresh endpoint selection classes
             setEndpoint(selectedEndpoint === '/validate' ? '/validate' : 'ingest');
         }
@@ -674,7 +674,7 @@
                 }
             } finally {
                 runBtn.disabled = false;
-                
+
                 // Reset button text
                 const runBtnSpan = document.getElementById('run-btn-text');
                 if (endpoint === '/validate') {
@@ -684,7 +684,7 @@
                     runBtn.className = "w-full bg-active-emerald hover:bg-active-emerald/90 text-slate-deep py-4 rounded-lg flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-lg shadow-active-emerald/20";
                     runBtn.innerHTML = '<span class="material-symbols-outlined font-bold">check_circle</span> <span id="run-btn-text" class="font-button-label text-button-label uppercase tracking-[0.15em] font-black">Run ETL Pipeline</span>';
                 }
-                
+
                 setTimeout(() => {
                     // Reset back to scientific blue
                     runBtn.className = "w-full bg-scientific-blue hover:bg-scientific-blue/90 text-slate-deep py-4 rounded-lg flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-lg shadow-scientific-blue/20";
