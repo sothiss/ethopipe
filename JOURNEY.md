@@ -43,6 +43,15 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 * **The Architectural Pivot:** Abandoned traditional cross-platform server setup assumptions. Implemented a containerization protocol via Docker and standard `devcontainer.json` parameters. This configuration ships the exact localized Linux runtime environment alongside the operational source code.
 * **Quantitative Milestone:** Repository optimized for automated metadata tracking. Code architecture fully prepared to connect seamlessly with custom domain routing overlays (`thetransparencyproject.me`) and GitHub Pages deployment compilers.
 
+### Entry 004: Portal Refactoring & Repository Standardization
+* **Hurdle Type:** Frontend Dependency Bloat & Project Standardization Metadata
+* **The Technical Challenge:** The portal UI depended on an external Tailwind CDN with a bloated custom configuration injected at runtime. This introduced unnecessary dependency overhead, potential styling glitches upon network latency, and ran counter to local-first, low-overhead open science guidelines. Additionally, project funding and historical tracking lacked standardized registry endpoints.
+* **The Architectural Pivot:** 
+  1. Refactored `index.html` by replacing the Tailwind CDN script and its heavy configuration payload with structured, native CSS custom variables and semantic selectors.
+  2. Created `FUNDING.yml` to define repository funding channels (`sothiss` on GitHub and Patreon, `thanks_dev`), ensuring alignment with open-source project compliance.
+  3. Established the `JOURNEY.md` log infrastructure to chronologically document key technical decisions, environmental parameters, and milestones.
+* **Quantitative Milestone:** Reduced HTML loading dependency footprint from an external multi-megabyte Tailwind engine down to 19 KB of clean, local-first HTML and custom CSS, while keeping the pytest suite fully stable (17/17 tests passing in 0.75s).
+
 ---
 
 ## 🚀 Active Trajectory & Next Micro-Tasks
