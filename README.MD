@@ -86,20 +86,16 @@ If you match our criteria or wish to support computational animal welfare, back 
 * **Principal Systems Architect:** Alice Severi Gonçalves
 * **ORCID Persistent Scientific iD:** [0009-0003-0048-8982](https://orcid.org/0009-0003-0048-8982)
 * **Archive Software Deposit (DOI):** [10.5281/zenodo.21211371](https://doi.org/10.5281/zenodo.21211371)
+* **Live Informatics Directory:** [thetransparencyproject.me](https://thetransparencyproject.me)
 
-### Grounding Bibliography
+### 🤝 Infrastructure Acknowledgements & Grants-in-Kind
+This open-science research tool is made possible through infrastructure provisions and developer platform subsidies graciously supplied by the following organizations:
+* **GitHub Education / Student Developer Pack:** Providing automated continuous integration pipeline allocations, containerized sandbox hosting boundaries, and environment protection configurations.
+* **Google Cloud & Google Developers Program:** Subsidizing compute resource token allocations for advanced large language model parsing within Google AI Studio.
+* **NVIDIA Developer Program:** Granting entry-level developer network access and compute engineering frameworks for future computer-vision analytical testing passes.
+* **GitBook Community Plan:** Supporting open-science communication by providing specialized access to team compilation engines to maintain our public technical specifications directory.
+
+### 📝 Grounding Bibliography
 1. **Broseghini, A., Lõoke, M., Guérineau, C., Marinelli, L., & Paolo Mongillo. (2024).** Ethogram of the predatory sequence of dogs (Canis familiaris). *Applied Animal Behaviour Science*, 279, 106402. [https://doi.org/10.1016/j.applanim.2024.106402](https://doi.org/10.1016/j.applanim.2024.106402)
 2. **de Winkel, T., van der Steen, S., Enders-Slegers, M. J., Griffioen, R., Haverbeke, A., Groenewoud, D., & Hediger, K. (2024).** Observational behaviors and emotions to assess welfare of dogs: A systematic review. *Journal of Veterinary Behavior*, 72, 1-17. [https://doi.org/10.1016/j.jveb.2023.12.007](https://doi.org/10.1016/j.jveb.2023.12.007)
 3. **Merck Veterinary Manual.** *Normal Physiological Values for Dogs.*
-
-## Repository structure
-
-- `src/` - Application code
-- `tests/` - Automated tests
-- `docs/` - Project documentation, specifications, and papers
-- `.github/workflows/` - CI/CD pipelines
-
-## Acknowledgements
-
-- **[GitBook](https://www.gitbook.com/)** for supporting this project by providing access to their community plan.
-
