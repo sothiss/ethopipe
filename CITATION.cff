@@ -8,3 +8,4 @@ title: "EthoPipe: An Open-Science ETL Pipeline for Applied Canine Ethology and P
 version: 0.1.0
 date-released: 2026-05-31
 url: "https://github.com/sothiss/ethopipe"
+license: "MIT"
