@@ -31,3 +31,8 @@ ignore = []
 
 [tool.ruff.isort]
 known-first-party = ["src"]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.6.0",
+]
