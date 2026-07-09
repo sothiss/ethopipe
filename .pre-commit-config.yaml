@@ -21,3 +21,48 @@ repos:
       - id: end-of-file-fixer
 
   - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+      - id: isort
+        args: [ --profile, black ]
+
+  # ---------------------------------------------------------------------------
+  # PROJECT-SPECIFIC VALIDATION HOOKS
+  # ---------------------------------------------------------------------------
+  - repo: local
+    hooks:
+      # Run `python -m src.utils.validate_prompts` against prompt files
+      - id: validate-prompts
+        name: Prompt Structure Validator
+        entry: python -m src.utils.validate_prompts
+        language: system
+        files: src/prompts.py|src/prompt_validator.py|src/schemas.py|src/models.py
+        types: [file]
+        stages: [commit, push, pre-commit]
+
+      # Validate Darwin Core mapping consistency for core schemas
+      - id: validate-dwc-mapping
+        name: DwC Schema Validator
+        entry: python -m src.utils.validate_dwc_mapping
+        language: system
+        files: src/schemas.py|src/models.py
+        types: [file]
+        stages: [commit, push, pre-commit]
+
+      # Detect non-deterministic prompts (Temperature > 0)
+      - id: detect-temp-in-prompts
+        name: Temperature Check (Non-Determinism Detector)
+        entry: python src/utils/detect_temp.py
+        language: system
+        files: src/prompts.py
+        types: [file]
+        stages: [commit, push, pre-commit]
+
+      # Ensure log level is set to CRITICAL for production
+      - id: detect-debug-logs
+        name: Production Log Level Check
+        entry: python src/utils/detect_debug_logs.py
+        language: system
+        files: src/config.py|src/data_pipeline.py|src/main.py
+        types: [file]
+        stages: [commit, push, pre-commit]
