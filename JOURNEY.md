@@ -52,7 +52,19 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
   3. Established the `JOURNEY.md` log infrastructure to chronologically document key technical decisions, environmental parameters, and milestones.
 * **Quantitative Milestone:** Reduced HTML loading dependency footprint from an external multi-megabyte Tailwind engine down to 19 KB of clean, local-first HTML and custom CSS, while keeping the pytest suite fully stable (17/17 tests passing in 0.75s).
 
+### Entry 005: Automated Quality Gates & Adversarial Boundary Verification
+* **Hurdle Type:** Development Governance, Verification Automation & Dependency Safety
+* **The Technical Challenge:** Securing a deterministic data ingestion pipeline requires continuous, machine-enforced verification of prompt constraints, Pydantic type safety, and Darwin Core formatting rules. Furthermore, standard static test assertions cannot dynamically verify biological bounds against infinite combinations of messy narrative inputs, exposing the code to input vulnerability and environment drift.
+* **The Architectural Pivot:** 
+  1. **Pre-Commit Quality Governance:** Implemented a comprehensive `pre-commit` workflow, embedding automated checks using `ruff-format`, `isort`, and `mypy` (with `pydantic` and `pandas-stubs` support) to enforce standard typing rules.
+  2. **Custom Domain-Specific Validation Hooks:** Created local hooks to run automated static checks on the codebase, enforcing log level verification (`detect-debug-logs`), prompt validation (`validate-prompts`), temperature boundaries preventing non-deterministic model configurations (`detect-temp-in-prompts`), and Darwin Core schema structure compliance (`validate-dwc-mapping`).
+  3. **Adversarial Verification via Property-Based Testing:** Integrated `hypothesis` into the development environment to systematically explore edge-case inputs in `test_adversarial_boundaries.py`, verifying model resilience against invalid heart rates (<30 BPM) and arbitrary narrative injections.
+  4. **Deterministic Dependency Auditing:** Wired up `uv` hooks (`uv-add`, `uv-check`, `uv-audit`, and `uv-python-version`) to continuously run package integrity audits, security scans, and environment compliance checks during development.
+  5. **Licensing Compliance:** Formally integrated open-source citation metadata by declaring the `MIT` license specification inside `CITATION.cff` and updating `LICENSE` with a clear attribution note.
+* **Quantitative Milestone:** Successfully deployed 11 automated pre-commit security, typing, and validation hooks to prevent regression, and expanded the verification suite with property-based testing constraints.
+
 ---
+
 
 ## 🚀 Active Trajectory & Next Micro-Tasks
 - [ ] Bind the completed JSON Schema validation parameters directly into the Google AI Studio response panel.
