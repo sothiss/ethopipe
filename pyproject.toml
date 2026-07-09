@@ -34,5 +34,7 @@ known-first-party = ["src"]
 
 [dependency-groups]
 dev = [
+    "ruff==0.11.0",
+    "black==24.4.2",
     "pre-commit>=4.6.0",
 ]
