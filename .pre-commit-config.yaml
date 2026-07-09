@@ -66,3 +66,49 @@ repos:
         files: src/config.py|src/data_pipeline.py|src/main.py
         types: [file]
         stages: [commit, push, pre-commit]
+
+  # ---------------------------------------------------------------------------
+  # DEPENDENCY MANAGEMENT HOOKS (uv-specific)
+  # ---------------------------------------------------------------------------
+  - repo: https://github.com/astral-sh/uv
+    rev: 0.9.11
+    hooks:
+      # Run `uv add` for missing dependencies in pyproject.toml
+      - id: uv-add
+        name: UV Dependency Checker
+        entry: uv
+        args: ["add"]
+        language: system
+        types: [file]
+        stages: [commit, push]
+        pass_filenames: false
+
+      # Run `uv check` for dependency health
+      - id: uv-check
+        name: UV Dependency Health Check
+        entry: uv
+        args: ["check", "--preview-features", "check-command"]
+        language: system
+        types: [file]
+        stages: [commit, push]
+        pass_filenames: false
+
+      # Run `uv audit` for security vulnerabilities
+      - id: uv-audit
+        name: UV Dependency Audit
+        entry: uv
+        args: ["audit", "--preview-features", "audit-command"]
+        language: system
+        types: [file]
+        stages: [commit, push]
+        pass_filenames: false
+
+      # Ensure Python version matches pyproject.toml
+      - id: uv-python-version
+        name: Python Version Compliance
+        entry: uv
+        args: ["python", "--version"]
+        language: system
+        types: [file]
+        stages: [commit, push]
+        pass_filenames: false
