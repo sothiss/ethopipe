@@ -1,0 +1,42 @@
+name: Export Secrets to Doppler
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment Environment for this job.'
+        required: true
+        type: environment
+      doppler_token:
+        description: 'Doppler Service Token'
+        required: false
+        type: string
+      doppler_target_project:
+        description: 'Doppler Target Project'
+        required: false
+        type: string
+      doppler_target_config:
+        description: 'Doppler Target Config'
+        required: false
+        type: string
+
+jobs:
+  export-to-doppler:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
+      - name: Upload Secrets to Doppler
+        run: |
+          doppler secrets upload \
+            --project "$DOPPLER_TARGET_PROJECT" \
+            --config "$DOPPLER_TARGET_CONFIG" \
+            --silent <(echo "$GITHUB_SECRETS" | jq 'del(.github_token, .DOPPLER_TOKEN, .DOPPLER_TARGET_PROJECT, .DOPPLER_TARGET_CONFIG) | with_entries( .key |= ascii_upcase )')
+        shell: bash
+        env:
+          DOPPLER_TOKEN: ${{ inputs.doppler_token || secrets.DOPPLER_TOKEN }}
+          DOPPLER_TARGET_PROJECT: ${{ inputs.doppler_target_project || secrets.DOPPLER_TARGET_PROJECT }}
+          DOPPLER_TARGET_CONFIG: ${{ inputs.doppler_target_config || secrets.DOPPLER_TARGET_CONFIG_DEV }}
+          GITHUB_SECRETS: ${{ toJson(secrets) }}
