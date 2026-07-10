@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Literal
 from uuid import UUID
@@ -45,7 +45,7 @@ class EthologicalIncident(BaseModel):
     model_config = ConfigDict(strict=True)
 
     animal_id: UUID
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     heart_rate: int = Field(..., gt=0, lt=300)
     behavior_type: str = Field(
         ...,
@@ -66,8 +66,8 @@ class EthologicalIncident(BaseModel):
         if isinstance(v, str):
             try:
                 return datetime.fromisoformat(v.replace("Z", "+00:00"))
-            except ValueError:
-                pass
+            except ValueError as e:
+                raise ValueError(f"Invalid legacy timestamp format: {v}") from e
         return v
 
     @field_validator("handler_notes", mode="after")
@@ -187,8 +187,8 @@ class BehaviorObservation(BaseModel):
         if isinstance(v, str):
             try:
                 return datetime.fromisoformat(v.replace("Z", "+00:00"))
-            except ValueError:
-                pass
+            except ValueError as e:
+                raise ValueError(f"Invalid observation time format: {v}") from e
         return v
 
     @field_validator("additional_notes", mode="after")
@@ -250,31 +250,26 @@ class MeasurementOrFact(BaseModel):
 
     individual_id: str = Field(
         ...,
-        alias="dwc:individualID",
         validation_alias="dwc:individualID",
         serialization_alias="dwc:individualID",
     )
     event_date: str = Field(
         ...,
-        alias="dwc:eventDate",
         validation_alias="dwc:eventDate",
         serialization_alias="dwc:eventDate",
     )
     measurement_type: str = Field(
         ...,
-        alias="dwc:measurementType",
         validation_alias="dwc:measurementType",
         serialization_alias="dwc:measurementType",
     )
     measurement_value: str = Field(
         ...,
-        alias="dwc:measurementValue",
         validation_alias="dwc:measurementValue",
         serialization_alias="dwc:measurementValue",
     )
     basis_of_record: str = Field(
         ...,
-        alias="dwc:basisOfRecord",
         validation_alias="dwc:basisOfRecord",
         serialization_alias="dwc:basisOfRecord",
     )
@@ -322,8 +317,8 @@ class CanineObservation(BaseModel):
         if isinstance(v, str):
             try:
                 return datetime.fromisoformat(v.replace("Z", "+00:00"))
-            except ValueError:
-                pass
+            except ValueError as e:
+                raise ValueError(f"Invalid observation timestamp format: {v}") from e
         return v
 
     @field_validator("context_session", mode="after")
