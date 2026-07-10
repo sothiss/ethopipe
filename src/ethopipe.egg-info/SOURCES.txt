@@ -1,5 +1,4 @@
 LICENSE
-README.md
 pyproject.toml
 src/ethopipe.egg-info/PKG-INFO
 src/ethopipe.egg-info/SOURCES.txt
@@ -11,5 +10,6 @@ src/pipeline/api.py
 src/pipeline/main.py
 src/pipeline/models.py
 src/pipeline/parser.py
+tests/test_adversarial_boundaries.py
 tests/test_api.py
 tests/test_models.py

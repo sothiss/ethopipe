@@ -1,2 +1,1 @@
-ethopipe
-ethopipe.egg-info
+pipeline
