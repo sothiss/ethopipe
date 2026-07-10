@@ -10,6 +10,9 @@ on:
       - '*.toml'
   workflow_dispatch: # Allows manual trigger from the GitHub Actions dashboard UI
 
+permissions:
+  contents: read
+
 jobs:
   build-context:
     runs-on: ubuntu-latest
