@@ -1,0 +1,35 @@
+name: Compile Semantic Ingestion Context
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '*.md'
+      - '*.toml'
+  workflow_dispatch: # Allows manual trigger from the GitHub Actions dashboard UI
+
+jobs:
+  build-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Local Repository Branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 5
+
+      - name: Initialize Sterile Python Runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Snapshot Aggregation Script
+        run: python scripts/compile_snapshot.py
+
+      - name: Archive Snapshot Artifact
+        uses: actions/upload-artifact     @v4
+        with:
+          name: ethopipe-llm-snapshot
+          path: docs/LLM_SNAPSHOT.md
+          retention-days: 7
