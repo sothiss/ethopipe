@@ -32,3 +32,4 @@ desktop.ini
 *.pem
 secrets.*
 credentials.*
+code-security.datadog.yaml
