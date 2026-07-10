@@ -4,7 +4,7 @@ from src.pipeline.models import PROHIBITED_WORDS, CanineObservation
 
 # Pattern to find prohibited words as full words, case-insensitive
 PROHIBITED_PATTERN = re.compile(
-    r"\b(" + "|".join(PROHIBITED_WORDS) + r")\b", re.IGNORECASE
+    fr"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNORECASE
 )
 
 
