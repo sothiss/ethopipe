@@ -30,13 +30,18 @@ jobs:
 
       - name: Upload Secrets to Doppler
         run: |
+          extra_config_arg=()
+          if [ -n "$DOPPLER_TARGET_CONFIG" ]; then
+            extra_config_arg=(--config "$DOPPLER_TARGET_CONFIG")
+          fi
+
           doppler secrets upload \
             --project "$DOPPLER_TARGET_PROJECT" \
-            --config "$DOPPLER_TARGET_CONFIG" \
-            --silent <(echo "$GITHUB_SECRETS" | jq 'del(.github_token, .DOPPLER_TOKEN, .DOPPLER_TARGET_PROJECT, .DOPPLER_TARGET_CONFIG) | with_entries( .key |= ascii_upcase )')
+            "${extra_config_arg[@]}" \
+            --silent <(echo "$GITHUB_SECRETS" | jq 'del(.github_token, .DOPPLER_TOKEN, .DOPPLER_TARGET_PROJECT, .DOPPLER_TARGET_CONFIG, .DOPPLER_PROJECT, .DOPPLER_CONFIG) | with_entries( .key |= ascii_upcase )')
         shell: bash
         env:
           DOPPLER_TOKEN: ${{ inputs.doppler_token || secrets.DOPPLER_TOKEN }}
-          DOPPLER_TARGET_PROJECT: ${{ inputs.doppler_target_project || secrets.DOPPLER_TARGET_PROJECT }}
-          DOPPLER_TARGET_CONFIG: ${{ inputs.doppler_target_config || secrets.DOPPLER_TARGET_CONFIG_DEV }}
+          DOPPLER_TARGET_PROJECT: ${{ inputs.doppler_target_project || secrets.DOPPLER_TARGET_PROJECT || secrets.DOPPLER_PROJECT }}
+          DOPPLER_TARGET_CONFIG: ${{ inputs.doppler_target_config || secrets.DOPPLER_TARGET_CONFIG || secrets.DOPPLER_TARGET_CONFIG_DEV || secrets.DOPPLER_CONFIG }}
           GITHUB_SECRETS: ${{ toJson(secrets) }}
