@@ -63,6 +63,18 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
   5. **Licensing Compliance:** Formally integrated open-source citation metadata by declaring the `MIT` license specification inside `CITATION.cff` and updating `LICENSE` with a clear attribution note.
 * **Quantitative Milestone:** Successfully deployed 11 automated pre-commit security, typing, and validation hooks to prevent regression, and expanded the verification suite with property-based testing constraints.
 
+### Entry 006: Credential Isolation, Strict Type Refinement & SAST Scope Control
+* **Hurdle Type:** Security Hardening, Developer Tooling & Static Analysis Compliance
+* **The Technical Challenge:** Integration of observability and dependency hooks introduced three tooling issues:
+  1. **Secret Leak & Syntax Errors:** Hardcoding Datadog credentials directly in `pyproject.toml` caused TOML syntax errors and created a security threat of committing active credentials to version control.
+  2. **Silent Exceptions & Constructor Mismatches:** Using empty `except` blocks with `pass` in validators masked data errors (flagged as silent exceptions). Redundant `alias` definitions in `MeasurementOrFact` forced type checkers to flag parameter mismatch errors since the constructor names did not match Python variable identifiers. Also, deprecated `datetime.utcnow()` triggered runtime warnings.
+  3. **Analysis Noise:** The static analysis engine scanned third-party `.venv` dependencies and local `.env` variables, cluttering output with non-actionable diagnostics.
+* **The Architectural Pivot:**
+  1. **Secret & Config Separation:** Moved Datadog configuration variables out of `pyproject.toml` into a local git-ignored `.env` file, and kept `pyproject.toml` focused strictly on tooling declarations.
+  2. **Validator & Type System Refinement:** Refactored field validators in `models.py` to raise explicit `ValueError` on parsing failure. Removed redundant `alias` declarations on `MeasurementOrFact` to allow standard constructor keyword signatures while preserving validation and serialization aliases. Updated legacy datetimes to use timezone-aware `datetime.now(timezone.utc)`.
+  3. **Lint Scope Exclusion:** Added `.venv/` and `.env` to the global `ignore-paths` section in `code-security.datadog.yaml` to restrict static analysis scanning strictly to first-party code.
+* **Quantitative Milestone:** Re-established a zero-error and zero-warning developer environment baseline across all first-party modules, fully securing credentials without altering Darwin Core data payloads.
+
 ---
 
 
