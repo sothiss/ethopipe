@@ -40,3 +40,6 @@ dev = [
     "pre-commit>=4.6.0",
     "hypothesis>=6.112.0",
 ]
+
+[tool.datadog]
+generate-config = false
