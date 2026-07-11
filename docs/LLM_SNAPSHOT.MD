@@ -1213,4 +1213,3 @@ def test_narrative_injector_isolation(messy_text):
             ),
         )
 ```
-

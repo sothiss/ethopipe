@@ -4,7 +4,7 @@ In accordance with open-science reproducibility standards, JOSS (Journal of Open
 
 ## 1. AI Assistant Disclosure
 This project utilizes AI-assisted coding to implement structural enhancements, documentation, test suites, and refactoring tasks. The primary AI assistant active in the environment is **Antigravity**, operating under the following governance parameters:
-- **Engine/Weights:** `gemini-2.5-pro` (or equivalent reasoning models).
+- **Engine/Weights:** `gemini-3.5-flash` (or equivalent reasoning models).
 - **Execution Mode:** Deterministic runtime configuration (Temperature = 0.0 equivalent) to enforce logical predictability and minimize stochastic variance in generated code.
 - **Verification Gate:** Standardized workspace telemetry verification and state synchronization.
 
