@@ -80,5 +80,5 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 
 ## 🚀 Active Trajectory & Next Micro-Tasks
 - [ ] Bind the completed JSON Schema validation parameters directly into the Google AI Studio response panel.
-- [ ] Clamp `gemini-2.5-pro` parameter execution thresholds to a temperature of strict `0.0` to force the AI to function purely as a constrained text-cleaning clerk.
+- [ ] Clamp `gemini-3.5-flash` parameter execution thresholds to a temperature of strict `0.0` to force the AI to function purely as a constrained text-cleaning clerk.
 - [ ] Outline a localized storage adapter to safely persist validated Pydantic payloads into a query-optimized dimensional Star Schema structure.

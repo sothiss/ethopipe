@@ -23,11 +23,11 @@ EthoPipe resolves this crisis by introducing a programmatic digital gatekeeper. 
 
 To enforce absolute reproducibility and data integrity, the pipeline completely decouples its semantic parsing from downstream evaluation and serialization layers across three operational phases:
 
-[Qualitative Narrative] ──> [Gemini 2.5 Pro Parser] ──> [Strict Pydantic Validation] ──> [Darwin Core (DwC) Mapping]
+[Qualitative Narrative] ──> [Gemini 3.5 Flash Parser] ──> [Strict Pydantic Validation] ──> [Darwin Core (DwC) Mapping]
 (Messy Handler Notes)       (Clamped Temp: 0.0)         (Type Enforced Bounds)     (Global Data Interop)
 
 
-1. **Semantic Parsing (Extract):** Ingests raw text strings utilizing the advanced `gemini-2.5-pro` architecture. By locking the model's generation temperature parameter strictly to absolute zero (`0.0`) and activating structured JSON output configurations backed by schema exports, the model is stripped of creative expression. It functions strictly as a deterministic text-cleaning clerk, mapping qualitative human prose down to typed key-value records while leaving the context window immune to stochastic variance or hallucinations.
+1. **Semantic Parsing (Extract):** Ingests raw text strings utilizing the advanced `gemini-3.5-flash` architecture. By locking the model's generation temperature parameter strictly to absolute zero (`0.0`) and activating structured JSON output configurations backed by schema exports, the model is stripped of creative expression. It functions strictly as a deterministic text-cleaning clerk, mapping qualitative human prose down to typed key-value records while leaving the context window immune to stochastic variance or hallucinations.
 2. **Type Enforcement Matrix (Transform):** Intercepted arrays pass directly into localized Pydantic validation models configured with `ConfigDict(strict=True)`. This engine acts as an unyielding filter that hardcodes biological and morphological constraints derived directly from published veterinary literature—such as mathematically restricting canine heart rate inputs strictly between `30` and `250 BPM` (derived from the *Merck Veterinary Manual*). Any entries containing non-scientific designations, string typos, or malformed data are instantly rejected at the gate and routed to a background quarantine queue.
 3. **Biological Informatics Integration (Load):** Natively aligns verified internal variables with international **Darwin Core (DwC)** metadata schemas to maintain seamless interoperability with global biodiversity informatics platforms (such as GBIF and OBIS):
    * Internal subject identifiers map straight to `dwc:individualID`.
