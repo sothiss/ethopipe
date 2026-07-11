@@ -12,6 +12,8 @@ Requires-Dist: pydantic==2.13.4
 Requires-Dist: pandas==3.0.3
 Requires-Dist: uvicorn==0.49.0
 Requires-Dist: pytest==9.0.3
+Requires-Dist: supabase>=2.31.0
+Requires-Dist: ddtrace>=4.11.0
 Dynamic: license-file
 
 # EthoPipe: An Open-Science ETL Pipeline for Applied Canine Ethology and Physiological Telemetry
@@ -115,9 +117,3 @@ This open-science research tool is made possible through infrastructure provisio
 1. **Broseghini, A., Lõoke, M., Guérineau, C., Marinelli, L., & Paolo Mongillo. (2024).** Ethogram of the predatory sequence of dogs (Canis familiaris). *Applied Animal Behaviour Science*, 279, 106402. [https://doi.org/10.1016/j.applanim.2024.106402](https://doi.org/10.1016/j.applanim.2024.106402)
 2. **de Winkel, T., van der Steen, S., Enders-Slegers, M. J., Griffioen, R., Haverbeke, A., Groenewoud, D., & Hediger, K. (2024).** Observational behaviors and emotions to assess welfare of dogs: A systematic review. *Journal of Veterinary Behavior*, 72, 1-17. [https://doi.org/10.1016/j.jveb.2023.12.007](https://doi.org/10.1016/j.jveb.2023.12.007)
 3. **Merck Veterinary Manual.** *Normal Physiological Values for Dogs.*
-4. **Core Data Standard for Biological Observations.** *Centre for Biodiversity and Environment Research, University College London* (External Link)
-5. **Standardized Ethogram for Domestic Dog Research.** *The Transparency Project, University College London* (Internal Repository Link)
-6. **Darwin Core® Standard: A Gale-force Wind for Biodiversity Informatics.** *Biodiversity Information Standards* (TDWG)
-7. **Morphometric data for the domestic dog (*Canis familiaris*) for comparative and evolutionary studies.** *Scientific Data*, 4, 170069. [https://doi.org/10.1038/sdata.2017.69](https://doi.org/10.1038/sdata.2017.69)
-
----

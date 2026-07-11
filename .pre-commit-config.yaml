@@ -18,7 +18,6 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: [pydantic, pandas-stubs]
-      - id: end-of-file-fixer
 
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.10.1
@@ -38,7 +37,7 @@ repos:
         language: system
         files: src/prompts.py|src/prompt_validator.py|src/schemas.py|src/models.py
         types: [file]
-        stages: [commit, push, pre-commit]
+        stages: [pre-commit, pre-push, pre-commit]
 
       # Validate Darwin Core mapping consistency for core schemas
       - id: validate-dwc-mapping
@@ -47,7 +46,7 @@ repos:
         language: system
         files: src/schemas.py|src/models.py
         types: [file]
-        stages: [commit, push, pre-commit]
+        stages: [pre-commit, pre-push, pre-commit]
 
       # Detect non-deterministic prompts (Temperature > 0)
       - id: detect-temp-in-prompts
@@ -56,7 +55,7 @@ repos:
         language: system
         files: src/prompts.py
         types: [file]
-        stages: [commit, push, pre-commit]
+        stages: [pre-commit, pre-push, pre-commit]
 
       # Ensure log level is set to CRITICAL for production
       - id: detect-debug-logs
@@ -65,14 +64,11 @@ repos:
         language: system
         files: src/config.py|src/data_pipeline.py|src/main.py
         types: [file]
-        stages: [commit, push, pre-commit]
+        stages: [pre-commit, pre-push, pre-commit]
 
-  # ---------------------------------------------------------------------------
-  # DEPENDENCY MANAGEMENT HOOKS (uv-specific)
-  # ---------------------------------------------------------------------------
-  - repo: https://github.com/astral-sh/uv
-    rev: 0.9.11
-    hooks:
+      # ---------------------------------------------------------------------------
+      # DEPENDENCY MANAGEMENT HOOKS (uv-specific)
+      # ---------------------------------------------------------------------------
       # Run `uv add` for missing dependencies in pyproject.toml
       - id: uv-add
         name: UV Dependency Checker
@@ -80,7 +76,7 @@ repos:
         args: ["add"]
         language: system
         types: [file]
-        stages: [commit, push]
+        stages: [pre-commit, pre-push]
         pass_filenames: false
 
       # Run `uv check` for dependency health
@@ -90,7 +86,7 @@ repos:
         args: ["check", "--preview-features", "check-command"]
         language: system
         types: [file]
-        stages: [commit, push]
+        stages: [pre-commit, pre-push]
         pass_filenames: false
 
       # Run `uv audit` for security vulnerabilities
@@ -100,7 +96,7 @@ repos:
         args: ["audit", "--preview-features", "audit-command"]
         language: system
         types: [file]
-        stages: [commit, push]
+        stages: [pre-commit, pre-push]
         pass_filenames: false
 
       # Ensure Python version matches pyproject.toml
@@ -110,5 +106,5 @@ repos:
         args: ["python", "--version"]
         language: system
         types: [file]
-        stages: [commit, push]
+        stages: [pre-commit, pre-push]
         pass_filenames: false
