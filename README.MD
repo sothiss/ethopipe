@@ -11,7 +11,7 @@ An open-access biological informatics pipeline developed under **The Transparenc
 
 ## 🔬 1. Statement of Need & Scientific Purpose
 
-Within applied animal behavior and canine ethology, researchers face a critical data bottleneck: ground-level field observations, shelter logs, and handler incident reports are heavily trapped within fragmented, qualitative, and highly subjective text narrative silos. Human observers frequently introduce significant inter-rater variance by projecting anthropomorphic storytelling or cultural functional interpretations onto animals (e.g., qualifying a canine subject's internal state as "angry," "guilty," or "stubborn" instead of documenting objective, observable physical motor sequences). 
+Within applied animal behavior and canine ethology, researchers face a critical data bottleneck: ground-level field observations, shelter logs, and handler incident reports are heavily trapped within fragmented, qualitative, and highly subjective text narrative silos. Human observers frequently introduce significant inter-rater variance by projecting anthropomorphic storytelling or cultural functional interpretations onto animals (e.g., qualifying a canine subject's internal state as "angry," "guilty," or "stubborn" instead of documenting objective, observable physical motor sequences).
 
 Because these qualitative data lack uniform formatting and objective operational baselines, they are mathematically unviable for population-scale continuous multi-center epidemiological studies, multi-way statistical models, or rigorous quantitative peer review. This systemic deficit in data engineering directly fuels a replication crisis across the companion animal welfare space.
 

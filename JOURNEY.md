@@ -1,7 +1,7 @@
 # Research Software Engineering (RSE) Log: EthoPipe Journey
-**Project Architecture:** EthoPipe (The Transparency Project 1.0)  
-**Principal Investigator:** Alice Severi Gonçalves (ORCID: 0009-0003-0048-8982)  
-**Methodological Paradigm:** Open Science, Computational Canine Ethology, and Deterministic Data Pipelines  
+**Project Architecture:** EthoPipe (The Transparency Project 1.0)
+**Principal Investigator:** Alice Severi Gonçalves (ORCID: 0009-0003-0048-8982)
+**Methodological Paradigm:** Open Science, Computational Canine Ethology, and Deterministic Data Pipelines
 
 ---
 
@@ -23,7 +23,7 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 ### Entry 001: The Systemic Clean Slate & History Reset
 * **Hurdle Type:** Environmental Anomalies & Git History Friction
 * **The Technical Challenge:** The local development environment was suffering from compounding configuration debt. Bloated IDE extensions (Azure/Kubernetes proxies) were polluting execution paths, while raw Google Cloud Application Default Credentials (ADC) endpoints were misaligned. The local version control history had devolved into volatile tracking cycles.
-* **The Architectural Pivot:** Performed an explicit "intellectual garbage collection." 
+* **The Architectural Pivot:** Performed an explicit "intellectual garbage collection."
   1. Ruthlessly pruned the IDE extension panels to maximize processing bandwidth.
   2. Executed an operational Git reset to eliminate tracking clutter and establish a sterile repository baseline.
   3. Re-authenticated cloud credentials globally via `gcloud auth application-default login` outside the immediate codebase paths.
@@ -46,7 +46,7 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 ### Entry 004: Portal Refactoring & Repository Standardization
 * **Hurdle Type:** Frontend Dependency Bloat & Project Standardization Metadata
 * **The Technical Challenge:** The portal UI depended on an external Tailwind CDN with a bloated custom configuration injected at runtime. This introduced unnecessary dependency overhead, potential styling glitches upon network latency, and ran counter to local-first, low-overhead open science guidelines. Additionally, project funding and historical tracking lacked standardized registry endpoints.
-* **The Architectural Pivot:** 
+* **The Architectural Pivot:**
   1. Refactored `index.html` by replacing the Tailwind CDN script and its heavy configuration payload with structured, native CSS custom variables and semantic selectors.
   2. Created `FUNDING.yml` to define repository funding channels (`sothiss` on GitHub and Patreon, `thanks_dev`), ensuring alignment with open-source project compliance.
   3. Established the `JOURNEY.md` log infrastructure to chronologically document key technical decisions, environmental parameters, and milestones.
@@ -55,7 +55,7 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 ### Entry 005: Automated Quality Gates & Adversarial Boundary Verification
 * **Hurdle Type:** Development Governance, Verification Automation & Dependency Safety
 * **The Technical Challenge:** Securing a deterministic data ingestion pipeline requires continuous, machine-enforced verification of prompt constraints, Pydantic type safety, and Darwin Core formatting rules. Furthermore, standard static test assertions cannot dynamically verify biological bounds against infinite combinations of messy narrative inputs, exposing the code to input vulnerability and environment drift.
-* **The Architectural Pivot:** 
+* **The Architectural Pivot:**
   1. **Pre-Commit Quality Governance:** Implemented a comprehensive `pre-commit` workflow, embedding automated checks using `ruff-format`, `isort`, and `mypy` (with `pydantic` and `pandas-stubs` support) to enforce standard typing rules.
   2. **Custom Domain-Specific Validation Hooks:** Created local hooks to run automated static checks on the codebase, enforcing log level verification (`detect-debug-logs`), prompt validation (`validate-prompts`), temperature boundaries preventing non-deterministic model configurations (`detect-temp-in-prompts`), and Darwin Core schema structure compliance (`validate-dwc-mapping`).
   3. **Adversarial Verification via Property-Based Testing:** Integrated `hypothesis` into the development environment to systematically explore edge-case inputs in `test_adversarial_boundaries.py`, verifying model resilience against invalid heart rates (<30 BPM) and arbitrary narrative injections.
