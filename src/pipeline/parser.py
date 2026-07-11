@@ -3,9 +3,7 @@ import re
 from src.pipeline.models import PROHIBITED_WORDS, CanineObservation
 
 # Pattern to find prohibited words as full words, case-insensitive
-PROHIBITED_PATTERN = re.compile(
-    fr"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNORECASE
-)
+PROHIBITED_PATTERN = re.compile(rf"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNORECASE)
 
 
 def de_bias_text(text: str) -> str:

@@ -1,6 +1,8 @@
-from hypothesis import given, strategies as st
-from pydantic import ValidationError
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
+from pydantic import ValidationError
+
 from src.pipeline.models import (
     BehaviorObservation,
     BehaviorType,
@@ -8,10 +10,11 @@ from src.pipeline.models import (
     PhysioMeasurement,
 )
 
+
 @given(st.integers(min_value=-1000, max_value=29))
 def test_heart_rate_under_bounds_rejection(invalid_hr):
     """
-    Ensure the data pipeline strictly rejects physiological inputs beneath 
+    Ensure the data pipeline strictly rejects physiological inputs beneath
     the absolute clinical baseline bound of 30 BPM.
     """
     with pytest.raises(ValidationError):
@@ -21,6 +24,7 @@ def test_heart_rate_under_bounds_rejection(invalid_hr):
             body_temp_c=38.5,
             cortisol_nmolL=150.0,
         )
+
 
 @given(
     st.text(min_size=1, max_size=500).filter(

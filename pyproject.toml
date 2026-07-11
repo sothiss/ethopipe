@@ -1,6 +1,6 @@
 [project]
 name = "ethopipe"
-version = "0.1.0"
+version = "0.2.0a0"
 description = "Open-science ethological data ingestion pipeline"
 readme = "README.md"
 requires-python = ">=3.11"

@@ -5,7 +5,7 @@ authors:
     given-names: "Alice Severi"
     orcid: "https://orcid.org/0009-0003-0048-8982"
 title: "EthoPipe: An Open-Science ETL Pipeline for Applied Canine Ethology and Physiological Telemetry"
-version: 0.1.0
-date-released: 2026-05-31
+version: 0.2.0a0
+date-released: 2026-07-10
 url: "https://github.com/sothiss/ethopipe"
 license: "MIT"

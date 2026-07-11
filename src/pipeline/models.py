@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Literal
 from uuid import UUID
@@ -45,7 +45,7 @@ class EthologicalIncident(BaseModel):
     model_config = ConfigDict(strict=True)
 
     animal_id: UUID
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(UTC))
     heart_rate: int = Field(..., gt=0, lt=300)
     behavior_type: str = Field(
         ...,

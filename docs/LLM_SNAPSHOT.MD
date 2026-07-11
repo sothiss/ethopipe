@@ -7,7 +7,7 @@ This file is auto-generated on git push. It aggregates all configuration and fir
 ```toml
 [project]
 name = "ethopipe"
-version = "0.1.0"
+version = "0.2.0a0"
 description = "Open-science ethological data ingestion pipeline"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -234,7 +234,7 @@ if __name__ == "__main__":
 ## File: `src/pipeline/models.py`
 
 ```python
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Literal
 from uuid import UUID
@@ -281,7 +281,7 @@ class EthologicalIncident(BaseModel):
     model_config = ConfigDict(strict=True)
 
     animal_id: UUID
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(UTC))
     heart_rate: int = Field(..., gt=0, lt=300)
     behavior_type: str = Field(
         ...,
@@ -647,9 +647,7 @@ import re
 from src.pipeline.models import PROHIBITED_WORDS, CanineObservation
 
 # Pattern to find prohibited words as full words, case-insensitive
-PROHIBITED_PATTERN = re.compile(
-    fr"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNORECASE
-)
+PROHIBITED_PATTERN = re.compile(rf"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNORECASE)
 
 
 def de_bias_text(text: str) -> str:
@@ -1158,9 +1156,11 @@ def test_ingest_subjective_notes_rejected(monkeypatch):
 ## File: `tests/test_adversarial_boundaries.py`
 
 ```python
-from hypothesis import given, strategies as st
-from pydantic import ValidationError
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
+from pydantic import ValidationError
+
 from src.pipeline.models import (
     BehaviorObservation,
     BehaviorType,
@@ -1168,10 +1168,11 @@ from src.pipeline.models import (
     PhysioMeasurement,
 )
 
+
 @given(st.integers(min_value=-1000, max_value=29))
 def test_heart_rate_under_bounds_rejection(invalid_hr):
     """
-    Ensure the data pipeline strictly rejects physiological inputs beneath 
+    Ensure the data pipeline strictly rejects physiological inputs beneath
     the absolute clinical baseline bound of 30 BPM.
     """
     with pytest.raises(ValidationError):
@@ -1181,6 +1182,7 @@ def test_heart_rate_under_bounds_rejection(invalid_hr):
             body_temp_c=38.5,
             cortisol_nmolL=150.0,
         )
+
 
 @given(
     st.text(min_size=1, max_size=500).filter(
