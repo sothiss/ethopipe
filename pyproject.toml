@@ -40,6 +40,8 @@ dev = [
     "black==26.3.1",
     "pre-commit>=4.6.0",
     "hypothesis>=6.112.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.28.1",
 ]
 
 [tool.datadog]
