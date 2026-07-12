@@ -27,8 +27,8 @@ function Run($cmd) {
 # Step 1: Environment Audit
 Step 1 "Pre-Execution Environment Audits"
 try {
-    Run "$venv\uv.exe pip list"
-    Run "$venv\uv.exe pip audit"
+    Run "uv pip list"
+    Run "uv pip audit"
 } catch {
     Write-Warning "Step 1 failed: $_"
     $failures += "Step 1: Environment Audit"
@@ -49,7 +49,7 @@ Step 3 "Type Safety Checks (Mypy)"
 try {
     Run "$venv\mypy.exe src"
 } catch {
-    Write-Warning "Step 3 failed: $_"
+    Write-Warning "Step 3 failed (mypy may need installing: uv pip install mypy pandas-stubs): $_"
     $failures += "Step 3: Type Safety"
 }
 
@@ -74,6 +74,10 @@ try {
 # Step 6: Pre-Commit Hook Enforcement
 Step 6 "Git Hook Enforcement (pre-commit)"
 try {
+    $gitCheck = & git --version 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw "git not found on PATH. Run pre-commit from a terminal where 'git --version' works."
+    }
     Run "$venv\pre-commit.exe run --all-files"
 } catch {
     Write-Warning "Step 6 failed: $_"
