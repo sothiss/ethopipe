@@ -3,7 +3,7 @@ import os
 
 def compile_snapshot():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    snapshot_path = os.path.join(project_root, "docs", "LLM_SNAPSHOT.MD")
+    snapshot_path = os.path.join(project_root, "docs", "LLM_SNAPSHOT.md")
 
     files_to_include = [
         "pyproject.toml",

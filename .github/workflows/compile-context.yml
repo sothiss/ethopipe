@@ -6,6 +6,7 @@ on:
     paths:
       - 'src/**'
       - 'tests/**'
+      - 'docs/**'
       - '*.md'
       - '*.toml'
   workflow_dispatch: # Allows manual trigger from the GitHub Actions dashboard UI
@@ -31,7 +32,7 @@ jobs:
         run: python scripts/compile_snapshot.py
 
       - name: Archive Snapshot Artifact
-        uses: actions/upload-artifact     @v4
+        uses: actions/upload-artifact@v4
         with:
           name: ethopipe-llm-snapshot
           path: docs/LLM_SNAPSHOT.md
