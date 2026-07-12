@@ -45,7 +45,9 @@ def test_ingest_incident_incorrect_credentials(monkeypatch):
     monkeypatch.setenv("API_USERNAME", "admin")
     monkeypatch.setenv("API_PASSWORD", "secret")
     payload = get_valid_observation_payload()
-    response = client.post("/ingest", json=payload, auth=("wronguser", "wrongpassword"))
+    response = client.post(
+        "/ingest", json=payload, auth=("wronguser", "wrongpassword")
+    )
     assert response.status_code == 401
     assert response.json() == {"detail": "Incorrect username or password"}
 
