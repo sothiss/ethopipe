@@ -1,29 +1,24 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.0
+    rev: v0.15.21
     hooks:
       - id: ruff
         args: [ --fix ]
       - id: ruff-format
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.18.2
     hooks:
       - id: mypy
         additional_dependencies: [pydantic, pandas-stubs]
 
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.10.1
-    hooks:
-      - id: isort
-        args: [ --profile, black ]
 
   # ---------------------------------------------------------------------------
   # PROJECT-SPECIFIC VALIDATION HOOKS
@@ -37,7 +32,7 @@ repos:
         language: system
         files: src/prompts.py|src/prompt_validator.py|src/schemas.py|src/models.py
         types: [file]
-        stages: [pre-commit, pre-push, pre-commit]
+        stages: [pre-commit, pre-push]
 
       # Validate Darwin Core mapping consistency for core schemas
       - id: validate-dwc-mapping
@@ -46,7 +41,7 @@ repos:
         language: system
         files: src/schemas.py|src/models.py
         types: [file]
-        stages: [pre-commit, pre-push, pre-commit]
+        stages: [pre-commit, pre-push]
 
       # Detect non-deterministic prompts (Temperature > 0)
       - id: detect-temp-in-prompts
@@ -55,7 +50,7 @@ repos:
         language: system
         files: src/prompts.py
         types: [file]
-        stages: [pre-commit, pre-push, pre-commit]
+        stages: [pre-commit, pre-push]
 
       # Ensure log level is set to CRITICAL for production
       - id: detect-debug-logs
@@ -64,7 +59,7 @@ repos:
         language: system
         files: src/config.py|src/data_pipeline.py|src/main.py
         types: [file]
-        stages: [pre-commit, pre-push, pre-commit]
+        stages: [pre-commit, pre-push]
 
       # ---------------------------------------------------------------------------
       # DEPENDENCY MANAGEMENT HOOKS (uv-specific)
