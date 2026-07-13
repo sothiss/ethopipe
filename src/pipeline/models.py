@@ -250,27 +250,27 @@ class MeasurementOrFact(BaseModel):
 
     individual_id: str = Field(
         ...,
-        validation_alias="dwc:individualID",
+        validation_alias=AliasChoices("individual_id", "dwc:individualID"),
         serialization_alias="dwc:individualID",
     )
     event_date: str = Field(
         ...,
-        validation_alias="dwc:eventDate",
+        validation_alias=AliasChoices("event_date", "dwc:eventDate"),
         serialization_alias="dwc:eventDate",
     )
     measurement_type: str = Field(
         ...,
-        validation_alias="dwc:measurementType",
+        validation_alias=AliasChoices("measurement_type", "dwc:measurementType"),
         serialization_alias="dwc:measurementType",
     )
     measurement_value: str = Field(
         ...,
-        validation_alias="dwc:measurementValue",
+        validation_alias=AliasChoices("measurement_value", "dwc:measurementValue"),
         serialization_alias="dwc:measurementValue",
     )
     basis_of_record: str = Field(
         ...,
-        validation_alias="dwc:basisOfRecord",
+        validation_alias=AliasChoices("basis_of_record", "dwc:basisOfRecord"),
         serialization_alias="dwc:basisOfRecord",
     )
 

@@ -88,9 +88,8 @@ def test_ingest_subjective_notes_rejected(monkeypatch):
     monkeypatch.setenv("API_USERNAME", "admin")
     monkeypatch.setenv("API_PASSWORD", "secret")
     payload = get_valid_observation_payload()
-    payload["behaviors"][0]["Additional_Notes"] = (
-        "The dog was very stubborn."  # Prohibited word
-    )
+    # Prohibited word
+    payload["behaviors"][0]["Additional_Notes"] = "The dog was very stubborn."
     response = client.post("/ingest", json=payload, auth=("admin", "secret"))
     assert response.status_code == 422
     assert "stubborn" in response.text

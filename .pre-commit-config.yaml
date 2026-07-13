@@ -69,11 +69,11 @@ repos:
       # ---------------------------------------------------------------------------
       # DEPENDENCY MANAGEMENT HOOKS (uv-specific)
       # ---------------------------------------------------------------------------
-      # Run `uv add` for missing dependencies in pyproject.toml
+      # Run `uv lock --check` to check dependency lockfile consistency
       - id: uv-add
-        name: UV Dependency Checker
+        name: UV Lockfile Checker
         entry: uv
-        args: ["add"]
+        args: ["lock", "--check"]
         language: system
         types: [file]
         stages: [pre-commit, pre-push]
@@ -103,7 +103,7 @@ repos:
       - id: uv-python-version
         name: Python Version Compliance
         entry: uv
-        args: ["python", "--version"]
+        args: ["python", "find"]
         language: system
         types: [file]
         stages: [pre-commit, pre-push]

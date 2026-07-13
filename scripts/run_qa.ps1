@@ -28,7 +28,7 @@ function Run($cmd) {
 Step 1 "Pre-Execution Environment Audits"
 try {
     Run "uv pip list"
-    Run "uv pip audit"
+    Run "uv audit"
 } catch {
     Write-Warning "Step 1 failed: $_"
     $failures += "Step 1: Environment Audit"

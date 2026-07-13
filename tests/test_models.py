@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import cast
 from uuid import uuid4
 
 import pytest
@@ -37,10 +38,10 @@ def test_legacy_incident_subjective_rejected() -> None:
 
 def test_valid_canine_observation() -> None:
     obs = CanineObservation(
-        ObservationID="obs-001",
-        SubjectID="dog-123",
-        Timestamp_ISO8601=datetime.now(),
-        Location="Lab A",
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime.now(),
+        location="Lab A",
         behaviors=[
             BehaviorObservation(
                 behavior=BehaviorType.PLAY_BOW,
@@ -65,7 +66,7 @@ def test_canine_observation_strict_mode() -> None:
     # Under strict=True, passing strings for numeric values should fail
     with pytest.raises(ValidationError):
         PhysioMeasurement(
-            heart_rate_bpm="100",  # String instead of int
+            heart_rate_bpm=cast(int, "100"),  # String instead of int
             resp_rate_bpm=20,
             body_temp_c=38.5,
             cortisol_nmolL=150.0,
@@ -113,9 +114,9 @@ def test_size_dependent_heart_rate() -> None:
     # Toy breeds: 80 - 200 BPM
     # Valid Toy
     obs_toy_valid = CanineObservation(
-        ObservationID="obs-001",
-        SubjectID="dog-123",
-        Timestamp_ISO8601=datetime.now(),
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime.now(),
         dog_size="Toy",
         behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
         physiology=PhysioMeasurement(
@@ -130,9 +131,9 @@ def test_size_dependent_heart_rate() -> None:
     # Invalid Toy (too low)
     with pytest.raises(ValidationError):
         CanineObservation(
-            ObservationID="obs-001",
-            SubjectID="dog-123",
-            Timestamp_ISO8601=datetime.now(),
+            observation_id="obs-001",
+            subject_id="dog-123",
+            timestamp=datetime.now(),
             dog_size="Toy",
             behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
             physiology=PhysioMeasurement(
@@ -146,9 +147,9 @@ def test_size_dependent_heart_rate() -> None:
     # Giant breeds: 40 - 110 BPM
     # Valid Giant
     obs_giant_valid = CanineObservation(
-        ObservationID="obs-001",
-        SubjectID="dog-123",
-        Timestamp_ISO8601=datetime.now(),
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime.now(),
         dog_size="Giant",
         behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
         physiology=PhysioMeasurement(
@@ -163,9 +164,9 @@ def test_size_dependent_heart_rate() -> None:
     # Invalid Giant (too high)
     with pytest.raises(ValidationError):
         CanineObservation(
-            ObservationID="obs-001",
-            SubjectID="dog-123",
-            Timestamp_ISO8601=datetime.now(),
+            observation_id="obs-001",
+            subject_id="dog-123",
+            timestamp=datetime.now(),
             dog_size="Giant",
             behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
             physiology=PhysioMeasurement(
@@ -226,6 +227,7 @@ def test_parser_de_biasing_deletion() -> None:
     obs = normalize_incident(payload)
     # Prohibited words 'stubborn' and 'angry' must be deleted
     notes = obs.behaviors[0].additional_notes
+    assert notes is not None
     assert "stubborn" not in notes.lower()
     assert "angry" not in notes.lower()
     assert notes == "The dog was but eventually sat. He seemed ."
@@ -233,9 +235,9 @@ def test_parser_de_biasing_deletion() -> None:
 
 def test_darwin_core_mapping() -> None:
     obs = CanineObservation(
-        ObservationID="obs-001",
-        SubjectID="dog-123",
-        Timestamp_ISO8601=datetime(2026, 7, 5, 12, 0, 0),
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime(2026, 7, 5, 12, 0, 0),
         behaviors=[
             BehaviorObservation(
                 behavior=BehaviorType.PLAY_BOW,

@@ -50,6 +50,13 @@ dev = [
 [tool.datadog]
 generate-config = true
 
+[tool.mypy]
+explicit_package_bases = true
+mypy_path = "."
+plugins = [
+    "pydantic.mypy"
+]
+
 [build-system]
 requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
