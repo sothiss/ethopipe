@@ -1,5 +1,5 @@
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Literal
 from uuid import UUID
 
@@ -80,7 +80,7 @@ class EthologicalIncident(BaseModel):
 # New Canine Ethology Data Dictionary models
 
 
-class BehaviorType(str, Enum):
+class BehaviorType(StrEnum):
     # Resting Postures
     LYING = "Lying"
     SITTING = "Sitting"
