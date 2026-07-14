@@ -32,7 +32,7 @@ We require a few tools to ensure code quality and reproducibility.
    ```
 
 4. **Install Pre-commit Hooks:**
-   We use `pre-commit` to run Black and Ruff on every commit to maintain consistent code formatting and quality.
+   We use `pre-commit` to run Ruff on every commit to maintain consistent code formatting and quality.
    ```bash
    pre-commit install
    ```
@@ -45,7 +45,7 @@ We require a few tools to ensure code quality and reproducibility.
   ```bash
   pytest tests/
   ```
-- **Code Formatting:** Our pre-commit hooks will automatically format your code with Black and lint it with Ruff.
+- **Code Formatting:** Our pre-commit hooks will automatically format and lint your code with Ruff.
 
 ## Submitting Changes
 

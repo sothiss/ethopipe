@@ -37,7 +37,7 @@ try {
 # Step 2: Format & Style Gates
 Step 2 "Format & Style Gates"
 try {
-    Run "$venv\black.exe --check src tests"
+    Run "$venv\ruff.exe format --check src tests"
     Run "$venv\ruff.exe check src tests"
 } catch {
     Write-Warning "Step 2 failed: $_"
