@@ -30,7 +30,7 @@ repos:
         name: Prompt Structure Validator
         entry: python -m src.utils.validate_prompts
         language: system
-        files: src/prompts.py|src/prompt_validator.py|src/schemas.py|src/models.py
+        files: src/pipeline/prompts\.py|src/pipeline/models\.py
         types: [file]
         stages: [pre-commit, pre-push]
 
@@ -39,7 +39,7 @@ repos:
         name: DwC Schema Validator
         entry: python -m src.utils.validate_dwc_mapping
         language: system
-        files: src/schemas.py|src/models.py
+        files: src/pipeline/models\.py
         types: [file]
         stages: [pre-commit, pre-push]
 
@@ -48,7 +48,7 @@ repos:
         name: Temperature Check (Non-Determinism Detector)
         entry: python src/utils/detect_temp.py
         language: system
-        files: src/prompts.py
+        files: src/pipeline/prompts\.py
         types: [file]
         stages: [pre-commit, pre-push]
 
@@ -57,7 +57,7 @@ repos:
         name: Production Log Level Check
         entry: python src/utils/detect_debug_logs.py
         language: system
-        files: src/config.py|src/data_pipeline.py|src/main.py
+        files: src/pipeline/main\.py|src/pipeline/api\.py
         types: [file]
         stages: [pre-commit, pre-push]
 

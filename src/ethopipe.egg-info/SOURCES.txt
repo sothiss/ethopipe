@@ -11,6 +11,11 @@ src/pipeline/api.py
 src/pipeline/main.py
 src/pipeline/models.py
 src/pipeline/parser.py
+src/utils/__init__.py
+src/utils/detect_debug_logs.py
+src/utils/detect_temp.py
+src/utils/validate_dwc_mapping.py
+src/utils/validate_prompts.py
 tests/test_adversarial_boundaries.py
 tests/test_api.py
 tests/test_models.py
