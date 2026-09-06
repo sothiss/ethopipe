@@ -1,5 +1,4 @@
 LICENSE
-README.md
 pyproject.toml
 src/ethopipe.egg-info/PKG-INFO
 src/ethopipe.egg-info/SOURCES.txt
