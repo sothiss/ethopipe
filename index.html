@@ -36,18 +36,18 @@
       --surface-card-hover: #24344d;
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-card: rgba(255, 255, 255, 0.12);
-      
+
       --accent-amber: #f59e0b;
       --accent-amber-glow: rgba(245, 158, 11, 0.22);
       --accent-amber-hover: #fbbf24;
-      
+
       --accent-cyan: #38bdf8;
       --accent-cyan-glow: rgba(56, 189, 248, 0.25);
-      
+
       --text-white: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
-      
+
       --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -56,7 +56,7 @@
       --radius-md: 12px;
       --radius-2xl: 20px;
       --radius-full: 9999px;
-      
+
       --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -86,7 +86,7 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      background: 
+      background:
         radial-gradient(circle at 18% 15%, rgba(56, 189, 248, 0.07) 0%, transparent 40%),
         radial-gradient(circle at 82% 35%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
         radial-gradient(circle at 50% 85%, rgba(30, 41, 59, 0.6) 0%, transparent 50%);
@@ -98,7 +98,7 @@
       pointer-events: none;
       z-index: 0;
       background-size: 48px 48px;
-      background-image: 
+      background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
       mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
@@ -1341,7 +1341,7 @@
               <p class="combo-description" data-pt="O tratamento definitivo para computadores lentos ou com aquecimento excessivo. Devolve a velocidade e o silêncio originais com segurança absoluta." data-en="The definitive care package for slow or overheating rigs. Restores factory-fresh responsiveness and silence with absolute safety.">
                 O tratamento definitivo para computadores lentos ou com aquecimento excessivo. Devolve a velocidade e o silêncio originais com segurança absoluta.
               </p>
-              
+
               <ul class="combo-checklist">
                 <li><span class="check">&#10003;</span> <span data-pt="Limpeza profunda & desoxidação de chassi" data-en="Deep ultrasonic & chassis dust evacuation">Limpeza profunda & desoxidação de chassi</span></li>
                 <li><span class="check">&#10003;</span> <span data-pt="Troca de pasta térmica de alta condutividade" data-en="High-conductivity thermal paste replacement">Troca de pasta térmica de alta condutividade</span></li>
@@ -1424,7 +1424,7 @@
             <div class="quote-box" data-pt="&ldquo;Computadores pessoais não são caixas pretas descartáveis. São ferramentas essenciais de trabalho e criação que merecem cuidado metódico, respeito técnico e total transparência.&rdquo;" data-en="&ldquo;Personal computers are not disposable black boxes. They are critical creative and professional instruments that deserve methodical care, technical respect, and radical transparency.&rdquo;">
               &ldquo;Computadores pessoais não são caixas pretas descartáveis. São ferramentas essenciais de trabalho e criação que merecem cuidado metódico, respeito técnico e total transparência.&rdquo;
             </div>
-            
+
             <div class="founder-signature">
               <div class="founder-avatar">A</div>
               <div class="founder-info">
@@ -1503,7 +1503,7 @@
     // Language Toggle (PT-BR / EN)
     let currentLang = 'pt';
     const langBtn = document.getElementById('langToggleBtn');
-    
+
     if (langBtn) {
       langBtn.addEventListener('click', () => {
         currentLang = currentLang === 'pt' ? 'en' : 'pt';

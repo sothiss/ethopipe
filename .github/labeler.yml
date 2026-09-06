@@ -1,0 +1,15 @@
+backend:
+  - changed-files:
+      - any-glob-to-any-file: ['src/**', 'tests/**', 'pyproject.toml', 'requirements.txt']
+
+frontend:
+  - changed-files:
+      - any-glob-to-any-file: ['index.html', 'assets/**', 'logo*.svg']
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: ['docs/**', '*.md', 'CITATION.cff', 'LICENSE']
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: ['.github/**', '.pre-commit-config.yaml']

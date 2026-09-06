@@ -31,35 +31,45 @@ dependencies = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
-[tool.black]
-line-length = 88
 [tool.ruff]
 line-length = 88
+
+[tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 ignore = []
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["src"]
 
 [dependency-groups]
 dev = [
     "ruff==0.11.0",
-    "black==26.3.1",
     "pre-commit>=4.6.0",
     "hypothesis>=6.112.0",
     "pytest-cov>=4.1.0",
     "httpx>=0.28.1",
+    "mypy>=1.10.0",
+    "pandas-stubs>=2.2.0",
 ]
 
 [tool.datadog]
 generate-config = true
 
+[tool.mypy]
+explicit_package_bases = true
+mypy_path = "."
+plugins = [
+    "pydantic.mypy"
+]
+
 [build-system]
 requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-
-
+[tool.coverage.run]
+omit = [
+    "src/utils/*",
+]
 ```
 
 ## File: `requirements.txt`
@@ -70,11 +80,15 @@ pydantic==2.13.4
 pandas==3.0.3
 uvicorn==0.49.0
 pytest==9.0.3
+supabase==2.31.0
+ddtrace==4.11.0
 pre-commit==4.6.0
-black==26.3.1
 ruff==0.11.0
 pytest-cov==7.1.0
 httpx==0.28.1
+hypothesis==6.156.6
+mypy==2.2.0
+pandas-stubs==3.0.3.260530
 ```
 
 ## File: `.pre-commit-config.yaml`
@@ -82,30 +96,25 @@ httpx==0.28.1
 ```yaml
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.0
+    rev: v0.15.21
     hooks:
       - id: ruff
         args: [ --fix ]
       - id: ruff-format
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.18.2
     hooks:
       - id: mypy
         additional_dependencies: [pydantic, pandas-stubs]
 
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.10.1
-    hooks:
-      - id: isort
-        args: [ --profile, black ]
 
   # ---------------------------------------------------------------------------
   # PROJECT-SPECIFIC VALIDATION HOOKS
@@ -117,45 +126,45 @@ repos:
         name: Prompt Structure Validator
         entry: python -m src.utils.validate_prompts
         language: system
-        files: src/prompts.py|src/prompt_validator.py|src/schemas.py|src/models.py
+        files: src/pipeline/prompts\.py|src/pipeline/models\.py
         types: [file]
-        stages: [pre-commit, pre-push, pre-commit]
+        stages: [pre-commit, pre-push]
 
       # Validate Darwin Core mapping consistency for core schemas
       - id: validate-dwc-mapping
         name: DwC Schema Validator
         entry: python -m src.utils.validate_dwc_mapping
         language: system
-        files: src/schemas.py|src/models.py
+        files: src/pipeline/models\.py
         types: [file]
-        stages: [pre-commit, pre-push, pre-commit]
+        stages: [pre-commit, pre-push]
 
       # Detect non-deterministic prompts (Temperature > 0)
       - id: detect-temp-in-prompts
         name: Temperature Check (Non-Determinism Detector)
         entry: python src/utils/detect_temp.py
         language: system
-        files: src/prompts.py
+        files: src/pipeline/prompts\.py
         types: [file]
-        stages: [pre-commit, pre-push, pre-commit]
+        stages: [pre-commit, pre-push]
 
       # Ensure log level is set to CRITICAL for production
       - id: detect-debug-logs
         name: Production Log Level Check
         entry: python src/utils/detect_debug_logs.py
         language: system
-        files: src/config.py|src/data_pipeline.py|src/main.py
+        files: src/pipeline/main\.py|src/pipeline/api\.py
         types: [file]
-        stages: [pre-commit, pre-push, pre-commit]
+        stages: [pre-commit, pre-push]
 
       # ---------------------------------------------------------------------------
       # DEPENDENCY MANAGEMENT HOOKS (uv-specific)
       # ---------------------------------------------------------------------------
-      # Run `uv add` for missing dependencies in pyproject.toml
+      # Run `uv lock --check` to check dependency lockfile consistency
       - id: uv-add
-        name: UV Dependency Checker
+        name: UV Lockfile Checker
         entry: uv
-        args: ["add"]
+        args: ["lock", "--check"]
         language: system
         types: [file]
         stages: [pre-commit, pre-push]
@@ -185,31 +194,11 @@ repos:
       - id: uv-python-version
         name: Python Version Compliance
         entry: uv
-        args: ["python", "--version"]
+        args: ["python", "find"]
         language: system
         types: [file]
         stages: [pre-commit, pre-push]
         pass_filenames: false
-```
-
-## File: `code-security.datadog.yaml`
-
-```yaml
-schema-version: v1.0
-sast:
-  global-config:
-    ignore-paths:
-      - ".venv/"
-      - ".env"
-  use-rulesets:
-    - python-best-practices
-    - python-code-style
-    - python-django
-    - python-flask
-    - python-inclusive
-    - python-pandas
-    - python-security
-
 ```
 
 ## File: `src/pipeline/__init__.py`
@@ -235,7 +224,7 @@ if __name__ == "__main__":
 
 ```python
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Literal
 from uuid import UUID
 
@@ -316,7 +305,7 @@ class EthologicalIncident(BaseModel):
 # New Canine Ethology Data Dictionary models
 
 
-class BehaviorType(str, Enum):
+class BehaviorType(StrEnum):
     # Resting Postures
     LYING = "Lying"
     SITTING = "Sitting"
@@ -486,27 +475,27 @@ class MeasurementOrFact(BaseModel):
 
     individual_id: str = Field(
         ...,
-        validation_alias="dwc:individualID",
+        validation_alias=AliasChoices("individual_id", "dwc:individualID"),
         serialization_alias="dwc:individualID",
     )
     event_date: str = Field(
         ...,
-        validation_alias="dwc:eventDate",
+        validation_alias=AliasChoices("event_date", "dwc:eventDate"),
         serialization_alias="dwc:eventDate",
     )
     measurement_type: str = Field(
         ...,
-        validation_alias="dwc:measurementType",
+        validation_alias=AliasChoices("measurement_type", "dwc:measurementType"),
         serialization_alias="dwc:measurementType",
     )
     measurement_value: str = Field(
         ...,
-        validation_alias="dwc:measurementValue",
+        validation_alias=AliasChoices("measurement_value", "dwc:measurementValue"),
         serialization_alias="dwc:measurementValue",
     )
     basis_of_record: str = Field(
         ...,
-        validation_alias="dwc:basisOfRecord",
+        validation_alias=AliasChoices("basis_of_record", "dwc:basisOfRecord"),
         serialization_alias="dwc:basisOfRecord",
     )
 
@@ -778,6 +767,7 @@ Test package for EthoPipe.
 
 ```python
 from datetime import datetime, timedelta
+from typing import cast
 from uuid import uuid4
 
 import pytest
@@ -816,10 +806,10 @@ def test_legacy_incident_subjective_rejected() -> None:
 
 def test_valid_canine_observation() -> None:
     obs = CanineObservation(
-        ObservationID="obs-001",
-        SubjectID="dog-123",
-        Timestamp_ISO8601=datetime.now(),
-        Location="Lab A",
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime.now(),
+        location="Lab A",
         behaviors=[
             BehaviorObservation(
                 behavior=BehaviorType.PLAY_BOW,
@@ -844,7 +834,7 @@ def test_canine_observation_strict_mode() -> None:
     # Under strict=True, passing strings for numeric values should fail
     with pytest.raises(ValidationError):
         PhysioMeasurement(
-            heart_rate_bpm="100",  # String instead of int
+            heart_rate_bpm=cast(int, "100"),  # String instead of int
             resp_rate_bpm=20,
             body_temp_c=38.5,
             cortisol_nmolL=150.0,
@@ -892,9 +882,9 @@ def test_size_dependent_heart_rate() -> None:
     # Toy breeds: 80 - 200 BPM
     # Valid Toy
     obs_toy_valid = CanineObservation(
-        ObservationID="obs-001",
-        SubjectID="dog-123",
-        Timestamp_ISO8601=datetime.now(),
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime.now(),
         dog_size="Toy",
         behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
         physiology=PhysioMeasurement(
@@ -909,9 +899,9 @@ def test_size_dependent_heart_rate() -> None:
     # Invalid Toy (too low)
     with pytest.raises(ValidationError):
         CanineObservation(
-            ObservationID="obs-001",
-            SubjectID="dog-123",
-            Timestamp_ISO8601=datetime.now(),
+            observation_id="obs-001",
+            subject_id="dog-123",
+            timestamp=datetime.now(),
             dog_size="Toy",
             behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
             physiology=PhysioMeasurement(
@@ -925,9 +915,9 @@ def test_size_dependent_heart_rate() -> None:
     # Giant breeds: 40 - 110 BPM
     # Valid Giant
     obs_giant_valid = CanineObservation(
-        ObservationID="obs-001",
-        SubjectID="dog-123",
-        Timestamp_ISO8601=datetime.now(),
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime.now(),
         dog_size="Giant",
         behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
         physiology=PhysioMeasurement(
@@ -942,9 +932,9 @@ def test_size_dependent_heart_rate() -> None:
     # Invalid Giant (too high)
     with pytest.raises(ValidationError):
         CanineObservation(
-            ObservationID="obs-001",
-            SubjectID="dog-123",
-            Timestamp_ISO8601=datetime.now(),
+            observation_id="obs-001",
+            subject_id="dog-123",
+            timestamp=datetime.now(),
             dog_size="Giant",
             behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
             physiology=PhysioMeasurement(
@@ -1005,6 +995,7 @@ def test_parser_de_biasing_deletion() -> None:
     obs = normalize_incident(payload)
     # Prohibited words 'stubborn' and 'angry' must be deleted
     notes = obs.behaviors[0].additional_notes
+    assert notes is not None
     assert "stubborn" not in notes.lower()
     assert "angry" not in notes.lower()
     assert notes == "The dog was but eventually sat. He seemed ."
@@ -1012,9 +1003,9 @@ def test_parser_de_biasing_deletion() -> None:
 
 def test_darwin_core_mapping() -> None:
     obs = CanineObservation(
-        ObservationID="obs-001",
-        SubjectID="dog-123",
-        Timestamp_ISO8601=datetime(2026, 7, 5, 12, 0, 0),
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime(2026, 7, 5, 12, 0, 0),
         behaviors=[
             BehaviorObservation(
                 behavior=BehaviorType.PLAY_BOW,
@@ -1145,9 +1136,8 @@ def test_ingest_subjective_notes_rejected(monkeypatch):
     monkeypatch.setenv("API_USERNAME", "admin")
     monkeypatch.setenv("API_PASSWORD", "secret")
     payload = get_valid_observation_payload()
-    payload["behaviors"][0][
-        "Additional_Notes"
-    ] = "The dog was very stubborn."  # Prohibited word
+    # Prohibited word
+    payload["behaviors"][0]["Additional_Notes"] = "The dog was very stubborn."
     response = client.post("/ingest", json=payload, auth=("admin", "secret"))
     assert response.status_code == 422
     assert "stubborn" in response.text
