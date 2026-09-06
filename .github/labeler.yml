@@ -1,0 +1,21 @@
+documentation:
+  - docs/**
+  - README.MD
+  - CONTRIBUTING.md
+  - CHANGELOG.md
+
+tests:
+  - tests/**
+
+python:
+  - src/**/*.py
+  - tests/**/*.py
+  - pyproject.toml
+  - requirements.txt
+  - uv.lock
+
+github_actions:
+  - .github/workflows/**
+
+ci-cd:
+  - .github/workflows/**
