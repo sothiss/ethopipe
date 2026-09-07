@@ -1,0 +1,6 @@
+services:
+  ethopipe:
+    image: ethopipe
+    build:
+      context: .
+      dockerfile: ./Dockerfile
