@@ -26,7 +26,7 @@ PROHIBITED_WORDS = {
     "guilty",
 }
 
-# Pre-compiled regex pattern for fast C-level word boundary search (~1.3x speedup vs word tokenizing)
+# Pre-compiled regex for C-level word search (~1.3x speedup vs tokenizing)
 _PROHIBITED_REGEX = re.compile(rf"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNORECASE)
 
 
@@ -139,7 +139,7 @@ class BehaviorType(StrEnum):
     LIE_DOWN = "LieDown"
 
 
-# Pre-computed lookup maps for O(1) BehaviorType resolution (~190x speedup vs linear enum scans)
+# Pre-computed lookup maps for O(1) BehaviorType resolution (~190x speedup)
 _BEHAVIOR_VALUE_LOOKUP: dict[str, BehaviorType] = {
     member.value: member for member in BehaviorType
 }
