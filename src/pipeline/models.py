@@ -280,6 +280,7 @@ class CanineObservation(BaseModel):
 
     observation_id: str = Field(
         ...,
+        max_length=255,
         validation_alias=AliasChoices("observation_id", "ObservationID"),
         serialization_alias="ObservationID",
     )
