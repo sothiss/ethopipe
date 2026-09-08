@@ -96,6 +96,40 @@ def test_observation_id_max_length() -> None:
         )
 
 
+def test_subject_id_max_length() -> None:
+    # 255 chars - valid
+    valid_subj = "d" * 255
+    obs = CanineObservation(
+        observation_id="obs-001",
+        subject_id=valid_subj,
+        timestamp=datetime.now(),
+        behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
+        physiology=PhysioMeasurement(
+            heart_rate_bpm=100,
+            resp_rate_bpm=20,
+            body_temp_c=38.5,
+            cortisol_nmolL=150.0,
+        ),
+    )
+    assert obs.subject_id == valid_subj
+
+    # 256 chars - invalid
+    invalid_subj = "d" * 256
+    with pytest.raises(ValidationError):
+        CanineObservation(
+            observation_id="obs-001",
+            subject_id=invalid_subj,
+            timestamp=datetime.now(),
+            behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
+            physiology=PhysioMeasurement(
+                heart_rate_bpm=100,
+                resp_rate_bpm=20,
+                body_temp_c=38.5,
+                cortisol_nmolL=150.0,
+            ),
+        )
+
+
 def test_canine_observation_strict_mode() -> None:
     # Under strict=True, passing strings for numeric values should fail
     with pytest.raises(ValidationError):
