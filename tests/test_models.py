@@ -62,38 +62,30 @@ def test_valid_canine_observation() -> None:
     assert obs.physiology.heart_rate_bpm == 100
 
 
-def test_observation_id_max_length() -> None:
-    # 255 chars - valid
-    valid_id = "a" * 255
-    obs = CanineObservation(
-        observation_id=valid_id,
-        subject_id="dog-123",
-        timestamp=datetime.now(),
-        behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
-        physiology=PhysioMeasurement(
+@pytest.mark.parametrize("field_name", ["observation_id", "subject_id"])
+def test_string_field_max_length(field_name: str) -> None:
+    base_kwargs = {
+        "observation_id": "obs-001",
+        "subject_id": "dog-123",
+        "timestamp": datetime.now(),
+        "behaviors": [BehaviorObservation(behavior=BehaviorType.SIT)],
+        "physiology": PhysioMeasurement(
             heart_rate_bpm=100,
             resp_rate_bpm=20,
             body_temp_c=38.5,
             cortisol_nmolL=150.0,
         ),
-    )
-    assert obs.observation_id == valid_id
+    }
+
+    # 255 chars - valid
+    valid_kwargs = dict(base_kwargs, **{field_name: "a" * 255})
+    obs = CanineObservation(**valid_kwargs)
+    assert getattr(obs, field_name) == "a" * 255
 
     # 256 chars - invalid
-    invalid_id = "a" * 256
+    invalid_kwargs = dict(base_kwargs, **{field_name: "a" * 256})
     with pytest.raises(ValidationError):
-        CanineObservation(
-            observation_id=invalid_id,
-            subject_id="dog-123",
-            timestamp=datetime.now(),
-            behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
-            physiology=PhysioMeasurement(
-                heart_rate_bpm=100,
-                resp_rate_bpm=20,
-                body_temp_c=38.5,
-                cortisol_nmolL=150.0,
-            ),
-        )
+        CanineObservation(**invalid_kwargs)
 
 
 def test_canine_observation_strict_mode() -> None:
