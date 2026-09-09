@@ -1,3 +1,4 @@
+import re
 from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Literal
@@ -25,18 +26,21 @@ PROHIBITED_WORDS = {
     "guilty",
 }
 
+# Pre-compiled regex pattern for fast word matching against prohibited terms
+_PROHIBITED_SEARCH_PATTERN = re.compile(
+    rf"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNORECASE
+)
+
 
 def _verify_objective_text(text: str | None) -> str | None:
     if text:
-        import re
-
-        cleaned_words = re.findall(r"\b\w+\b", text.lower())
-        for word in cleaned_words:
-            if word in PROHIBITED_WORDS:
-                raise ValueError(
-                    f"Subjective/anthropomorphic term '{word}' "
-                    "is prohibited in ethological observations."
-                )
+        match = _PROHIBITED_SEARCH_PATTERN.search(text)
+        if match:
+            word = match.group(0).lower()
+            raise ValueError(
+                f"Subjective/anthropomorphic term '{word}' "
+                "is prohibited in ethological observations."
+            )
     return text
 
 
@@ -137,6 +141,16 @@ class BehaviorType(StrEnum):
     LIE_DOWN = "LieDown"
 
 
+# Performance Optimization: Pre-computed lookup dicts for O(1) behavior validation
+_BEHAVIOR_EXACT_LOOKUP: dict[str, BehaviorType] = {
+    member.value: member for member in BehaviorType
+}
+_BEHAVIOR_LOWER_LOOKUP: dict[str, BehaviorType] = {}
+for member in BehaviorType:
+    _BEHAVIOR_LOWER_LOOKUP.setdefault(member.name.lower(), member)
+    _BEHAVIOR_LOWER_LOOKUP.setdefault(member.value.lower(), member)
+
+
 class BehaviorObservation(BaseModel):
     model_config = ConfigDict(strict=True, populate_by_name=True)
 
@@ -170,15 +184,13 @@ class BehaviorObservation(BaseModel):
     @field_validator("behavior", mode="before")
     @classmethod
     def parse_behavior_type(cls, v):
+        # Bolt performance optimization: O(1) dict lookup instead of O(N) enum scan
         if isinstance(v, str):
-            for member in BehaviorType:
-                if member.value == v:
-                    return member
-                if (
-                    member.name.lower() == v.lower()
-                    or member.value.lower() == v.lower()
-                ):
-                    return member
+            if v in _BEHAVIOR_EXACT_LOOKUP:
+                return _BEHAVIOR_EXACT_LOOKUP[v]
+            v_lower = v.lower()
+            if v_lower in _BEHAVIOR_LOWER_LOOKUP:
+                return _BEHAVIOR_LOWER_LOOKUP[v_lower]
         return v
 
     @field_validator("start_time", "end_time", mode="before")
