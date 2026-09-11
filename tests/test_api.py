@@ -34,6 +34,14 @@ def test_read_root():
     assert response.json() == {"message": "EthoPipe API is running"}
 
 
+def test_security_headers():
+    response = client.get("/")
+    assert response.headers["X-Content-Type-Options"] == "nosniff"
+    assert response.headers["X-Frame-Options"] == "DENY"
+    assert response.headers["X-XSS-Protection"] == "0"
+    assert "max-age=31536000" in response.headers["Strict-Transport-Security"]
+
+
 def test_ingest_incident_unauthenticated():
     payload = get_valid_observation_payload()
     response = client.post("/ingest", json=payload)
