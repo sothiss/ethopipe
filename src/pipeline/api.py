@@ -3,7 +3,7 @@ import os
 import secrets
 from typing import Annotated
 
-from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi import Depends, FastAPI, HTTPException, Request, Response, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from src.pipeline.models import CanineObservation
@@ -11,6 +11,22 @@ from src.pipeline.models import CanineObservation
 app = FastAPI(title="EthoPipe API")
 security = HTTPBasic()
 logger = logging.getLogger(__name__)
+
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next) -> Response:
+    """
+    Middleware to attach essential HTTP security headers to all responses.
+    Protects against MIME-sniffing, clickjacking, XSS framing, and insecure transports.
+    """
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = (
+        "max-age=31536000; includeSubDomains"
+    )
+    return response
 
 
 def get_current_username(
