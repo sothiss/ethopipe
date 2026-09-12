@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import cast
+from typing import Any, cast
 from uuid import uuid4
 
 import pytest
@@ -64,7 +64,7 @@ def test_valid_canine_observation() -> None:
 
 @pytest.mark.parametrize("field_name", ["observation_id", "subject_id"])
 def test_string_field_max_length(field_name: str) -> None:
-    base_kwargs = {
+    base_kwargs: dict[str, Any] = {
         "observation_id": "obs-001",
         "subject_id": "dog-123",
         "timestamp": datetime.now(),
