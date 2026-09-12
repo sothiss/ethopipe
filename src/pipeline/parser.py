@@ -8,6 +8,16 @@ PROHIBITED_PATTERN = re.compile(rf"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNOR
 MULTI_SPACE_PATTERN = re.compile(r"\s+")
 
 
+# Pattern to detect if text requires whitespace normalization (leading/trailing
+# whitespace, multiple spaces, or non-space whitespace like \r, \n, \t, \f, \v)
+NEEDS_NORM_PATTERN = re.compile(r"^\s|\s$|\s\s|[\r\n\t\f\v]")
+
+
+def _is_normalized(text: str) -> bool:
+    """Check if text is free of leading/trailing and redundant inner whitespace."""
+    return NEEDS_NORM_PATTERN.search(text) is None
+
+
 def de_bias_text(text: str) -> str:
     """
     Actively delete subjective, anthropomorphic terms from raw notes.
@@ -20,17 +30,8 @@ def de_bias_text(text: str) -> str:
     # directly (zero allocations, skips secondary whitespace regex pass & strip).
     # ~41% faster on clean text notes while preserving exact behavior.
     cleaned, count = PROHIBITED_PATTERN.subn("", text)
-    if (
-        count == 0
-        and text == text.strip()
-        and "  " not in text
-        and "\t" not in text
-        and "\n" not in text
-    ):
+    if count == 0 and _is_normalized(text):
         return text
-
-    if count == 0:
-        cleaned = text
 
     # Normalize multiple spaces and strip
     return MULTI_SPACE_PATTERN.sub(" ", cleaned).strip()
