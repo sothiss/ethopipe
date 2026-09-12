@@ -34,6 +34,17 @@ def test_read_root():
     assert response.json() == {"message": "EthoPipe API is running"}
 
 
+def test_security_headers_present():
+    response = client.get("/")
+    assert response.headers["X-Content-Type-Options"] == "nosniff"
+    assert response.headers["X-Frame-Options"] == "DENY"
+    assert response.headers["X-XSS-Protection"] == "1; mode=block"
+    assert "Strict-Transport-Security" in response.headers
+    csp = response.headers["Content-Security-Policy"]
+    assert csp == "default-src 'none'; frame-ancestors 'none'"
+    assert response.headers["Referrer-Policy"] == "no-referrer"
+
+
 def test_ingest_incident_unauthenticated():
     payload = get_valid_observation_payload()
     response = client.post("/ingest", json=payload)
