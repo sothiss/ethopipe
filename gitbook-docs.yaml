@@ -1,0 +1,33 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: the transparency project
+  structure:
+    - type: section
+      key: section-1
+      title: Docs
+      path: the-transparency-project-docs
+      description: ""
+      icon: square-pen
+      default: true
+      children:
+        - type: space
+          key: space-3
+          title: Copy of Changelog
+          path: copy-of-changelog
+          default: true
+          content:
+            directory: null
+    - type: section
+      key: section-2
+      title: Changelog
+      path: changelog
+      description: ""
+      icon: gears
+      children:
+        - type: space
+          key: space-2
+          title: Changelog
+          path: changelog
+          default: true
+          content:
+            directory: ./changelog
