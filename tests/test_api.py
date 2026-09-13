@@ -43,6 +43,10 @@ def test_security_headers_present():
     csp = response.headers["Content-Security-Policy"]
     assert csp == "default-src 'none'; frame-ancestors 'none'"
     assert response.headers["Referrer-Policy"] == "no-referrer"
+    assert (
+        response.headers["Permissions-Policy"]
+        == "geolocation=(), camera=(), microphone=()"
+    )
 
 
 def test_ingest_incident_unauthenticated():
