@@ -62,8 +62,16 @@ def test_valid_canine_observation() -> None:
     assert obs.physiology.heart_rate_bpm == 100
 
 
-@pytest.mark.parametrize("field_name", ["observation_id", "subject_id"])
-def test_string_field_max_length(field_name: str) -> None:
+@pytest.mark.parametrize(
+    "field_name, max_len",
+    [
+        ("observation_id", 255),
+        ("subject_id", 255),
+        ("location", 500),
+        ("context_session", 1000),
+    ],
+)
+def test_string_field_max_length(field_name: str, max_len: int) -> None:
     base_kwargs: dict[str, Any] = {
         "observation_id": "obs-001",
         "subject_id": "dog-123",
@@ -77,15 +85,25 @@ def test_string_field_max_length(field_name: str) -> None:
         ),
     }
 
-    # 255 chars - valid
-    valid_kwargs = dict(base_kwargs, **{field_name: "a" * 255})
+    # Max length chars - valid
+    valid_kwargs = dict(base_kwargs, **{field_name: "a" * max_len})
     obs = CanineObservation(**valid_kwargs)
-    assert getattr(obs, field_name) == "a" * 255
+    assert getattr(obs, field_name) == "a" * max_len
 
-    # 256 chars - invalid
-    invalid_kwargs = dict(base_kwargs, **{field_name: "a" * 256})
+    # Exceeding max length - invalid
+    invalid_kwargs = dict(base_kwargs, **{field_name: "a" * (max_len + 1)})
     with pytest.raises(ValidationError):
         CanineObservation(**invalid_kwargs)
+
+
+def test_behavior_observation_additional_notes_max_length() -> None:
+    # 1000 chars - valid
+    obs = BehaviorObservation(behavior=BehaviorType.SIT, additional_notes="a" * 1000)
+    assert obs.additional_notes == "a" * 1000
+
+    # 1001 chars - invalid
+    with pytest.raises(ValidationError):
+        BehaviorObservation(behavior=BehaviorType.SIT, additional_notes="a" * 1001)
 
 
 def test_canine_observation_strict_mode() -> None:

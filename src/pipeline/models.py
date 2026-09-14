@@ -176,6 +176,7 @@ class BehaviorObservation(BaseModel):
     )
     additional_notes: str | None = Field(
         None,
+        max_length=1000,
         validation_alias=AliasChoices("additional_notes", "Additional_Notes"),
         serialization_alias="Additional_Notes",
     )
@@ -306,11 +307,13 @@ class CanineObservation(BaseModel):
     )
     location: str | None = Field(
         None,
+        max_length=500,
         validation_alias=AliasChoices("location", "Location"),
         serialization_alias="Location",
     )
     context_session: str | None = Field(
         None,
+        max_length=1000,
         validation_alias=AliasChoices("context_session", "Context/Session", "context"),
         serialization_alias="Context/Session",
     )
