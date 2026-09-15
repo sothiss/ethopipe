@@ -62,7 +62,7 @@ def test_valid_canine_observation() -> None:
     assert obs.physiology.heart_rate_bpm == 100
 
 
-@pytest.mark.parametrize("field_name", ["observation_id", "subject_id"])
+@pytest.mark.parametrize("field_name", ["observation_id", "subject_id", "location"])
 def test_string_field_max_length(field_name: str) -> None:
     base_kwargs: dict[str, Any] = {
         "observation_id": "obs-001",
@@ -86,6 +86,53 @@ def test_string_field_max_length(field_name: str) -> None:
     invalid_kwargs = dict(base_kwargs, **{field_name: "a" * 256})
     with pytest.raises(ValidationError):
         CanineObservation(**invalid_kwargs)
+
+
+def test_free_text_field_max_length_1000() -> None:
+    # 1000 chars - valid context_session
+    obs = CanineObservation(
+        observation_id="obs-001",
+        subject_id="dog-123",
+        timestamp=datetime.now(),
+        context_session="a" * 1000,
+        behaviors=[
+            BehaviorObservation(
+                behavior=BehaviorType.SIT,
+                additional_notes="b" * 1000,
+            )
+        ],
+        physiology=PhysioMeasurement(
+            heart_rate_bpm=100,
+            resp_rate_bpm=20,
+            body_temp_c=38.5,
+            cortisol_nmolL=150.0,
+        ),
+    )
+    assert obs.context_session == "a" * 1000
+    assert obs.behaviors[0].additional_notes == "b" * 1000
+
+    # >1000 chars in context_session - invalid
+    with pytest.raises(ValidationError):
+        CanineObservation(
+            observation_id="obs-001",
+            subject_id="dog-123",
+            timestamp=datetime.now(),
+            context_session="a" * 1001,
+            behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
+            physiology=PhysioMeasurement(
+                heart_rate_bpm=100,
+                resp_rate_bpm=20,
+                body_temp_c=38.5,
+                cortisol_nmolL=150.0,
+            ),
+        )
+
+    # >1000 chars in additional_notes - invalid
+    with pytest.raises(ValidationError):
+        BehaviorObservation(
+            behavior=BehaviorType.SIT,
+            additional_notes="b" * 1001,
+        )
 
 
 def test_canine_observation_strict_mode() -> None:
