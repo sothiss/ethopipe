@@ -176,6 +176,7 @@ class BehaviorObservation(BaseModel):
     )
     additional_notes: str | None = Field(
         None,
+        max_length=2000,
         validation_alias=AliasChoices("additional_notes", "Additional_Notes"),
         serialization_alias="Additional_Notes",
     )
@@ -259,26 +260,31 @@ class MeasurementOrFact(BaseModel):
 
     individual_id: str = Field(
         ...,
+        max_length=255,
         validation_alias=AliasChoices("individual_id", "dwc:individualID"),
         serialization_alias="dwc:individualID",
     )
     event_date: str = Field(
         ...,
+        max_length=255,
         validation_alias=AliasChoices("event_date", "dwc:eventDate"),
         serialization_alias="dwc:eventDate",
     )
     measurement_type: str = Field(
         ...,
+        max_length=255,
         validation_alias=AliasChoices("measurement_type", "dwc:measurementType"),
         serialization_alias="dwc:measurementType",
     )
     measurement_value: str = Field(
         ...,
+        max_length=255,
         validation_alias=AliasChoices("measurement_value", "dwc:measurementValue"),
         serialization_alias="dwc:measurementValue",
     )
     basis_of_record: str = Field(
         ...,
+        max_length=255,
         validation_alias=AliasChoices("basis_of_record", "dwc:basisOfRecord"),
         serialization_alias="dwc:basisOfRecord",
     )
@@ -306,11 +312,13 @@ class CanineObservation(BaseModel):
     )
     location: str | None = Field(
         None,
+        max_length=255,
         validation_alias=AliasChoices("location", "Location"),
         serialization_alias="Location",
     )
     context_session: str | None = Field(
         None,
+        max_length=2000,
         validation_alias=AliasChoices("context_session", "Context/Session", "context"),
         serialization_alias="Context/Session",
     )
