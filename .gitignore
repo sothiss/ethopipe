@@ -44,4 +44,5 @@ code-security.datadog.yaml
 # Ruff, Hypothesis and Distribution caches/outputs
 .ruff_cache/
 .hypothesis/
+.mypy_cache/
 dist/

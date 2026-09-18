@@ -88,6 +88,43 @@ def test_string_field_max_length(field_name: str) -> None:
         CanineObservation(**invalid_kwargs)
 
 
+def test_free_text_field_max_lengths() -> None:
+    # Test BehaviorObservation.additional_notes max length (1000)
+    valid_obs = BehaviorObservation(
+        behavior=BehaviorType.SIT, additional_notes="a" * 1000
+    )
+    assert len(valid_obs.additional_notes or "") == 1000
+
+    with pytest.raises(ValidationError):
+        BehaviorObservation(behavior=BehaviorType.SIT, additional_notes="a" * 1001)
+
+    # Test CanineObservation.location max length (255) and context_session (1000)
+    base_kwargs: dict[str, Any] = {
+        "observation_id": "obs-001",
+        "subject_id": "dog-123",
+        "timestamp": datetime.now(),
+        "behaviors": [BehaviorObservation(behavior=BehaviorType.SIT)],
+        "physiology": PhysioMeasurement(
+            heart_rate_bpm=100,
+            resp_rate_bpm=20,
+            body_temp_c=38.5,
+            cortisol_nmolL=150.0,
+        ),
+    }
+
+    obs_valid = CanineObservation(
+        **base_kwargs, location="a" * 255, context_session="a" * 1000
+    )
+    assert len(obs_valid.location or "") == 255
+    assert len(obs_valid.context_session or "") == 1000
+
+    with pytest.raises(ValidationError):
+        CanineObservation(**base_kwargs, location="a" * 256)
+
+    with pytest.raises(ValidationError):
+        CanineObservation(**base_kwargs, context_session="a" * 1001)
+
+
 def test_canine_observation_strict_mode() -> None:
     # Under strict=True, passing strings for numeric values should fail
     with pytest.raises(ValidationError):
