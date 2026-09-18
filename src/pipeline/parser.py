@@ -4,6 +4,8 @@ from src.pipeline.models import PROHIBITED_WORDS, CanineObservation
 
 # Pattern to find prohibited words as full words, case-insensitive
 PROHIBITED_PATTERN = re.compile(rf"\b({'|'.join(PROHIBITED_WORDS)})\b", re.IGNORECASE)
+# Bolt Optimization: Pre-compile whitespace pattern at top level
+WHITESPACE_PATTERN = re.compile(r"\s+")
 
 
 def de_bias_text(text: str) -> str:
@@ -14,8 +16,8 @@ def de_bias_text(text: str) -> str:
         return text
     # Replace prohibited words with empty string
     cleaned = PROHIBITED_PATTERN.sub("", text)
-    # Normalize multiple spaces and strip
-    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    # Normalize multiple spaces and strip using pre-compiled WHITESPACE_PATTERN
+    cleaned = WHITESPACE_PATTERN.sub(" ", cleaned).strip()
     return cleaned
 
 
