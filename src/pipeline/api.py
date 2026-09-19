@@ -27,6 +27,8 @@ async def add_security_headers(request: Request, call_next) -> Response:
         "default-src 'none'; frame-ancestors 'none'"
     )
     response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers["X-Permitted-Cross-Domain-Policies"] = "none"
+    response.headers["Cache-Control"] = "no-store"
     return response
 
 

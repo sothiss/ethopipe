@@ -43,6 +43,8 @@ def test_security_headers_present():
     csp = response.headers["Content-Security-Policy"]
     assert csp == "default-src 'none'; frame-ancestors 'none'"
     assert response.headers["Referrer-Policy"] == "no-referrer"
+    assert response.headers["X-Permitted-Cross-Domain-Policies"] == "none"
+    assert response.headers["Cache-Control"] == "no-store"
 
 
 def test_ingest_incident_unauthenticated():
