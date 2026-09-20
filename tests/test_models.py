@@ -299,3 +299,59 @@ def test_darwin_core_mapping() -> None:
     assert serialized[1]["dwc:measurementType"] == "heart_rate_bpm"
     assert serialized[1]["dwc:measurementValue"] == "95"
     assert serialized[1]["dwc:basisOfRecord"] == "MachineObservation"
+
+
+def test_free_text_and_collection_length_limits() -> None:
+    # Test location max_length=255
+    with pytest.raises(ValidationError):
+        CanineObservation(
+            observation_id="obs-001",
+            subject_id="dog-123",
+            timestamp=datetime.now(),
+            location="x" * 256,
+            behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
+            physiology=PhysioMeasurement(
+                heart_rate_bpm=100,
+                resp_rate_bpm=20,
+                body_temp_c=38.5,
+                cortisol_nmolL=150.0,
+            ),
+        )
+
+    # Test context_session max_length=1000
+    with pytest.raises(ValidationError):
+        CanineObservation(
+            observation_id="obs-001",
+            subject_id="dog-123",
+            timestamp=datetime.now(),
+            context_session="x" * 1001,
+            behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)],
+            physiology=PhysioMeasurement(
+                heart_rate_bpm=100,
+                resp_rate_bpm=20,
+                body_temp_c=38.5,
+                cortisol_nmolL=150.0,
+            ),
+        )
+
+    # Test additional_notes max_length=1000
+    with pytest.raises(ValidationError):
+        BehaviorObservation(
+            behavior=BehaviorType.SIT,
+            additional_notes="x" * 1001,
+        )
+
+    # Test behaviors list max_length=100
+    with pytest.raises(ValidationError):
+        CanineObservation(
+            observation_id="obs-001",
+            subject_id="dog-123",
+            timestamp=datetime.now(),
+            behaviors=[BehaviorObservation(behavior=BehaviorType.SIT)] * 101,
+            physiology=PhysioMeasurement(
+                heart_rate_bpm=100,
+                resp_rate_bpm=20,
+                body_temp_c=38.5,
+                cortisol_nmolL=150.0,
+            ),
+        )

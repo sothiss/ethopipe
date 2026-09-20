@@ -41,7 +41,8 @@ secrets.*
 credentials.*
 code-security.datadog.yaml
 
-# Ruff, Hypothesis and Distribution caches/outputs
+# Ruff, Mypy, Hypothesis and Distribution caches/outputs
 .ruff_cache/
+.mypy_cache/
 .hypothesis/
 dist/
