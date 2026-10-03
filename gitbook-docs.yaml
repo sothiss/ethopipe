@@ -16,7 +16,7 @@ site:
           path: copy-of-changelog
           default: true
           content:
-            directory: null
+            directory: ./ethopipe/docs
     - type: section
       key: section-2
       title: Changelog
