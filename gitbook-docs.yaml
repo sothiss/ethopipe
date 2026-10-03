@@ -5,7 +5,7 @@ site:
     - type: section
       key: section-1
       title: Ethopipe
-      path: ethopipe
+      path: docs
       description: Ethopipe repository docs
       icon: github
       children:
