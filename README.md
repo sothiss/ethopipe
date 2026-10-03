@@ -1,6 +1,6 @@
 # EthoPipe: An Open-Science ETL Pipeline for Applied Canine Ethology and Physiological Telemetry
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CI/CD Pipeline](https://github.com/sothiss/ethopipe/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21211371-blue)](https://doi.org/10.5281/zenodo.21211371)
 [![ORCID iD](https://img.shields.io/badge/ORCID-0009--0003--0048--8982-green)](https://orcid.org/0009-0003-0048-8982)
