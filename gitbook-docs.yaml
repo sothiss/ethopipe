@@ -5,7 +5,7 @@ site:
     - type: section
       key: section-1
       title: Docs
-      path: the-transparency-project-docs
+      path: ethopipe
       description: ""
       icon: square-pen
       default: true
