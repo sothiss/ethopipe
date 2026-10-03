@@ -31,3 +31,16 @@ site:
           default: true
           content:
             directory: null
+    - type: section
+      key: section-3
+      title: The Transparecy Project
+      path: the-transparecy-project
+      children:
+        - type: space
+          key: space-3
+          title: The Transparecy Project
+          path: the-transparecy-project
+          default: true
+          draft: true
+          content:
+            directory: ./the-transparecy-project
