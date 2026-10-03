@@ -4,30 +4,44 @@ site:
   structure:
     - type: section
       key: section-1
-      title: Docs
-      path: the-transparency-project-docs
-      description: ""
-      icon: square-pen
+      title: Ethopipe
+      path: docs
+      description: Ethopipe repository docs
+      icon: github
       default: true
       children:
         - type: space
-          key: space-3
-          title: Copy of Changelog
-          path: copy-of-changelog
+          key: space-1
+          title: Ethopipe
+          path: untitled
           default: true
           content:
             directory: null
     - type: section
       key: section-2
       title: Changelog
-      path: changelog
+      path: ethopipe-changelog
       description: ""
       icon: gears
       children:
         - type: space
           key: space-2
-          title: Changelog
-          path: changelog
+          title: Ethopipe
+          path: ethopipe
           default: true
           content:
-            directory: ./changelog
+            directory: null
+    - type: section
+      key: section-3
+      title: The Transparecy Project
+      path: the-transparecy-project
+      description: ""
+      children:
+        - type: space
+          key: space-3
+          title: The Transparecy Project
+          path: the-transparecy-project
+          default: true
+          draft: true
+          content:
+            directory: ./the-transparecy-project
