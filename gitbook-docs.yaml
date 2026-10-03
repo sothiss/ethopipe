@@ -8,6 +8,7 @@ site:
       path: docs
       description: Ethopipe repository docs
       icon: github
+      default: true
       children:
         - type: space
           key: space-1
@@ -35,7 +36,6 @@ site:
       title: The Transparecy Project
       path: the-transparecy-project
       description: ""
-      default: true
       children:
         - type: space
           key: space-3
