@@ -11,16 +11,10 @@ site:
       default: true
       children:
         - type: space
-          key: space-3
-          title: Copy of Changelog
-          path: copy-of-changelog
-          default: true
-          content:
-            directory: ./ethopipe/copy-of-changelog
-        - type: space
           key: space-1
           title: Untitled
           path: untitled
+          default: true
           content:
             directory: null
     - type: section
