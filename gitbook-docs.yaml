@@ -26,8 +26,8 @@ site:
       children:
         - type: space
           key: space-2
-          title: Changelog
-          path: changelog
+          title: Ethopipe
+          path: ethopipe
           default: true
           content:
             directory: null
