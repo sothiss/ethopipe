@@ -4,15 +4,15 @@ site:
   structure:
     - type: section
       key: section-1
-      title: Docs
+      title: Ethopipe
       path: ethopipe
-      description: ""
-      icon: square-pen
+      description: Ethopipe repository docs
+      icon: github
       default: true
       children:
         - type: space
           key: space-1
-          title: Untitled
+          title: Ethopipe
           path: untitled
           default: true
           content:
