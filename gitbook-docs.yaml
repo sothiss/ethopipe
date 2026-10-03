@@ -20,7 +20,7 @@ site:
     - type: section
       key: section-2
       title: Changelog
-      path: changelog
+      path: ethopipe-changelog
       description: ""
       icon: gears
       children:
