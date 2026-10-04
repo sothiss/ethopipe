@@ -154,12 +154,14 @@ If you match our criteria or wish to support computational animal welfare, back 
 * **Archive Software Deposit (DOI):** [10.5281/zenodo.21211371](https://doi.org/10.5281/zenodo.21211371)
 * **Live Informatics Directory:** [thetransparencyproject.me](https://thetransparencyproject.me)
 
+### 💖 Official Documentation Sponsor
+* **[GitBook](https://www.gitbook.com/) (Community Sponsorship Plan):** Official documentation partner powering our public technical specifications, schema directories, and open-science manuals. GitBook graciously provides infrastructure sponsorship, Git Sync continuous integration, and team compilation engines to ensure transparent, reproducible informatics for the scientific community.
+
 ### 🤝 Infrastructure Acknowledgements & Grants-in-Kind
 This open-science research tool is made possible through infrastructure provisions and developer platform subsidies graciously supplied by the following organizations:
 * **GitHub Education / Student Developer Pack:** Providing automated continuous integration pipeline allocations, containerized sandbox hosting boundaries, and environment protection configurations.
 * **Google Cloud & Google Developers Program:** Subsidizing compute resource token allocations for advanced large language model parsing within Google AI Studio.
 * **NVIDIA Developer Program:** Granting entry-level developer network access and compute engineering frameworks for future computer-vision analytical testing passes.
-* **GitBook Community Plan:** Supporting open-science communication by providing specialized access to team compilation engines to maintain our public technical specifications directory.
 
 ### 📝 Grounding Bibliography
 1. **Broseghini, A., Lõoke, M., Guérineau, C., Marinelli, L., & Paolo Mongillo. (2024).** Ethogram of the predatory sequence of dogs (Canis familiaris). *Applied Animal Behaviour Science*, 279, 106402. [https://doi.org/10.1016/j.applanim.2024.106402](https://doi.org/10.1016/j.applanim.2024.106402)
