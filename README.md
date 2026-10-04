@@ -40,7 +40,73 @@ Finalized structures are organized into a query-optimized relational **Star Sche
 
 ---
 
-## 🤖 3. Continuous Integration & Code Guardrails
+## 🚀 3. Installation & Quickstart
+
+### Prerequisites
+- Python `3.11` or `3.12`
+- `uv` (recommended) or `pip`
+
+### Installation
+
+Clone the repository and install dependencies using `uv`:
+
+```bash
+git clone https://github.com/sothiss/ethopipe.git
+cd ethopipe
+uv sync
+```
+
+Alternatively, with `pip`:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+### Quickstart
+
+Run the FastAPI ingestion service locally:
+
+```bash
+uv run uvicorn src.pipeline.main:app --reload --port 8000
+```
+
+Validate a canine ethological observation payload:
+
+```python
+from datetime import datetime
+from src.pipeline.models import (
+    BehaviorObservation,
+    BehaviorType,
+    CanineObservation,
+    PhysioMeasurement,
+)
+
+obs = CanineObservation(
+    observation_id="obs-001",
+    subject_id="canine-42",
+    timestamp=datetime.now(),
+    behaviors=[BehaviorObservation(behavior=BehaviorType.PLAYBOW)],
+    physiology=PhysioMeasurement(
+        heart_rate_bpm=95,
+        resp_rate_bpm=22,
+        body_temp_c=38.6,
+        cortisol_nmolL=120.0,
+    ),
+)
+print(obs.model_dump_json(indent=2))
+```
+
+Run the quality assurance suite:
+
+```powershell
+.\scripts\run_qa.ps1
+```
+
+---
+
+## 🤖 4. Continuous Integration & Code Guardrails
 
 To preserve code health and protect against dependency drift ("bit rot") over long-term research cycles, this repository enforces a rigorous, multi-stage automated Continuous Integration (CI) engine via GitHub Actions (`.github/workflows/ci.yml`) on every code push or pull request to the `main` branch:
 
