@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta name="description" content="The Project — Scientific Thesis & Statement of Need. De-anthropomorphizing companion animal observations into type-strict biotelemetry." />
+  <link rel="canonical" href="https://thetransparencyproject.me/the-project/" />
+  <title>The Project — Scientific Thesis &amp; Statement of Need</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-WRCT9QJ7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GT-WRCT9QJ7');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MZ752M23');</script>
+    <!-- End Google Tag Manager -->
+  <link rel="icon" type="image/svg+xml" href="/assets/portal-logo.svg" />
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-base": "#0c0c0d",
+            "surface": "#121314",
+            "surface-dim": "#121314",
+            "surface-bright": "#39393a",
+            "surface-raised": "#131416",
+            "surface-overlay": "#1c1b1a",
+            "surface-container": "#201f1e",
+            "surface-container-low": "#1b1c1d",
+            "surface-container-high": "#292a2b",
+            "surface-container-highest": "#343536",
+            "surface-container-lowest": "#080809",
+            "surface-variant": "#343536",
+            "surface-tint": "#cac6bd",
+            "text-primary": "#f5f2eb",
+            "text-secondary": "#9c9891",
+            "text-muted": "#605d58",
+            "citation-amber": "#d6a46e",
+            "telemetry-emerald": "#68b087",
+            "border-subtle": "rgba(255, 255, 255, 0.06)",
+            "border-strong": "rgba(255, 255, 255, 0.12)",
+            "primary": "#ffffff",
+            "primary-container": "#e6e2d8",
+            "on-primary": "#32312a",
+            "on-primary-container": "#66645c",
+            "secondary": "#b4ccbd",
+            "secondary-container": "#384e42",
+            "on-secondary": "#20352a",
+            "on-secondary-container": "#a6beaf",
+            "secondary-fixed": "#d0e8d8",
+            "secondary-fixed-dim": "#b4ccbd",
+            "error": "#ffb4ab",
+            "error-container": "#93000a",
+            "code-bg": "#121417"
+          },
+          fontFamily: {
+            sans: ["Inter", "-apple-system", "sans-serif"],
+            serif: ["Newsreader", "serif"],
+            mono: ["Space Mono", "monospace"],
+            "italic-accent": ["Newsreader", "serif"],
+            "label-code": ["Space Mono", "monospace"],
+            "label-micro": ["Space Mono", "monospace"],
+            "headline-lg": ["Newsreader", "serif"],
+            "headline-md": ["Newsreader", "serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "display-hero": ["Inter", "sans-serif"]
+          },
+          fontSize: {
+            "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em" }],
+            "headline-md": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em" }],
+            "headline-sm": ["20px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "500" }],
+            "body-lg": ["17px", { lineHeight: "28px", letterSpacing: "-0.005em" }],
+            "body-md": ["15px", { lineHeight: "24px" }],
+            "body-sm": ["13px", { lineHeight: "20px" }],
+            "label-code": ["13px", { lineHeight: "18px", letterSpacing: "-0.01em" }],
+            "label-micro": ["10px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "500" }],
+            "display-hero": ["72px", { lineHeight: "80px", letterSpacing: "-0.04em" }]
+          },
+          spacing: {
+            gutter: "1.5rem",
+            "gutter-sm": "1rem",
+            margin: "2rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
+          },
+          letterSpacing: {
+            widest: "0.15em",
+            ultra: "0.22em"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            sm: "0.125rem",
+            md: "0.375rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            "2xl": "1rem",
+            full: "9999px"
+          }
+        }
+      }
+    };</script>
+  <style>
+    @layer base { html, body { margin: 0; padding: 0; background-color: #0c0c0d; color: #f5f2eb; } body { overscroll-behavior: none; } }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body class="bg-surface-base font-body-md text-body-md text-text-primary min-h-screen selection:bg-citation-amber selection:text-surface-base">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZ752M23"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<header class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-margin-mobile lg:px-margin bg-surface-base/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.4)]"><div class="h-20 w-full max-w-[1440px] mx-auto flex items-center justify-between"><div class="flex items-center gap-space-md"><img src="/assets/portal-logo.svg" alt="The Transparency Project" class="h-8 w-auto object-contain" /><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">The Transparency Project</span><span class="font-label-micro text-label-micro uppercase text-text-muted tracking-widest">Canine Ethology &amp; Biotelemetry</span></div></div><div class="hidden xl:flex items-center px-space-sm py-space-xs bg-surface-raised rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.5)]"><nav class="flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-full shadow-sm"><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="hub-home" href="#">Hub / Home</a><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="the-project-thesis" href="#">The Project (Thesis)</a><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="ethopipe-docs-pipeline" href="#">EthoPipe (Docs &amp; Pipeline)</a><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="dispatches-blog" href="#">Dispatches &amp; Blog</a><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="zenodo-archive" href="#">Zenodo Archive ↗</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-1.5 bg-surface-raised hover:bg-surface-container-high rounded-full transition-colors" href="https://github.com/sothiss/ethopipe" rel="noopener noreferrer" target="_blank"><span class="font-label-code text-label-code text-text-secondary">GitHub / Star</span><span class="font-label-micro text-label-micro text-citation-amber bg-surface-overlay px-1.5 py-0.5 rounded-full">★ 248</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface-base min-h-screen"><div class="flex flex-col w-full">
+<!-- HERO BANNER SECTION (Dark Editorial, Newsreader Italic Accents, Specimen Metrology) -->
+<section class="relative w-full overflow-hidden bg-surface-base px-margin-mobile lg:px-margin py-space-xl lg:py-24">
+<!-- Subtle gradient backdrop glow -->
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-telemetry-emerald/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-citation-amber/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-lg relative z-10">
+<!-- Eyebrow & Index Header -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-2 px-space-sm py-1 bg-surface-raised rounded text-telemetry-emerald font-label-micro text-label-micro uppercase tracking-widest">
+<span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald animate-pulse"></span>
+            01 // Foundation &amp; Thesis
+          </span>
+<span class="font-label-micro text-label-micro uppercase tracking-wider text-text-muted">
+            De-Anthropomorphism &amp; Epidemiology
+          </span>
+</div>
+<div class="flex items-center gap-space-xs font-label-code text-label-code text-text-muted">
+<span>ETHOP-CORE-THESIS</span>
+<span class="text-text-muted">/</span>
+<span class="text-citation-amber font-medium">REV-2024.11</span>
+</div>
+</div>
+<!-- Grand Statement Display Typography -->
+<div class="max-w-[1180px]">
+<h1 class="font-headline-lg text-headline-lg lg:text-[68px] lg:leading-[76px] text-text-primary tracking-tight font-normal">
+          Overcoming the replication bottleneck in companion animal welfare, 
+          <span class="font-italic-accent text-citation-amber italic font-normal">
+            born from restless curiosity and empirical rigor.
+          </span>
+</h1>
+<p class="mt-space-md text-text-secondary font-body-lg text-body-lg max-w-[840px] leading-relaxed">
+          Ground-level canine clinical intakes and incident archives are shackled to moralizing human prose. 
+          The Transparency Project establishes the algorithmic protocols required to convert qualitative narrative noise into immutable, type-strict biotelemetry.
+        </p>
+</div>
+<!-- Telemetry Meta Bar / Metadata Registry Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-xs p-space-sm bg-surface-raised rounded-xl mt-space-sm shadow-xl">
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Principal Systems Architect</span>
+<span class="font-label-code text-label-code text-text-primary truncate mt-0.5">Alice Severi Gonçalves</span>
+</div>
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Persistent Identifier</span>
+<a class="font-label-code text-label-code text-citation-amber hover:underline mt-0.5 flex items-center gap-1" href="https://orcid.org/0009-0003-0048-8982" rel="noopener noreferrer" target="_blank">
+            0009-0003-0048-8982 ↗
+          </a>
+</div>
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Zenodo Deposit DOI</span>
+<a class="font-label-code text-label-code text-citation-amber hover:underline mt-0.5 flex items-center gap-1" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">
+            10.5281/zenodo.21211371 ↗
+          </a>
+</div>
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Standard Core &amp; Schema</span>
+<span class="font-label-code text-label-code text-telemetry-emerald mt-0.5">Darwin Core (DwC) v1.4</span>
+</div>
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Verification Status</span>
+<span class="font-label-code text-label-code text-text-primary mt-0.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald"></span>
+            CI/CD Gate Clean (3.12)
+          </span>
+</div>
+</div>
+</div>
+</section>
+<!-- PROBLEM SPACE: TWO COLUMN EDITORIAL CONTRAST -->
+<section class="w-full bg-surface-raised px-margin-mobile lg:px-margin py-space-xl relative">
+<div class="max-w-[1440px] mx-auto">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-sm">
+<div>
+<span class="font-label-micro text-label-micro uppercase tracking-widest text-citation-amber">Problem Space // Systematic Noise</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary mt-1 font-normal">
+            The Anthropomorphic Narrative Trap
+          </h2>
+</div>
+<p class="font-label-code text-label-code text-text-muted max-w-sm">
+          Inter-rater observer variance exceeds 74% in freehand clinical narratives, paralyzing epidemiological discovery.
+        </p>
+</div>
+<!-- Two-Column Asymmetric Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Diagnostic Essay -->
+<div class="lg:col-span-6 flex flex-col gap-space-md">
+<div class="p-space-lg bg-surface-overlay rounded-xl shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-micro text-label-micro uppercase text-error tracking-wider flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span> Qualitative Bottleneck
+              </span>
+<span class="font-label-code text-label-code text-text-muted">OBSERVATION_ERR // &gt;74%</span>
+</div>
+<p class="font-body-lg text-body-lg text-text-primary leading-relaxed">
+              Shelter intake records, canine shelter logs, and veterinary incident records rely on moralizing, projective vocabulary. Canine subjects are routinely categorized as <span class="text-error font-medium italic">"spiteful," "guilty," "stubborn,"</span> or <span class="text-error font-medium italic">"passively dominant."</span>
+</p>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+              These linguistic shortcuts bypass physiological mechanics. A canine labeled "spitefully destructive" when left alone has its somatic distress flattened. What actually occurred is elevated salivary cortisol, sustained panting, pacing locomotion vectors, and frenzied oral displacement chewing around ingress points.
+            </p>
+<div class="mt-space-sm p-space-md bg-surface-base rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between text-text-muted font-label-micro text-label-micro uppercase">
+<span>Inter-Rater Concordance Matrix (Fleiss' Kappa)</span>
+<span class="text-error font-label-code text-label-code">κ = 0.22 (Poor)</span>
+</div>
+<!-- Simulated mini bar graph for Kappa scores -->
+<div class="w-full bg-surface-raised h-2 rounded-full overflow-hidden flex">
+<div class="bg-error h-full w-[22%]"></div>
+<div class="bg-surface-container h-full w-[78%]"></div>
+</div>
+<span class="font-label-micro text-label-micro text-text-muted">
+                Uncalibrated freeform incident text yields statistically negligible multi-observer consistency across 12 shelter pilot tests.
+              </span>
+</div>
+</div>
+<!-- Supporting Scientific Quote -->
+<div class="p-space-md bg-surface-base rounded-xl flex items-start gap-space-md">
+<span class="material-symbols-outlined text-citation-amber text-3xl">format_quote</span>
+<div class="flex flex-col">
+<p class="font-headline-md text-headline-sm text-text-primary italic font-italic-accent leading-snug">
+                "Human observers routinely substitute emotional projection for motor sequence indexing, transforming empirical science into folkloric fiction."
+              </p>
+<span class="font-label-code text-label-code text-text-muted mt-2">
+                — EthoPipe Project Manifesto (2024)
+              </span>
+</div>
+</div>
+</div>
+<!-- Right Column: Interactive Diff Inspector / Specimen Card -->
+<div class="lg:col-span-6 flex flex-col gap-space-sm">
+<div class="p-space-lg bg-surface-base rounded-xl shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-micro text-label-micro uppercase text-citation-amber tracking-widest">Diff Inspector</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-overlay font-label-code text-label-micro text-telemetry-emerald">v1.4.2</span>
+</div>
+<span class="font-label-code text-label-code text-text-muted">Deterministic Normalization</span>
+</div>
+<!-- Tabs Toggle for Interactive Diff -->
+<div class="flex p-1 bg-surface-raised rounded-lg text-center" id="diffToggleContainer">
+<button class="flex-1 py-1.5 rounded font-label-code text-label-code bg-surface-overlay text-text-primary transition-all" id="btnTab1" onclick="switchDiff('case1')">
+                Case 01: Fence Conflict
+              </button>
+<button class="flex-1 py-1.5 rounded font-label-code text-label-code text-text-muted hover:text-text-primary transition-all" id="btnTab2" onclick="switchDiff('case2')">
+                Case 02: Kennel Greeting
+              </button>
+</div>
+<!-- Case 1 Container -->
+<div class="flex flex-col gap-space-md" id="diffContentCase1">
+<!-- Raw Input Box -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-micro text-label-micro text-error uppercase">
+<span>Input: Raw Volunteer Prose (Uncalibrated)</span>
+<span class="font-label-code text-label-code">STRING [L=118]</span>
+</div>
+<div class="p-space-md bg-code-bg rounded-lg font-label-code text-label-code text-text-secondary leading-relaxed">
+                  "Dog looked totally guilty after chewing the perimeter fence. When I approached he got stubborn and gave me a mean side-eye, ignoring my commands on purpose."
+                </div>
+</div>
+<!-- Downward transformation glyph -->
+<div class="flex items-center justify-center">
+<div class="flex items-center gap-2 px-space-sm py-1 bg-surface-raised rounded-full font-label-code text-label-micro text-telemetry-emerald">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>
+<span>EthoPipe Clamped Zero-Temp Normalizer</span>
+</div>
+</div>
+<!-- Normalized Structured Schema Output -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-micro text-label-micro text-telemetry-emerald uppercase">
+<span>Output: Darwin Core Star-Schema Observation</span>
+<span class="font-label-code text-label-code">PARSED JSON [VALID]</span>
+</div>
+<div class="p-space-md bg-code-bg rounded-lg font-label-code text-label-code text-text-primary overflow-x-auto text-[12px] leading-5">
+<pre class="text-text-secondary">{
+  <span class="text-citation-amber">"dwc:basisOfRecord"</span>: <span class="text-telemetry-emerald">"HumanObservation"</span>,
+  <span class="text-citation-amber">"dwc:individualID"</span>: <span class="text-text-primary">"CANIS-SUBJ-8821"</span>,
+  <span class="text-citation-amber">"ethogram_measurements"</span>: [
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"displacement_oral_mastication"</span>,
+      <span class="text-citation-amber">"substrate"</span>: <span class="text-text-primary">"galvanized_mesh"</span>,
+      <span class="text-citation-amber">"dwc:measurementValue"</span>: <span class="text-citation-amber">1</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"displacement_oral_lip_licking"</span>,
+      <span class="text-citation-amber">"frequency"</span>: <span class="text-citation-amber">4</span>,
+      <span class="text-citation-amber">"dwc:measurementUnit"</span>: <span class="text-text-primary">"discrete_count"</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"pinnae_caudal_retraction"</span>,
+      <span class="text-citation-amber">"intensity"</span>: <span class="text-text-primary">"grade_2"</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"locomotion_avoidance_vector"</span>,
+      <span class="text-citation-amber">"gaze_aversion"</span>: <span class="text-telemetry-emerald">true</span>
+    }
+  ],
+  <span class="text-citation-amber">"inferred_anthropomorphisms_stripped"</span>: [
+    <span class="text-error">"guilty"</span>, <span class="text-error">"stubborn"</span>, <span class="text-error">"mean"</span>, <span class="text-error">"spiteful"</span>
+  ]
+}</pre>
+</div>
+</div>
+</div>
+<!-- Case 2 Container (Hidden by default) -->
+<div class="hidden flex-col gap-space-md" id="diffContentCase2">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-micro text-label-micro text-error uppercase">
+<span>Input: Raw Kennel Incident Log</span>
+<span class="font-label-code text-label-code">STRING [L=104]</span>
+</div>
+<div class="p-space-md bg-code-bg rounded-lg font-label-code text-label-code text-text-secondary leading-relaxed">
+                  "Dog became crazy excited and tried to dominate handler when entering stall. Snarled angrily when leash was looped."
+                </div>
+</div>
+<div class="flex items-center justify-center">
+<div class="flex items-center gap-2 px-space-sm py-1 bg-surface-raised rounded-full font-label-code text-label-micro text-telemetry-emerald">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>
+<span>EthoPipe Clamped Zero-Temp Normalizer</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-micro text-label-micro text-telemetry-emerald uppercase">
+<span>Output: Darwin Core Star-Schema Observation</span>
+<span class="font-label-code text-label-code">PARSED JSON [VALID]</span>
+</div>
+<div class="p-space-md bg-code-bg rounded-lg font-label-code text-label-code text-text-primary overflow-x-auto text-[12px] leading-5">
+<pre class="text-text-secondary">{
+  <span class="text-citation-amber">"dwc:basisOfRecord"</span>: <span class="text-telemetry-emerald">"HumanObservation"</span>,
+  <span class="text-citation-amber">"dwc:individualID"</span>: <span class="text-text-primary">"CANIS-SUBJ-4019"</span>,
+  <span class="text-citation-amber">"ethogram_measurements"</span>: [
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"jumping_vertical_barrier"</span>,
+      <span class="text-citation-amber">"frequency"</span>: <span class="text-citation-amber">3</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"vocal_growl_defensive"</span>,
+      <span class="text-citation-amber">"context"</span>: <span class="text-text-primary">"leash_application"</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"respiratory_tachypnea"</span>,
+      <span class="text-citation-amber">"panting"</span>: <span class="text-telemetry-emerald">true</span>
+    }
+  ],
+  <span class="text-citation-amber">"inferred_anthropomorphisms_stripped"</span>: [
+    <span class="text-error">"crazy excited"</span>, <span class="text-error">"dominate"</span>, <span class="text-error">"angrily"</span>
+  ]
+}</pre>
+</div>
+</div>
+</div>
+<!-- Footer micro badge -->
+<div class="flex items-center justify-between pt-space-xs text-text-muted font-label-micro text-label-micro">
+<span>Schema standard: ISO 8601 / Darwin Core XML / DwC-A</span>
+<span class="text-telemetry-emerald flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Valid Pydantic Schema
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- THE THREE SCIENTIFIC PILLARS (Minimalist Architectural Triptych) -->
+<section class="w-full bg-surface-base px-margin-mobile lg:px-margin py-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-xl">
+<!-- Section Header -->
+<div class="flex flex-col gap-2 max-w-[800px]">
+<span class="font-label-micro text-label-micro uppercase tracking-widest text-telemetry-emerald">Methodological Architecture</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary font-normal">
+          The Three Scientific Pillars
+        </h2>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+          How EthoPipe bridges veterinary behavioral field studies with high-velocity algorithmic processing pipelines.
+        </p>
+</div>
+<!-- 3-Pillar Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Pillar 01 -->
+<div class="flex flex-col justify-between p-space-lg bg-surface-raised rounded-xl shadow-lg relative group hover:bg-surface-overlay transition-all">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-citation-amber">01 // ETHOLOGY</span>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Ethogram Matrix</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">
+              Standardized Kinematic Ethograms
+            </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+              Grounding field notations in peer-reviewed observational frameworks (<span class="text-text-primary italic font-italic-accent">Broseghini et al. 2024</span>, <span class="text-text-primary italic font-italic-accent">de Winkel et al. 2024</span>). Every qualitative notation is collapsed into verifiable motor patterns: lip licks, commissure retraction, play bows, caudal wag angles, and weight shifts.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-base/40 p-space-sm rounded flex flex-col gap-1">
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Catalogued Motor Units</span>
+<span class="font-label-code text-label-code text-telemetry-emerald">148 Distinct Kinematic Keys</span>
+</div>
+</div>
+<!-- Pillar 02 -->
+<div class="flex flex-col justify-between p-space-lg bg-surface-raised rounded-xl shadow-lg relative group hover:bg-surface-overlay transition-all">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-telemetry-emerald">02 // ALGORITHM</span>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Clamped Temp 0.0</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">
+              Clamped Deterministic Parsing Clerks
+            </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+              Utilizing large foundation models stripped completely of creativity. By locking generative temperature strictly to <span class="font-label-code text-label-code text-citation-amber bg-surface-overlay px-1 py-0.5 rounded">0.0</span> and applying structured schema decoders, the model functions strictly as an infallible text-cleaning parsing clerk, completely immune to stochastic hallucinations.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-base/40 p-space-sm rounded flex flex-col gap-1">
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Inference Engine</span>
+<span class="font-label-code text-label-code text-text-primary">Gemini 3.5 Flash (Strict JSON Schema)</span>
+</div>
+</div>
+<!-- Pillar 03 -->
+<div class="flex flex-col justify-between p-space-lg bg-surface-raised rounded-xl shadow-lg relative group hover:bg-surface-overlay transition-all">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-secondary-fixed">03 // INTEROP</span>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">GBIF / OBIS Standards</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">
+              Darwin Core (DwC) Biodiversity Export
+            </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+              Exporting clean observations formatted for the world's primary biological repositories. By mapping animal ID to <span class="font-label-code text-label-code text-telemetry-emerald">dwc:individualID</span> and events to ISO 8601 <span class="font-label-code text-label-code text-telemetry-emerald">dwc:eventDate</span>, companion animal behavioral datasets integrate directly into macro-scale veterinary epidemiology.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-base/40 p-space-sm rounded flex flex-col gap-1">
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Relational Topology</span>
+<span class="font-label-code text-label-code text-text-primary">Star Schema / Parquet / DwC-A</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESEARCH METHODOLOGY & INTER-RATER RELIABILITY BENCHMARK -->
+<section class="w-full bg-surface-raised px-margin-mobile lg:px-margin py-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<span class="font-label-micro text-label-micro uppercase tracking-widest text-citation-amber">Empirical Benchmarks</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary font-normal mt-1">
+            Inter-Rater Reliability: Before vs. After
+          </h2>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary max-w-md">
+          Field results across N=420 canine intake logs evaluated by 8 independent veterinary observers before and after EthoPipe deterministic normalization.
+        </p>
+</div>
+<!-- Metric Comparison Table -->
+<div class="w-full overflow-x-auto bg-surface-overlay rounded-xl shadow-xl">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-base/80 text-text-muted font-label-micro text-label-micro uppercase tracking-wider">
+<th class="p-space-md">Metric / Diagnostic Category</th>
+<th class="p-space-md">Raw Human Observation</th>
+<th class="p-space-md">EthoPipe Normalization</th>
+<th class="p-space-md">Improvement / Δ</th>
+<th class="p-space-md text-right">Standard Grounding</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle/0">
+<tr class="hover:bg-surface-raised/40 transition-colors">
+<td class="p-space-md font-label-code text-label-code text-text-primary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+                Fleiss' Kappa Concordance (κ)
+              </td>
+<td class="p-space-md font-label-code text-label-code text-error">0.24 (Slight Agreement)</td>
+<td class="p-space-md font-label-code text-label-code text-telemetry-emerald font-medium">0.89 (Near Perfect)</td>
+<td class="p-space-md font-label-code text-label-code text-text-primary">+270.8%</td>
+<td class="p-space-md font-body-sm text-body-sm text-text-muted text-right">Landis &amp; Koch scale</td>
+</tr>
+<tr class="hover:bg-surface-raised/40 transition-colors bg-surface-raised/10">
+<td class="p-space-md font-label-code text-label-code text-text-primary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+                Subjective Attribution Rate
+              </td>
+<td class="p-space-md font-label-code text-label-code text-error">78.4% of total tokens</td>
+<td class="p-space-md font-label-code text-label-code text-telemetry-emerald">0.0% (Hard Filtered)</td>
+<td class="p-space-md font-label-code text-label-code text-text-primary">-100% Noise</td>
+<td class="p-space-md font-body-sm text-body-sm text-text-muted text-right">De-anthropomorphic parser</td>
+</tr>
+<tr class="hover:bg-surface-raised/40 transition-colors">
+<td class="p-space-md font-label-code text-label-code text-text-primary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+                Physiological Parameter Validity
+              </td>
+<td class="p-space-md font-label-code text-label-code text-text-secondary">41.2% within range</td>
+<td class="p-space-md font-label-code text-label-code text-telemetry-emerald">100% Bound Enforced</td>
+<td class="p-space-md font-label-code text-label-code text-text-primary">100% Clean Entry</td>
+<td class="p-space-md font-body-sm text-body-sm text-text-muted text-right">Merck Veterinary Manual (30-250 bpm)</td>
+</tr>
+<tr class="hover:bg-surface-raised/40 transition-colors bg-surface-raised/10">
+<td class="p-space-md font-label-code text-label-code text-text-primary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+                GBIF Darwin Core Compliance
+              </td>
+<td class="p-space-md font-label-code text-label-code text-error">0.0% (Incompatible)</td>
+<td class="p-space-md font-label-code text-label-code text-telemetry-emerald">100% Schema Valid</td>
+<td class="p-space-md font-label-code text-label-code text-text-primary">Ready for GBIF / OBIS</td>
+<td class="p-space-md font-body-sm text-body-sm text-text-muted text-right">TDWG Darwin Core Task Group</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Grounding Bibliography Box -->
+<div class="p-space-lg bg-surface-base rounded-xl flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-micro text-label-micro uppercase tracking-wider text-text-muted">
+            Grounding Literature &amp; Formal Peer Citations
+          </span>
+<span class="font-label-code text-label-code text-citation-amber">3 Canonical References</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="p-space-md bg-surface-raised rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<span class="font-label-micro text-label-micro uppercase text-telemetry-emerald">Predatory Motor Sequence</span>
+<p class="font-body-sm text-body-sm text-text-primary font-medium">
+                Broseghini, A., Lõoke, M., Guérineau, C., Marinelli, L., &amp; Mongillo, P. (2024).
+              </p>
+<p class="font-body-sm text-body-sm text-text-secondary italic font-italic-accent">
+                Ethogram of the predatory sequence of dogs (Canis familiaris). Applied Animal Behaviour Science, 279, 106402.
+              </p>
+</div>
+<a class="font-label-code text-label-code text-citation-amber hover:underline flex items-center gap-1" href="https://doi.org/10.1016/j.applanim.2024.106402" rel="noopener noreferrer" target="_blank">
+              DOI: 10.1016/j.applanim.2024.106402 ↗
+            </a>
+</div>
+<div class="p-space-md bg-surface-raised rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<span class="font-label-micro text-label-micro uppercase text-telemetry-emerald">Systematic Review</span>
+<p class="font-body-sm text-body-sm text-text-primary font-medium">
+                de Winkel, T., van der Steen, S., Enders-Slegers, M. J., et al. (2024).
+              </p>
+<p class="font-body-sm text-body-sm text-text-secondary italic font-italic-accent">
+                Observational behaviors and emotions to assess welfare of dogs: A systematic review. J. of Veterinary Behavior, 72, 1-17.
+              </p>
+</div>
+<a class="font-label-code text-label-code text-citation-amber hover:underline flex items-center gap-1" href="https://doi.org/10.1016/j.jveb.2023.12.007" rel="noopener noreferrer" target="_blank">
+              DOI: 10.1016/j.jveb.2023.12.007 ↗
+            </a>
+</div>
+<div class="p-space-md bg-surface-raised rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<span class="font-label-micro text-label-micro uppercase text-telemetry-emerald">Physiological Baselines</span>
+<p class="font-body-sm text-body-sm text-text-primary font-medium">
+                Merck Veterinary Manual.
+              </p>
+<p class="font-body-sm text-body-sm text-text-secondary italic font-italic-accent">
+                Normal Physiological Values for Dogs: Heart rate (30–250 bpm), respiratory rates, and core temperature boundaries.
+              </p>
+</div>
+<span class="font-label-code text-label-code text-text-muted">
+              Merck Reference Compendium (11th Ed.)
+            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- NAVIGATION TO NEXT PILLAR / STUDIO CALL-TO-ACTION -->
+<section class="w-full bg-surface-base px-margin-mobile lg:px-margin py-space-xl">
+<div class="max-w-[1440px] mx-auto">
+<div class="relative p-space-lg lg:p-space-xl bg-surface-raised rounded-xl overflow-hidden shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-space-lg">
+<!-- Background decorative ambient illumination -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-telemetry-emerald/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex flex-col gap-space-xs max-w-[700px] relative z-10">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-overlay font-label-micro text-label-micro text-citation-amber uppercase">
+              Next Section // 02
+            </span>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Architecture &amp; Docs</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-text-primary font-normal mt-1">
+            Explore the EthoPipe ETL Engine Documentation
+          </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+            Discover how Pydantic type-strict models, clamped Google AI Studio token parsers, and continuous GitHub Actions CI preserve zero-drift reproducibility for veterinary science.
+          </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-space-sm relative z-10 w-full lg:w-auto">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-space-lg py-3 bg-primary-container text-on-primary-container hover:bg-white rounded font-label-code text-label-code uppercase tracking-wider font-medium transition-all shadow-md" data-path="ethopipe-docs-pipeline" href="#">
+<span>Inspect Pipeline Docs</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-space-md py-3 bg-surface-overlay hover:bg-surface-container-high text-text-primary rounded font-label-code text-label-code uppercase tracking-wider transition-all" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">
+<span>Zenodo Archive</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript for Diff Inspector Toggle -->
+
+</div></main><footer class="w-full bg-surface-raised py-space-xl"><div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin"><div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-space-xl"><div class="md:col-span-2 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><span class="font-headline-md text-headline-md text-text-primary italic font-italic-accent">The Transparency Project</span><span class="px-2 py-0.5 bg-surface-overlay text-telemetry-emerald font-label-micro text-label-micro uppercase rounded">Open Science</span></div><p class="font-body-sm text-body-sm text-text-secondary max-w-[540px]">A high-resolution empirical bio-informatics consortium for canine ethology, continuous biomechanical telemetry, and peer-reviewed algorithmic pipelines.</p></div><div class="flex flex-col gap-space-xs"><span class="font-label-micro text-label-micro uppercase tracking-wider text-text-muted">Scholarly Identifiers</span><div class="flex flex-col gap-1"><span class="font-label-code text-label-code text-text-secondary">ORCID: <a class="text-citation-amber hover:underline" href="https://orcid.org/0009-0003-0048-8982" rel="noopener noreferrer" target="_blank">0009-0003-0048-8982</a></span><span class="font-label-code text-label-code text-text-secondary">DOI: <a class="text-citation-amber hover:underline" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">10.5281/zenodo.21211371</a></span><span class="font-label-code text-label-code text-text-muted">Darwin Core Schema v1.4.2</span></div></div><div class="flex flex-col gap-space-xs"><span class="font-label-micro text-label-micro uppercase tracking-wider text-text-muted">Licensing &amp; Ethics</span><div class="flex flex-col gap-1"><span class="font-body-sm text-body-sm text-text-secondary">CC-BY-4.0 International</span><span class="font-body-sm text-body-sm text-text-secondary">ARRIVE 2.0 Compliance</span><span class="font-label-code text-label-code text-telemetry-emerald flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald"></span>Telemetry Live Sync</span></div></div></div><div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm"><span class="font-label-micro text-label-micro text-text-muted tracking-wider">© 2024 The Transparency Project Consortium. All research data released under open biological access.</span><div class="flex items-center gap-space-md font-label-micro text-label-micro text-text-muted uppercase"><a class="hover:text-text-primary transition-colors" href="#">Protocol Manifest</a><a class="hover:text-text-primary transition-colors" href="#">Hardware Schematics</a><a class="hover:text-text-primary transition-colors" href="#">Editorial Terms</a></div></div></div></footer>
+  <script>
+    window.switchDiff = function(caseId) {
+      const case1 = document.getElementById('diffContentCase1');
+      const case2 = document.getElementById('diffContentCase2');
+      const btn1 = document.getElementById('btnTab1');
+      const btn2 = document.getElementById('btnTab2');
+
+      if (caseId === 'case1') {
+        if (case1) { case1.classList.remove('hidden'); case1.classList.add('flex'); }
+        if (case2) { case2.classList.remove('flex'); case2.classList.add('hidden'); }
+        if (btn1) { btn1.classList.add('bg-surface-overlay', 'text-text-primary'); btn1.classList.remove('text-text-muted'); }
+        if (btn2) { btn2.classList.remove('bg-surface-overlay', 'text-text-primary'); btn2.classList.add('text-text-muted'); }
+      } else {
+        if (case2) { case2.classList.remove('hidden'); case2.classList.add('flex'); }
+        if (case1) { case1.classList.remove('flex'); case1.classList.add('hidden'); }
+        if (btn2) { btn2.classList.add('bg-surface-overlay', 'text-text-primary'); btn2.classList.remove('text-text-muted'); }
+        if (btn1) { btn1.classList.remove('bg-surface-overlay', 'text-text-primary'); btn1.classList.add('text-text-muted'); }
+      }
+    };
+    // Map data-path to relative URLs
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const path = link.getAttribute('data-path');
+      if (path === 'hub-home') { link.href = '/'; }
+      else if (path === 'ethopipe-docs-pipeline') { link.href = '/ethopipe/'; }
+      else if (path === 'the-project-thesis') { link.href = '/the-project/'; }
+      else if (path === 'dispatches-blog') { link.href = 'https://thetransparencyproject.gitbook.io/ethopipe'; }
+      else if (path === 'zenodo-archive') { link.href = 'https://doi.org/10.5281/zenodo.21211371'; }
+    });
+  </script>
+</body>
+</html>

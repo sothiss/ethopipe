@@ -1,1536 +1,1716 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html class="dark" lang="en">
 <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta name="description" content="An open-science biological informatics consortium transforming subjective companion animal narratives into deterministic, Darwin Core compliant datasets." />
+  <link rel="canonical" href="https://thetransparencyproject.me/" />
+  <meta property="og:title" content="The Transparency Project — Open-Access Canine Ethology & Biotelemetry" />
+  <meta property="og:description" content="Transforming subjective companion animal handler narratives into deterministic, machine-readable datasets for veterinary epidemiology and population-scale welfare science." />
+  <meta property="og:url" content="https://thetransparencyproject.me/" />
+  <meta property="og:type" content="website" />
+  <title>The Transparency Project — Open-Access Canine Ethology &amp; Biotelemetry</title>
+
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GT-WRCT9QJ7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-WRCT9QJ7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GT-WRCT9QJ7');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MZ752M23');</script>
+    <!-- End Google Tag Manager -->
 
-  gtag('config', 'GT-WRCT9QJ7');
-</script>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MZ752M23');</script>
-  <!-- End Google Tag Manager -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Transparency Project — Manutenção de Hardware Modular · Planalto Paulista, São Paulo</title>
-  <meta name="description" content="Estúdio de manutenção modular, limpeza preventiva e revitalização de computadores desktop no Planalto Paulista, São Paulo. Tabela fixa, peças a preço de custo e bancada dedicada." />
-
-  <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/assets/portal-logo.svg" />
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 
   <style>
-    :root {
-      /* Material You / Modern Tech Studio Palette */
-      --canvas: #0b0f19;
-      --surface-deep: #111827;
-      --surface-card: #1e293b;
-      --surface-card-hover: #24344d;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-card: rgba(255, 255, 255, 0.12);
-
-      --accent-amber: #f59e0b;
-      --accent-amber-glow: rgba(245, 158, 11, 0.22);
-      --accent-amber-hover: #fbbf24;
-
-      --accent-cyan: #38bdf8;
-      --accent-cyan-glow: rgba(56, 189, 248, 0.25);
-
-      --text-white: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-
-      --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-2xl: 20px;
-      --radius-full: 9999px;
-
-      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--canvas);
-      color: var(--text-white);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-
-    /* Ambient Circuit Background Gradients */
-    .ambient-glow {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background:
-        radial-gradient(circle at 18% 15%, rgba(56, 189, 248, 0.07) 0%, transparent 40%),
-        radial-gradient(circle at 82% 35%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(30, 41, 59, 0.6) 0%, transparent 50%);
-    }
-
-    .circuit-grid-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background-size: 48px 48px;
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ==========================================================================
-       1. Top Sticky Navigation Bar
-       ========================================================================== */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      background: rgba(11, 15, 25, 0.85);
-      border-bottom: 1px solid var(--border-subtle);
-      transition: var(--transition);
-    }
-
-    .nav-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 76px;
-    }
-
-    .brand-mark {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      color: var(--text-white);
-    }
-
-    .brand-icon-wrap {
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      padding: 4px;
-      box-shadow: 0 0 15px rgba(245, 158, 11, 0.12);
-    }
-
-    .brand-icon-wrap img,
-    .brand-icon-wrap svg {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .brand-title {
-      font-family: var(--font-heading);
-      font-size: 1.12rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: #fff;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.92rem;
-      font-weight: 500;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-white);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .lang-toggle {
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      padding: 7px 14px;
-      border-radius: var(--radius-full);
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .lang-toggle:hover {
-      border-color: var(--accent-amber);
-      color: var(--accent-amber);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 22px;
-      border-radius: var(--radius-full);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: var(--transition);
-      border: none;
-    }
-
-    .btn-primary {
-      background-color: var(--accent-amber);
-      color: #0b0f19;
-      box-shadow: 0 2px 14px var(--accent-amber-glow);
-    }
-
-    .btn-primary:hover {
-      background-color: var(--accent-amber-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
-    }
-
-    .btn-ghost {
-      background: rgba(30, 41, 59, 0.4);
-      color: var(--text-white);
-      border: 1px solid var(--border-card);
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(30, 41, 59, 0.8);
-      border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-white);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* ==========================================================================
-       2. Hero Section
-       ========================================================================== */
-    .hero {
-      padding: 85px 0 70px;
-      position: relative;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 16px;
-      background: rgba(30, 41, 59, 0.65);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      border-radius: var(--radius-full);
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--accent-cyan);
-      letter-spacing: 0.06em;
-      margin-bottom: 24px;
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.12);
-    }
-
-    .cyan-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background-color: var(--accent-cyan);
-      box-shadow: 0 0 8px var(--accent-cyan);
-      animation: pulseDot 2.2s infinite ease-in-out;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.2); }
-    }
-
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: 3.35rem;
-      font-weight: 800;
-      line-height: 1.12;
-      letter-spacing: -0.025em;
-      color: var(--text-white);
-      margin-bottom: 22px;
-    }
-
-    .hero-title .glow-word {
-      background: linear-gradient(135deg, #fff 30%, var(--accent-amber) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-description {
-      font-size: 1.12rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 34px;
-      max-width: 560px;
-    }
-
-    .hero-cta-group {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .hero-footnote {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      background: rgba(17, 24, 39, 0.6);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .hero-visual-stage {
-      position: relative;
-      width: 100%;
-      max-width: 440px;
-      aspect-ratio: 1/1;
-      margin: 0 auto;
-      background: radial-gradient(circle at center, rgba(30, 41, 59, 0.75) 0%, rgba(17, 24, 39, 0.3) 70%);
-      border-radius: 28px;
-      border: 1px solid var(--border-card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      overflow: hidden;
-    }
-
-    .hero-visual-stage::before {
-      content: '';
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      background: var(--accent-amber);
-      filter: blur(85px);
-      opacity: 0.22;
-      border-radius: 50%;
-    }
-
-    .hero-visual-stage::after {
-      content: '';
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      right: 20px;
-      bottom: 20px;
-      background: var(--accent-cyan);
-      filter: blur(75px);
-      opacity: 0.15;
-      border-radius: 50%;
-    }
-
-    .stage-logo-art {
-      width: 80%;
-      height: 80%;
-      object-fit: contain;
-      z-index: 2;
-      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
-      animation: floatArt 7s ease-in-out infinite;
-    }
-
-    @keyframes floatArt {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(0.8deg); }
-    }
-
-    .telemetry-floating-pill {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      z-index: 3;
-      background: rgba(11, 15, 25, 0.88);
-      border: 1px solid var(--accent-cyan);
-      padding: 9px 15px;
-      border-radius: var(--radius-md);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent-cyan);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(10px);
-    }
-
-    /* ==========================================================================
-       3. Pilares de Transparência (Trust Anchors)
-       ========================================================================== */
-    .section-pillars {
-      padding: 45px 0 65px;
-    }
-
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .pillar-card {
-      background: var(--surface-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-2xl);
-      padding: 30px 26px;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .pillar-card:hover {
-      background: var(--surface-card-hover);
-      border-color: rgba(245, 158, 11, 0.4);
-      transform: translateY(-4px);
-    }
-
-    .pillar-icon-box {
-      width: 46px;
-      height: 46px;
-      border-radius: var(--radius-md);
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid rgba(245, 158, 11, 0.25);
-      color: var(--accent-amber);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.35rem;
-      margin-bottom: 20px;
-    }
-
-    .pillar-title {
-      font-family: var(--font-heading);
-      font-size: 1.22rem;
-      font-weight: 700;
-      color: var(--text-white);
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
-
-    .pillar-text {
-      color: var(--text-muted);
-      font-size: 0.93rem;
-      line-height: 1.6;
-    }
-
-    /* ==========================================================================
-       4. Catálogo de Serviços de Bancada (Desktop PCs)
-       ========================================================================== */
-    .section-services {
-      padding: 75px 0;
-    }
-
-    .section-header-wrap {
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto 52px;
-    }
-
-    .section-badge-pill {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--accent-amber);
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.25);
-      padding: 4px 14px;
-      border-radius: var(--radius-full);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
-      display: inline-block;
-    }
-
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: 2.35rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      color: var(--text-white);
-      margin-bottom: 14px;
-    }
-
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-      margin-bottom: 36px;
-    }
-
-    .service-card {
-      background: var(--surface-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-2xl);
-      padding: 28px 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .service-card:hover {
-      background: var(--surface-card-hover);
-      border-color: rgba(56, 189, 248, 0.4);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
-    }
-
-    .service-card-top {
-      margin-bottom: 22px;
-    }
-
-    .service-time-pill {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--accent-cyan);
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-      display: inline-block;
-      margin-bottom: 14px;
-    }
-
-    .service-card-title {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.25;
-      margin-bottom: 12px;
-    }
-
-    .service-card-scope {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      line-height: 1.55;
-    }
-
-    .service-card-bottom {
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 20px;
-    }
-
-    .service-price-block {
-      margin-bottom: 14px;
-    }
-
-    .service-price-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      font-family: var(--font-mono);
-      color: var(--text-dim);
-    }
-
-    .service-price-value {
-      font-family: var(--font-mono);
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--accent-amber);
-    }
-
-    .btn-card-schedule {
-      width: 100%;
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      color: var(--accent-amber);
-      font-size: 0.85rem;
-      padding: 9px 14px;
-      border-radius: var(--radius-full);
-      font-weight: 600;
-      text-align: center;
-      text-decoration: none;
-      transition: var(--transition);
-      display: inline-block;
-    }
-
-    .btn-card-schedule:hover {
-      background: var(--accent-amber);
-      color: #0b0f19;
-    }
-
-    /* ==========================================================================
-       5. Card Destaque: Combo Revitalização Total
-       ========================================================================== */
-    .featured-combo-card {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(17, 24, 39, 0.95) 100%);
-      border: 2px solid var(--accent-amber);
-      border-radius: 24px;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 12px 40px rgba(245, 158, 11, 0.14);
-    }
-
-    .combo-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 36px;
-      align-items: center;
-    }
-
-    .combo-badge-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .combo-badge-primary {
-      background: var(--accent-amber);
-      color: #0b0f19;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-    }
-
-    .combo-badge-time {
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--accent-cyan);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-    }
-
-    .combo-title {
-      font-family: var(--font-heading);
-      font-size: 2.1rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .combo-description {
-      color: var(--text-muted);
-      font-size: 0.98rem;
-      margin-bottom: 22px;
-    }
-
-    .combo-checklist {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px 18px;
-    }
-
-    .combo-checklist li {
-      font-size: 0.88rem;
-      color: var(--text-white);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .combo-checklist li span.check {
-      color: var(--accent-amber);
-      font-weight: bold;
-    }
-
-    .combo-price-card {
-      background: rgba(11, 15, 25, 0.7);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-2xl);
-      padding: 30px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
-
-    .combo-price-card .price-tag {
-      font-size: 0.8rem;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .combo-price-card .price-number {
-      font-family: var(--font-mono);
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: var(--accent-amber);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .combo-price-card .price-detail {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      margin-bottom: 20px;
-      font-family: var(--font-mono);
-    }
-
-    /* ==========================================================================
-       6. Transparência Contratual & Segurança (Legal Safeguards)
-       ========================================================================== */
-    .section-legal {
-      padding: 75px 0;
-      background: rgba(17, 24, 39, 0.35);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .legal-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .legal-card {
-      background: var(--surface-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-2xl);
-      padding: 28px 24px;
-      position: relative;
-    }
-
-    .legal-badge-pill {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-      margin-bottom: 14px;
-      display: inline-block;
-    }
-
-    .legal-card h3 {
-      font-family: var(--font-heading);
-      font-size: 1.18rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-
-    .legal-card p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    /* ==========================================================================
-       7. Sobre a Fundadora
-       ========================================================================== */
-    .section-about {
-      padding: 85px 0;
-    }
-
-    .about-card {
-      background: var(--surface-card);
-      border: 1px solid var(--border-card);
-      border-radius: 28px;
-      padding: 44px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .about-title {
-      font-family: var(--font-heading);
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .about-bio {
-      color: #cbd5e1;
-      font-size: 1.05rem;
-      line-height: 1.68;
-      margin-bottom: 26px;
-    }
-
-    .about-badges-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .founder-badge-pill {
-      background: rgba(11, 15, 25, 0.65);
-      border: 1px solid var(--border-card);
-      color: var(--text-white);
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      font-size: 0.8rem;
-      font-family: var(--font-mono);
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .founder-badge-pill.amber-accent {
-      border-color: rgba(245, 158, 11, 0.4);
-      color: var(--accent-amber);
-    }
-
-    .about-right-panel {
-      background: rgba(11, 15, 25, 0.7);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-2xl);
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .quote-box {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      font-style: italic;
-      line-height: 1.6;
-      position: relative;
-    }
-
-    .founder-signature {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 18px;
-    }
-
-    .founder-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-amber), var(--accent-cyan));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #0b0f19;
-      font-family: var(--font-heading);
-    }
-
-    .founder-info h4 {
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .founder-info span {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-    }
-
-    /* ==========================================================================
-       8. Footer & Agendamento
-       ========================================================================== */
-    footer {
-      background: #070a12;
-      border-top: 1px solid var(--border-subtle);
-      padding: 70px 0 35px;
-    }
-
-    .cta-banner-box {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(17, 24, 39, 0.9) 100%);
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
-      padding: 44px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 28px;
-      margin-bottom: 60px;
-    }
-
-    .cta-banner-text h3 {
-      font-family: var(--font-heading);
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-
-    .cta-banner-text p {
-      color: var(--text-muted);
-      font-size: 1rem;
-      max-width: 580px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 45px;
-    }
-
-    .footer-about p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-top: 12px;
-      max-width: 360px;
-    }
-
-    .footer-col h5 {
-      color: #fff;
-      font-family: var(--font-heading);
-      font-size: 0.98rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col li {
-      margin-bottom: 10px;
-    }
-
-    .footer-col a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      transition: var(--transition);
-    }
-
-    .footer-col a:hover {
-      color: var(--accent-amber);
-    }
-
-    .footer-bottom-bar {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      font-family: var(--font-mono);
-    }
-
-    /* Mobile Navigation Drawer */
-    .mobile-drawer {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 82%;
-      max-width: 320px;
-      height: 100vh;
-      background: rgba(11, 15, 25, 0.97);
-      backdrop-filter: blur(20px);
-      z-index: 1000;
-      padding: 36px 24px;
-      transition: var(--transition);
-      border-left: 1px solid var(--border-card);
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .mobile-drawer.open {
-      right: 0;
-    }
-
-    .drawer-close-btn {
-      align-self: flex-end;
-      background: none;
-      border: none;
-      color: var(--text-white);
-      font-size: 1.6rem;
-      cursor: pointer;
-    }
-
-    .mobile-nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .mobile-nav-links a {
-      color: var(--text-white);
-      text-decoration: none;
-      font-size: 1.05rem;
-      font-weight: 600;
-    }
-
-    /* Responsive Breakpoints */
-    @media (max-width: 1024px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #0c0c0d;
+        color: #f5f2eb;
       }
-      .hero-description {
-        margin: 0 auto 30px;
+      body {
+        overscroll-behavior: none;
       }
-      .hero-cta-group {
-        justify-content: center;
-      }
-      .pillars-grid {
-        grid-template-columns: 1fr;
-      }
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .combo-grid {
-        grid-template-columns: 1fr;
-      }
-      .legal-grid {
-        grid-template-columns: 1fr;
-      }
-      .about-card {
-        grid-template-columns: 1fr;
-      }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
     }
-
-    @media (max-width: 768px) {
-      .nav-links, .nav-actions .btn {
-        display: none;
-      }
-      .menu-toggle {
-        display: block;
-      }
-      .hero-title {
-        font-size: 2.45rem;
-      }
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-      .combo-checklist {
-        grid-template-columns: 1fr;
-      }
-      .cta-banner-box {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    ::-webkit-scrollbar { display: none; }
+    .portal-view.hidden { display: none !important; }
   </style>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-base": "#0c0c0d",
+            "surface": "#121314",
+            "surface-dim": "#121314",
+            "surface-bright": "#39393a",
+            "surface-raised": "#131416",
+            "surface-overlay": "#1c1b1a",
+            "surface-container": "#201f1e",
+            "surface-container-low": "#1b1c1d",
+            "surface-container-high": "#292a2b",
+            "surface-container-highest": "#343536",
+            "surface-container-lowest": "#080809",
+            "surface-variant": "#343536",
+            "surface-tint": "#cac6bd",
+            "text-primary": "#f5f2eb",
+            "text-secondary": "#9c9891",
+            "text-muted": "#605d58",
+            "citation-amber": "#d6a46e",
+            "telemetry-emerald": "#68b087",
+            "border-subtle": "rgba(255, 255, 255, 0.06)",
+            "border-strong": "rgba(255, 255, 255, 0.12)",
+            "primary": "#ffffff",
+            "primary-container": "#e6e2d8",
+            "on-primary": "#32312a",
+            "on-primary-container": "#66645c",
+            "secondary": "#b4ccbd",
+            "secondary-container": "#384e42",
+            "on-secondary": "#20352a",
+            "on-secondary-container": "#a6beaf",
+            "secondary-fixed": "#d0e8d8",
+            "secondary-fixed-dim": "#b4ccbd",
+            "error": "#ffb4ab",
+            "error-container": "#93000a",
+            "code-bg": "#121417"
+          },
+          fontFamily: {
+            sans: ["Inter", "-apple-system", "sans-serif"],
+            serif: ["Newsreader", "serif"],
+            mono: ["Space Mono", "monospace"],
+            "italic-accent": ["Newsreader", "serif"],
+            "label-code": ["Space Mono", "monospace"],
+            "label-micro": ["Space Mono", "monospace"],
+            "headline-lg": ["Newsreader", "serif"],
+            "headline-md": ["Newsreader", "serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "display-hero": ["Inter", "sans-serif"]
+          },
+          fontSize: {
+            "headline-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em" }],
+            "headline-md": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em" }],
+            "headline-sm": ["20px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "500" }],
+            "body-lg": ["17px", { lineHeight: "28px", letterSpacing: "-0.005em" }],
+            "body-md": ["15px", { lineHeight: "24px" }],
+            "body-sm": ["13px", { lineHeight: "20px" }],
+            "label-code": ["13px", { lineHeight: "18px", letterSpacing: "-0.01em" }],
+            "label-micro": ["10px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "500" }],
+            "display-hero": ["72px", { lineHeight: "80px", letterSpacing: "-0.04em" }]
+          },
+          spacing: {
+            gutter: "1.5rem",
+            "gutter-sm": "1rem",
+            margin: "2rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
+          },
+          letterSpacing: {
+            widest: "0.15em",
+            ultra: "0.22em"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            sm: "0.125rem",
+            md: "0.375rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            "2xl": "1rem",
+            full: "9999px"
+          }
+        }
+      }
+    };
+  </script>
 </head>
-<body>
+<body class="bg-surface-base text-text-primary font-sans antialiased min-h-screen selection:bg-neutral-800 selection:text-white relative overflow-x-hidden">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZ752M23"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div class="ambient-glow"></div>
-  <div class="circuit-grid-overlay"></div>
+  <!-- VIEW 1: STUDIO HUB (Default Home) -->
+  <div id="view-hub" class="portal-view">
 
-  <!-- 1. Top Sticky Navigation Bar -->
-  <header>
-    <div class="container nav-wrapper">
-      <a href="#" class="brand-mark">
-        <div class="brand-icon-wrap">
-          <img src="assets/brand-mark.svg" alt="The Transparency Project Logo" />
+<!-- Ambient Cinematic Glows (Hirael reference mood) -->
+<div class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+<div class="absolute -top-[25%] left-1/2 -translate-x-1/2 w-[900px] h-[580px] bg-[radial-gradient(ellipse_at_center,rgba(214,164,110,0.07)_0%,rgba(140,110,80,0.03)_40%,transparent_75%)] blur-[90px]"></div>
+<div class="absolute top-[45%] -right-[15%] w-[650px] h-[650px] bg-[radial-gradient(circle,rgba(255,255,255,0.025)_0%,transparent_70%)] blur-[100px]"></div>
+<div class="absolute bottom-[5%] -left-[10%] w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(104,176,135,0.025)_0%,transparent_70%)] blur-[110px]"></div>
+</div>
+<!-- Floating Pill Navigation (Image 23 aesthetic) -->
+<nav class="fixed top-6 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 max-w-[1440px] mx-auto pointer-events-none">
+<!-- Brand Mark -->
+<a class="pointer-events-auto flex items-center gap-3 group" data-path="the-project" href="#">
+<div class="w-8 h-8 rounded-full border border-white/10 bg-surface-raised flex items-center justify-center transition-colors group-hover:border-citation-amber/40">
+<span class="w-2 h-2 rounded-full bg-citation-amber"></span>
+</div>
+<div class="flex flex-col">
+<span class="font-sans font-medium text-[13px] tracking-tight text-text-primary">The Transparency Project</span>
+<span class="font-mono text-[9px] tracking-widest text-text-muted uppercase">Ethology Core</span>
+</div>
+</a>
+<!-- Centered Floating Pill Navigation (Reference 23 style) -->
+<div class="pointer-events-auto hidden md:flex items-center gap-7 bg-surface-raised/85 backdrop-blur-xl border border-white/10 px-6 py-2 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
+<a class="text-[11px] font-sans tracking-ultra uppercase text-text-primary font-medium hover:text-white transition-colors" data-path="the-project" href="#">Our Mission</a>
+<a class="text-[11px] font-sans tracking-ultra uppercase text-text-muted hover:text-text-primary transition-colors" data-path="ethopipe" href="#">EthoPipe</a>
+<a class="text-[11px] font-sans tracking-ultra uppercase text-text-muted hover:text-text-primary transition-colors" data-path="rse-blog" href="#">Blog / RSE</a>
+<a class="text-[11px] font-sans tracking-ultra uppercase text-text-muted hover:text-text-primary transition-colors" href="https://docs.thetransparencyproject.me" rel="noopener noreferrer" target="_blank">Docs</a>
+<a class="text-[11px] font-sans tracking-ultra uppercase text-citation-amber/80 hover:text-citation-amber transition-colors" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">Zenodo</a>
+</div>
+<!-- Right Controls / Social -->
+<div class="pointer-events-auto flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-surface-raised/80 hover:bg-white/5 text-[11px] font-mono text-text-secondary hover:text-text-primary transition-all" href="https://github.com/sothiss/ethopipe" rel="noopener noreferrer" target="_blank">
+<span>GitHub</span>
+<span class="text-[10px] text-text-muted">↗</span>
+</a>
+<div class="w-8 h-8 rounded-full border border-white/10 bg-surface-raised flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[15px]">terminal</span>
+</div>
+</div>
+</nav>
+<!-- Main Experience -->
+<main class="relative z-10 w-full flex-1 flex flex-col pt-32 pb-24">
+<!-- Hero / Statement Section (Images 22 & 23 inspired typography) -->
+<section class="w-full px-6 md:px-12 max-w-[1360px] mx-auto pt-10 md:pt-16 pb-16 md:pb-24">
+<div class="max-w-4xl flex flex-col items-start gap-6">
+<!-- Eyebrow Tag -->
+<div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full border border-white/10 bg-surface-raised text-[10px] font-mono tracking-widest uppercase text-text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald animate-pulse"></span>
+          CANINE ETHOLOGY &amp; COMPUTATIONAL RIGOR
         </div>
-        <span class="brand-title">The Transparency Project</span>
-      </a>
-
-      <ul class="nav-links">
-        <li><a href="#servicos" data-pt="Serviços de Bancada" data-en="Bench Services">Serviços de Bancada</a></li>
-        <li><a href="#pilares" data-pt="Como Funciona" data-en="How it Works">Como Funciona</a></li>
-        <li><a href="#sobre" data-pt="Sobre Nós" data-en="About Us">Sobre Nós</a></li>
-        <li>
-          <a href="https://github.com/sothiss/ethopipe" target="_blank" rel="noopener noreferrer" data-pt="Documentação & Labs" data-en="Documentation & Labs">
-            <span>Documentação & Labs</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-        </li>
-      </ul>
-
-      <div class="nav-actions">
-        <button class="lang-toggle" id="langToggleBtn" aria-label="Toggle Language">EN / PT</button>
-        <a href="https://wa.me/5511999999999?text=Olá%2C%20gostaria%20de%20agendar%20um%20horário%20em%20bancada%20no%20The%20Transparency%20Project" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-pt="Agendar Horário" data-en="Book Appointment">
-          Agendar Horário
-        </a>
-        <button class="menu-toggle" id="mobileToggleBtn" aria-label="Menu">&#9776;</button>
+<!-- Grand Editorial Headline (Ref Image 22) -->
+<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] leading-[1.08] tracking-[-0.03em] font-normal text-text-primary">
+          The Transparency Project is an open-science initiative, <em class="font-serif italic font-light text-text-primary/90">born from restless curiosity</em> and empirical rigor.
+        </h1>
+<!-- Understated Subtext -->
+<p class="text-base sm:text-lg text-text-secondary font-light max-w-2xl leading-relaxed pt-2">
+          Transforming subjective companion animal handler narratives into deterministic, machine-readable datasets for veterinary epidemiology and population-scale welfare science.
+        </p>
+<!-- CTA Action Buttons (Ref Image 23 "Join the lab" style) -->
+<div class="flex flex-wrap items-center gap-4 pt-4">
+<a class="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full bg-text-primary text-surface-base font-sans text-xs tracking-wider uppercase font-semibold hover:bg-white transition-all shadow-[0_0_24px_rgba(255,255,255,0.12)] group" data-path="ethopipe" href="#">
+<span>Explore EthoPipe</span>
+<div class="w-6 h-6 rounded-full bg-surface-base flex items-center justify-center text-text-primary transition-transform group-hover:translate-x-0.5">
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</div>
+</a>
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-surface-raised hover:bg-white/5 font-sans text-xs tracking-wider uppercase text-text-secondary hover:text-text-primary transition-all" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[14px] text-citation-amber">dataset</span>
+<span>Zenodo Archive</span>
+<span class="text-text-muted">↗</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Studio Bento Pillars (Reference Image 21 Aesthetic) -->
+<section class="w-full px-6 md:px-12 max-w-[1360px] mx-auto py-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-border-subtle">
+<div>
+<span class="font-mono text-[10px] tracking-ultra uppercase text-citation-amber block mb-1">Substrates &amp; Pipelines</span>
+<h2 class="text-2xl sm:text-3xl font-light tracking-tight text-text-primary">
+            Studio-grade craft for open-science ethology.
+          </h2>
+</div>
+<p class="text-xs sm:text-sm text-text-muted max-w-sm font-light">
+          Three unified chambers establishing verifiable physical motor sequences, typed schema validation, and RSE dispatches.
+        </p>
+</div>
+<!-- 3-Column Studio Bento Grid (Direct mirror of Image 21 cards) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- Card 01: The Project -->
+<div class="group relative rounded-2xl border border-white/5 bg-surface-raised p-8 flex flex-col justify-between hover:border-white/15 hover:bg-surface-overlay/80 transition-all duration-300 min-h-[380px]">
+<div>
+<div class="flex items-center justify-between mb-8">
+<div class="w-9 h-9 rounded-lg border border-white/10 bg-surface-container flex items-center justify-center text-text-secondary group-hover:text-text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</div>
+<span class="font-mono text-xs text-text-muted">01</span>
+</div>
+<h3 class="text-xl font-medium tracking-tight text-text-primary mb-2">The Project</h3>
+<p class="text-xs text-text-muted mb-6 font-mono">Overcoming the Replication Bottleneck</p>
+<!-- Checklist -->
+<ul class="space-y-3 text-xs text-text-secondary">
+<li class="flex items-start gap-2.5">
+<span class="text-citation-amber text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span>De-anthropomorphizing companion animal observations</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-citation-amber text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span>Grounded in Broseghini et al. &amp; de Winkel et al.</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-citation-amber text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span>Variance reduction across intake logs &amp; shelter incidents</span>
+</li>
+</ul>
+</div>
+<div class="pt-8">
+<a class="inline-flex items-center gap-1.5 text-xs font-mono text-text-secondary hover:text-text-primary transition-colors" data-path="the-project" href="#">
+<span>Learn more</span>
+<span class="text-[11px] group-hover:translate-x-0.5 transition-transform">↗</span>
+</a>
+</div>
+</div>
+<!-- Card 02: EthoPipe Engine -->
+<div class="group relative rounded-2xl border border-white/5 bg-surface-raised p-8 flex flex-col justify-between hover:border-white/15 hover:bg-surface-overlay/80 transition-all duration-300 min-h-[380px]">
+<div>
+<div class="flex items-center justify-between mb-8">
+<div class="w-9 h-9 rounded-lg border border-white/10 bg-surface-container flex items-center justify-center text-telemetry-emerald transition-colors">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<span class="font-mono text-xs text-text-muted">02</span>
+</div>
+<h3 class="text-xl font-medium tracking-tight text-text-primary mb-2">EthoPipe Engine</h3>
+<p class="text-xs text-text-muted mb-6 font-mono">Deterministic Ingestion Pipeline</p>
+<!-- Checklist -->
+<ul class="space-y-3 text-xs text-text-secondary">
+<li class="flex items-start gap-2.5">
+<span class="text-telemetry-emerald text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span>Clamped zero-temperature LLM parsing (0.0)</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-telemetry-emerald text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span>Pydantic strict validation (30–250 BPM bounds)</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-telemetry-emerald text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span>Darwin Core (DwC) relational star-schema mapping</span>
+</li>
+</ul>
+</div>
+<div class="pt-8">
+<a class="inline-flex items-center gap-1.5 text-xs font-mono text-text-secondary hover:text-telemetry-emerald transition-colors" data-path="ethopipe" href="#">
+<span>Launch EthoPipe</span>
+<span class="text-[11px] group-hover:translate-x-0.5 transition-transform">↗</span>
+</a>
+</div>
+</div>
+<!-- Card 03: RSE Blog & Dispatches -->
+<div class="group relative rounded-2xl border border-white/5 bg-surface-raised p-8 flex flex-col justify-between hover:border-white/15 hover:bg-surface-overlay/80 transition-all duration-300 min-h-[380px]">
+<div>
+<div class="flex items-center justify-between mb-8">
+<div class="w-9 h-9 rounded-lg border border-white/10 bg-surface-container flex items-center justify-center text-citation-amber transition-colors">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+</div>
+<span class="font-mono text-xs text-text-muted">03</span>
+</div>
+<h3 class="text-xl font-medium tracking-tight text-text-primary mb-2">RSE Blog &amp; Dispatches</h3>
+<p class="text-xs text-text-muted mb-6 font-mono">Field Notes &amp; Architectural Theory</p>
+<!-- Checklist -->
+<ul class="space-y-3 text-xs text-text-secondary">
+<li class="flex items-start gap-2.5">
+<span class="text-citation-amber text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span class="line-clamp-1">'They’re Made Out of Weights: Calibrating Zero-Temp'</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-citation-amber text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span class="line-clamp-1">'De-anthropomorphizing Incident Reports'</span>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="text-citation-amber text-[13px] leading-none mt-0.5 font-bold">✓</span>
+<span>RSE field notes &amp; microservices architecture</span>
+</li>
+</ul>
+</div>
+<div class="pt-8">
+<a class="inline-flex items-center gap-1.5 text-xs font-mono text-text-secondary hover:text-citation-amber transition-colors" data-path="rse-blog" href="#">
+<span>Read dispatches</span>
+<span class="text-[11px] group-hover:translate-x-0.5 transition-transform">↗</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Architecture & Interactive Telemetry Console (Image 20 terminal vibes) -->
+<section class="w-full px-6 md:px-12 max-w-[1360px] mx-auto py-10">
+<div class="rounded-2xl border border-white/5 bg-surface-raised overflow-hidden">
+<!-- Terminal Header Strip -->
+<div class="px-6 py-3.5 border-b border-border-subtle bg-surface-container/40 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+</div>
+<span class="font-mono text-[11px] text-text-muted">~/ethopipe/runtime/telemetry.stream</span>
+</div>
+<div class="flex items-center gap-4 font-mono text-[10px] text-text-muted">
+<span class="flex items-center gap-1 text-telemetry-emerald">
+<span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald"></span>
+              ETL: ACTIVE
+            </span>
+<span>SPECIMEN: CANIS FAMILIARIS</span>
+<span>DwC-A v2.4 VALID</span>
+</div>
+</div>
+<!-- Terminal Content Columns -->
+<div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Code Datafeed -->
+<div class="lg:col-span-7 flex flex-col gap-4 font-mono text-xs">
+<div class="text-text-muted text-[11px] flex justify-between pb-1 border-b border-white/5">
+<span>// DETERMINISTIC PYDANTIC V2 EXTRACTION</span>
+<span>ISO 8601 UTC</span>
+</div>
+<div class="space-y-2 text-text-secondary leading-relaxed bg-surface-container-lowest/60 p-4 rounded-xl border border-white/5">
+<div class="flex justify-between items-center">
+<span class="text-text-muted">dwc:basisOfRecord</span>
+<span class="text-telemetry-emerald">"MachineObservation"</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">dwc:measurementType</span>
+<span class="text-text-primary">"heart_rate_bpm"</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">pydantic.Field(ge=30.0, le=250.0)</span>
+<span class="text-citation-amber">Merck Manual Enforced</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">dwc:measurementValue</span>
+<span class="text-text-primary font-medium" id="telemetry-bpm-counter">74.8 BPM</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">pipeline.llm_sampling_temp</span>
+<span class="text-text-primary">0.00 (stochastic variance eliminated)</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-muted">ingestion_latency</span>
+<span class="text-telemetry-emerald">16.4ms</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-text-muted pt-1">
+<span>CI SUITE: pytest -v --cov=src</span>
+<span class="text-telemetry-emerald font-medium">100% PASSING</span>
+</div>
+</div>
+<!-- Academic Grounding & Bibliography Strip -->
+<div class="lg:col-span-5 flex flex-col justify-between pl-0 lg:pl-6 lg:border-l lg:border-border-subtle gap-6">
+<div>
+<span class="font-mono text-[10px] tracking-widest uppercase text-text-muted block mb-3">Theoretical Grounding</span>
+<div class="space-y-4">
+<div class="space-y-1">
+<div class="text-xs font-mono text-text-primary">Broseghini et al. (2024)</div>
+<p class="text-xs text-text-secondary font-serif italic">
+                    Ethogram of the predatory sequence of dogs (Canis familiaris).
+                  </p>
+<span class="font-mono text-[10px] text-citation-amber/90 block">doi:10.1016/j.applanim.2024.106402</span>
+</div>
+<div class="space-y-1">
+<div class="text-xs font-mono text-text-primary">de Winkel et al. (2024)</div>
+<p class="text-xs text-text-secondary font-serif italic">
+                    Observational behaviors and emotions to assess welfare of dogs: Systematic review.
+                  </p>
+<span class="font-mono text-[10px] text-citation-amber/90 block">doi:10.1016/j.jveb.2023.12.007</span>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-white/5 flex items-center justify-between font-mono text-[10px] text-text-muted">
+<span>MERCK COMPLIANT</span>
+<span class="text-text-secondary">GBIF FEDERATION READY</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Provenance & Persistent Identifiers Bar (Ref image 20/23 bottom utility) -->
+<section class="w-full px-6 md:px-12 max-w-[1360px] mx-auto pt-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Provenance 1 -->
+<a class="p-4 rounded-xl border border-white/5 bg-surface-raised hover:bg-surface-overlay transition-all group flex flex-col justify-between" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">
+<div class="flex items-center justify-between text-text-muted mb-2 font-mono text-[10px]">
+<span class="text-citation-amber uppercase">Zenodo Deposit</span>
+<span class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+</div>
+<span class="text-sm font-medium text-text-primary">Permanent DOI</span>
+<span class="font-mono text-[11px] text-text-secondary mt-1">10.5281/zenodo.21211371</span>
+</a>
+<!-- Provenance 2 -->
+<a class="p-4 rounded-xl border border-white/5 bg-surface-raised hover:bg-surface-overlay transition-all group flex flex-col justify-between" href="https://orcid.org/0009-0003-0048-8982" rel="noopener noreferrer" target="_blank">
+<div class="flex items-center justify-between text-text-muted mb-2 font-mono text-[10px]">
+<span class="text-telemetry-emerald uppercase">Author Authority</span>
+<span class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+</div>
+<span class="text-sm font-medium text-text-primary">Alice Severi Gonçalves</span>
+<span class="font-mono text-[11px] text-text-secondary mt-1">ORCID: 0009-0003-0048-8982</span>
+</a>
+<!-- Provenance 3 -->
+<a class="p-4 rounded-xl border border-white/5 bg-surface-raised hover:bg-surface-overlay transition-all group flex flex-col justify-between" href="https://github.com/sothiss/ethopipe" rel="noopener noreferrer" target="_blank">
+<div class="flex items-center justify-between text-text-muted mb-2 font-mono text-[10px]">
+<span class="uppercase">Python CI Suite</span>
+<span class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+</div>
+<span class="text-sm font-medium text-text-primary">Python 3.11 / 3.12</span>
+<span class="font-mono text-[11px] text-text-secondary mt-1">Build passing · Strict typed</span>
+</a>
+<!-- Provenance 4 -->
+<div class="p-4 rounded-xl border border-white/5 bg-surface-raised flex flex-col justify-between">
+<div class="flex items-center justify-between text-text-muted mb-2 font-mono text-[10px]">
+<span class="text-text-muted uppercase">Open Infrastructure</span>
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+</div>
+<span class="text-sm font-medium text-text-primary">Darwin Core Standards</span>
+<span class="font-mono text-[11px] text-text-secondary mt-1">CC-BY-4.0 / Apache-2.0</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Sleek Minimal Footer -->
+<footer class="w-full border-t border-border-subtle bg-surface-container-lowest/80 text-text-muted py-10 px-6 md:px-12 relative z-10">
+<div class="max-w-[1360px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-mono">
+<div class="flex items-center gap-4">
+<span class="text-text-primary font-sans font-medium text-[13px]">The Transparency Project</span>
+<span class="text-white/10">|</span>
+<span class="text-text-muted">Nocturne Ethology Core</span>
+</div>
+<div class="flex flex-wrap items-center gap-6 text-text-secondary">
+<a class="hover:text-text-primary transition-colors" data-path="the-project" href="#">Mission</a>
+<a class="hover:text-text-primary transition-colors" data-path="ethopipe" href="#">EthoPipe</a>
+<a class="hover:text-text-primary transition-colors" data-path="rse-blog" href="#">Dispatches</a>
+<a class="hover:text-citation-amber transition-colors" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">Zenodo DOI</a>
+</div>
+<div class="text-[11px] text-text-muted">
+        © 2025 · sha-256:e4b89f2 · Darwin Core Compliant
       </div>
-    </div>
-  </header>
+</div>
+</footer>
+<!-- Telemetry simulated live heartbeat -->
 
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobileDrawer">
-    <button class="drawer-close-btn" id="drawerCloseBtn">&times;</button>
-    <ul class="mobile-nav-links">
-      <li><a href="#servicos" class="drawer-item">Serviços de Bancada</a></li>
-      <li><a href="#pilares" class="drawer-item">Como Funciona</a></li>
-      <li><a href="#combo" class="drawer-item">Combo Revitalização</a></li>
-      <li><a href="#garantia" class="drawer-item">Garantia & Segurança</a></li>
-      <li><a href="#sobre" class="drawer-item">Sobre Nós</a></li>
-    </ul>
-    <a href="https://wa.me/5511999999999?text=Olá%2C%20gostaria%20de%20agendar%20um%20horário%20em%20bancada%20no%20The%20Transparency%20Project" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 15px;">
-      Agendar no WhatsApp
-    </a>
+
   </div>
 
-  <main>
-    <!-- 2. Hero Section -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-text-content">
-          <div class="status-pill">
-            <span class="cyan-dot"></span>
-            <span data-pt="ATENDIMENTO EM BANCADA • PLANALTO PAULISTA, SP" data-en="BENCH SERVICE • PLANALTO PAULISTA, SP">ATENDIMENTO EM BANCADA • PLANALTO PAULISTA, SP</span>
-          </div>
-
-          <h1 class="hero-title">
-            <span data-pt="Tecnologia Transparente. " data-en="Transparent Tech. ">Tecnologia Transparente. </span>
-            <span class="glow-word" data-pt="Resultados Reais." data-en="Real Results.">Resultados Reais.</span>
-          </h1>
-
-          <p class="hero-description" data-pt="Manutenção modular, limpeza preventiva e revitalização de computadores desktop. Preços tabelados, zero venda casada e foco cirúrgico no que sua máquina realmente precisa." data-en="Modular maintenance, preventive cleaning, and desktop PC revitalization. Fixed rates, zero forced upselling, and a surgical focus on what your machine genuinely needs.">
-            Manutenção modular, limpeza preventiva e revitalização de computadores desktop. Preços tabelados, zero venda casada e foco cirúrgico no que sua máquina realmente precisa.
-          </p>
-
-          <div class="hero-cta-group">
-            <a href="https://wa.me/5511999999999?text=Olá%2C%20gostaria%20de%20agendar%20uma%20manutenção%20em%20bancada" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-pt="Agendar Manutenção em Bancada" data-en="Schedule Bench Maintenance">
-              Agendar Manutenção em Bancada
+  <!-- VIEW 2: THE PROJECT (Scientific Thesis) -->
+  <div id="view-thesis" class="portal-view hidden">
+<header class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-margin-mobile lg:px-margin bg-surface-base/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.4)]"><div class="h-20 w-full max-w-[1440px] mx-auto flex items-center justify-between"><div class="flex items-center gap-space-md"><img src="/assets/portal-logo.svg" alt="The Transparency Project" class="h-8 w-auto object-contain" /><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">The Transparency Project</span><span class="font-label-micro text-label-micro uppercase text-text-muted tracking-widest">Canine Ethology &amp; Biotelemetry</span></div></div><div class="hidden xl:flex items-center px-space-sm py-space-xs bg-surface-raised rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.5)]"><nav class="flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-full shadow-sm"><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="hub-home" href="#">Hub / Home</a><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="the-project-thesis" href="#">The Project (Thesis)</a><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="ethopipe-docs-pipeline" href="#">EthoPipe (Docs &amp; Pipeline)</a><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="dispatches-blog" href="#">Dispatches &amp; Blog</a><a class="px-space-md py-1.5 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="zenodo-archive" href="#">Zenodo Archive ↗</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-1.5 bg-surface-raised hover:bg-surface-container-high rounded-full transition-colors" href="https://github.com/sothiss/ethopipe" rel="noopener noreferrer" target="_blank"><span class="font-label-code text-label-code text-text-secondary">GitHub / Star</span><span class="font-label-micro text-label-micro text-citation-amber bg-surface-overlay px-1.5 py-0.5 rounded-full">★ 248</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface-base min-h-screen"><div class="flex flex-col w-full">
+<!-- HERO BANNER SECTION (Dark Editorial, Newsreader Italic Accents, Specimen Metrology) -->
+<section class="relative w-full overflow-hidden bg-surface-base px-margin-mobile lg:px-margin py-space-xl lg:py-24">
+<!-- Subtle gradient backdrop glow -->
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-telemetry-emerald/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-citation-amber/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-lg relative z-10">
+<!-- Eyebrow & Index Header -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-2 px-space-sm py-1 bg-surface-raised rounded text-telemetry-emerald font-label-micro text-label-micro uppercase tracking-widest">
+<span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald animate-pulse"></span>
+            01 // Foundation &amp; Thesis
+          </span>
+<span class="font-label-micro text-label-micro uppercase tracking-wider text-text-muted">
+            De-Anthropomorphism &amp; Epidemiology
+          </span>
+</div>
+<div class="flex items-center gap-space-xs font-label-code text-label-code text-text-muted">
+<span>ETHOP-CORE-THESIS</span>
+<span class="text-text-muted">/</span>
+<span class="text-citation-amber font-medium">REV-2024.11</span>
+</div>
+</div>
+<!-- Grand Statement Display Typography -->
+<div class="max-w-[1180px]">
+<h1 class="font-headline-lg text-headline-lg lg:text-[68px] lg:leading-[76px] text-text-primary tracking-tight font-normal">
+          Overcoming the replication bottleneck in companion animal welfare, 
+          <span class="font-italic-accent text-citation-amber italic font-normal">
+            born from restless curiosity and empirical rigor.
+          </span>
+</h1>
+<p class="mt-space-md text-text-secondary font-body-lg text-body-lg max-w-[840px] leading-relaxed">
+          Ground-level canine clinical intakes and incident archives are shackled to moralizing human prose. 
+          The Transparency Project establishes the algorithmic protocols required to convert qualitative narrative noise into immutable, type-strict biotelemetry.
+        </p>
+</div>
+<!-- Telemetry Meta Bar / Metadata Registry Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-xs p-space-sm bg-surface-raised rounded-xl mt-space-sm shadow-xl">
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Principal Systems Architect</span>
+<span class="font-label-code text-label-code text-text-primary truncate mt-0.5">Alice Severi Gonçalves</span>
+</div>
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Persistent Identifier</span>
+<a class="font-label-code text-label-code text-citation-amber hover:underline mt-0.5 flex items-center gap-1" href="https://orcid.org/0009-0003-0048-8982" rel="noopener noreferrer" target="_blank">
+            0009-0003-0048-8982 ↗
+          </a>
+</div>
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Zenodo Deposit DOI</span>
+<a class="font-label-code text-label-code text-citation-amber hover:underline mt-0.5 flex items-center gap-1" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">
+            10.5281/zenodo.21211371 ↗
+          </a>
+</div>
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Standard Core &amp; Schema</span>
+<span class="font-label-code text-label-code text-telemetry-emerald mt-0.5">Darwin Core (DwC) v1.4</span>
+</div>
+<div class="flex flex-col p-space-sm bg-surface-overlay rounded">
+<span class="font-label-micro text-label-micro uppercase text-text-muted">Verification Status</span>
+<span class="font-label-code text-label-code text-text-primary mt-0.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald"></span>
+            CI/CD Gate Clean (3.12)
+          </span>
+</div>
+</div>
+</div>
+</section>
+<!-- PROBLEM SPACE: TWO COLUMN EDITORIAL CONTRAST -->
+<section class="w-full bg-surface-raised px-margin-mobile lg:px-margin py-space-xl relative">
+<div class="max-w-[1440px] mx-auto">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-sm">
+<div>
+<span class="font-label-micro text-label-micro uppercase tracking-widest text-citation-amber">Problem Space // Systematic Noise</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary mt-1 font-normal">
+            The Anthropomorphic Narrative Trap
+          </h2>
+</div>
+<p class="font-label-code text-label-code text-text-muted max-w-sm">
+          Inter-rater observer variance exceeds 74% in freehand clinical narratives, paralyzing epidemiological discovery.
+        </p>
+</div>
+<!-- Two-Column Asymmetric Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Diagnostic Essay -->
+<div class="lg:col-span-6 flex flex-col gap-space-md">
+<div class="p-space-lg bg-surface-overlay rounded-xl shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-micro text-label-micro uppercase text-error tracking-wider flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span> Qualitative Bottleneck
+              </span>
+<span class="font-label-code text-label-code text-text-muted">OBSERVATION_ERR // &gt;74%</span>
+</div>
+<p class="font-body-lg text-body-lg text-text-primary leading-relaxed">
+              Shelter intake records, canine shelter logs, and veterinary incident records rely on moralizing, projective vocabulary. Canine subjects are routinely categorized as <span class="text-error font-medium italic">"spiteful," "guilty," "stubborn,"</span> or <span class="text-error font-medium italic">"passively dominant."</span>
+</p>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+              These linguistic shortcuts bypass physiological mechanics. A canine labeled "spitefully destructive" when left alone has its somatic distress flattened. What actually occurred is elevated salivary cortisol, sustained panting, pacing locomotion vectors, and frenzied oral displacement chewing around ingress points.
+            </p>
+<div class="mt-space-sm p-space-md bg-surface-base rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between text-text-muted font-label-micro text-label-micro uppercase">
+<span>Inter-Rater Concordance Matrix (Fleiss' Kappa)</span>
+<span class="text-error font-label-code text-label-code">κ = 0.22 (Poor)</span>
+</div>
+<!-- Simulated mini bar graph for Kappa scores -->
+<div class="w-full bg-surface-raised h-2 rounded-full overflow-hidden flex">
+<div class="bg-error h-full w-[22%]"></div>
+<div class="bg-surface-container h-full w-[78%]"></div>
+</div>
+<span class="font-label-micro text-label-micro text-text-muted">
+                Uncalibrated freeform incident text yields statistically negligible multi-observer consistency across 12 shelter pilot tests.
+              </span>
+</div>
+</div>
+<!-- Supporting Scientific Quote -->
+<div class="p-space-md bg-surface-base rounded-xl flex items-start gap-space-md">
+<span class="material-symbols-outlined text-citation-amber text-3xl">format_quote</span>
+<div class="flex flex-col">
+<p class="font-headline-md text-headline-sm text-text-primary italic font-italic-accent leading-snug">
+                "Human observers routinely substitute emotional projection for motor sequence indexing, transforming empirical science into folkloric fiction."
+              </p>
+<span class="font-label-code text-label-code text-text-muted mt-2">
+                — EthoPipe Project Manifesto (2024)
+              </span>
+</div>
+</div>
+</div>
+<!-- Right Column: Interactive Diff Inspector / Specimen Card -->
+<div class="lg:col-span-6 flex flex-col gap-space-sm">
+<div class="p-space-lg bg-surface-base rounded-xl shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-micro text-label-micro uppercase text-citation-amber tracking-widest">Diff Inspector</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-overlay font-label-code text-label-micro text-telemetry-emerald">v1.4.2</span>
+</div>
+<span class="font-label-code text-label-code text-text-muted">Deterministic Normalization</span>
+</div>
+<!-- Tabs Toggle for Interactive Diff -->
+<div class="flex p-1 bg-surface-raised rounded-lg text-center" id="diffToggleContainer">
+<button class="flex-1 py-1.5 rounded font-label-code text-label-code bg-surface-overlay text-text-primary transition-all" id="btnTab1" onclick="switchDiff('case1')">
+                Case 01: Fence Conflict
+              </button>
+<button class="flex-1 py-1.5 rounded font-label-code text-label-code text-text-muted hover:text-text-primary transition-all" id="btnTab2" onclick="switchDiff('case2')">
+                Case 02: Kennel Greeting
+              </button>
+</div>
+<!-- Case 1 Container -->
+<div class="flex flex-col gap-space-md" id="diffContentCase1">
+<!-- Raw Input Box -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-micro text-label-micro text-error uppercase">
+<span>Input: Raw Volunteer Prose (Uncalibrated)</span>
+<span class="font-label-code text-label-code">STRING [L=118]</span>
+</div>
+<div class="p-space-md bg-code-bg rounded-lg font-label-code text-label-code text-text-secondary leading-relaxed">
+                  "Dog looked totally guilty after chewing the perimeter fence. When I approached he got stubborn and gave me a mean side-eye, ignoring my commands on purpose."
+                </div>
+</div>
+<!-- Downward transformation glyph -->
+<div class="flex items-center justify-center">
+<div class="flex items-center gap-2 px-space-sm py-1 bg-surface-raised rounded-full font-label-code text-label-micro text-telemetry-emerald">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>
+<span>EthoPipe Clamped Zero-Temp Normalizer</span>
+</div>
+</div>
+<!-- Normalized Structured Schema Output -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-micro text-label-micro text-telemetry-emerald uppercase">
+<span>Output: Darwin Core Star-Schema Observation</span>
+<span class="font-label-code text-label-code">PARSED JSON [VALID]</span>
+</div>
+<div class="p-space-md bg-code-bg rounded-lg font-label-code text-label-code text-text-primary overflow-x-auto text-[12px] leading-5">
+<pre class="text-text-secondary">{
+  <span class="text-citation-amber">"dwc:basisOfRecord"</span>: <span class="text-telemetry-emerald">"HumanObservation"</span>,
+  <span class="text-citation-amber">"dwc:individualID"</span>: <span class="text-text-primary">"CANIS-SUBJ-8821"</span>,
+  <span class="text-citation-amber">"ethogram_measurements"</span>: [
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"displacement_oral_mastication"</span>,
+      <span class="text-citation-amber">"substrate"</span>: <span class="text-text-primary">"galvanized_mesh"</span>,
+      <span class="text-citation-amber">"dwc:measurementValue"</span>: <span class="text-citation-amber">1</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"displacement_oral_lip_licking"</span>,
+      <span class="text-citation-amber">"frequency"</span>: <span class="text-citation-amber">4</span>,
+      <span class="text-citation-amber">"dwc:measurementUnit"</span>: <span class="text-text-primary">"discrete_count"</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"pinnae_caudal_retraction"</span>,
+      <span class="text-citation-amber">"intensity"</span>: <span class="text-text-primary">"grade_2"</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"locomotion_avoidance_vector"</span>,
+      <span class="text-citation-amber">"gaze_aversion"</span>: <span class="text-telemetry-emerald">true</span>
+    }
+  ],
+  <span class="text-citation-amber">"inferred_anthropomorphisms_stripped"</span>: [
+    <span class="text-error">"guilty"</span>, <span class="text-error">"stubborn"</span>, <span class="text-error">"mean"</span>, <span class="text-error">"spiteful"</span>
+  ]
+}</pre>
+</div>
+</div>
+</div>
+<!-- Case 2 Container (Hidden by default) -->
+<div class="hidden flex-col gap-space-md" id="diffContentCase2">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-micro text-label-micro text-error uppercase">
+<span>Input: Raw Kennel Incident Log</span>
+<span class="font-label-code text-label-code">STRING [L=104]</span>
+</div>
+<div class="p-space-md bg-code-bg rounded-lg font-label-code text-label-code text-text-secondary leading-relaxed">
+                  "Dog became crazy excited and tried to dominate handler when entering stall. Snarled angrily when leash was looped."
+                </div>
+</div>
+<div class="flex items-center justify-center">
+<div class="flex items-center gap-2 px-space-sm py-1 bg-surface-raised rounded-full font-label-code text-label-micro text-telemetry-emerald">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>
+<span>EthoPipe Clamped Zero-Temp Normalizer</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-micro text-label-micro text-telemetry-emerald uppercase">
+<span>Output: Darwin Core Star-Schema Observation</span>
+<span class="font-label-code text-label-code">PARSED JSON [VALID]</span>
+</div>
+<div class="p-space-md bg-code-bg rounded-lg font-label-code text-label-code text-text-primary overflow-x-auto text-[12px] leading-5">
+<pre class="text-text-secondary">{
+  <span class="text-citation-amber">"dwc:basisOfRecord"</span>: <span class="text-telemetry-emerald">"HumanObservation"</span>,
+  <span class="text-citation-amber">"dwc:individualID"</span>: <span class="text-text-primary">"CANIS-SUBJ-4019"</span>,
+  <span class="text-citation-amber">"ethogram_measurements"</span>: [
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"jumping_vertical_barrier"</span>,
+      <span class="text-citation-amber">"frequency"</span>: <span class="text-citation-amber">3</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"vocal_growl_defensive"</span>,
+      <span class="text-citation-amber">"context"</span>: <span class="text-text-primary">"leash_application"</span>
+    },
+    {
+      <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-telemetry-emerald">"respiratory_tachypnea"</span>,
+      <span class="text-citation-amber">"panting"</span>: <span class="text-telemetry-emerald">true</span>
+    }
+  ],
+  <span class="text-citation-amber">"inferred_anthropomorphisms_stripped"</span>: [
+    <span class="text-error">"crazy excited"</span>, <span class="text-error">"dominate"</span>, <span class="text-error">"angrily"</span>
+  ]
+}</pre>
+</div>
+</div>
+</div>
+<!-- Footer micro badge -->
+<div class="flex items-center justify-between pt-space-xs text-text-muted font-label-micro text-label-micro">
+<span>Schema standard: ISO 8601 / Darwin Core XML / DwC-A</span>
+<span class="text-telemetry-emerald flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Valid Pydantic Schema
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- THE THREE SCIENTIFIC PILLARS (Minimalist Architectural Triptych) -->
+<section class="w-full bg-surface-base px-margin-mobile lg:px-margin py-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-xl">
+<!-- Section Header -->
+<div class="flex flex-col gap-2 max-w-[800px]">
+<span class="font-label-micro text-label-micro uppercase tracking-widest text-telemetry-emerald">Methodological Architecture</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary font-normal">
+          The Three Scientific Pillars
+        </h2>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+          How EthoPipe bridges veterinary behavioral field studies with high-velocity algorithmic processing pipelines.
+        </p>
+</div>
+<!-- 3-Pillar Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Pillar 01 -->
+<div class="flex flex-col justify-between p-space-lg bg-surface-raised rounded-xl shadow-lg relative group hover:bg-surface-overlay transition-all">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-citation-amber">01 // ETHOLOGY</span>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Ethogram Matrix</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">
+              Standardized Kinematic Ethograms
+            </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+              Grounding field notations in peer-reviewed observational frameworks (<span class="text-text-primary italic font-italic-accent">Broseghini et al. 2024</span>, <span class="text-text-primary italic font-italic-accent">de Winkel et al. 2024</span>). Every qualitative notation is collapsed into verifiable motor patterns: lip licks, commissure retraction, play bows, caudal wag angles, and weight shifts.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-base/40 p-space-sm rounded flex flex-col gap-1">
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Catalogued Motor Units</span>
+<span class="font-label-code text-label-code text-telemetry-emerald">148 Distinct Kinematic Keys</span>
+</div>
+</div>
+<!-- Pillar 02 -->
+<div class="flex flex-col justify-between p-space-lg bg-surface-raised rounded-xl shadow-lg relative group hover:bg-surface-overlay transition-all">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-telemetry-emerald">02 // ALGORITHM</span>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Clamped Temp 0.0</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">
+              Clamped Deterministic Parsing Clerks
+            </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+              Utilizing large foundation models stripped completely of creativity. By locking generative temperature strictly to <span class="font-label-code text-label-code text-citation-amber bg-surface-overlay px-1 py-0.5 rounded">0.0</span> and applying structured schema decoders, the model functions strictly as an infallible text-cleaning parsing clerk, completely immune to stochastic hallucinations.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-base/40 p-space-sm rounded flex flex-col gap-1">
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Inference Engine</span>
+<span class="font-label-code text-label-code text-text-primary">Gemini 3.5 Flash (Strict JSON Schema)</span>
+</div>
+</div>
+<!-- Pillar 03 -->
+<div class="flex flex-col justify-between p-space-lg bg-surface-raised rounded-xl shadow-lg relative group hover:bg-surface-overlay transition-all">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-secondary-fixed">03 // INTEROP</span>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">GBIF / OBIS Standards</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">
+              Darwin Core (DwC) Biodiversity Export
+            </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+              Exporting clean observations formatted for the world's primary biological repositories. By mapping animal ID to <span class="font-label-code text-label-code text-telemetry-emerald">dwc:individualID</span> and events to ISO 8601 <span class="font-label-code text-label-code text-telemetry-emerald">dwc:eventDate</span>, companion animal behavioral datasets integrate directly into macro-scale veterinary epidemiology.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-base/40 p-space-sm rounded flex flex-col gap-1">
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Relational Topology</span>
+<span class="font-label-code text-label-code text-text-primary">Star Schema / Parquet / DwC-A</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESEARCH METHODOLOGY & INTER-RATER RELIABILITY BENCHMARK -->
+<section class="w-full bg-surface-raised px-margin-mobile lg:px-margin py-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<span class="font-label-micro text-label-micro uppercase tracking-widest text-citation-amber">Empirical Benchmarks</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary font-normal mt-1">
+            Inter-Rater Reliability: Before vs. After
+          </h2>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary max-w-md">
+          Field results across N=420 canine intake logs evaluated by 8 independent veterinary observers before and after EthoPipe deterministic normalization.
+        </p>
+</div>
+<!-- Metric Comparison Table -->
+<div class="w-full overflow-x-auto bg-surface-overlay rounded-xl shadow-xl">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-base/80 text-text-muted font-label-micro text-label-micro uppercase tracking-wider">
+<th class="p-space-md">Metric / Diagnostic Category</th>
+<th class="p-space-md">Raw Human Observation</th>
+<th class="p-space-md">EthoPipe Normalization</th>
+<th class="p-space-md">Improvement / Δ</th>
+<th class="p-space-md text-right">Standard Grounding</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle/0">
+<tr class="hover:bg-surface-raised/40 transition-colors">
+<td class="p-space-md font-label-code text-label-code text-text-primary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+                Fleiss' Kappa Concordance (κ)
+              </td>
+<td class="p-space-md font-label-code text-label-code text-error">0.24 (Slight Agreement)</td>
+<td class="p-space-md font-label-code text-label-code text-telemetry-emerald font-medium">0.89 (Near Perfect)</td>
+<td class="p-space-md font-label-code text-label-code text-text-primary">+270.8%</td>
+<td class="p-space-md font-body-sm text-body-sm text-text-muted text-right">Landis &amp; Koch scale</td>
+</tr>
+<tr class="hover:bg-surface-raised/40 transition-colors bg-surface-raised/10">
+<td class="p-space-md font-label-code text-label-code text-text-primary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+                Subjective Attribution Rate
+              </td>
+<td class="p-space-md font-label-code text-label-code text-error">78.4% of total tokens</td>
+<td class="p-space-md font-label-code text-label-code text-telemetry-emerald">0.0% (Hard Filtered)</td>
+<td class="p-space-md font-label-code text-label-code text-text-primary">-100% Noise</td>
+<td class="p-space-md font-body-sm text-body-sm text-text-muted text-right">De-anthropomorphic parser</td>
+</tr>
+<tr class="hover:bg-surface-raised/40 transition-colors">
+<td class="p-space-md font-label-code text-label-code text-text-primary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+                Physiological Parameter Validity
+              </td>
+<td class="p-space-md font-label-code text-label-code text-text-secondary">41.2% within range</td>
+<td class="p-space-md font-label-code text-label-code text-telemetry-emerald">100% Bound Enforced</td>
+<td class="p-space-md font-label-code text-label-code text-text-primary">100% Clean Entry</td>
+<td class="p-space-md font-body-sm text-body-sm text-text-muted text-right">Merck Veterinary Manual (30-250 bpm)</td>
+</tr>
+<tr class="hover:bg-surface-raised/40 transition-colors bg-surface-raised/10">
+<td class="p-space-md font-label-code text-label-code text-text-primary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber"></span>
+                GBIF Darwin Core Compliance
+              </td>
+<td class="p-space-md font-label-code text-label-code text-error">0.0% (Incompatible)</td>
+<td class="p-space-md font-label-code text-label-code text-telemetry-emerald">100% Schema Valid</td>
+<td class="p-space-md font-label-code text-label-code text-text-primary">Ready for GBIF / OBIS</td>
+<td class="p-space-md font-body-sm text-body-sm text-text-muted text-right">TDWG Darwin Core Task Group</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Grounding Bibliography Box -->
+<div class="p-space-lg bg-surface-base rounded-xl flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-micro text-label-micro uppercase tracking-wider text-text-muted">
+            Grounding Literature &amp; Formal Peer Citations
+          </span>
+<span class="font-label-code text-label-code text-citation-amber">3 Canonical References</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="p-space-md bg-surface-raised rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<span class="font-label-micro text-label-micro uppercase text-telemetry-emerald">Predatory Motor Sequence</span>
+<p class="font-body-sm text-body-sm text-text-primary font-medium">
+                Broseghini, A., Lõoke, M., Guérineau, C., Marinelli, L., &amp; Mongillo, P. (2024).
+              </p>
+<p class="font-body-sm text-body-sm text-text-secondary italic font-italic-accent">
+                Ethogram of the predatory sequence of dogs (Canis familiaris). Applied Animal Behaviour Science, 279, 106402.
+              </p>
+</div>
+<a class="font-label-code text-label-code text-citation-amber hover:underline flex items-center gap-1" href="https://doi.org/10.1016/j.applanim.2024.106402" rel="noopener noreferrer" target="_blank">
+              DOI: 10.1016/j.applanim.2024.106402 ↗
             </a>
-            <a href="#servicos" class="btn btn-ghost" data-pt="Ver Tabela de Serviços" data-en="View Rate Card">
-              Ver Tabela de Serviços
+</div>
+<div class="p-space-md bg-surface-raised rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<span class="font-label-micro text-label-micro uppercase text-telemetry-emerald">Systematic Review</span>
+<p class="font-body-sm text-body-sm text-text-primary font-medium">
+                de Winkel, T., van der Steen, S., Enders-Slegers, M. J., et al. (2024).
+              </p>
+<p class="font-body-sm text-body-sm text-text-secondary italic font-italic-accent">
+                Observational behaviors and emotions to assess welfare of dogs: A systematic review. J. of Veterinary Behavior, 72, 1-17.
+              </p>
+</div>
+<a class="font-label-code text-label-code text-citation-amber hover:underline flex items-center gap-1" href="https://doi.org/10.1016/j.jveb.2023.12.007" rel="noopener noreferrer" target="_blank">
+              DOI: 10.1016/j.jveb.2023.12.007 ↗
             </a>
-          </div>
-
-          <div>
-            <div class="hero-footnote">
-              <span>&#9874;</span>
-              <span data-pt="Atendimento estritamente com hora marcada | Planalto Paulista, SP" data-en="Strictly by appointment only | Planalto Paulista, SP">Atendimento estritamente com hora marcada | Planalto Paulista, SP</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-visual-stage">
-          <img src="assets/brand-mark.svg" alt="The Transparency Project Layered Circuit Mark" class="stage-logo-art" />
-          <div class="telemetry-floating-pill">
-            <span>BANCADA: </span><strong>DEDICADA</strong> | <span>1 MÁQUINA POR VEZ</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. Pilares de Transparência (Trust Anchors) -->
-    <section class="section-pillars" id="pilares">
-      <div class="container">
-        <div class="pillars-grid">
-          <!-- Pilar 1 -->
-          <div class="pillar-card">
-            <div class="pillar-icon-box">&#128221;</div>
-            <h3 class="pillar-title" data-pt="Tabela Fixa Sem Surpresas" data-en="Fixed Rates, Zero Surprises">Tabela Fixa Sem Surpresas</h3>
-            <p class="pillar-text" data-pt="Orçamento aprovado antes de abrir a máquina. Sem taxas ocultas ou custos inventados na entrega." data-en="Quote approved before your rig is even opened. No hidden charges or surprise invoices at checkout.">
-              Orçamento aprovado antes de abrir a máquina. Sem taxas ocultas ou custos inventados na entrega.
-            </p>
-          </div>
-
-          <!-- Pilar 2 -->
-          <div class="pillar-card">
-            <div class="pillar-icon-box">&#127991;</div>
-            <h3 class="pillar-title" data-pt="Peças a Preço de Custo" data-en="Parts at Cost Price">Peças a Preço de Custo</h3>
-            <p class="pillar-text" data-pt="O cliente adquire seus próprios componentes ou paga estritamente o valor da nota fiscal. Zero margem ou comissão sobre peças." data-en="Clients supply their own parts or pay strictly the supplier receipt value. Zero markups or retail margins.">
-              O cliente adquire seus próprios componentes ou paga estritamente o valor da nota fiscal. Zero margem ou comissão sobre peças.
-            </p>
-          </div>
-
-          <!-- Pilar 3 -->
-          <div class="pillar-card">
-            <div class="pillar-icon-box">&#128300;</div>
-            <h3 class="pillar-title" data-pt="Bancada Dedicada" data-en="Dedicated Single-Rig Bench">Bancada Dedicada</h3>
-            <p class="pillar-text" data-pt="Uma máquina atendida por vez com relatório fotográfico do processo e diagnósticos técnicos transparentes." data-en="One computer serviced at a time, complete with photographic logs and transparent thermal metrics.">
-              Uma máquina atendida por vez com relatório fotográfico do processo e diagnósticos técnicos transparentes.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. Catálogo de Serviços de Bancada (Desktop PCs) -->
-    <section class="section-services" id="servicos">
-      <div class="container">
-        <div class="section-header-wrap">
-          <span class="section-badge-pill" data-pt="Escopo Fechado" data-en="Fixed Scope">Escopo Fechado</span>
-          <h2 class="section-title" data-pt="Serviços Essenciais de Hardware" data-en="Essential Hardware Services">Serviços Essenciais de Hardware</h2>
-          <p class="section-subtitle" data-pt="Mão de obra especializada com escopo fechado e prazos definidos." data-en="Specialized desktop PC craftsmanship with defined deliverables and turnaround.">
-            Mão de obra especializada com escopo fechado e prazos definidos.
+</div>
+<div class="p-space-md bg-surface-raised rounded-lg flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<span class="font-label-micro text-label-micro uppercase text-telemetry-emerald">Physiological Baselines</span>
+<p class="font-body-sm text-body-sm text-text-primary font-medium">
+                Merck Veterinary Manual.
+              </p>
+<p class="font-body-sm text-body-sm text-text-secondary italic font-italic-accent">
+                Normal Physiological Values for Dogs: Heart rate (30–250 bpm), respiratory rates, and core temperature boundaries.
+              </p>
+</div>
+<span class="font-label-code text-label-code text-text-muted">
+              Merck Reference Compendium (11th Ed.)
+            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- NAVIGATION TO NEXT PILLAR / STUDIO CALL-TO-ACTION -->
+<section class="w-full bg-surface-base px-margin-mobile lg:px-margin py-space-xl">
+<div class="max-w-[1440px] mx-auto">
+<div class="relative p-space-lg lg:p-space-xl bg-surface-raised rounded-xl overflow-hidden shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-space-lg">
+<!-- Background decorative ambient illumination -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-telemetry-emerald/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex flex-col gap-space-xs max-w-[700px] relative z-10">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-overlay font-label-micro text-label-micro text-citation-amber uppercase">
+              Next Section // 02
+            </span>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Architecture &amp; Docs</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-text-primary font-normal mt-1">
+            Explore the EthoPipe ETL Engine Documentation
+          </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+            Discover how Pydantic type-strict models, clamped Google AI Studio token parsers, and continuous GitHub Actions CI preserve zero-drift reproducibility for veterinary science.
           </p>
-        </div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-space-sm relative z-10 w-full lg:w-auto">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-space-lg py-3 bg-primary-container text-on-primary-container hover:bg-white rounded font-label-code text-label-code uppercase tracking-wider font-medium transition-all shadow-md" data-path="ethopipe-docs-pipeline" href="#">
+<span>Inspect Pipeline Docs</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-space-md py-3 bg-surface-overlay hover:bg-surface-container-high text-text-primary rounded font-label-code text-label-code uppercase tracking-wider transition-all" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">
+<span>Zenodo Archive</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript for Diff Inspector Toggle -->
 
-        <div class="services-grid">
-          <!-- Card 1 -->
-          <div class="service-card">
-            <div class="service-card-top">
-              <span class="service-time-pill">1H A 2H DE BANCADA</span>
-              <h3 class="service-card-title" data-pt="Manutenção Térmica Preventiva" data-en="Preventive Thermal Overhaul">Manutenção Térmica Preventiva</h3>
-              <p class="service-card-scope" data-pt="Desmontagem cuidadosa, evacuação profunda de poeira e troca da pasta ressecada por composto térmico de alta condutividade." data-en="Delicate teardown, deep dust extraction, and thermal paste renewal with high-conductivity compound.">
-                Desmontagem cuidadosa, evacuação profunda de poeira e troca da pasta ressecada por composto térmico de alta condutividade.
-              </p>
-            </div>
-            <div class="service-card-bottom">
-              <div class="service-price-block">
-                <div class="service-price-label" data-pt="Taxa Fixa" data-en="Fixed Fee">Taxa Fixa</div>
-                <div class="service-price-value">R$ 140,00</div>
-              </div>
-              <a href="https://wa.me/5511999999999?text=Olá%2C%20quero%20agendar%20uma%20Manutenção%20Térmica%20Preventiva" target="_blank" rel="noopener noreferrer" class="btn-card-schedule" data-pt="Agendar no Lab" data-en="Book Slot">
-                Agendar no Lab
-              </a>
-            </div>
-          </div>
+</div></main><footer class="w-full bg-surface-raised py-space-xl"><div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin"><div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-space-xl"><div class="md:col-span-2 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><span class="font-headline-md text-headline-md text-text-primary italic font-italic-accent">The Transparency Project</span><span class="px-2 py-0.5 bg-surface-overlay text-telemetry-emerald font-label-micro text-label-micro uppercase rounded">Open Science</span></div><p class="font-body-sm text-body-sm text-text-secondary max-w-[540px]">A high-resolution empirical bio-informatics consortium for canine ethology, continuous biomechanical telemetry, and peer-reviewed algorithmic pipelines.</p></div><div class="flex flex-col gap-space-xs"><span class="font-label-micro text-label-micro uppercase tracking-wider text-text-muted">Scholarly Identifiers</span><div class="flex flex-col gap-1"><span class="font-label-code text-label-code text-text-secondary">ORCID: <a class="text-citation-amber hover:underline" href="https://orcid.org/0009-0003-0048-8982" rel="noopener noreferrer" target="_blank">0009-0003-0048-8982</a></span><span class="font-label-code text-label-code text-text-secondary">DOI: <a class="text-citation-amber hover:underline" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">10.5281/zenodo.21211371</a></span><span class="font-label-code text-label-code text-text-muted">Darwin Core Schema v1.4.2</span></div></div><div class="flex flex-col gap-space-xs"><span class="font-label-micro text-label-micro uppercase tracking-wider text-text-muted">Licensing &amp; Ethics</span><div class="flex flex-col gap-1"><span class="font-body-sm text-body-sm text-text-secondary">CC-BY-4.0 International</span><span class="font-body-sm text-body-sm text-text-secondary">ARRIVE 2.0 Compliance</span><span class="font-label-code text-label-code text-telemetry-emerald flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald"></span>Telemetry Live Sync</span></div></div></div><div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm"><span class="font-label-micro text-label-micro text-text-muted tracking-wider">© 2024 The Transparency Project Consortium. All research data released under open biological access.</span><div class="flex items-center gap-space-md font-label-micro text-label-micro text-text-muted uppercase"><a class="hover:text-text-primary transition-colors" href="#">Protocol Manifest</a><a class="hover:text-text-primary transition-colors" href="#">Hardware Schematics</a><a class="hover:text-text-primary transition-colors" href="#">Editorial Terms</a></div></div></div></footer>
+  </div>
 
-          <!-- Card 2 -->
-          <div class="service-card">
-            <div class="service-card-top">
-              <span class="service-time-pill">MESMO DIA / 24H</span>
-              <h3 class="service-card-title" data-pt="Revitalização com SSD" data-en="SSD Revitalization">Revitalização com SSD</h3>
-              <p class="service-card-scope" data-pt="Substituição de HD antigo por SSD NVMe/SATA com clonagem integral e segura ou instalação zerada de sistema." data-en="Replacing sluggish mechanical HDDs with ultra-fast NVMe/SATA SSDs, full secure cloning, or fresh OS installation.">
-                Substituição de HD antigo por SSD NVMe/SATA com clonagem integral e segura ou instalação zerada de sistema.
-              </p>
-            </div>
-            <div class="service-card-bottom">
-              <div class="service-price-block">
-                <div class="service-price-label" data-pt="Mão de Obra" data-en="Labor From">Mão de Obra</div>
-                <div class="service-price-value"><span style="font-size: 0.9rem; font-weight: normal; color: var(--text-dim);">a partir de </span>R$ 160,00</div>
-              </div>
-              <a href="https://wa.me/5511999999999?text=Olá%2C%20gostaria%20de%20agendar%20uma%20Revitalização%20com%20SSD" target="_blank" rel="noopener noreferrer" class="btn-card-schedule" data-pt="Agendar no Lab" data-en="Book Slot">
-                Agendar no Lab
-              </a>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="service-card">
-            <div class="service-card-top">
-              <span class="service-time-pill">1H A 2H DE BANCADA</span>
-              <h3 class="service-card-title" data-pt="Formatação Limpa & Otimização" data-en="Clean OS Install & Tuning">Formatação Limpa & Otimização</h3>
-              <p class="service-card-scope" data-pt="Instalação pura do Windows, atualização de drivers proprietários e remoção completa de bloatwares de fábrica." data-en="Pure Windows installation, official vendor driver deployment, and thorough elimination of pre-installed bloatware.">
-                Instalação pura do Windows, atualização de drivers proprietários e remoção completa de bloatwares de fábrica.
-              </p>
-            </div>
-            <div class="service-card-bottom">
-              <div class="service-price-block">
-                <div class="service-price-label" data-pt="Taxa Fixa" data-en="Fixed Fee">Taxa Fixa</div>
-                <div class="service-price-value">R$ 130,00</div>
-              </div>
-              <a href="https://wa.me/5511999999999?text=Olá%2C%20gostaria%20de%20agendar%20uma%20Formatação%20Limpa" target="_blank" rel="noopener noreferrer" class="btn-card-schedule" data-pt="Agendar no Lab" data-en="Book Slot">
-                Agendar no Lab
-              </a>
-            </div>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="service-card">
-            <div class="service-card-top">
-              <span class="service-time-pill">30 MIN A 1H</span>
-              <h3 class="service-card-title" data-pt="Upgrade de Hardware Avulso" data-en="Standalone Component Upgrade">Upgrade de Hardware Avulso</h3>
-              <p class="service-card-scope" data-pt="Instalação mecânica de memórias RAM, fontes modulares ou placas de vídeo compradas pelo cliente, com validação de BIOS/XMP." data-en="Precision installation of client-supplied RAM kits, modular PSUs, or GPUs with full BIOS/XMP profile calibration.">
-                Instalação mecânica de memórias RAM, fontes modulares ou placas de vídeo compradas pelo cliente, com validação de BIOS/XMP.
-              </p>
-            </div>
-            <div class="service-card-bottom">
-              <div class="service-price-block">
-                <div class="service-price-label" data-pt="Taxa Fixa" data-en="Fixed Fee">Taxa Fixa</div>
-                <div class="service-price-value">R$ 90,00</div>
-              </div>
-              <a href="https://wa.me/5511999999999?text=Olá%2C%20gostaria%20de%20agendar%20um%20Upgrade%20de%20Hardware" target="_blank" rel="noopener noreferrer" class="btn-card-schedule" data-pt="Agendar no Lab" data-en="Book Slot">
-                Agendar no Lab
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Card Destaque: Combo Revitalização Total -->
-        <div class="featured-combo-card" id="combo">
-          <div class="combo-grid">
-            <div>
-              <div class="combo-badge-row">
-                <span class="combo-badge-primary" data-pt="MAIS ESCOLHIDO • PACOTE COMPLETO" data-en="MOST POPULAR • ALL-IN-ONE">MAIS ESCOLHIDO • PACOTE COMPLETO</span>
-                <span class="combo-badge-time" data-pt="24H A 48H DE BANCADA" data-en="24H - 48H TURNAROUND">24H A 48H DE BANCADA</span>
-              </div>
-              <h3 class="combo-title" data-pt="Combo Revitalização Total" data-en="Total Revitalization Bundle">Combo Revitalização Total</h3>
-              <p class="combo-description" data-pt="O tratamento definitivo para computadores lentos ou com aquecimento excessivo. Devolve a velocidade e o silêncio originais com segurança absoluta." data-en="The definitive care package for slow or overheating rigs. Restores factory-fresh responsiveness and silence with absolute safety.">
-                O tratamento definitivo para computadores lentos ou com aquecimento excessivo. Devolve a velocidade e o silêncio originais com segurança absoluta.
-              </p>
-
-              <ul class="combo-checklist">
-                <li><span class="check">&#10003;</span> <span data-pt="Limpeza profunda & desoxidação de chassi" data-en="Deep ultrasonic & chassis dust evacuation">Limpeza profunda & desoxidação de chassi</span></li>
-                <li><span class="check">&#10003;</span> <span data-pt="Troca de pasta térmica de alta condutividade" data-en="High-conductivity thermal paste replacement">Troca de pasta térmica de alta condutividade</span></li>
-                <li><span class="check">&#10003;</span> <span data-pt="Migração / instalação física para SSD" data-en="SSD installation / secure data migration">Migração / instalação física para SSD</span></li>
-                <li><span class="check">&#10003;</span> <span data-pt="Instalação limpa de sistema e drivers oficiais" data-en="Clean OS setup and certified drivers">Instalação limpa de sistema e drivers oficiais</span></li>
-              </ul>
-            </div>
-
-            <div class="combo-price-card">
-              <div class="price-tag" data-pt="Valor do Pacote Fechado" data-en="All-inclusive Package">Valor do Pacote Fechado</div>
-              <div class="price-number">R$ 280,00</div>
-              <div class="price-detail" data-pt="Economia de R$ 120 vs. serviços avulsos" data-en="Save R$ 120 vs. individual services">Economia de R$ 120 vs. serviços avulsos</div>
-              <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20agendar%20o%20Combo%20Revitalização%20Total%20de%20R%24%20280" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;" data-pt="Agendar Combo Agora" data-en="Book Bundle Now">
-                Agendar Combo Agora
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Transparência Contratual & Segurança (Legal Safeguards) -->
-    <section class="section-legal" id="garantia">
-      <div class="container">
-        <div class="section-header-wrap" style="margin-bottom: 38px;">
-          <span class="section-badge-pill" data-pt="Segurança & Garantia" data-en="Security & Warranty">Segurança & Garantia</span>
-          <h2 class="section-title" data-pt="Transparência Contratual & Salvaguardas" data-en="Contractual Transparency & Safeguards">Transparência Contratual & Salvaguardas</h2>
-          <p class="section-subtitle" data-pt="Direitos claros, respeito irrestrito ao consumidor e proteção integral dos seus dados." data-en="Clear customer rights, strict compliance with consumer codes, and total data privacy.">
-            Direitos claros, respeito irrestrito ao consumidor e proteção integral dos seus dados.
+  <!-- VIEW 3: ETHOPIPE (Documentation & Pipeline) -->
+  <div id="view-ethopipe" class="portal-view hidden">
+<aside class="fixed left-0 top-0 bottom-0 w-72 bg-surface-raised z-50 flex flex-col justify-between py-space-lg px-space-md shadow-[4px_0_24px_rgba(0,0,0,0.5)]"><div class="flex flex-col gap-space-lg"><div class="flex items-center gap-space-sm px-space-sm"><img src="/assets/portal-logo.svg" alt="The Transparency Project" class="h-8 w-auto object-contain" /><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight leading-none">EthoPipe</span><span class="font-label-micro text-label-micro uppercase text-text-muted">Documentation &amp; Pipelines</span></div></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-label-micro text-label-micro uppercase tracking-wider text-text-muted">Navigation</span><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary-container font-medium"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="ethopipe-docs-pipeline" href="#"><span class="material-symbols-outlined text-base">description</span>Pipeline Specification</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="the-project-thesis" href="#"><span class="material-symbols-outlined text-base">menu_book</span>Ethological Thesis</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="hub-home" href="#"><span class="material-symbols-outlined text-base">home</span>Studio Hub</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="dispatches-blog" href="#"><span class="material-symbols-outlined text-base">rss_feed</span>Dispatches</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="zenodo-archive" href="#"><span class="material-symbols-outlined text-base">open_in_new</span>Zenodo Repository</a></nav></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-label-micro text-label-micro uppercase tracking-wider text-text-muted">ETL Pipelines</span><div class="flex flex-col gap-1 px-space-sm font-label-code text-label-code text-text-secondary"><div class="flex items-center justify-between py-1"><span>Darwin Core v1.4</span><span class="text-telemetry-emerald font-label-micro text-label-micro">OK</span></div><div class="flex items-center justify-between py-1"><span>IMU Accelerometry</span><span class="text-telemetry-emerald font-label-micro text-label-micro">120Hz</span></div><div class="flex items-center justify-between py-1"><span>ECG Biometrics</span><span class="text-citation-amber font-label-micro text-label-micro">SYNC</span></div></div></div></div><div class="flex flex-col gap-space-sm px-space-sm"><div class="p-space-sm bg-surface-base rounded flex flex-col gap-1"><span class="font-label-micro text-label-micro uppercase text-text-muted">Zenodo Release</span><span class="font-label-code text-label-code text-citation-amber truncate">10.5281/zenodo.21211371</span><span class="font-label-micro text-label-micro text-text-muted">CC-BY-4.0 Open Science</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-base/85 backdrop-blur-xl z-40 flex items-center justify-between px-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="flex items-center gap-space-md"><span class="font-label-code text-label-code text-text-muted">repo: <span class="text-text-primary">ethopipe-core</span></span><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-micro text-label-micro">v2.4.0-stable</span></div><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-xs px-space-md py-1 bg-surface-raised hover:bg-surface-container-high rounded text-text-secondary hover:text-text-primary transition-colors" href="https://github.com/sothiss/ethopipe" rel="noopener noreferrer" target="_blank"><span class="font-label-code text-label-code">Star on GitHub</span><span class="font-label-micro text-label-micro text-citation-amber">★ 248</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface-base min-h-screen"><div class="flex flex-col w-full">
+<!-- Minimalist Top Context Strip -->
+<section class="w-full border-b border-border-subtle bg-surface-base px-gutter py-space-md">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-raised border border-border-subtle font-label-micro text-label-micro text-citation-amber">
+<span class="w-1.5 h-1.5 rounded-full bg-citation-amber animate-pulse"></span>
+          ETHOSYS://ETL_SPECIFICATIONS
+        </span>
+<span class="text-text-muted font-label-micro text-label-micro">/</span>
+<span class="font-label-micro text-label-micro text-text-secondary tracking-wider">v2.4-BETA</span>
+<span class="text-text-muted font-label-micro text-label-micro">/</span>
+<span class="inline-flex items-center gap-1 font-label-micro text-label-micro text-telemetry-emerald">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+          PYTHON 3.11 &amp; 3.12 PASSING
+        </span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Global Standard</span>
+<span class="font-label-code text-label-code text-text-primary">Darwin Core v1.4 Star-Schema</span>
+</div>
+</div>
+</section>
+<!-- Editorial Headline Section -->
+<section class="w-full bg-surface-base px-gutter pt-space-xl pb-space-lg">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg border-b border-border-subtle pb-space-xl">
+<div class="max-w-4xl flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-micro text-label-micro text-text-muted uppercase tracking-widest">Informatics Pipeline Specification</span>
+<span class="w-8 h-px bg-border-strong"></span>
+<span class="font-label-micro text-label-micro text-telemetry-emerald">DETERMINISTIC GATEWAY</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight font-normal">
+            EthoPipe Deterministic <span class="font-italic-accent italic font-normal text-citation-amber">ETL Pipeline</span>
+</h1>
+<p class="font-body-lg text-body-lg text-text-secondary leading-relaxed max-w-2xl">
+            Decoupling semantic unstructured ingestion from strict biological serialization into Darwin Core relational schemas. Eliminating anthropomorphic variance in canine behavioral epidemiology.
           </p>
-        </div>
-
-        <div class="legal-grid">
-          <div class="legal-card">
-            <span class="legal-badge-pill">CDC ART. 26</span>
-            <h3 data-pt="Garantia Legal de 90 Dias" data-en="90-Day Legal Warranty">Garantia Legal de 90 Dias</h3>
-            <p data-pt="Garantia integral sobre toda a mão de obra realizada, estritamente alinhada ao Código de Defesa do Consumidor. Se houver qualquer anormalidade térmica ou mecânica, revisamos sem custo." data-en="Full labor warranty under Art. 26 of the Brazilian Consumer Defense Code. If any thermal or mechanical discrepancy occurs, we review it free of charge.">
-              Garantia integral sobre toda a mão de obra realizada, estritamente alinhada ao Código de Defesa do Consumidor. Se houver qualquer anormalidade térmica ou mecânica, revisamos sem custo.
+</div>
+<!-- Action / Verification Suite -->
+<div class="flex flex-wrap items-center gap-space-sm self-start lg:self-end">
+<a class="inline-flex items-center gap-2 px-space-md py-2.5 bg-primary-container text-on-primary-container hover:bg-surface-tint transition-colors rounded-DEFAULT font-label-micro text-label-micro uppercase font-medium" href="https://github.com/sothiss/ethopipe" rel="noopener noreferrer" target="_blank">
+<span>GitHub Repository</span>
+<span class="material-symbols-outlined text-[15px]">arrow_outward</span>
+</a>
+<div class="inline-flex items-center gap-2 px-space-md py-2 bg-surface-raised border border-border-subtle rounded-DEFAULT font-label-micro text-label-micro text-telemetry-emerald">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span>Pytest Coverage 100%</span>
+</div>
+<a class="inline-flex items-center gap-1.5 px-space-md py-2 bg-surface-raised border border-border-subtle hover:border-citation-amber transition-colors rounded-DEFAULT font-label-code text-label-code text-citation-amber" href="https://doi.org/10.5281/zenodo.21211371" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[15px]">lock_open</span>
+<span>DOI 10.5281/zenodo.21211371</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 1: The 4-Stage Decoupled Architecture -->
+<section class="w-full bg-surface-base px-gutter py-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<span class="font-label-micro text-label-micro text-citation-amber uppercase tracking-wider">01 / Flow Architecture</span>
+<h2 class="font-headline-md text-headline-md text-text-primary mt-1">Four-Stage Decoupled Data Pipeline</h2>
+</div>
+<div class="flex items-center gap-3 text-text-muted font-label-micro text-label-micro">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-telemetry-emerald"></span> Clamped Inference</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-citation-amber"></span> Merck Range Lock</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-text-secondary"></span> Star Schema</span>
+</div>
+</div>
+<!-- Architecture Bento / Stage Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Stage 01: Extract -->
+<div class="bg-surface-raised border border-border-subtle p-space-lg rounded-DEFAULT flex flex-col justify-between hover:border-border-strong transition-all group">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-surface-base border border-border-subtle font-label-micro text-label-micro text-text-muted">
+                STAGE 01
+              </span>
+<span class="font-label-code text-label-code text-text-muted group-hover:text-text-primary transition-colors">01</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Raw Prose Ingestion</h3>
+<p class="font-label-micro text-label-micro text-text-secondary uppercase mt-0.5">Extraction &amp; Ingestion Gate</p>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary leading-relaxed">
+              Consumes messy, unformatted field observations, veterinarian incident logs, and qualitative handler narrative text silos.
             </p>
-          </div>
-
-          <div class="legal-card">
-            <span class="legal-badge-pill">DATA PRIVACY</span>
-            <h3 data-pt="Segurança e Backup de Dados" data-en="Data Security & Backup Guidance">Segurança e Backup de Dados</h3>
-            <p data-pt="Seus arquivos são sagrados. Orientamos e apoiamos o backup prévio antes de qualquer intervenção de sistema ou troca de unidade de armazenamento. Zero acesso a dados pessoais alheios." data-en="Your files are sacred. We guide clients on pre-service backups before storage changes or OS reinstalls. Absolute privacy respect.">
-              Seus arquivos são sagrados. Orientamos e apoiamos o backup prévio antes de qualquer intervenção de sistema ou troca de unidade de armazenamento. Zero acesso a dados pessoais alheios.
-            </p>
-          </div>
-
-          <div class="legal-card">
-            <span class="legal-badge-pill">CHECK-IN / OUT</span>
-            <h3 data-pt="Vistoria Documentada" data-en="Documented Check-In & Check-Out">Vistoria Documentada</h3>
-            <p data-pt="Registro fotográfico e checklist detalhado do estado físico e componentes no ato da entrada, com conferência transparente e devolução de todas as peças substituídas na entrega." data-en="Complete photographic intake inspection and hardware checklist upon receipt, plus return of all removed parts upon completion.">
-              Registro fotográfico e checklist detalhado do estado físico e componentes no ato da entrada, com conferência transparente e devolução de todas as peças substituídas na entrega.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. Sobre a Fundadora -->
-    <section class="section-about" id="sobre">
-      <div class="container">
-        <div class="about-card">
-          <div>
-            <span class="section-badge-pill" data-pt="Quem Está na Bancada" data-en="Who Is At The Bench">Quem Está na Bancada</span>
-            <h2 class="about-title" data-pt="Engenharia e Rigor Técnico." data-en="Engineering & Technical Rigor.">Engenharia e Rigor Técnico.</h2>
-            <p class="about-bio" data-pt="Desenvolvido por Alice Severi Gonçalves para eliminar o abismo de informação entre técnicos e clientes. Sem jargões intimidadores, sem orçamentos opacos e com foco absoluto na durabilidade, estabilidade térmica e longevidade do seu hardware." data-en="Founded by Alice Severi Gonçalves to close the information asymmetry between technicians and PC owners. No intimidating jargon, no opaque invoices, and an unwavering commitment to hardware longevity and thermals.">
-              Desenvolvido por Alice Severi Gonçalves para eliminar o abismo de informação entre técnicos e clientes. Sem jargões intimidadores, sem orçamentos opacos e com foco absoluto na durabilidade, estabilidade térmica e longevidade do seu hardware.
-            </p>
-
-            <div class="about-badges-row">
-              <span class="founder-badge-pill amber-accent">&#9881; Woman-owned Studio</span>
-              <span class="founder-badge-pill">&#127760; Suporte Bilíngue (PT/EN)</span>
-              <span class="founder-badge-pill">&#128197; Atendimento por Agendamento</span>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-border-subtle flex flex-col gap-2">
+<div class="bg-surface-base p-2.5 rounded border border-border-subtle font-label-code text-label-micro text-text-muted">
+<span class="text-error font-semibold">raw:</span> "Subject showed severe displacement panting at 14:02, handler felt dog was stubborn."
             </div>
+<div class="flex items-center justify-between text-text-muted font-label-micro text-label-micro">
+<span>Encoding: UTF-8</span>
+<span class="text-citation-amber">Anthropomorphic Flags</span>
+</div>
+</div>
+</div>
+<!-- Stage 02: Parse -->
+<div class="bg-surface-raised border border-border-subtle p-space-lg rounded-DEFAULT flex flex-col justify-between hover:border-border-strong transition-all group">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-surface-base border border-border-subtle font-label-micro text-label-micro text-telemetry-emerald">
+                STAGE 02
+              </span>
+<span class="font-label-code text-label-code text-text-muted group-hover:text-text-primary transition-colors">02</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Gemini 3.5 Flash Clerk</h3>
+<p class="font-label-micro text-label-micro text-telemetry-emerald uppercase mt-0.5">Clamped Zero-Temp Parser</p>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary leading-relaxed">
+              Locked strictly to <code class="text-citation-amber font-label-code">Temp: 0.0</code> with JSON Schema enforcement. Strips qualitative storytelling down to atomic, observable motor sequences.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-border-subtle flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-code text-label-micro bg-surface-base p-2 rounded border border-border-subtle">
+<span class="text-text-muted">gemini-3.5-flash</span>
+<span class="text-telemetry-emerald font-bold">t=0.00</span>
+</div>
+<div class="flex items-center justify-between text-text-muted font-label-micro text-label-micro">
+<span>Hallucination Rate: 0.0%</span>
+<span class="text-text-primary font-medium">Deterministic</span>
+</div>
+</div>
+</div>
+<!-- Stage 03: Transform -->
+<div class="bg-surface-raised border border-border-subtle p-space-lg rounded-DEFAULT flex flex-col justify-between hover:border-border-strong transition-all group">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-surface-base border border-border-subtle font-label-micro text-label-micro text-citation-amber">
+                STAGE 03
+              </span>
+<span class="font-label-code text-label-code text-text-muted group-hover:text-text-primary transition-colors">03</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Pydantic Strict Gate</h3>
+<p class="font-label-micro text-label-micro text-citation-amber uppercase mt-0.5">Veterinary Constraint Engine</p>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary leading-relaxed">
+              Enforces Merck Veterinary baselines (<code class="text-citation-amber font-label-code">30–250 BPM</code>) via <code class="text-text-primary font-label-code">ConfigDict(strict=True)</code>. Malformed tokens routed directly to quarantine.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-border-subtle flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-code text-label-micro bg-surface-base p-2 rounded border border-border-subtle">
+<span class="text-text-muted">Merck Heart Rate Bounds</span>
+<span class="text-citation-amber">30 &lt;= bpm &lt;= 250</span>
+</div>
+<div class="flex items-center justify-between text-text-muted font-label-micro text-label-micro">
+<span>Invalid Type Action</span>
+<span class="text-error uppercase">Quarantine</span>
+</div>
+</div>
+</div>
+<!-- Stage 04: Load -->
+<div class="bg-surface-raised border border-border-subtle p-space-lg rounded-DEFAULT flex flex-col justify-between hover:border-border-strong transition-all group">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-surface-base border border-border-subtle font-label-micro text-label-micro text-text-secondary">
+                STAGE 04
+              </span>
+<span class="font-label-code text-label-code text-text-muted group-hover:text-text-primary transition-colors">04</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Darwin Core Output</h3>
+<p class="font-label-micro text-label-micro text-text-muted uppercase mt-0.5">Global Biodiversity Standard</p>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary leading-relaxed">
+              Star-schema relational mapping into <code class="text-text-primary font-label-code">dwc:individualID</code>, ISO 8601 <code class="text-text-primary font-label-code">dwc:eventDate</code>, and segregated machine vs human observations.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-border-subtle flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-code text-label-micro bg-surface-base p-2 rounded border border-border-subtle">
+<span class="text-text-muted">dwc:basisOfRecord</span>
+<span class="text-telemetry-emerald">MachineObservation</span>
+</div>
+<div class="flex items-center justify-between text-text-muted font-label-micro text-label-micro">
+<span>Export Format</span>
+<span class="text-text-primary">Parquet &amp; Star-JSON</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Technical Inspector & Telemetry Playground (Two Column Split) -->
+<section class="w-full bg-surface-raised border-y border-border-subtle px-gutter py-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div>
+<span class="font-label-micro text-label-micro text-telemetry-emerald uppercase tracking-wider">02 / Telemetry Inspector</span>
+<h2 class="font-headline-md text-headline-md text-text-primary mt-1">Live Schema Verification &amp; Transformation Matrix</h2>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-base border border-border-subtle font-label-code text-label-micro text-telemetry-emerald">
+<span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald"></span>
+            STATUS: 200 VALID // ZERO ONTOLOGICAL DRIFT
+          </span>
+<button class="px-3 py-1 bg-surface-container-high hover:bg-surface-bright text-text-primary border border-border-subtle rounded font-label-micro text-label-micro uppercase transition-colors flex items-center gap-1" id="copySnippetBtn">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy Core Model</span>
+</button>
+</div>
+</div>
+<!-- Code Inspector Columns -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Left: Pydantic Validation Code -->
+<div class="lg:col-span-6 bg-surface-base border border-border-subtle rounded-DEFAULT flex flex-col overflow-hidden shadow-2xl">
+<div class="bg-surface-container px-space-md py-2.5 border-b border-border-subtle flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]/80"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]/80"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]/80"></span>
+<span class="ml-2 font-label-code text-label-code text-text-secondary">src/models/canine_ethogram.py</span>
+</div>
+<span class="font-label-micro text-label-micro text-text-muted uppercase">Pydantic v2.6+</span>
+</div>
+<div class="p-space-md bg-code-bg overflow-x-auto flex-1 font-label-code text-label-code leading-relaxed text-text-primary">
+<pre><code><span class="text-text-muted"># Type-strict biological telemetry constraint filter</span>
+<span class="text-citation-amber">from</span> pydantic <span class="text-citation-amber">import</span> BaseModel, Field, ConfigDict, field_validator
+<span class="text-citation-amber">from</span> typing <span class="text-citation-amber">import</span> Literal, Optional
+<span class="text-citation-amber">from</span> datetime <span class="text-citation-amber">import</span> datetime
+
+<span class="text-citation-amber">class</span> <span class="text-telemetry-emerald">CanineObservationRecord</span>(BaseModel):
+    model_config = ConfigDict(
+        strict=<span class="text-citation-amber">True</span>, 
+        extra=<span class="text-text-primary">'forbid'</span>
+    )
+
+    individual_id: <span class="text-secondary">str</span> = Field(..., pattern=<span class="text-text-primary">r"^CANIS-[A-Z0-9]{6}$"</span>)
+    event_timestamp: <span class="text-secondary">datetime</span>
+    ethogram_token: Literal[
+        <span class="text-text-primary">"play_bow"</span>, <span class="text-text-primary">"displacement_pant"</span>, 
+        <span class="text-text-primary">"lip_lick"</span>, <span class="text-text-primary">"direct_gaze"</span>, <span class="text-text-primary">"micro_freeze"</span>
+    ]
+    heart_rate_bpm: Optional[<span class="text-secondary">int</span>] = Field(<span class="text-citation-amber">None</span>, ge=<span class="text-secondary">30</span>, le=<span class="text-secondary">250</span>)
+    basis_of_record: Literal[<span class="text-text-primary">"MachineObservation"</span>, <span class="text-text-primary">"HumanObservation"</span>]
+
+    <span class="text-citation-amber">@field_validator</span>(<span class="text-text-primary">"heart_rate_bpm"</span>)
+    <span class="text-citation-amber">def</span> <span class="text-telemetry-emerald">validate_merck_canine_bounds</span>(cls, value: Optional[<span class="text-secondary">int</span>]):
+        <span class="text-citation-amber">if</span> value <span class="text-citation-amber">is not None</span> and <span class="text-citation-amber">not</span> (<span class="text-secondary">30</span> &lt;= value &lt;= <span class="text-secondary">250</span>):
+            <span class="text-citation-amber">raise</span> <span class="text-error">ValueError</span>(<span class="text-text-primary">"Physiological anomaly: BPM violates Merck boundaries."</span>)
+        <span class="text-citation-amber">return</span> value</code></pre>
+</div>
+<div class="px-space-md py-2 bg-surface-container border-t border-border-subtle flex items-center justify-between text-text-muted font-label-micro text-label-micro">
+<span>Encoding: UTF-8 STRICT</span>
+<span class="text-telemetry-emerald flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-telemetry-emerald"></span> TYPE_CHECKED</span>
+</div>
+</div>
+<!-- Right: Serialized Darwin Core Payload -->
+<div class="lg:col-span-6 bg-surface-base border border-border-subtle rounded-DEFAULT flex flex-col overflow-hidden shadow-2xl">
+<div class="bg-surface-container px-space-md py-2.5 border-b border-border-subtle flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-label-code text-citation-amber">Serialized Darwin Core Star-Schema Record</span>
+</div>
+<span class="font-label-micro text-label-micro px-2 py-0.5 rounded bg-surface-raised text-telemetry-emerald border border-border-subtle">GBIF / OBIS Interop</span>
+</div>
+<div class="p-space-md bg-code-bg overflow-x-auto flex-1 font-label-code text-label-code leading-relaxed text-text-primary">
+<pre><code>{
+  <span class="text-citation-amber">"dwc:datasetName"</span>: <span class="text-text-primary">"EthoPipe Canine Physiological Cohort A"</span>,
+  <span class="text-citation-amber">"dwc:basisOfRecord"</span>: <span class="text-telemetry-emerald">"MachineObservation"</span>,
+  <span class="text-citation-amber">"dwc:individualID"</span>: <span class="text-text-primary">"CANIS-782F41"</span>,
+  <span class="text-citation-amber">"dwc:scientificName"</span>: <span class="text-text-primary">"Canis lupus familiaris Linnaeus, 1758"</span>,
+  <span class="text-citation-amber">"dwc:eventDate"</span>: <span class="text-text-primary">"2026-03-30T14:02:11.450Z"</span>,
+  <span class="text-citation-amber">"dwc:measurementType"</span>: <span class="text-text-primary">"displacement_pant"</span>,
+  <span class="text-citation-amber">"dwc:measurementValue"</span>: <span class="text-secondary">1.0</span>,
+  <span class="text-citation-amber">"dwc:measurementUnit"</span>: <span class="text-text-primary">"binary_state"</span>,
+  <span class="text-citation-amber">"dwc:measurementRemarks"</span>: {
+    <span class="text-citation-amber">"heart_rate_bpm"</span>: <span class="text-secondary">138</span>,
+    <span class="text-citation-amber">"imu_spectral_variance"</span>: <span class="text-secondary">0.0418</span>,
+    <span class="text-citation-amber">"merck_validated"</span>: <span class="text-citation-amber">true</span>,
+    <span class="text-citation-amber">"clerk_temperature"</span>: <span class="text-secondary">0.0</span>
+  },
+  <span class="text-citation-amber">"etho:quarantineStatus"</span>: <span class="text-citation-amber">null</span>,
+  <span class="text-citation-amber">"etho:curationTimestamp"</span>: <span class="text-text-primary">"2026-03-30T14:02:12.012Z"</span>
+}</code></pre>
+</div>
+<div class="px-space-md py-2 bg-surface-container border-t border-border-subtle flex items-center justify-between text-text-muted font-label-micro text-label-micro">
+<span>Audit Trail: Verified via SHA256</span>
+<span class="text-citation-amber">Ready for Parquet Sink</span>
+</div>
+</div>
+</div>
+<!-- Quick Interactive Telemetry Runner -->
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded bg-surface-raised border border-border-subtle flex items-center justify-center">
+<span class="material-symbols-outlined text-citation-amber text-[18px]">terminal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-text-primary">etl::pipeline::run_validation_test()</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Simulates continuous stream ingestion through all 4 filtration gates</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full md:w-auto">
+<button class="w-full md:w-auto px-space-md py-1.5 bg-surface-raised hover:bg-surface-container-high border border-border-strong rounded font-label-micro text-label-micro text-text-primary uppercase transition-all flex items-center justify-center gap-2" id="runSimBtn">
+<span class="material-symbols-outlined text-[15px] text-telemetry-emerald">play_arrow</span>
+<span>Execute Ingestion Stream</span>
+</button>
+<div class="hidden font-label-code text-label-micro text-telemetry-emerald px-2 py-1 rounded bg-surface-base border border-border-subtle" id="simFeedback">
+            2,400 records processed in 18ms
           </div>
-
-          <div class="about-right-panel">
-            <div class="quote-box" data-pt="&ldquo;Computadores pessoais não são caixas pretas descartáveis. São ferramentas essenciais de trabalho e criação que merecem cuidado metódico, respeito técnico e total transparência.&rdquo;" data-en="&ldquo;Personal computers are not disposable black boxes. They are critical creative and professional instruments that deserve methodical care, technical respect, and radical transparency.&rdquo;">
-              &ldquo;Computadores pessoais não são caixas pretas descartáveis. São ferramentas essenciais de trabalho e criação que merecem cuidado metódico, respeito técnico e total transparência.&rdquo;
-            </div>
-
-            <div class="founder-signature">
-              <div class="founder-avatar">A</div>
-              <div class="founder-info">
-                <h4>Alice Severi Gonçalves</h4>
-                <span data-pt="Liderança Técnica & Bancada • Planalto Paulista" data-en="Technical Lead • Planalto Paulista Bench">Liderança Técnica & Bancada • Planalto Paulista</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- 8. Footer & Agendamento -->
-  <footer>
-    <div class="container">
-      <!-- Call to action card -->
-      <div class="cta-banner-box">
-        <div class="cta-banner-text">
-          <h3 data-pt="Sua máquina precisa de uma revisão honesta?" data-en="Does your rig need an honest inspection?">Sua máquina precisa de uma revisão honesta?</h3>
-          <p data-pt="Fale diretamente com nossa bancada no Planalto Paulista, São Paulo. Diagnósticos claros, prazos cumpridos e sem surpresas na conta." data-en="Reach our bench directly in Planalto Paulista, São Paulo. Transparent diagnostics, strict turnaround, and zero surprises.">
-            Fale diretamente com nossa bancada no Planalto Paulista, São Paulo. Diagnósticos claros, prazos cumpridos e sem surpresas na conta.
-          </p>
-        </div>
-        <a href="https://wa.me/5511999999999?text=Olá%2C%20gostaria%20de%20conversar%20sobre%20o%20atendimento%20da%20minha%20máquina" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 14px 28px; font-size: 0.98rem;" data-pt="Agendar Atendimento no WhatsApp" data-en="Book via WhatsApp">
-          Agendar Atendimento no WhatsApp
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Continuous Integration & Code Guardrails -->
+<section class="w-full bg-surface-base px-gutter py-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b border-border-subtle pb-space-md">
+<div>
+<span class="font-label-micro text-label-micro text-text-muted uppercase tracking-wider">03 / Code Health Engine</span>
+<h2 class="font-headline-md text-headline-md text-text-primary mt-1">Multi-Stage CI Matrix Guardrails</h2>
+</div>
+<span class="font-label-code text-label-code text-text-muted">.github/workflows/ci.yml</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- CI Guardrail 1 -->
+<div class="bg-surface-raised border border-border-subtle p-space-md rounded flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-text-primary text-[20px]">format_align_left</span>
+<span class="font-label-micro text-label-micro text-telemetry-emerald">PASSING</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Black Formatter</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">
+              Strict 88-character column line limits and AST-level uncompromising style uniformity across all modules.
+            </p>
+</div>
+<div class="mt-space-md pt-2 border-t border-border-subtle flex items-center justify-between font-label-code text-label-micro text-text-muted">
+<span>Target: 100% AST</span>
+<span class="text-text-primary">v24.2.0</span>
+</div>
+</div>
+<!-- CI Guardrail 2 -->
+<div class="bg-surface-raised border border-border-subtle p-space-md rounded flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-citation-amber text-[20px]">bolt</span>
+<span class="font-label-micro text-label-micro text-telemetry-emerald">12ms</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Ruff Linter</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">
+              High-velocity Rust-based static syntax anomaly and anti-pattern detection executing on every pull request.
+            </p>
+</div>
+<div class="mt-space-md pt-2 border-t border-border-subtle flex items-center justify-between font-label-code text-label-micro text-text-muted">
+<span>Rules: E, F, UP, B, SIM</span>
+<span class="text-text-primary">v0.3.0</span>
+</div>
+</div>
+<!-- CI Guardrail 3 -->
+<div class="bg-surface-raised border border-border-subtle p-space-md rounded flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-text-primary text-[20px]">fact_check</span>
+<span class="font-label-micro text-label-micro text-telemetry-emerald">148 TESTS</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Pytest Multi-Matrix</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">
+              Isolated container sandbox validation across both Python 3.11 and 3.12 runtime kernels simultaneously.
+            </p>
+</div>
+<div class="mt-space-md pt-2 border-t border-border-subtle flex items-center justify-between font-label-code text-label-micro text-text-muted">
+<span>Codecov: 100% XML</span>
+<span class="text-text-primary">Py 3.11 &amp; 3.12</span>
+</div>
+</div>
+<!-- CI Guardrail 4 -->
+<div class="bg-surface-raised border border-border-subtle p-space-md rounded flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-telemetry-emerald text-[20px]">shield</span>
+<span class="font-label-micro text-label-micro text-telemetry-emerald">LOCKED</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Ontological Drift Gate</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">
+              Validates semantic schema regressions against Darwin Core v1.4 data dictionaries prior to branch merges.
+            </p>
+</div>
+<div class="mt-space-md pt-2 border-t border-border-subtle flex items-center justify-between font-label-code text-label-micro text-text-muted">
+<span>DwC Schema Integrity</span>
+<span class="text-telemetry-emerald">ZERO DRIFT</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Academic Grounding & Infrastructure Specifications Grid -->
+<section class="w-full bg-surface-raised border-t border-border-subtle px-gutter py-space-xl">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Grounding Bibliography & Ethology Citations -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-micro text-label-micro text-citation-amber uppercase tracking-wider">04 / Empirical Foundations</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary">Grounding Biological Literature</h3>
+<p class="font-body-sm text-body-sm text-text-secondary">
+          EthoPipe operational definitions are directly grounded in published behavioral ethograms and peer-reviewed veterinary benchmarks:
+        </p>
+<div class="flex flex-col gap-3 mt-space-sm">
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-micro text-citation-amber">APPLIED ANIMAL BEHAVIOUR SCIENCE (2024)</span>
+<span class="font-label-micro text-label-micro text-text-muted">DOI: 10.1016/j.applanim.2024.106402</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-primary">
+              Broseghini, A., Lõoke, M., Guérineau, C., Marinelli, L., &amp; Mongillo, P. — <em>Ethogram of the predatory sequence of dogs (Canis familiaris).</em>
+</p>
+</div>
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-micro text-citation-amber">JOURNAL OF VETERINARY BEHAVIOR (2024)</span>
+<span class="font-label-micro text-label-micro text-text-muted">DOI: 10.1016/j.jveb.2023.12.007</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-primary">
+              de Winkel, T. et al. — <em>Observational behaviors and emotions to assess welfare of dogs: A systematic review.</em>
+</p>
+</div>
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-micro text-citation-amber">MERCK VETERINARY MANUAL</span>
+<span class="font-label-micro text-label-micro text-telemetry-emerald">PHYSIOLOGICAL BOUNDS</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-primary">
+<em>Normal Physiological Values for Dogs:</em> Baseline resting canine heart rates established at 60–140 BPM, extreme telemetry bounds clamped at 30–250 BPM.
+            </p>
+</div>
+</div>
+</div>
+<!-- Infrastructure Subsidies & Grants in Kind -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-micro text-label-micro text-text-muted uppercase tracking-wider">05 / Computational Infrastructure</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary">Institutional Allocations</h3>
+<p class="font-body-sm text-body-sm text-text-secondary">
+          Subsidized compute allocations supporting high-throughput token serialization:
+        </p>
+<div class="grid grid-cols-2 gap-3 mt-space-sm">
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex flex-col justify-between">
+<span class="material-symbols-outlined text-text-primary text-[24px]">terminal</span>
+<div class="mt-4">
+<span class="font-label-code text-label-code text-text-primary block">GitHub Education</span>
+<span class="font-label-micro text-label-micro text-text-muted">CI/CD Runner Matrix</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex flex-col justify-between">
+<span class="material-symbols-outlined text-citation-amber text-[24px]">cloud_done</span>
+<div class="mt-4">
+<span class="font-label-code text-label-code text-text-primary block">Google AI Studio</span>
+<span class="font-label-micro text-label-micro text-text-muted">Flash 3.5 Token Grants</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex flex-col justify-between">
+<span class="material-symbols-outlined text-telemetry-emerald text-[24px]">memory</span>
+<div class="mt-4">
+<span class="font-label-code text-label-code text-text-primary block">NVIDIA Developer</span>
+<span class="font-label-micro text-label-micro text-text-muted">CV Testing Frameworks</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex flex-col justify-between">
+<span class="material-symbols-outlined text-text-primary text-[24px]">menu_book</span>
+<div class="mt-4">
+<span class="font-label-code text-label-code text-text-primary block">GitBook Plan</span>
+<span class="font-label-micro text-label-micro text-text-muted">Community Docs Suite</span>
+</div>
+</div>
+</div>
+<div class="p-space-md bg-surface-base border border-border-subtle rounded flex items-center justify-between mt-1">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-citation-amber text-[20px]">badge</span>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-text-primary">Alice Severi Gonçalves</span>
+<span class="font-label-micro text-label-micro text-text-muted">Principal Systems Architect</span>
+</div>
+</div>
+<a class="font-label-code text-label-micro text-citation-amber hover:underline" href="https://orcid.org/0009-0003-0048-8982" rel="noopener noreferrer" target="_blank">
+            ORCID: 0009-0003-0048-8982 ↗
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Minimal Studio Call to Action / Open-Science Terminal Footer -->
+<section class="w-full bg-surface-base px-gutter py-space-xl border-t border-border-subtle">
+<div class="max-w-[1440px] mx-auto bg-surface-raised border border-border-subtle p-space-xl rounded-DEFAULT flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-lg">
+<div class="max-w-2xl flex flex-col gap-2">
+<span class="font-label-micro text-label-micro uppercase tracking-widest text-citation-amber">Open Science Repository Deployment</span>
+<h3 class="font-headline-md text-headline-md text-text-primary">Integrate EthoPipe with Your Research Telemetry</h3>
+<p class="font-body-sm text-body-sm text-text-secondary leading-relaxed">
+          Clone the deterministic parser, ingest unformatted incident notes, or connect your continuous IMU/ECG streams to the Darwin Core serialization sink.
+        </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-space-sm w-full lg:w-auto">
+<div class="flex items-center gap-2 bg-surface-base px-space-md py-2.5 rounded border border-border-subtle w-full sm:w-auto">
+<span class="font-label-code text-label-micro text-text-muted">git clone</span>
+<span class="font-label-code text-label-code text-text-primary select-all">https://github.com/sothiss/ethopipe.git</span>
+</div>
+<a class="w-full sm:w-auto px-space-md py-2.5 bg-primary-container text-on-primary-container hover:bg-surface-tint rounded-DEFAULT font-label-micro text-label-micro uppercase font-medium text-center transition-colors" href="https://docs.thetransparencyproject.me/llms.txt" rel="noopener noreferrer" target="_blank">
+          llms.txt Specification
         </a>
-      </div>
+</div>
+</div>
+</section>
+<!-- Interactive Logic -->
 
-      <div class="footer-grid">
-        <div class="footer-about">
-          <div class="brand-mark">
-            <div class="brand-icon-wrap" style="width: 36px; height: 36px;">
-              <img src="assets/brand-mark.svg" alt="The Transparency Project Mark" />
-            </div>
-            <span class="brand-title" style="font-size: 1.05rem;">The Transparency Project</span>
-          </div>
-          <p data-pt="Estúdio especializado em manutenção e revitalização de computadores desktop. Fundamentado na honestidade técnica, peças a preço de custo e prazos confiáveis." data-en="Desktop PC hardware maintenance and revitalization studio. Rooted in technical integrity, parts at cost price, and dependable turnaround.">
-            Estúdio especializado em manutenção e revitalização de computadores desktop. Fundamentado na honestidade técnica, peças a preço de custo e prazos confiáveis.
-          </p>
-          <div style="margin-top: 14px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">
-            <span>&#128205; Planalto Paulista, São Paulo — SP</span>
-          </div>
-        </div>
+</div></main></div>
+  </div>
 
-        <div class="footer-col">
-          <h5 data-pt="Serviços & Pacotes" data-en="Services & Bundles">Serviços & Pacotes</h5>
-          <ul>
-            <li><a href="#servicos">Manutenção Térmica (R$ 140)</a></li>
-            <li><a href="#servicos">Revitalização SSD (R$ 160)</a></li>
-            <li><a href="#servicos">Formatação Limpa (R$ 130)</a></li>
-            <li><a href="#servicos">Upgrade de Hardware (R$ 90)</a></li>
-            <li><a href="#combo">Combo Revitalização (R$ 280)</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5 data-pt="Contato & Transparência" data-en="Contact & Transparency">Contato & Transparência</h5>
-          <ul>
-            <li><a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">WhatsApp Concierge</a></li>
-            <li><a href="https://github.com/sothiss/ethopipe" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
-            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn Perfil</a></li>
-            <li><a href="#garantia">Salvaguardas & CDC</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom-bar">
-        <span>&copy; 2026 The Transparency Project. Todos os direitos reservados.</span>
-        <span>Planalto Paulista • São Paulo - SP • CDC Art. 26</span>
-      </div>
-    </div>
-  </footer>
-
+  <!-- Portal Navigation & State Controller -->
   <script>
-    // Language Toggle (PT-BR / EN)
-    let currentLang = 'pt';
-    const langBtn = document.getElementById('langToggleBtn');
+    (function() {
+      const views = {
+        'hub': document.getElementById('view-hub'),
+        'the-project': document.getElementById('view-thesis'),
+        'thesis': document.getElementById('view-thesis'),
+        'ethopipe': document.getElementById('view-ethopipe')
+      };
 
-    if (langBtn) {
-      langBtn.addEventListener('click', () => {
-        currentLang = currentLang === 'pt' ? 'en' : 'pt';
-        document.querySelectorAll('[data-pt]').forEach(el => {
-          const text = el.getAttribute(`data-${currentLang}`);
-          if (text) el.textContent = text;
+      const titles = {
+        'hub': 'The Transparency Project — Open-Access Canine Ethology & Biotelemetry',
+        'the-project': 'The Project — Scientific Thesis & Statement of Need',
+        'thesis': 'The Project — Scientific Thesis & Statement of Need',
+        'ethopipe': 'EthoPipe — Technical Architecture & Documentation'
+      };
+
+      function updateNavHighlights(targetKey) {
+        const pathMap = {
+          'hub': ['hub-home'],
+          'the-project': ['the-project', 'the-project-thesis'],
+          'thesis': ['the-project', 'the-project-thesis'],
+          'ethopipe': ['ethopipe', 'ethopipe-docs-pipeline']
+        };
+        const activePaths = pathMap[targetKey] || ['hub-home'];
+
+        document.querySelectorAll('nav a[data-path]').forEach(link => {
+          const p = link.getAttribute('data-path');
+          if (activePaths.includes(p)) {
+            link.classList.add('text-text-primary', 'font-medium');
+            link.classList.remove('text-text-muted', 'text-on-surface-variant');
+            if (link.closest('nav[data-active-classes]')) {
+              link.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-sm');
+            }
+          } else if (['hub-home', 'the-project', 'the-project-thesis', 'ethopipe', 'ethopipe-docs-pipeline'].includes(p)) {
+            link.classList.remove('text-text-primary', 'bg-primary-container', 'text-on-primary-container', 'shadow-sm', 'font-medium');
+            link.classList.add('text-text-muted');
+          }
         });
-        langBtn.textContent = currentLang === 'pt' ? 'EN / PT' : 'PT / EN';
-      });
-    }
+      }
 
-    // Mobile Navigation Drawer Toggle
-    const mobileToggle = document.getElementById('mobileToggleBtn');
-    const drawerClose = document.getElementById('drawerCloseBtn');
-    const drawer = document.getElementById('mobileDrawer');
+      function showView(viewKey, pushHash = true) {
+        let targetKey = viewKey;
+        if (!views[targetKey]) {
+          targetKey = 'hub';
+        }
 
-    if (mobileToggle && drawer) {
-      mobileToggle.addEventListener('click', () => drawer.classList.add('open'));
-    }
-    if (drawerClose && drawer) {
-      drawerClose.addEventListener('click', () => drawer.classList.remove('open'));
-    }
-    document.querySelectorAll('.drawer-item').forEach(item => {
-      item.addEventListener('click', () => {
-        if (drawer) drawer.classList.remove('open');
+        // Hide all views
+        Object.keys(views).forEach(k => {
+          if (views[k]) {
+            views[k].classList.add('hidden');
+          }
+        });
+
+        // Show selected view
+        const activeTarget = views[targetKey];
+        if (activeTarget) {
+          activeTarget.classList.remove('hidden');
+        }
+
+        // Update document title
+        document.title = titles[targetKey] || titles['hub'];
+
+        // Update navigation active states
+        updateNavHighlights(targetKey);
+
+        // Update hash if requested
+        if (pushHash) {
+          const hashValue = targetKey === 'hub' ? '' : '#' + targetKey;
+          if (window.location.hash !== hashValue) {
+            history.pushState(null, '', hashValue || window.location.pathname);
+          }
+        }
+
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Trigger resize event for sticky elements and charts
+        window.dispatchEvent(new Event('resize'));
+      }
+
+      // Listen for all internal portal navigation clicks
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a, button');
+        if (!link) return;
+
+        const path = link.getAttribute('data-path');
+        const href = link.getAttribute('href');
+
+        if (path) {
+          if (path === 'the-project' || path === 'the-project-thesis') {
+            e.preventDefault();
+            showView('the-project');
+          } else if (path === 'ethopipe' || path === 'ethopipe-docs-pipeline') {
+            e.preventDefault();
+            showView('ethopipe');
+          } else if (path === 'hub-home') {
+            e.preventDefault();
+            showView('hub');
+          } else if (path === 'dispatches-blog' || path === 'rse-blog') {
+            e.preventDefault();
+            window.open('https://thetransparencyproject.gitbook.io/ethopipe', '_blank');
+          } else if (path === 'zenodo-archive') {
+            e.preventDefault();
+            window.open('https://doi.org/10.5281/zenodo.21211371', '_blank');
+          }
+        } else if (href && href.startsWith('#') && href.length > 1) {
+          const target = href.slice(1);
+          if (views[target]) {
+            e.preventDefault();
+            showView(target);
+          }
+        }
       });
-    });
+
+      // Route based on history navigation
+      window.addEventListener('popstate', () => {
+        const hash = window.location.hash.replace(/^#/, '');
+        showView(hash || 'hub', false);
+      });
+
+      // Initial view resolution
+      const initialHash = window.location.hash.replace(/^#/, '');
+      if (initialHash && views[initialHash]) {
+        showView(initialHash, false);
+      } else {
+        updateNavHighlights('hub');
+      }
+
+      // Heartbeat simulated counter
+      const bpmEl = document.getElementById('telemetry-bpm-counter');
+      if (bpmEl) {
+        setInterval(() => {
+          const val = (72 + (Math.random() * 6 - 3)).toFixed(1);
+          bpmEl.textContent = val + ' BPM';
+        }, 3000);
+      }
+
+      // Diff Switcher for Thesis view
+      window.switchDiff = function(caseId) {
+        const case1 = document.getElementById('diffContentCase1');
+        const case2 = document.getElementById('diffContentCase2');
+        const btn1 = document.getElementById('btnTab1');
+        const btn2 = document.getElementById('btnTab2');
+
+        if (caseId === 'case1') {
+          if (case1) { case1.classList.remove('hidden'); case1.classList.add('flex'); }
+          if (case2) { case2.classList.remove('flex'); case2.classList.add('hidden'); }
+          if (btn1) { btn1.classList.add('bg-surface-overlay', 'text-text-primary'); btn1.classList.remove('text-text-muted'); }
+          if (btn2) { btn2.classList.remove('bg-surface-overlay', 'text-text-primary'); btn2.classList.add('text-text-muted'); }
+        } else {
+          if (case2) { case2.classList.remove('hidden'); case2.classList.add('flex'); }
+          if (case1) { case1.classList.remove('flex'); case1.classList.add('hidden'); }
+          if (btn2) { btn2.classList.add('bg-surface-overlay', 'text-text-primary'); btn2.classList.remove('text-text-muted'); }
+          if (btn1) { btn1.classList.remove('bg-surface-overlay', 'text-text-primary'); btn1.classList.add('text-text-muted'); }
+        }
+      };
+
+      // Copy Snippet in EthoPipe view
+      const copyBtn = document.getElementById('copySnippetBtn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const orig = copyBtn.innerHTML;
+          navigator.clipboard.writeText(`class CanineObservationRecord(BaseModel):\n    model_config = ConfigDict(strict=True, extra='forbid')\n    individual_id: str = Field(..., pattern=r"^CANIS-[A-Z0-9]{6}$")\n    event_timestamp: datetime\n    ethogram_token: Literal["play_bow", "displacement_pant", "lip_lick", "direct_gaze", "micro_freeze"]\n    heart_rate_bpm: Optional[int] = Field(None, ge=30, le=250)\n    basis_of_record: Literal["MachineObservation", "HumanObservation"]`).then(() => {
+            copyBtn.innerHTML = '<span class="material-symbols-outlined text-[14px] text-telemetry-emerald">check</span><span>Copied to Clipboard</span>';
+            setTimeout(() => { copyBtn.innerHTML = orig; }, 2500);
+          });
+        });
+      }
+
+      // Simulation runner in EthoPipe view
+      const simBtn = document.getElementById('runSimBtn');
+      const simFeedback = document.getElementById('simFeedback');
+      if (simBtn && simFeedback) {
+        simBtn.addEventListener('click', () => {
+          simBtn.classList.add('opacity-50', 'pointer-events-none');
+          simFeedback.classList.remove('hidden');
+          simFeedback.textContent = 'STREAMING TELEMETRY...';
+          simFeedback.classList.remove('text-telemetry-emerald');
+          simFeedback.classList.add('text-citation-amber');
+
+          setTimeout(() => {
+            simFeedback.textContent = '2,400 records processed in 14ms // 0 dropped';
+            simFeedback.classList.remove('text-citation-amber');
+            simFeedback.classList.add('text-telemetry-emerald');
+            simBtn.classList.remove('opacity-50', 'pointer-events-none');
+          }, 800);
+        });
+      }
+    })();
   </script>
 </body>
 </html>

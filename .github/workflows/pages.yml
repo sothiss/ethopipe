@@ -31,6 +31,9 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html CNAME _site/
+          cp -r assets _site/
+          cp -r the-project _site/
+          cp -r ethopipe _site/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
