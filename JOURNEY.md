@@ -21,6 +21,7 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 ## 📓 Chronological Evolution & Architectural Logs
 
 ### Entry 001: The Systemic Clean Slate & History Reset
+* **Date & Model:** 2025-11-15 | Gemini 1.5 Pro | Human PI: Alice Severi Gonçalves
 * **Hurdle Type:** Environmental Anomalies & Git History Friction
 * **The Technical Challenge:** The local development environment was suffering from compounding configuration debt. Bloated IDE extensions (Azure/Kubernetes proxies) were polluting execution paths, while raw Google Cloud Application Default Credentials (ADC) endpoints were misaligned. The local version control history had devolved into volatile tracking cycles.
 * **The Architectural Pivot:** Performed an explicit "intellectual garbage collection."
@@ -30,6 +31,7 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 * **Quantitative Milestone:** A pristine, standardized root repository structure (`src/`, `tests/`, `docs/`) deployed safely to a single tracking line on `main` at `github.com/sothiss/ethopipe`.
 
 ### Entry 002: Hardcoding Biological Realities into the Pydantic Matrix
+* **Date & Model:** 2025-12-02 | Gemini 1.5 Pro | Human PI: Alice Severi Gonçalves
 * **Hurdle Type:** Semantic Ingestion Bias vs. Deterministic Gatekeeping
 * **The Technical Challenge:** Unstructured field narratives and handler logs contain high frequencies of anthropomorphic, subjective terms (e.g., "Max was being stubborn and protective"). Furthermore, manual data entries introduce extreme physiological anomalies that can corrupt downstream quantitative analytical engines.
 * **The Architectural Pivot:** Translated paper-based canine behavior literature (Hsu & Serpell's C-BARQ parameters, Bekoff, Handelman, and 2024 peer-reviewed ethograms) directly into immutable Python code blocks. Hardcoded biological guardrails into Pydantic models:
@@ -38,12 +40,14 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 * **Quantitative Milestone:** Successfully built and verified a 43-test passing validation validation loop cleanly executing across `test_models.py`, `test_ingestion.py`, and `test_api.py` in 2.22 seconds with zero structural regressions.
 
 ### Entry 003: The Move to Radical Reproducibility (Docker Integration)
+* **Date & Model:** 2026-01-20 | Gemini 1.5 Pro | Human PI: Alice Severi Gonçalves
 * **Hurdle Type:** Execution Disparity & Academic Compliance
 * **The Technical Challenge:** Minor library updates or variable path mismatches between local environments and cloud instances cause silent formatting failures. For academic peer review (such as targeting a Journal of Open Source Software—JOSS publication), an interactive application must be globally reproducible without external manual installation friction.
 * **The Architectural Pivot:** Abandoned traditional cross-platform server setup assumptions. Implemented a containerization protocol via Docker and standard `devcontainer.json` parameters. This configuration ships the exact localized Linux runtime environment alongside the operational source code.
 * **Quantitative Milestone:** Repository optimized for automated metadata tracking. Code architecture fully prepared to connect seamlessly with custom domain routing overlays (`thetransparencyproject.me`) and GitHub Pages deployment compilers.
 
 ### Entry 004: Portal Refactoring & Repository Standardization
+* **Date & Model:** 2026-06-25 | Gemini 3.5 Flash | Human PI: Alice Severi Gonçalves
 * **Hurdle Type:** Frontend Dependency Bloat & Project Standardization Metadata
 * **The Technical Challenge:** The portal UI depended on an external Tailwind CDN with a bloated custom configuration injected at runtime. This introduced unnecessary dependency overhead, potential styling glitches upon network latency, and ran counter to local-first, low-overhead open science guidelines. Additionally, project funding and historical tracking lacked standardized registry endpoints.
 * **The Architectural Pivot:**
@@ -53,6 +57,7 @@ This matrix tracks the invariant technical boundaries of the execution layer to 
 * **Quantitative Milestone:** Reduced HTML loading dependency footprint from an external multi-megabyte Tailwind engine down to 19 KB of clean, local-first HTML and custom CSS, while keeping the pytest suite fully stable (17/17 tests passing in 0.75s).
 
 ### Entry 005: Automated Quality Gates & Adversarial Boundary Verification
+* **Date & Model:** 2026-07-08 | Gemini 3.5 Flash | Human PI: Alice Severi Gonçalves
 * **Hurdle Type:** Development Governance, Verification Automation & Dependency Safety
 * **The Technical Challenge:** Securing a deterministic data ingestion pipeline requires continuous, machine-enforced verification of prompt constraints, Pydantic type safety, and Darwin Core formatting rules. Furthermore, standard static test assertions cannot dynamically verify biological bounds against infinite combinations of messy narrative inputs, exposing the code to input vulnerability and environment drift.
 * **The Architectural Pivot:**
