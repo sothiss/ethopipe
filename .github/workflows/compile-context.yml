@@ -19,12 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Local Repository Branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 5
 
       - name: Initialize Sterile Python Runtime
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
@@ -32,7 +32,7 @@ jobs:
         run: python scripts/compile_snapshot.py
 
       - name: Archive Snapshot Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ethopipe-llm-snapshot
           path: docs/LLM_SNAPSHOT.md
