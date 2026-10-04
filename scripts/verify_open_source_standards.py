@@ -210,14 +210,22 @@ class StandardsAudit:
 
         # Ruff format check
         code, out, err = run_cmd(
-            [str(ruff_exe if ruff_exe.exists() else "ruff"), "format", "--check", "src", "tests"],
+            [
+                str(ruff_exe if ruff_exe.exists() else "ruff"),
+                "format",
+                "--check",
+                "src",
+                "tests",
+            ],
             self.root,
         )
         self.record(
             cat,
             "Code Formatting (Ruff)",
             code == 0,
-            "All source and test files match standard format." if code == 0 else f"{out}\n{err}",
+            "All source and test files match standard format."
+            if code == 0
+            else f"{out}\n{err}",
             "Run `ruff format src tests` to automatically fix formatting.",
         )
 
@@ -230,7 +238,9 @@ class StandardsAudit:
             cat,
             "Static Linting (Ruff: E, F, I, UP, B, SIM, RUF)",
             code == 0,
-            "All lint checks passed without violations." if code == 0 else f"{out}\n{err}",
+            "All lint checks passed without violations."
+            if code == 0
+            else f"{out}\n{err}",
             "Run `ruff check --fix src tests` to resolve issues.",
         )
 
@@ -243,7 +253,9 @@ class StandardsAudit:
             cat,
             "Type Safety & Boundary Checking (Mypy)",
             code == 0,
-            "Strict typing validated across core modules." if code == 0 else f"{out}\n{err}",
+            "Strict typing validated across core modules."
+            if code == 0
+            else f"{out}\n{err}",
             "Add missing type annotations or stub packages.",
         )
 
@@ -285,14 +297,20 @@ class StandardsAudit:
         adv_test = self.root / "tests" / "test_adversarial_boundaries.py"
         if adv_test.exists():
             code, out, _ = run_cmd(
-                [str(pytest_exe if pytest_exe.exists() else "pytest"), str(adv_test), "-q"],
+                [
+                    str(pytest_exe if pytest_exe.exists() else "pytest"),
+                    str(adv_test),
+                    "-q",
+                ],
                 self.root,
             )
             self.record(
                 cat,
                 "Adversarial Boundaries (Hypothesis)",
                 code == 0,
-                "Property-based boundary fuzzing passed." if code == 0 else f"Failures: {out}",
+                "Property-based boundary fuzzing passed."
+                if code == 0
+                else f"Failures: {out}",
                 "Investigate boundary violations in tests/test_adversarial_boundaries.py.",
             )
 
@@ -360,7 +378,9 @@ class StandardsAudit:
                 status_icon = "✅ Pass" if item["passed"] else "❌ Fail"
                 remedy = item["remediation"] if not item["passed"] else "-"
                 details_clean = item["details"].replace("\n", " ")[:120]
-                md += f"| {item['name']} | {status_icon} | {details_clean} | {remedy} |\n"
+                md += (
+                    f"| {item['name']} | {status_icon} | {details_clean} | {remedy} |\n"
+                )
             md += "\n"
 
         md += """---
@@ -413,7 +433,9 @@ def main() -> None:
         print("\n🎉 SUCCESS: All code quality and open source standards passed!")
         sys.exit(0)
     else:
-        print("\n⚠️ WARNING: One or more standards checks failed. See report for remediation.")
+        print(
+            "\n⚠️ WARNING: One or more standards checks failed. See report for remediation."
+        )
         sys.exit(1)
 
 
