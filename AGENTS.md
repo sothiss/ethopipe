@@ -19,3 +19,12 @@ https://gitbook.com/docs/skill.md
 When making changes, preserve GitBook sync metadata such as frontmatter, `SUMMARY.md`, `gitbook-docs.yaml`, `.gitbook/`, and asset links unless the requested edit explicitly requires changing them.
 
 <!-- gitbook-agent-instructions:end -->
+
+## Cross-Model Agent Handoff & Catch-Up
+
+When switching active development between AI models (Antigravity/Gemini, Anthropic Claude, OpenAI o1/GPT-4o, Cursor):
+
+1. **Generate Handoff**: Run `.\scripts\handoff.ps1` or `python scripts/generate_agent_handoff.py --run-tests --update-snapshot --copy`.
+2. **Review State**: Read `docs/AGENT_HANDOFF.md` for live telemetry, active branch status, and recent diffs.
+3. **Clipboard Prompt**: The formatted `<CONTEXT_HANDOFF>` prompt block is automatically copied to your clipboard to paste into the incoming model session.
+4. **Workflow Documentation**: See `docs/AGENT_HANDOFF_WORKFLOW.md` for complete cross-agent instructions.
