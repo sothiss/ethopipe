@@ -52,10 +52,11 @@ class JourneyManager:
 
     def list_entries(self) -> list[dict[str, str]]:
         content = self._read_journey()
-        pattern = re.compile(
-            r"### Entry (\d+): ([^\n]+)\n\* \*\*Date & Model:\*\* ([^\n|]+) \| ([^\n|]+)",
-            re.MULTILINE,
+        regex_pattern = (
+            r"### Entry (\d+): ([^\n]+)\n"
+            r"\* \*\*Date & Model:\*\* ([^\n|]+) \| ([^\n|]+)"
         )
+        pattern = re.compile(regex_pattern, re.MULTILINE)
         matches = []
         for m in pattern.finditer(content):
             matches.append(
@@ -78,12 +79,24 @@ class JourneyManager:
             title=title,
             date=today,
             model=model,
-            hurdle="[Hurdle Category: Environmental / Architectural / Ingestion / Governance]",
-            challenge="[Specific technical friction or anti-pattern encountered]",
-            reasoning="[Detailed record of how the AI reasoned through the problem: trade-offs, constraints, alternative designs, and self-corrections]",
-            pivot="[Key architectural changes, new abstractions, decoupled modules, or eliminated dependencies]",
-            milestone="[Verified metrics: test counts, execution time, zero-bloat adherence, and passing audits]",
-            ai_note="[Observations on AI model capabilities, reasoning fidelity, long-context handling, and human-AI synergy evolution]",
+            hurdle="[Environmental / Architecture / Ingestion / Governance]",
+            challenge="[Specific technical friction or constraint encountered]",
+            reasoning=(
+                "[Detailed record of how the AI reasoned through the problem: "
+                "trade-offs, constraints, alternative designs, and self-corrections]"
+            ),
+            pivot=(
+                "[Key architectural changes, new abstractions, decoupled modules, "
+                "or eliminated dependencies]"
+            ),
+            milestone=(
+                "[Verified metrics: test counts, execution time, zero-bloat "
+                "adherence, and passing audits]"
+            ),
+            ai_note=(
+                "[Observations on AI model capabilities, reasoning fidelity, "
+                "long-context handling, and human-AI synergy evolution]"
+            ),
         )
 
     def append_entry(
@@ -206,30 +219,17 @@ def main() -> None:
         print(mgr.generate_template(title=args.title, model=args.model))
 
     elif args.command == "timeline":
-        print(
-            f"\n{BOLD}{CYAN}=== EthoPipe AI Co-Evolution Trajectory (2025 - 2026+) ==={RESET}\n"
-        )
-        print("  • 2025 - Initial Foundation & Heuristics (Gemini 1.5 Pro / Flash)")
-        print(
-            "    - Focus: Pydantic schemas, initial Darwin Core biological constraints, Docker setup."
-        )
+        header = f"\n{BOLD}{CYAN}=== EthoPipe AI Co-Evolution Trajectory ==={RESET}\n"
+        print(header)
+        print("  • 2025 - Initial Foundation & Heuristics (Gemini 1.5 Pro)")
+        print("    - Focus: Pydantic schemas, Darwin Core mapping, Docker setup.")
         print("    - Paradigm: Reactive code generation, basic prompt instructions.")
-        print("  • Mid 2026 - Radical Determinism & Verification (Gemini 3.5 Flash)")
-        print(
-            "    - Focus: Property-based testing (Hypothesis), pre-commit gates, credential isolation."
-        )
-        print(
-            "    - Paradigm: Deterministic guardrails, zero-variance temperature, strict type safety."
-        )
-        print(
-            "  • Late 2026 - Autonomous Governance & Meta-Cognition (Gemini 3.8 Flash)"
-        )
-        print(
-            "    - Focus: Solo maintainer anti-bloat charter, step-gated idea engine, telemetry handoff."
-        )
-        print(
-            "    - Paradigm: Proactive systems architecture, AI cognitive journaling, automated governance.\n"
-        )
+        print("  • Mid 2026 - Determinism & Verification (Gemini 3.5 Flash)")
+        print("    - Focus: Property testing, pre-commit gates, secret isolation.")
+        print("    - Paradigm: Deterministic guardrails, zero-variance temperature.")
+        print("  • Late 2026 - Autonomous Governance (Gemini 3.8 Flash)")
+        print("    - Focus: Solo maintainer charter, step-gated idea pipeline.")
+        print("    - Paradigm: Systems architecture, cognitive journaling, tasks.\n")
 
     elif args.command == "new":
         entry_tag = mgr.append_entry(
