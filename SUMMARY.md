@@ -1,29 +1,28 @@
 # Table of contents
 
-* [EthoPipe: An Open-Science ETL Pipeline for Applied Canine Ethology and Physiological Telemetry](README.md)
-* [GitBook Documentation Editing](AGENTS.md)
-* [Changelog](CHANGELOG.md)
-* [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md)
+* [EthoPipe: Overview & Purpose](README.md)
+
+## Architecture & Specifications
+* [API Ingestion & Webhooks](docs/api-ingestion.md)
+* [Kimball Star Schema & Darwin Core Specs](docs/SCHEMA.md)
+* [Biological Validation & Guardrails](docs/VALIDATION.md)
+
+## Open Science & Governance
+* [AI Usage Disclosure & Governance](docs/ai-usage.md)
+* [Open Science Standards & Compliance](docs/OPEN_SOURCE_STANDARDS.md)
+* [Solo Maintainer Charter & Guardrails](docs/SOLO_MAINTAINER_AUDIT.md)
+* [Research Software Engineering Log (Journey)](JOURNEY.md)
+* [Contributor Code of Conduct](CODE_OF_CONDUCT.md)
 * [Contributing to EthoPipe](CONTRIBUTING.md)
-* [Research Software Engineering (RSE) Log: EthoPipe Journey](JOURNEY.md)
 * [Security Policy](SECURITY.md)
-* [.github](.github/README.md)
-  * [PULL\_REQUEST\_TEMPLATE](.github/PULL_REQUEST_TEMPLATE.MD)
-  * [ISSUE\_TEMPLATE](.github/issue_template/README.md)
-    * [\[BUG\]](.github/ISSUE_TEMPLATE/bug_report.md)
-    * [\[FEATURE\]](.github/ISSUE_TEMPLATE/feature_request.md)
-  * [agents](.github/agents/README.md)
-    * [my-agent.agent](.github/agents/my-agent.agent.md)
-* [.jules](.jules/README.md)
-  * [2026-07-05 - O(1) Dictionary Lookup vs Enum Iteration in Pydantic Field Validators](.jules/bolt.md)
-* [changelog](changelog-1/README.md)
-  * [Table of contents](changelog/SUMMARY.md)
-* [docs](docs/README.md)
-  * [EthoPipe Codebase Snapshot](docs/LLM_SNAPSHOT.MD)
-  * [EthoPipe Schema Specification](docs/SCHEMA.md)
-  * [EthoPipe Validation Specification](docs/VALIDATION.md)
-  * [AI Usage Disclosure and Governance Guidelines](docs/ai-usage.md)
-  * [releases](docs/releases/README.md)
-    * [Release Notes: v0.1.0](docs/releases/v0.1.0.md)
-    * [Release Notes: v0.2.0a0](docs/releases/v0.2.0a0.md)
-  * [API ingestion](docs/api-ingestion.md)
+
+## Development Workflows
+* [Step-Gated Ideas & Development Board](docs/IDEAS_BOARD.md)
+* [Cross-Model Agent Handoff Workflow](docs/AGENT_HANDOFF_WORKFLOW.md)
+* [Autonomous Code Companion Workflow](docs/CODE_COMPANION_WORKFLOW.md)
+
+## Releases & Changes
+* [Changelog](CHANGELOG.md)
+* [Release Directory](docs/releases/README.md)
+  * [Release Notes: v0.1.0](docs/releases/v0.1.0.md)
+  * [Release Notes: v0.2.0a0](docs/releases/v0.2.0a0.md)
