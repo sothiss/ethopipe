@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-EthoPipe Agent Handoff & Catch-Up Workflow Generator
+EthoPipe Agent Handoff & Code Companion Task Generator
 
-Generates a comprehensive state report, telemetry summary, and ready-to-paste
-catch-up prompt so the user can seamlessly switch between AI coding agents
-(e.g., Claude Code/Opus, OpenAI o1/GPT-4o, Cursor, Aider, or Antigravity).
+Generates state reports, telemetry summaries, and tailored prompts for:
+1. Interactive Cross-Model Handoffs (Claude, OpenAI o1/4o, Cursor, Antigravity)
+2. Autonomous Code Companions (Google Labs Jules, GitHub Copilot Workspace, Devin)
 """
 
 from __future__ import annotations
@@ -329,9 +329,126 @@ Please confirm you have ingested this context and state your plan immediately.
 """
 
 
+def build_companion_brief(
+    timestamp: str,
+    objective: str,
+    companion_type: str,
+    target_files: list[str],
+    next_steps: str,
+    blockers: str,
+    telemetry: dict[str, str],
+    test_status: str,
+) -> str:
+    """Build a deterministic brief strictly tailored for companions like Jules."""
+    pr_prefix_map = {
+        "bolt": "⚡ Bolt",
+        "sentinel": "🛡️ Sentinel",
+        "test": "test",
+        "feature": "feat",
+        "refactor": "refactor",
+    }
+    pr_prefix = pr_prefix_map.get(companion_type.lower(), "feat")
+    pr_title = f"{pr_prefix}: {objective}"
+
+    allowed_files_formatted = (
+        "\n".join([f"- `{f.strip()}`" for f in target_files])
+        if target_files
+        else "- `src/pipeline/models.py` (Default - specify exact files as needed)"
+    )
+
+    journal_instruction = ""
+    if companion_type.lower() == "bolt":
+        journal_instruction = """
+### Mandatory Learning Journal Update (.jules/bolt.md)
+Upon completing this optimization, you MUST append a learning entry to
+`.jules/bolt.md`:
+```markdown
+## YYYY-MM-DD - <Topic>
+**Learning:** <Quantitative profiling or architectural discovery>
+**Action:** <Code change implemented (e.g. O(1) hash lookup, caching)>
+```
+"""
+    elif companion_type.lower() == "sentinel":
+        journal_instruction = """
+### Mandatory Learning Journal Update (.jules/sentinel.md)
+Upon completing this security hardening, you MUST append a learning entry to
+`.jules/sentinel.md`:
+```markdown
+## YYYY-MM-DD - <Topic>
+**Learning:** <Vulnerability, input length boundary, or DoS vector resolved>
+**Action:** <Pydantic validation or sanitization rule enforced>
+```
+"""
+
+    sep = "=" * 80
+    return f"""{sep}
+CODE COMPANION (JULES) TASK BRIEF (PASTE INTO GITHUB ISSUE / COMPANION PROMPT)
+{sep}
+
+# Task Brief: {pr_title}
+
+**Target Companion:** Google Labs Jules (`@google-labs-jules[bot]`) / Companion
+**Task Track:** `{companion_type.upper()}`
+**Target Branch:** `{telemetry["branch"]}`
+**Recommended PR Title:** `{pr_title}`
+
+---
+
+## 1. Primary Objective
+{objective}
+
+---
+
+## 2. Strict Modification Boundaries (Scope Control)
+You are STRICTLY constrained to modify ONLY the following files:
+{allowed_files_formatted}
+
+Do NOT modify project configuration files (`pyproject.toml`,
+`.pre-commit-config.yaml`, CI workflows) unless specifically authorized.
+
+---
+
+## 3. Required Implementation Steps
+{next_steps}
+
+---
+
+## 4. Inviolable Repository Invariants (Do Not Violate)
+1. **Pydantic v2 Strict Mode**: All models must have
+   `model_config = ConfigDict(strict=True)`.
+2. **Canine Heart Rate Bounds**: Clamped strictly between 30 and 250 BPM
+   (Toy: 80-200 BPM, Giant: 40-110 BPM).
+3. **Darwin Core (DwC)**: Behavioral syllables map to `MeasurementOrFact`
+   (`dwc:individualID`, `dwc:eventDate`, `dwc:measurementType`,
+   `dwc:measurementValue`, `dwc:basisOfRecord`).
+4. **Linguistic De-biasing**: Discard subjective labels ('stubborn', 'spiteful')
+   in favor of objective motor postures.
+5. **Zero Test Regressions**: Current baseline has 22 passing tests.
+
+---
+
+## 5. Mandatory Verification Commands
+Before submitting your pull request, you MUST execute and pass:
+```bash
+pytest tests/ --tb=short -q
+ruff format --check src tests
+ruff check src tests
+```
+{journal_instruction}
+
+---
+
+## 6. Known Context & Warnings
+{blockers}
+
+*Reference Snapshot: `docs/LLM_SNAPSHOT.md` | Status: `docs/AGENT_HANDOFF.md`*
+{sep}
+"""
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Generate EthoPipe Agent Handoff Report and Catch-Up Prompt."
+        description="Generate EthoPipe Agent Handoff and Code Companion Task Briefs."
     )
     parser.add_argument(
         "--objective",
@@ -363,13 +480,29 @@ def main() -> None:
     )
     parser.add_argument(
         "--notes",
-        default="Seamless cross-agent switching between paid models.",
+        default="Targeting seamless cross-agent switching between paid models.",
         help="Additional instructions or directives",
     )
     parser.add_argument(
         "--target-agent",
         default="Any (Claude Code / OpenAI o1/4o / Cursor / Antigravity)",
-        help="Designated incoming model/agent family",
+        help="Designated incoming model/agent family (e.g. 'jules', 'claude')",
+    )
+    parser.add_argument(
+        "--companion",
+        action="store_true",
+        help="Generate a specialized autonomous task brief for Jules / code companions",
+    )
+    parser.add_argument(
+        "--companion-type",
+        choices=["bolt", "sentinel", "test", "feature", "refactor"],
+        default="bolt",
+        help="Companion track: bolt (perf), sentinel (security), test, feature",
+    )
+    parser.add_argument(
+        "--target-files",
+        default="src/pipeline/models.py,tests/test_models.py",
+        help="Comma-separated list of files the companion is permitted to modify",
     )
     parser.add_argument(
         "--run-tests",
@@ -408,6 +541,14 @@ def main() -> None:
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     file_timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
+    is_companion = args.companion or args.target_agent.lower() in [
+        "jules",
+        "companion",
+        "code-companion",
+    ]
+
+    target_file_list = [f.strip() for f in args.target_files.split(",") if f.strip()]
+
     # Generate documents
     report_md = build_markdown_report(
         timestamp=timestamp,
@@ -417,23 +558,35 @@ def main() -> None:
         next_steps=args.next_steps,
         blockers=args.blockers,
         notes=args.notes,
-        target_agent=args.target_agent,
+        target_agent="Google Labs Jules" if is_companion else args.target_agent,
         telemetry=telemetry,
         test_status=test_status,
     )
 
-    prompt_text = build_catchup_prompt(
-        timestamp=timestamp,
-        objective=args.objective,
-        completed=args.completed,
-        in_progress=args.in_progress,
-        next_steps=args.next_steps,
-        blockers=args.blockers,
-        notes=args.notes,
-        target_agent=args.target_agent,
-        telemetry=telemetry,
-        test_status=test_status,
-    )
+    if is_companion:
+        prompt_text = build_companion_brief(
+            timestamp=timestamp,
+            objective=args.objective,
+            companion_type=args.companion_type,
+            target_files=target_file_list,
+            next_steps=args.next_steps,
+            blockers=args.blockers,
+            telemetry=telemetry,
+            test_status=test_status,
+        )
+    else:
+        prompt_text = build_catchup_prompt(
+            timestamp=timestamp,
+            objective=args.objective,
+            completed=args.completed,
+            in_progress=args.in_progress,
+            next_steps=args.next_steps,
+            blockers=args.blockers,
+            notes=args.notes,
+            target_agent=args.target_agent,
+            telemetry=telemetry,
+            test_status=test_status,
+        )
 
     # Save to docs/AGENT_HANDOFF.md
     docs_dir = project_root / "docs"
@@ -442,6 +595,13 @@ def main() -> None:
     with open(handoff_path, "w", encoding="utf-8") as f:
         f.write(report_md)
     print(f"[✓] Primary Handoff Report written to: {handoff_path}")
+
+    # If companion, save to docs/JULES_TASK.md
+    if is_companion:
+        jules_task_path = docs_dir / "JULES_TASK.md"
+        with open(jules_task_path, "w", encoding="utf-8") as f:
+            f.write(prompt_text)
+        print(f"[✓] Code Companion Task Brief written to: {jules_task_path}")
 
     # Save historical archive to docs/handoffs/HANDOFF_<timestamp>.md
     archive_dir = docs_dir / "handoffs"
@@ -455,15 +615,15 @@ def main() -> None:
     if args.copy:
         clipboard_copied = copy_to_clipboard(prompt_text)
         if clipboard_copied:
-            print("[✓] Catch-Up Prompt successfully COPIED to Windows clipboard!")
+            print("[✓] Task Prompt successfully COPIED to Windows clipboard!")
         else:
             print("[!] Could not access clipboard. Please copy manually below.")
 
     # Print catchup prompt
     print("\n" + prompt_text)
     print(
-        "\n[INFO] Handoff generated successfully. You can switch models now.\n"
-        "       Paste the block above into your new agent session.\n"
+        "\n[INFO] Workflow generated successfully.\n"
+        "       Paste the prompt above into your target agent or GitHub issue.\n"
     )
 
 
