@@ -78,14 +78,14 @@ def test_string_field_max_length(field_name: str) -> None:
     }
 
     # 255 chars - valid
-    valid_kwargs = dict(base_kwargs, **{field_name: "a" * 255})
-    obs = CanineObservation(**valid_kwargs)
+    valid_kwargs = {**base_kwargs, field_name: "a" * 255}
+    obs = CanineObservation.model_validate(valid_kwargs)
     assert getattr(obs, field_name) == "a" * 255
 
     # 256 chars - invalid
-    invalid_kwargs = dict(base_kwargs, **{field_name: "a" * 256})
+    invalid_kwargs = {**base_kwargs, field_name: "a" * 256}
     with pytest.raises(ValidationError):
-        CanineObservation(**invalid_kwargs)
+        CanineObservation.model_validate(invalid_kwargs)
 
 
 def test_canine_observation_strict_mode() -> None:

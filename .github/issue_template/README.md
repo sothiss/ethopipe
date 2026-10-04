@@ -1,2 +1,1 @@
 # ISSUE\_TEMPLATE
-
