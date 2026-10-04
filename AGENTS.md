@@ -67,5 +67,3 @@ To record the technical journey and trace the evolution of AI model reasoning (c
 1. **Inspect / Append Journey**: Use `.\scripts\journey.ps1 -Template` or `python scripts/manage_journey.py new ...`.
 2. **Chronicle Invariants**: Each session entry in `JOURNEY.md` logs the active model, architectural pivots, interesting cognitive steps taken by the AI, and verified milestones.
 3. **Log Location**: See `JOURNEY.md` for complete historical logs.
-
-

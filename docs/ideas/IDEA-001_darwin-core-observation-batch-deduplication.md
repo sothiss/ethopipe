@@ -1,6 +1,6 @@
 # [IDEA-001] Darwin Core observation batch deduplication
 
-**Track:** `bolt` | **Created:** `2026-10-04` | **Status:** `in-triage`  
+**Track:** `bolt` | **Created:** `2026-10-04` | **Status:** `in-triage`
 **Current Gate:** `Gate 1: Triage & Solo Maintainer Veto`
 
 ---

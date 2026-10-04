@@ -61,7 +61,7 @@ class IdeaManager:
 
         content = f"""# [{idea_id}] {title}
 
-**Track:** `{track}` | **Created:** `{today}` | **Status:** `in-triage`  
+**Track:** `{track}` | **Created:** `{today}` | **Status:** `in-triage`
 **Current Gate:** `Gate 1: Triage & Solo Maintainer Veto`
 
 ---
