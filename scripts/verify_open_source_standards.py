@@ -6,7 +6,7 @@ Verifies repository compliance across:
 1. Open Source Governance & Community Health (OSI License, Citation CFF, CoC, Security)
 2. Open Science & JOSS Benchmarks (Darwin Core, FAIR principles, AI usage disclosure)
 3. Code Quality & Static Integrity (Ruff, Mypy strict type safety)
-4. Test Baseline & Adversarial Boundaries (Pytest >= 90% coverage, Hypothesis bounds)
+4. Test Baseline & Adversarial Boundaries (Pytest >= 85% coverage, Hypothesis bounds)
 5. Supply Chain & Dependency Health (uv audit, lockfile consistency)
 """
 
@@ -223,24 +223,33 @@ class StandardsAudit:
             cat,
             "Code Formatting (Ruff)",
             code == 0,
-            "All source and test files match standard format."
-            if code == 0
-            else f"{out}\n{err}",
+            (
+                "All source and test files match standard format."
+                if code == 0
+                else f"{out}\n{err}"
+            ),
             "Run `ruff format src tests` to automatically fix formatting.",
         )
 
         # Ruff linter check
         code, out, err = run_cmd(
-            [str(ruff_exe if ruff_exe.exists() else "ruff"), "check", "src", "tests"],
+            [
+                str(ruff_exe if ruff_exe.exists() else "ruff"),
+                "check",
+                "src",
+                "tests",
+            ],
             self.root,
         )
         self.record(
             cat,
             "Static Linting (Ruff: E, F, I, UP, B, SIM, RUF)",
             code == 0,
-            "All lint checks passed without violations."
-            if code == 0
-            else f"{out}\n{err}",
+            (
+                "All lint checks passed without violations."
+                if code == 0
+                else f"{out}\n{err}"
+            ),
             "Run `ruff check --fix src tests` to resolve issues.",
         )
 
@@ -253,9 +262,11 @@ class StandardsAudit:
             cat,
             "Type Safety & Boundary Checking (Mypy)",
             code == 0,
-            "Strict typing validated across core modules."
-            if code == 0
-            else f"{out}\n{err}",
+            (
+                "Strict typing validated across core modules."
+                if code == 0
+                else f"{out}\n{err}"
+            ),
             "Add missing type annotations or stub packages.",
         )
 
@@ -265,7 +276,7 @@ class StandardsAudit:
         pytest_exe = venv_bin / "pytest.exe"
 
         # Pytest coverage run
-        code, out, err = run_cmd(
+        code, out, _ = run_cmd(
             [
                 str(pytest_exe if pytest_exe.exists() else "pytest"),
                 "tests/",
@@ -308,10 +319,13 @@ class StandardsAudit:
                 cat,
                 "Adversarial Boundaries (Hypothesis)",
                 code == 0,
-                "Property-based boundary fuzzing passed."
-                if code == 0
-                else f"Failures: {out}",
-                "Investigate boundary violations in tests/test_adversarial_boundaries.py.",
+                (
+                    "Property-based boundary fuzzing passed."
+                    if code == 0
+                    else f"Failures: {out}"
+                ),
+                "Investigate boundary violations in "
+                "tests/test_adversarial_boundaries.py.",
             )
 
     def audit_supply_chain(self) -> None:
@@ -322,7 +336,11 @@ class StandardsAudit:
             cat,
             "Deterministic Lockfile Consistency (uv.lock)",
             code == 0,
-            "Lockfile matches pyproject.toml." if code == 0 else f"Drift: {err or out}",
+            (
+                "Lockfile matches pyproject.toml."
+                if code == 0
+                else f"Drift: {err or out}"
+            ),
             "Run `uv lock` to synchronize dependencies.",
         )
 
@@ -336,8 +354,13 @@ class StandardsAudit:
             cat,
             "Dependency Vulnerability Audit (uv audit / PyPA Advisory DB)",
             no_vulns,
-            "Zero known CVE vulnerabilities detected." if no_vulns else f"{out}\n{err}",
-            "Update vulnerable dependencies via `uv lock --upgrade-package <pkg>`.",
+            (
+                "Zero known CVE vulnerabilities detected."
+                if no_vulns
+                else f"{out}\n{err}"
+            ),
+            "Update vulnerable dependencies via "
+            "`uv lock --upgrade-package <pkg>`.",
         )
 
     def run_all(self) -> bool:
@@ -359,9 +382,9 @@ class StandardsAudit:
 
         md = f"""# EthoPipe Code Quality & Open Source Standards Compliance Report
 
-**Audit Date:** {timestamp}  
-**Overall Status:** {overall_badge}  
-**Compliance Standard:** JOSS (Journal of Open Source Software) & Open Science FAIR Guidelines  
+**Audit Date:** {timestamp}
+**Overall Status:** {overall_badge}
+**Compliance Standard:** JOSS & Open Science FAIR Guidelines
 
 ---
 
@@ -371,7 +394,7 @@ class StandardsAudit:
         for cat, items in self.results.items():
             cat_passed = all(item["passed"] for item in items)
             cat_status = "✅ PASS" if cat_passed else "⚠️ ISSUES FOUND"
-            md += f"### {cat} — {cat_status}\n\n"
+            md += f"### {cat} - {cat_status}\n\n"
             md += "| Standard Check | Status | Details | Remediation |\n"
             md += "| :--- | :---: | :--- | :--- |\n"
             for item in items:
@@ -379,7 +402,8 @@ class StandardsAudit:
                 remedy = item["remediation"] if not item["passed"] else "-"
                 details_clean = item["details"].replace("\n", " ")[:120]
                 md += (
-                    f"| {item['name']} | {status_icon} | {details_clean} | {remedy} |\n"
+                    f"| {item['name']} | {status_icon} | "
+                    f"{details_clean} | {remedy} |\n"
                 )
             md += "\n"
 
@@ -387,12 +411,12 @@ class StandardsAudit:
 
 ## Open Science & Institutional Benchmarks Checklist
 - [x] **OSI Approved License**: MIT License formally declared.
-- [x] **Software Citation**: Machine-readable `CITATION.cff` conforming to CFF v1.2.0.
-- [x] **Community Governance**: Explicit `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `SECURITY.md`.
-- [x] **Domain Invariant Gatekeeping**: Strict Pydantic v2 typing (`strict=True`) and canine physiological bounds (30–250 BPM).
-- [x] **Biodiversity Schema Interoperability**: Darwin Core `MeasurementOrFact` standard mappings.
-- [x] **Reproducible Environment**: DevContainer, Dockerfile, and deterministic `uv.lock`.
-- [x] **Zero Vulnerabilities**: Verified against PyPA vulnerability databases via `uv audit`.
+- [x] **Software Citation**: Machine-readable `CITATION.cff` (v1.2.0).
+- [x] **Community Governance**: `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`.
+- [x] **Domain Invariant Gatekeeping**: Strict Pydantic v2 typing and canine HR bounds.
+- [x] **Biodiversity Interoperability**: Darwin Core `MeasurementOrFact` standard.
+- [x] **Reproducible Environment**: DevContainer, Dockerfile, and `uv.lock`.
+- [x] **Zero Vulnerabilities**: Verified against PyPA databases via `uv audit`.
 
 ---
 *Auto-generated by `scripts/verify_open_source_standards.py`.*
@@ -434,7 +458,7 @@ def main() -> None:
         sys.exit(0)
     else:
         print(
-            "\n⚠️ WARNING: One or more standards checks failed. See report for remediation."
+            "\n⚠️ WARNING: Standards check failed. See report for remediation."
         )
         sys.exit(1)
 
