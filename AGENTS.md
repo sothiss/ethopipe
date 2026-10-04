@@ -37,3 +37,14 @@ When delegating tasks to autonomous code companions (e.g., Google Labs Jules `@g
 2. **Review Brief**: Inspect `docs/JULES_TASK.md` and paste the clipboard prompt into the GitHub Issue or companion prompt.
 3. **Journal Maintenance**: Ensure the companion updates `.jules/bolt.md` (for performance) or `.jules/sentinel.md` (for security).
 4. **Documentation**: See `docs/CODE_COMPANION_WORKFLOW.md` for full instructions.
+
+## Solo Maintainer Guardrails & Anti-Bloat Policy
+
+EthoPipe is strictly governed by the Solo Maintainer Charter to prevent cognitive overhead and dependency rot:
+
+1. **Language Monoculture**: 100% pure Python (>= 3.11). Never introduce Node/npm, TypeScript, Rust, Go, or compiled C bindings.
+2. **Dependency Cap**: Maximum of 8 direct runtime dependencies in `pyproject.toml`. Always prioritize the Python standard library.
+3. **Prohibited Daemons**: Reject external message brokers (Redis, Celery, RabbitMQ), distributed frameworks (Kafka, Spark), and enterprise orchestrators (Airflow).
+4. **Skill Hygiene**: Do not install enterprise cloud skills (BigQuery, Spark, Composer, Dataflow) in `.agents/skills`.
+5. **Audit Enforcement**: Run `python scripts/audit_maintainer_guardrails.py` (or `.\scripts\run_qa.ps1`) before submitting or approving changes.
+
