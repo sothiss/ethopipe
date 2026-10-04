@@ -48,3 +48,24 @@ EthoPipe is strictly governed by the Solo Maintainer Charter to prevent cognitiv
 4. **Skill Hygiene**: Do not install enterprise cloud skills (BigQuery, Spark, Composer, Dataflow) in `.agents/skills`.
 5. **Audit Enforcement**: Run `python scripts/audit_maintainer_guardrails.py` (or `.\scripts\run_qa.ps1`) before submitting or approving changes.
 
+## Walkthrough & Task Protocol (Mandatory)
+
+Every AI coding assistant (Gemini, Claude, GPT, Cursor) working in EthoPipe MUST strictly uphold the Task & Walkthrough invariant:
+
+1. **Up-Front Tasks**: Deconstruct non-trivial requests into a trackable checklist (`[ ]`, `[/]`, `[x]`) before writing code.
+2. **Post-Execution Walkthrough**: Always produce a structured Walkthrough detailing:
+   - Executive summary and motivation.
+   - Exact files changed with clickable links (`file:///...`).
+   - Architectural thinking and AI cognitive journey (key decisions, trade-offs, constraints).
+   - Verification proof (executed test commands and passing assertions).
+3. **Rule Definition**: See `.agents/rules/walkthrough-and-tasks.md`.
+
+## Session Journey Logging (AI Evolution & Architectural Decisions)
+
+To record the technical journey and trace the evolution of AI model reasoning (coding predominantly with Gemini since 2025):
+
+1. **Inspect / Append Journey**: Use `.\scripts\journey.ps1 -Template` or `python scripts/manage_journey.py new ...`.
+2. **Chronicle Invariants**: Each session entry in `JOURNEY.md` logs the active model, architectural pivots, interesting cognitive steps taken by the AI, and verified milestones.
+3. **Log Location**: See `JOURNEY.md` for complete historical logs.
+
+
