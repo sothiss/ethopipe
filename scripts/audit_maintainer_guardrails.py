@@ -4,8 +4,8 @@ EthoPipe Solo Maintainer Guardrails & Anti-Bloat Audit Engine
 
 Audits repository health against the Solo Maintainer Charter:
 1. Language Monoculture (Strict Python 3.11+, zero polyglot sprawl)
-2. Dependency Budget & Supply Chain (Strict runtime cap <= 8, no heavyweight sprawl)
-3. Agent Plugin & Skill Hygiene (Zero hallucination-inducing enterprise cloud skills)
+2. Dependency Budget & Supply Chain (Strict runtime cap <= 8, no heavy sprawl)
+3. Agent Plugin & Skill Hygiene (Zero enterprise cloud skills)
 4. Architectural Simplicity & Cognitive Budget (KISS/YAGNI, max file complexity)
 5. Toolchain Consolidation (Single tool for linting, testing, dependencies)
 """
@@ -75,10 +75,9 @@ class SoloMaintainerAudit:
     # 1. LANGUAGE MONOCULTURE CHECKS
     # -------------------------------------------------------------------------
     def audit_language_monoculture(self) -> None:
-        """Enforces that EthoPipe remains 100% Python with zero unauthorized language sprawl."""
+        """Enforces 100% Python monoculture with zero unauthorized sprawl."""
         category = "Language Monoculture"
 
-        # Forbidden extensions indicating unwanted polyglot runtimes
         forbidden_extensions = {
             ".js": "JavaScript runtime (Node.js/npm) sprawl",
             ".jsx": "React/Frontend framework sprawl",
@@ -95,7 +94,7 @@ class SoloMaintainerAudit:
             ".cs": ".NET runtime sprawl",
         }
 
-        forbidden_config_files = {
+        forbidden_configs = {
             "package.json": "Node.js npm package manager",
             "package-lock.json": "npm lockfile",
             "yarn.lock": "Yarn package manager",
@@ -106,7 +105,6 @@ class SoloMaintainerAudit:
             "composer.json": "PHP Composer manifest",
         }
 
-        # Directories to ignore during traversal
         ignored_dirs = {
             ".git",
             ".venv",
@@ -126,11 +124,10 @@ class SoloMaintainerAudit:
         found_foreign_configs: list[tuple[str, str]] = []
 
         for root_dir, dirs, files in os.walk(self.root):
-            # Prune ignored directories in-place
             dirs[:] = [d for d in dirs if d not in ignored_dirs]
             rel_dir = Path(root_dir).relative_to(self.root)
 
-            # Exclude docs and static web presentations from strict JS/HTML asset checks
+            # Skip docs and assets from strict JS/HTML asset checks
             if str(rel_dir).startswith("docs") or str(rel_dir).startswith("assets"):
                 continue
 
@@ -138,16 +135,13 @@ class SoloMaintainerAudit:
                 file_path = Path(root_dir) / file
                 rel_path = file_path.relative_to(self.root)
 
-                # Check forbidden configs
-                if file in forbidden_config_files:
+                if file in forbidden_configs:
                     found_foreign_configs.append(
-                        (str(rel_path), forbidden_config_files[file])
+                        (str(rel_path), forbidden_configs[file])
                     )
 
-                # Check forbidden extensions (except root index.html demo if standalone)
                 ext = file_path.suffix.lower()
                 if ext in forbidden_extensions:
-                    # Allow root index.html or minimal standalone demo if any
                     found_foreign_files.append(
                         (str(rel_path), forbidden_extensions[ext])
                     )
@@ -161,14 +155,14 @@ class SoloMaintainerAudit:
                 "Foreign Package Managers",
                 False,
                 details,
-                "Remove secondary language manifests. Maintain EthoPipe as pure Python.",
+                "Remove secondary language manifests. Maintain pure Python.",
             )
         else:
             self.record(
                 category,
                 "Foreign Package Managers",
                 True,
-                "Zero secondary language package managers (npm, cargo, go) detected.",
+                "Zero secondary package managers (npm, cargo, go) detected.",
             )
 
         if found_foreign_files:
@@ -180,14 +174,14 @@ class SoloMaintainerAudit:
                 "Pure Python Source Monoculture",
                 False,
                 details,
-                "Consolidate all logic into Python standard library, FastAPI, or Pydantic.",
+                "Consolidate logic into standard library, FastAPI, or Pydantic.",
             )
         else:
             self.record(
                 category,
                 "Pure Python Source Monoculture",
                 True,
-                "Codebase adheres to 100% Python monoculture (no Node/Rust/Go sprawl).",
+                "Codebase adheres to 100% Python monoculture (no polyglot sprawl).",
             )
 
     # -------------------------------------------------------------------------
@@ -223,9 +217,8 @@ class SoloMaintainerAudit:
 
         dependencies = data.get("project", {}).get("dependencies", [])
         dep_count = len(dependencies)
-        max_budget = 8  # Solo maintainer budget
+        max_budget = 8
 
-        # Forbidden heavy packages that blow up maintenance or require C/CUDA
         forbidden_heavy_packages = {
             "tensorflow": "High binary size and fragile native C++ bindings",
             "torch": "Massive wheel footprint (>2GB) and breaking API churn",
@@ -242,7 +235,6 @@ class SoloMaintainerAudit:
         parsed_dep_names: list[str] = []
 
         for dep in dependencies:
-            # Extract package name before ==, >=, etc.
             match = re.match(r"^([A-Za-z0-9_\-]+)", dep.strip())
             if match:
                 pkg_name = match.group(1).lower()
@@ -252,24 +244,25 @@ class SoloMaintainerAudit:
                         f"{pkg_name} ({forbidden_heavy_packages[pkg_name]})"
                     )
 
-        # Budget Check
         if dep_count <= max_budget:
             self.record(
                 category,
                 "Runtime Dependency Budget",
                 True,
-                f"Active runtime dependencies: {dep_count}/{max_budget} (within budget).",
+                f"Active runtime dependencies: {dep_count}/{max_budget} "
+                "(within budget).",
             )
         else:
+            diff = dep_count - max_budget
             self.record(
                 category,
                 "Runtime Dependency Budget",
                 False,
-                f"Active runtime dependencies: {dep_count}/{max_budget} (exceeds budget by {dep_count - max_budget}).",
-                f"Audit dependencies in pyproject.toml. Limit direct runtime packages to <= {max_budget}.",
+                f"Active runtime dependencies: {dep_count}/{max_budget} "
+                f"(exceeds budget by {diff}).",
+                f"Audit pyproject.toml. Limit direct packages to <= {max_budget}.",
             )
 
-        # Heavyweight / Complexity Check
         if detected_heavy:
             self.record(
                 category,
@@ -277,24 +270,24 @@ class SoloMaintainerAudit:
                 False,
                 "Detected heavyweight or external-daemon dependencies:\n"
                 + "\n".join(f"  - {d}" for d in detected_heavy),
-                "Remove heavy dependencies and replace with stdlib or Supabase/PostgreSQL.",
+                "Remove heavy dependencies and replace with stdlib or Supabase.",
             )
         else:
             self.record(
                 category,
                 "Heavyweight / Daemon Proscription",
                 True,
-                "Zero heavyweight (PyTorch/TensorFlow/Spark) or broker (Celery/Kafka) dependencies.",
+                "Zero heavyweight (PyTorch/Spark) or broker (Celery/Kafka) deps.",
             )
 
-        # Lockfile Consistency Check
         uv_lock = self.root / "uv.lock"
         if uv_lock.exists() and uv_lock.stat().st_size > 0:
+            size_kb = uv_lock.stat().st_size // 1024
             self.record(
                 category,
                 "Deterministic uv.lock File",
                 True,
-                f"uv.lock is present ({uv_lock.stat().st_size // 1024} KB).",
+                f"uv.lock is present and non-empty ({size_kb} KB).",
             )
         else:
             self.record(
@@ -322,7 +315,6 @@ class SoloMaintainerAudit:
             )
             return
 
-        # Cloud enterprise skills that trigger agent hallucinations for a local pipeline
         cloud_enterprise_skills = {
             "bigquery-data-transfer-service",
             "building-data-apps",
@@ -345,33 +337,29 @@ class SoloMaintainerAudit:
             "bigtable-basics",
         }
 
-        installed_skills = [
+        installed = [
             d.name
             for d in skills_dir.iterdir()
             if d.is_dir() and not d.name.startswith(".")
         ]
 
-        detected_cloud_skills = [
-            s for s in installed_skills if s in cloud_enterprise_skills
-        ]
+        detected_cloud = [s for s in installed if s in cloud_enterprise_skills]
+        total_skills = len(installed)
 
-        total_skills = len(installed_skills)
-
-        if detected_cloud_skills:
+        if detected_cloud:
             details = (
-                f"Detected {len(detected_cloud_skills)} out-of-scope enterprise GCP/cloud skills "
-                f"in `.agents/skills/` (Total skills: {total_skills}):\n"
-                + "\n".join(f"  - {s}" for s in detected_cloud_skills[:8])
+                f"Detected {len(detected_cloud)} out-of-scope enterprise GCP "
+                f"skills in `.agents/skills/` (Total: {total_skills}):\n"
+                + "\n".join(f"  - {s}" for s in detected_cloud[:6])
             )
-            if len(detected_cloud_skills) > 8:
-                details += f"\n  - ... and {len(detected_cloud_skills) - 8} more."
+            if len(detected_cloud) > 6:
+                details += f"\n  - ... and {len(detected_cloud) - 6} more."
 
             remediation = (
                 "Prune out-of-scope cloud skills from `.agents/skills/`. Keep only "
-                "repository-relevant skills (code-quality, code-companion, agent-handoff, sync-node)."
+                "repository-relevant skills (code-quality, companion, handoff)."
             )
 
-            # In strict mode this is a failure; otherwise recorded as an actionable warning
             self.record(
                 category,
                 "Enterprise Cloud Skill Pollution",
@@ -385,18 +373,17 @@ class SoloMaintainerAudit:
                 category,
                 "Enterprise Cloud Skill Pollution",
                 True,
-                f"Workspace skills are clean ({total_skills} domain-specific skills, zero cloud bloat).",
+                f"Clean workspace skills ({total_skills} domain skills, zero cloud).",
             )
 
-        # Essential EthoPipe skills check
-        essential_skills = ["code-quality", "code-companion", "agent-handoff"]
-        missing_essential = [s for s in essential_skills if s not in installed_skills]
-        if missing_essential:
+        essential = ["code-quality", "code-companion", "agent-handoff"]
+        missing = [s for s in essential if s not in installed]
+        if missing:
             self.record(
                 category,
                 "Essential EthoPipe Skills",
                 False,
-                f"Missing recommended agent skills: {missing_essential}",
+                f"Missing recommended agent skills: {missing}",
                 "Ensure core workflow skills are present in `.agents/skills/`.",
             )
         else:
@@ -404,7 +391,7 @@ class SoloMaintainerAudit:
                 category,
                 "Essential EthoPipe Skills",
                 True,
-                "All core agent skills (code-quality, code-companion, agent-handoff) are installed.",
+                "Core agent skills (code-quality, companion, handoff) present.",
             )
 
     # -------------------------------------------------------------------------
@@ -414,7 +401,6 @@ class SoloMaintainerAudit:
         """Enforces KISS/YAGNI principles: no monolith files, no k8s sprawl."""
         category = "Architectural Simplicity & Cognitive Budget"
 
-        # Check for Kubernetes or enterprise deployment sprawl
         forbidden_infra = [
             "k8s",
             "kubernetes",
@@ -434,7 +420,7 @@ class SoloMaintainerAudit:
                 "Infrastructure Overhead",
                 False,
                 f"Found enterprise infrastructure configurations: {found_infra}",
-                "Keep deployment minimal (Docker Compose / single container suffices).",
+                "Keep deployment minimal (Docker Compose / single container).",
             )
         else:
             self.record(
@@ -444,7 +430,6 @@ class SoloMaintainerAudit:
                 "Zero enterprise Kubernetes/Helm/Terraform infrastructure bloat.",
             )
 
-        # Check file line-count complexity in src/
         src_dir = self.root / "src"
         max_lines_per_file = 600
         bloated_files: list[tuple[str, int]] = []
@@ -455,21 +440,21 @@ class SoloMaintainerAudit:
                     if f.endswith(".py"):
                         p = Path(root_dir) / f
                         try:
-                            line_count = len(
+                            lines = len(
                                 p.read_text(
                                     encoding="utf-8", errors="replace"
                                 ).splitlines()
                             )
-                            if line_count > max_lines_per_file:
+                            if lines > max_lines_per_file:
                                 rel = p.relative_to(self.root)
-                                bloated_files.append((str(rel), line_count))
+                                bloated_files.append((str(rel), lines))
                         except Exception:
                             pass
 
         if bloated_files:
-            details = f"Files exceeding {max_lines_per_file} lines (high cognitive overhead):\n"
-            for rel, lines in bloated_files:
-                details += f"  - `{rel}`: {lines} lines\n"
+            details = f"Files exceeding {max_lines_per_file} lines:\n"
+            for rel, count in bloated_files:
+                details += f"  - `{rel}`: {count} lines\n"
             self.record(
                 category,
                 "Single-File Cognitive Limit (< 600 lines)",
@@ -483,7 +468,7 @@ class SoloMaintainerAudit:
                 category,
                 "Single-File Cognitive Limit (< 600 lines)",
                 True,
-                f"All application files in `src/` are cleanly bounded under {max_lines_per_file} lines.",
+                f"All files in `src/` are bounded under {max_lines_per_file} lines.",
             )
 
     # -------------------------------------------------------------------------
@@ -493,7 +478,6 @@ class SoloMaintainerAudit:
         """Enforces a single-tool-per-job rule to minimize developer friction."""
         category = "Toolchain Consolidation"
 
-        # Check for conflicting formatters/linters
         conflicting_tools = [
             ".flake8",
             ".pylintrc",
@@ -509,24 +493,23 @@ class SoloMaintainerAudit:
                 "Linter & Formatter Consolidation",
                 False,
                 f"Legacy linter configs found: {found_conflicts}",
-                "Remove legacy configs and standardize 100% on `ruff` in pyproject.toml.",
+                "Remove legacy configs and standardize 100% on `ruff`.",
             )
         else:
             self.record(
                 category,
                 "Linter & Formatter Consolidation",
                 True,
-                "Toolchain cleanly consolidated on Ruff (replaces black, isort, flake8).",
+                "Toolchain cleanly consolidated on Ruff (replaces black, isort).",
             )
 
-        # Check for unified local runner
         qa_runner = self.root / "scripts" / "run_qa.ps1"
         if qa_runner.exists():
             self.record(
                 category,
                 "Single-Command QA Pipeline",
                 True,
-                "Automated runner `scripts/run_qa.ps1` configured for zero-friction audit.",
+                "Runner `scripts/run_qa.ps1` configured for zero-friction audit.",
             )
         else:
             self.record(
@@ -541,15 +524,11 @@ class SoloMaintainerAudit:
     # EXECUTION & REPORT GENERATION
     # -------------------------------------------------------------------------
     def run_all(self) -> bool:
-        print(
-            f"\n{BOLD}{CYAN}════════════════════════════════════════════════════════════════{RESET}"
-        )
-        print(
-            f"{BOLD}{CYAN}   EthoPipe Solo Maintainer Guardrails & Anti-Bloat Audit       {RESET}"
-        )
-        print(
-            f"{BOLD}{CYAN}════════════════════════════════════════════════════════════════{RESET}\n"
-        )
+        sep = "═" * 64
+        print(f"\n{BOLD}{CYAN}{sep}{RESET}")
+        title = "EthoPipe Solo Maintainer Guardrails & Anti-Bloat Audit"
+        print(f"{BOLD}{CYAN}   {title}{RESET}")
+        print(f"{BOLD}{CYAN}{sep}{RESET}\n")
 
         self.audit_language_monoculture()
         self.audit_dependencies()
@@ -580,28 +559,30 @@ class SoloMaintainerAudit:
                         print(f"      {CYAN}Remediation:{RESET} {check['remediation']}")
             print()
 
-        print(
-            f"{BOLD}════════════════════════════════════════════════════════════════{RESET}"
-        )
+        sep = "═" * 64
+        print(f"{BOLD}{sep}{RESET}")
         if self.all_passed:
             if self.warnings_count > 0:
                 print(
-                    f"{GREEN}{BOLD}🎉 PASSED with {self.warnings_count} warning(s): Codebase complies with Solo Maintainer Guardrails!{RESET}\n"
+                    f"{GREEN}{BOLD}🎉 PASSED with {self.warnings_count} warning(s): "
+                    f"Codebase complies with Solo Maintainer Guardrails!{RESET}\n"
                 )
             else:
                 print(
-                    f"{GREEN}{BOLD}🎉 PERFECT: Zero bloat detected. Sustainable for solo maintainer!{RESET}\n"
+                    f"{GREEN}{BOLD}🎉 PERFECT: Zero bloat detected. "
+                    f"Sustainable for solo maintainer!{RESET}\n"
                 )
         else:
             print(
-                f"{RED}{BOLD}❌ AUDIT FAILED: {self.failures_count} violation(s) threatening solo sustainability.{RESET}\n"
+                f"{RED}{BOLD}❌ AUDIT FAILED: {self.failures_count} violation(s) "
+                f"threatening solo sustainability.{RESET}\n"
             )
 
     def _write_markdown_report(self) -> None:
         report_path = self.root / "docs" / "SOLO_MAINTAINER_AUDIT.md"
         now = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d %H:%M:%SZ")
 
-        status_badge = (
+        badge = (
             "![Status](https://img.shields.io/badge/Solo_Maintainer_Audit-PASSING-brightgreen)"
             if self.all_passed
             else "![Status](https://img.shields.io/badge/Solo_Maintainer_Audit-FAILED-red)"
@@ -612,40 +593,36 @@ class SoloMaintainerAudit:
             "",
             f"**Generated:** `{now}`  ",
             f"**Audit Mode:** `{'Strict' if self.strict else 'Standard'}`  ",
-            f"**Verdict:** {status_badge}",
+            f"**Verdict:** {badge}",
             "",
             "## Executive Summary",
             "",
-            "This automated scorecard enforces the **EthoPipe Solo Maintainer Charter**: protecting the repository ",
-            "from dependency creep, polyglot sprawl, out-of-scope enterprise cloud plugins, and cognitive debt.",
+            "This automated scorecard enforces the **EthoPipe Solo Maintainer "
+            "Charter**: protecting the repository from dependency creep, polyglot "
+            "sprawl, out-of-scope enterprise cloud plugins, and cognitive debt.",
             "",
             "| Pillar | Status | Passed | Issues |",
             "| :--- | :---: | :---: | :---: |",
         ]
 
         for cat, checks in self.results.items():
-            passed_checks = sum(1 for c in checks if c["passed"])
-            failed_checks = sum(1 for c in checks if not c["passed"])
-            cat_status = (
-                "✅ PASS"
-                if failed_checks == 0
-                else "⚠️ WARN"
-                if any(c["is_warning"] for c in checks if not c["passed"])
-                else "❌ FAIL"
-            )
-            md.append(
-                f"| {cat} | {cat_status} | {passed_checks}/{len(checks)} | {failed_checks} |"
-            )
+            passed = sum(1 for c in checks if c["passed"])
+            failed = sum(1 for c in checks if not c["passed"])
+            if failed == 0:
+                cat_status = "✅ PASS"
+            elif any(c["is_warning"] for c in checks if not c["passed"]):
+                cat_status = "⚠️ WARN"
+            else:
+                cat_status = "❌ FAIL"
+            md.append(f"| {cat} | {cat_status} | {passed}/{len(checks)} | {failed} |")
 
-        md.extend(
-            [
-                "",
-                "---",
-                "",
-                "## Detailed Check Breakdown",
-                "",
-            ]
-        )
+        md.extend([
+            "",
+            "---",
+            "",
+            "## Detailed Check Breakdown",
+            "",
+        ])
 
         for cat, checks in self.results.items():
             md.append(f"### {cat}")
@@ -659,19 +636,17 @@ class SoloMaintainerAudit:
                     md.append(f"**Action Required:** {c['remediation']}")
                 md.append("")
 
-        md.extend(
-            [
-                "---",
-                "",
-                "## The 5 Invariants of the Solo Maintainer Charter",
-                "",
-                "1. **Language Monoculture**: 100% Python (>= 3.11). Zero secondary compiled or JavaScript runtimes.",
-                "2. **Strict Dependency Budget**: Maximum 8 runtime packages in `pyproject.toml`. No heavy AI or broker daemons.",
-                "3. **Skill & Plugin Cleanliness**: Zero out-of-scope enterprise cloud skills (GCP, BigQuery, Airflow, Spark).",
-                "4. **Architectural Simplicity**: Pure modular Python. Files strictly bounded under 600 lines. Single Docker container.",
-                "5. **Unified Toolchain**: Exclusively `uv`, `ruff`, `mypy`, `pytest` with a single-command QA script (`run_qa.ps1`).",
-            ]
-        )
+        md.extend([
+            "---",
+            "",
+            "## The 5 Invariants of the Solo Maintainer Charter",
+            "",
+            "1. **Language Monoculture**: 100% Python (>= 3.11). Zero secondary compiled or JavaScript runtimes.",
+            "2. **Strict Dependency Budget**: Maximum 8 runtime packages in `pyproject.toml`. No heavy AI or broker daemons.",
+            "3. **Skill & Plugin Cleanliness**: Zero out-of-scope enterprise cloud skills (GCP, BigQuery, Airflow, Spark).",
+            "4. **Architectural Simplicity**: Pure modular Python. Files strictly bounded under 600 lines. Single Docker container.",
+            "5. **Unified Toolchain**: Exclusively `uv`, `ruff`, `mypy`, `pytest` with a single-command QA script (`run_qa.ps1`).",
+        ])
 
         report_path.write_text("\n".join(md), encoding="utf-8")
         print(f"{CYAN}[✓] Audit report written to: {report_path}{RESET}")
