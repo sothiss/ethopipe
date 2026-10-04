@@ -1,47 +1,19 @@
 $schema: https://api.gitbook.com/gitbook-docs.yaml
 site:
-  title: the transparency project
+  title: The Transparency Project
   structure:
     - type: section
       key: section-1
-      title: Ethopipe
+      title: EthoPipe Documentation
       path: docs
-      description: Ethopipe repository docs
-      icon: github
+      description: Official open-science documentation, specifications, and pipeline guides for EthoPipe.
+      icon: book-open
       default: true
       children:
         - type: space
           key: space-1
-          title: Ethopipe
-          path: untitled
-          default: true
-          content:
-            directory: null
-    - type: section
-      key: section-2
-      title: Changelog
-      path: ethopipe-changelog
-      description: ""
-      icon: gears
-      children:
-        - type: space
-          key: space-2
-          title: Ethopipe
+          title: EthoPipe
           path: ethopipe
           default: true
           content:
             directory: null
-    - type: section
-      key: section-3
-      title: The Transparecy Project
-      path: the-transparecy-project
-      description: ""
-      children:
-        - type: space
-          key: space-3
-          title: The Transparecy Project
-          path: the-transparecy-project
-          default: true
-          draft: true
-          content:
-            directory: ./the-transparecy-project

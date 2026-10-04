@@ -1,3 +1,22 @@
+# GitHub Actions PR Labeler Configuration
+# Automatically categorizes PRs by functional area, track, and governance
+
+track:bolt:
+  - changed-files:
+      - any-glob-to-any-file: ['.jules/bolt.md', 'tests/test_adversarial*']
+
+track:sentinel:
+  - changed-files:
+      - any-glob-to-any-file: ['.jules/sentinel.md', 'src/utils/detect*', 'src/pipeline/models.py']
+
+track:maintainer:
+  - changed-files:
+      - any-glob-to-any-file: ['scripts/**', '.agents/**', 'AGENTS.md']
+
+track:ideas:
+  - changed-files:
+      - any-glob-to-any-file: ['docs/ideas/**', 'docs/IDEAS_BOARD.md']
+
 backend:
   - changed-files:
       - any-glob-to-any-file: ['src/**', 'tests/**', 'pyproject.toml', 'requirements.txt']

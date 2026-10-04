@@ -4,6 +4,7 @@
 [![CI/CD Pipeline](https://github.com/sothiss/ethopipe/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21211371-blue)](https://doi.org/10.5281/zenodo.21211371)
 [![ORCID iD](https://img.shields.io/badge/ORCID-0009--0003--0048--8982-green)](https://orcid.org/0009-0003-0048-8982)
+[![Docs: GitBook](https://img.shields.io/badge/docs-GitBook-3884FF.svg?logo=gitbook&logoColor=white)](https://thetransparencyproject.gitbook.io/ethopipe)
 
 An open-access biological informatics pipeline developed under **The Transparency Project** (`thetransparencyproject.me`).
 
@@ -40,7 +41,73 @@ Finalized structures are organized into a query-optimized relational **Star Sche
 
 ---
 
-## 🤖 3. Continuous Integration & Code Guardrails
+## 🚀 3. Installation & Quickstart
+
+### Prerequisites
+- Python `3.11` or `3.12`
+- `uv` (recommended) or `pip`
+
+### Installation
+
+Clone the repository and install dependencies using `uv`:
+
+```bash
+git clone https://github.com/sothiss/ethopipe.git
+cd ethopipe
+uv sync
+```
+
+Alternatively, with `pip`:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+### Quickstart
+
+Run the FastAPI ingestion service locally:
+
+```bash
+uv run uvicorn src.pipeline.main:app --reload --port 8000
+```
+
+Validate a canine ethological observation payload:
+
+```python
+from datetime import datetime
+from src.pipeline.models import (
+    BehaviorObservation,
+    BehaviorType,
+    CanineObservation,
+    PhysioMeasurement,
+)
+
+obs = CanineObservation(
+    observation_id="obs-001",
+    subject_id="canine-42",
+    timestamp=datetime.now(),
+    behaviors=[BehaviorObservation(behavior=BehaviorType.PLAYBOW)],
+    physiology=PhysioMeasurement(
+        heart_rate_bpm=95,
+        resp_rate_bpm=22,
+        body_temp_c=38.6,
+        cortisol_nmolL=120.0,
+    ),
+)
+print(obs.model_dump_json(indent=2))
+```
+
+Run the quality assurance suite:
+
+```powershell
+.\scripts\run_qa.ps1
+```
+
+---
+
+## 🤖 4. Continuous Integration & Code Guardrails
 
 To preserve code health and protect against dependency drift ("bit rot") over long-term research cycles, this repository enforces a rigorous, multi-stage automated Continuous Integration (CI) engine via GitHub Actions (`.github/workflows/ci.yml`) on every code push or pull request to the `main` branch:
 
@@ -88,12 +155,14 @@ If you match our criteria or wish to support computational animal welfare, back 
 * **Archive Software Deposit (DOI):** [10.5281/zenodo.21211371](https://doi.org/10.5281/zenodo.21211371)
 * **Live Informatics Directory:** [thetransparencyproject.me](https://thetransparencyproject.me)
 
+### 💖 Official Documentation Sponsor
+* **[GitBook](https://www.gitbook.com/) (Community Sponsorship Plan):** Official documentation partner powering our public technical specifications, schema directories, and open-science manuals. GitBook graciously provides infrastructure sponsorship, Git Sync continuous integration, and team compilation engines to ensure transparent, reproducible informatics for the scientific community.
+
 ### 🤝 Infrastructure Acknowledgements & Grants-in-Kind
 This open-science research tool is made possible through infrastructure provisions and developer platform subsidies graciously supplied by the following organizations:
 * **GitHub Education / Student Developer Pack:** Providing automated continuous integration pipeline allocations, containerized sandbox hosting boundaries, and environment protection configurations.
 * **Google Cloud & Google Developers Program:** Subsidizing compute resource token allocations for advanced large language model parsing within Google AI Studio.
 * **NVIDIA Developer Program:** Granting entry-level developer network access and compute engineering frameworks for future computer-vision analytical testing passes.
-* **GitBook Community Plan:** Supporting open-science communication by providing specialized access to team compilation engines to maintain our public technical specifications directory.
 
 ### 📝 Grounding Bibliography
 1. **Broseghini, A., Lõoke, M., Guérineau, C., Marinelli, L., & Paolo Mongillo. (2024).** Ethogram of the predatory sequence of dogs (Canis familiaris). *Applied Animal Behaviour Science*, 279, 106402. [https://doi.org/10.1016/j.applanim.2024.106402](https://doi.org/10.1016/j.applanim.2024.106402)

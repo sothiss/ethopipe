@@ -84,6 +84,24 @@ try {
     $failures += "Step 6: Pre-Commit Hooks"
 }
 
+# Step 7: Open Source & Open Science Standards Audit
+Step 7 "Open Source & Open Science Standards Audit (JOSS / FAIR)"
+try {
+    Run "$venv\python.exe scripts/verify_open_source_standards.py"
+} catch {
+    Write-Warning "Step 7 failed: $_"
+    $failures += "Step 7: Open Source Standards"
+}
+
+# Step 8: Solo Maintainer Guardrails & Anti-Bloat Audit
+Step 8 "Solo Maintainer Guardrails & Anti-Bloat Audit"
+try {
+    Run "$venv\python.exe scripts/audit_maintainer_guardrails.py"
+} catch {
+    Write-Warning "Step 8 failed: $_"
+    $failures += "Step 8: Solo Maintainer Guardrails"
+}
+
 # Summary
 Write-Host ""
 Write-Host "══════════════════════════════════════════════" -ForegroundColor Cyan
@@ -91,7 +109,7 @@ Write-Host "  QA Summary" -ForegroundColor Cyan
 Write-Host "══════════════════════════════════════════════" -ForegroundColor Cyan
 
 if ($failures.Count -eq 0) {
-    Write-Host "  All 6 steps passed." -ForegroundColor Green
+    Write-Host "  All 8 steps passed." -ForegroundColor Green
     exit 0
 } else {
     Write-Host "  Failed steps:" -ForegroundColor Red
