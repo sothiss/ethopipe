@@ -453,8 +453,8 @@ class SoloMaintainerAudit:
 
         if bloated_files:
             details = f"Files exceeding {max_lines_per_file} lines:\n"
-            for rel, count in bloated_files:
-                details += f"  - `{rel}`: {count} lines\n"
+            for file_path_str, count in bloated_files:
+                details += f"  - `{file_path_str}`: {count} lines\n"
             self.record(
                 category,
                 "Single-File Cognitive Limit (< 600 lines)",
