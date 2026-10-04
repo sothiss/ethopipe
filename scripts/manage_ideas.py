@@ -80,7 +80,7 @@ class IdeaManager:
 - [ ] **YAGNI / KISS**: Truly required now, not speculative over-engineering.
 
 ### Gate 2: Boundary Specification
-- [ ] **Target Files**: List exact files to create or modify (e.g. `src/pipeline/models.py`).
+- [ ] **Target Files**: List exact files to touch (e.g. `src/pipeline/models.py`).
 - [ ] **Biological Bounds**: Heart rate clamped to [30, 250] BPM (if applicable).
 - [ ] **Darwin Core**: Maps to DwC MeasurementOrFact attributes (if applicable).
 - [ ] **Linguistic De-biasing**: Discards subjective labels (if applicable).
@@ -230,7 +230,8 @@ class IdeaManager:
                 all_compliant = False
                 print(
                     f"  {RED}[✗] SKIPPED STEPS DETECTED:{RESET} {item['id']} "
-                    f"'{item['title']}' is marked done with {unresolved_checks} unchecked gate(s)!"
+                    f"'{item['title']}' is marked done with {unresolved_checks} "
+                    f"unchecked gate(s)!"
                 )
             else:
                 pct = (
@@ -238,16 +239,21 @@ class IdeaManager:
                     if item["total_checks"] > 0
                     else 0
                 )
+                title_preview = (
+                    item["title"][:30] + "..."
+                    if len(item["title"]) > 33
+                    else item["title"]
+                )
                 print(
                     f"  {GREEN}[✓] VALIDATED:{RESET} {item['id']} "
-                    f"[{item['track'].upper()}] - {item['title']} "
-                    f"({item['completed_checks']}/{item['total_checks']} checks, {pct}%)"
+                    f"[{item['track'].upper()}] - {title_preview} "
+                    f"({item['completed_checks']}/{item['total_checks']}, {pct}%)"
                 )
 
         print()
         if all_compliant:
             print(
-                f"{GREEN}{BOLD}🎉 PASSED: Zero skipped steps across all tracked ideas!{RESET}\n"
+                f"{GREEN}{BOLD}🎉 PASSED: Zero skipped steps across tracked ideas!{RESET}\n"
             )
         else:
             print(
