@@ -1,0 +1,46 @@
+name: "🛠️ Maintenance & Refactor Task"
+description: "Submit a technical debt, refactoring, or maintainer chore task"
+title: "[CHORE]: "
+labels: ["maintenance", "track:maintainer"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this issue template for dependency maintenance, code refactoring, CI/CD improvements, or companion task briefings.
+  - type: textarea
+    id: task-description
+    attributes:
+      label: "Task Objective"
+      description: "Describe the maintenance work or technical debt to address."
+      placeholder: "Update CI workflow, refactor helper functions in src/utils, etc."
+    validations:
+      required: true
+  - type: dropdown
+    id: task-category
+    attributes:
+      label: "Category"
+      options:
+        - "CI/CD & Workflows"
+        - "Dependency Maintenance"
+        - "Code Refactoring / Cognitive Budget"
+        - "Documentation & Standards"
+        - "Code Companion Delegation (Jules / Autonomous Agent)"
+    validations:
+      required: true
+  - type: textarea
+    id: scope-target
+    attributes:
+      label: "Target Modules / Files"
+      description: "List the affected files or directories."
+      placeholder: ".github/workflows/, scripts/, src/..."
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Verification Checklist"
+      options:
+        - label: "Conforms to Solo Maintainer Charter (pure Python, <= 8 deps, 0 daemons)."
+          required: true
+        - label: "Requires passing `.\\scripts\\run_qa.ps1` before completion."
+          required: true
