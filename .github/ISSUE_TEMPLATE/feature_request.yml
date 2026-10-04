@@ -1,0 +1,57 @@
+name: "💡 Feature Request & RFC"
+description: "Propose a new feature, schema enhancement, or architectural idea"
+title: "[RFC]: "
+labels: ["enhancement", "gate:idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        EthoPipe adheres to a step-gated development workflow governed by the **Solo Maintainer Charter** and **Darwin Core Open Science standards**.
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: "🎯 Problem Statement"
+      description: "What problem does this feature solve? What is the scientific or user objective?"
+      placeholder: "Describe the ethological research challenge or workflow bottleneck..."
+    validations:
+      required: true
+  - type: dropdown
+    id: track
+    attributes:
+      label: "🧭 Track Classification"
+      description: "Select the primary governance track for this feature."
+      options:
+        - "⚡ track:bolt (Performance, caching, vectorization)"
+        - "🛡️ track:sentinel (Security, sanitization, boundary defense)"
+        - "📦 track:feature (Schema, Darwin Core mapping, parser)"
+        - "🔧 track:refactor (Simplification, modularization)"
+        - "🛠️ track:maintainer (Governance, scripts, workflows)"
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: "💡 Proposed Solution / Design"
+      description: "Describe the proposed design, API, or architectural changes."
+      placeholder: "Provide high-level code sketches, schema fields, or data transformations..."
+    validations:
+      required: true
+  - type: textarea
+    id: target-files
+    attributes:
+      label: "📁 Target Files / Scope"
+      description: "Which files or modules in src/ or tests/ will be impacted?"
+      placeholder: "src/pipeline/models.py, tests/test_validation.py"
+    validations:
+      required: false
+  - type: checkboxes
+    id: maintainer-gates
+    attributes:
+      label: "🛑 Step-Gated Pre-Flight Check"
+      options:
+        - label: "Solo Maintainer Filter: Can this be implemented in pure Python (no Node/npm, Rust, Go) without adding new direct dependencies?"
+          required: true
+        - label: "Domain Boundaries: Respects canine physiological bounds [30, 250 BPM], Darwin Core schemas, and linguistic neutrality."
+          required: true
+        - label: "Testing Strategy: Includes plans for unit tests or Hypothesis property-based boundary tests."
+          required: true

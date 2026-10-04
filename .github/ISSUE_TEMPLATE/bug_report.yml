@@ -1,0 +1,72 @@
+name: "🐛 Bug Report"
+description: "Report a bug or unexpected behavior in EthoPipe"
+title: "[BUG]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue in EthoPipe! Please provide reproducible details below so we can diagnose and resolve it.
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: "What happened?"
+      description: "A clear and concise description of the bug."
+      placeholder: "When processing canine telemetry records, ..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Step-by-step instructions or sample minimal data to reproduce the problem."
+      placeholder: |
+        1. Ingest input file with ...
+        2. Run `uv run ethopipe ...`
+        3. See unexpected exception ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "Expected Behavior"
+      description: "What did you expect to happen?"
+      placeholder: "The record should be clamped or rejected according to biological invariant boundaries."
+    validations:
+      required: true
+  - type: textarea
+    id: logs-traceback
+    attributes:
+      label: "Logs or Stack Trace"
+      description: "Paste relevant log output or stack traces here."
+      render: shell
+  - type: dropdown
+    id: os
+    attributes:
+      label: "Operating System"
+      options:
+        - "Linux / Ubuntu"
+        - "macOS"
+        - "Windows"
+        - "Other"
+    validations:
+      required: true
+  - type: dropdown
+    id: python-version
+    attributes:
+      label: "Python Version"
+      options:
+        - "Python 3.12"
+        - "Python 3.11"
+        - "Other (>= 3.11)"
+    validations:
+      required: true
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: "Pre-Flight Checklist"
+      options:
+        - label: "I have verified that this issue is not already reported in existing open issues."
+          required: true
+        - label: "I am using a supported Python version (>= 3.11)."
+          required: true
