@@ -1,13 +1,12 @@
 # Solo Maintainer Guardrails & Anti-Bloat Audit Report
 
-**Generated:** `2026-10-04 17:51:19Z`  
+**Generated:** `2026-10-04 17:53:54Z`  
 **Audit Mode:** `Standard`  
 **Verdict:** ![Status](https://img.shields.io/badge/Solo_Maintainer_Audit-PASSING-brightgreen)
 
 ## Executive Summary
 
-This automated scorecard enforces the **EthoPipe Solo Maintainer Charter**: protecting the repository 
-from dependency creep, polyglot sprawl, out-of-scope enterprise cloud plugins, and cognitive debt.
+This automated scorecard enforces the **EthoPipe Solo Maintainer Charter**: protecting the repository from dependency creep, polyglot sprawl, out-of-scope enterprise cloud plugins, and cognitive debt.
 
 | Pillar | Status | Passed | Issues |
 | :--- | :---: | :---: | :---: |
@@ -27,14 +26,14 @@ from dependency creep, polyglot sprawl, out-of-scope enterprise cloud plugins, a
 
 **Details:**
 ```text
-Zero secondary language package managers (npm, cargo, go) detected.
+Zero secondary package managers (npm, cargo, go) detected.
 ```
 
 #### ✅ Pure Python Source Monoculture
 
 **Details:**
 ```text
-Codebase adheres to 100% Python monoculture (no Node/Rust/Go sprawl).
+Codebase adheres to 100% Python monoculture (no polyglot sprawl).
 ```
 
 ### Dependency & Supply Chain Budget
@@ -50,14 +49,14 @@ Active runtime dependencies: 7/8 (within budget).
 
 **Details:**
 ```text
-Zero heavyweight (PyTorch/TensorFlow/Spark) or broker (Celery/Kafka) dependencies.
+Zero heavyweight (PyTorch/Spark) or broker (Celery/Kafka) deps.
 ```
 
 #### ✅ Deterministic uv.lock File
 
 **Details:**
 ```text
-uv.lock is present (431 KB).
+uv.lock is present and non-empty (431 KB).
 ```
 
 ### Agent Plugin & Skill Hygiene
@@ -66,24 +65,22 @@ uv.lock is present (431 KB).
 
 **Details:**
 ```text
-Detected 16 out-of-scope enterprise GCP/cloud skills in `.agents/skills/` (Total skills: 23):
+Detected 16 out-of-scope enterprise GCP skills in `.agents/skills/` (Total: 23):
   - bigquery-data-transfer-service
   - building-data-apps
   - data-autocleaning
   - dataform-bigquery
   - dbt-bigquery
   - developing-with-bigquery
-  - discovering-gcp-data-assets
-  - federate-lakehouse-catalog
-  - ... and 8 more.
+  - ... and 10 more.
 ```
-**Action Required:** Prune out-of-scope cloud skills from `.agents/skills/`. Keep only repository-relevant skills (code-quality, code-companion, agent-handoff, sync-node).
+**Action Required:** Prune out-of-scope cloud skills from `.agents/skills/`. Keep only repository-relevant skills (code-quality, companion, handoff).
 
 #### ✅ Essential EthoPipe Skills
 
 **Details:**
 ```text
-All core agent skills (code-quality, code-companion, agent-handoff) are installed.
+Core agent skills (code-quality, companion, handoff) present.
 ```
 
 ### Architectural Simplicity & Cognitive Budget
@@ -99,7 +96,7 @@ Zero enterprise Kubernetes/Helm/Terraform infrastructure bloat.
 
 **Details:**
 ```text
-All application files in `src/` are cleanly bounded under 600 lines.
+All files in `src/` are bounded under 600 lines.
 ```
 
 ### Toolchain Consolidation
@@ -108,14 +105,14 @@ All application files in `src/` are cleanly bounded under 600 lines.
 
 **Details:**
 ```text
-Toolchain cleanly consolidated on Ruff (replaces black, isort, flake8).
+Toolchain cleanly consolidated on Ruff (replaces black, isort).
 ```
 
 #### ✅ Single-Command QA Pipeline
 
 **Details:**
 ```text
-Automated runner `scripts/run_qa.ps1` configured for zero-friction audit.
+Runner `scripts/run_qa.ps1` configured for zero-friction audit.
 ```
 
 ---
@@ -125,5 +122,5 @@ Automated runner `scripts/run_qa.ps1` configured for zero-friction audit.
 1. **Language Monoculture**: 100% Python (>= 3.11). Zero secondary compiled or JavaScript runtimes.
 2. **Strict Dependency Budget**: Maximum 8 runtime packages in `pyproject.toml`. No heavy AI or broker daemons.
 3. **Skill & Plugin Cleanliness**: Zero out-of-scope enterprise cloud skills (GCP, BigQuery, Airflow, Spark).
-4. **Architectural Simplicity**: Pure modular Python. Files strictly bounded under 600 lines. Single Docker container.
+4. **Architectural Simplicity**: Pure modular Python. Files bounded under 600 lines. Single Docker container.
 5. **Unified Toolchain**: Exclusively `uv`, `ruff`, `mypy`, `pytest` with a single-command QA script (`run_qa.ps1`).
