@@ -151,6 +151,20 @@ To ensure frictionless tracking at the end of every engineering session, use thi
 
 ---
 
+### Entry 010: Repository Hygiene, GitHub Surface Streamlining & GitBook Sponsorship Unification
+* **Date & Model:** 2026-10-04 | Gemini 3.8 Flash | Human PI: Alice Severi Gonçalves
+* **Hurdle Type & Problem Space:** Documentation Fragmentation & Clutter Spillover
+* **The Technical Challenge:** GitBook Git-Sync generated dummy directories (changelog/, changelog-1/, the-transparecy-project/) and indexed raw repo plumbing into the public documentation sidebar. Meanwhile, our sole sponsor (GitBook) lacked dedicated prominence across documentation headers.
+* **AI Architectural Reasoning & Cognitive Evolution:**
+  The AI recognized that open-science repositories require a pristine public presentation both on GitHub (sterile root layout, zero empty test directories) and on GitBook (navigable table of contents without internal bot plumbing). The model decoupled internal developer tooling from user-facing documentation in SUMMARY.md, cleaned the multi-space schema in gitbook-docs.yaml to unify EthoPipe into a single root space, and prominently elevated GitBook as our Official Documentation Sponsor across badges and README metadata.
+* **The Architectural Pivot & Implemented Solution:**
+  Deleted dummy sync directories, unified gitbook-docs.yaml onto a stable single-space configuration, redesigned SUMMARY.md into structured thematic categories (Architecture, Open Science, Governance, Releases), upgraded docs/README.md and docs/releases/README.md into rich indices, and embedded official GitBook documentation badges and acknowledgments.
+* **Quantitative & Invariant Milestones:** All 8 QA verification steps passed in 1.26s; pre-commit 100% clean; repository root pruned from 3 extraneous directories to a sterile baseline; GitBook documentation table of contents completely streamlined.
+* **Gemini / AI Evolutionary Note:**
+  Illustrates Gemini's capability to understand multi-platform ecosystem interactions (GitHub web view vs. GitBook Git-Sync compilation) and autonomously prune artifacts without breaking underlying synchronization schemas or CI/CD pipelines.
+
+---
+
 ## 🚀 Active Trajectory & Next Micro-Tasks
 - [x] Establish Solo Maintainer Anti-Bloat Charter and automated guardrail auditor (`audit_maintainer_guardrails.py`).
 - [x] Implement 5-Gate Idea-to-Code pipeline and automated Kanban board generator (`manage_ideas.py`, `idea.ps1`).
