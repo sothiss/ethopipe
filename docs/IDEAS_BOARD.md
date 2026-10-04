@@ -1,13 +1,13 @@
 # EthoPipe Idea & Task Board
 
-**Last Synchronized:** `2026-10-04 18:04:50Z`  
+**Last Synchronized:** `2026-10-04 18:06:02Z`  
 **Pipeline Status:** Active Step-Gated Anti-Skipping System
 
 ## 📋 Active Tasks & Ideas
 
 | ID | Track | Title | Current Gate | Progress | File |
 | :--- | :---: | :--- | :--- | :---: | :--- |
-| - | - | *No active ideas registered.* | - | - | - |
+| **IDEA-001** | `bolt` | Darwin Core observation batch deduplication | `Gate 1: Triage & Solo Maintainer Veto` | 0/15 (0%) | [IDEA-001](docs/ideas/IDEA-001_darwin-core-observation-batch-deduplication.md) |
 
 ---
 

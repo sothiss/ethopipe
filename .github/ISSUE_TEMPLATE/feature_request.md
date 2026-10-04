@@ -1,18 +1,21 @@
 ---
-name: Feature request
-about: Suggest an idea or feature for EthoPipe
-title: "[FEATURE] "
-labels: enhancement
+name: Feature Idea & RFC
+about: Propose an idea or feature through the 5-Gate Step-Gated Pipeline
+title: "[IDEA] "
+labels: enhancement, gate:idea
 ---
 
-## Is your feature request related to a problem?
-A clear and concise description of what the problem is (e.g., I'm frustrated when...).
+## 🎯 Problem Statement
+<!-- What problem does this solve? What is the user or scientific goal? -->
 
-## Describe the solution you'd like
-A clear and concise description of what you want to happen.
+## 🧭 Track
+- [ ] ⚡ `track:bolt` (Performance / Algorithmic Optimization)
+- [ ] 🛡️ `track:sentinel` (Security / Input Hardening / Boundaries)
+- [ ] 📦 `track:feature` (Schema / Darwin Core / Data Parsing)
+- [ ] 🔧 `track:refactor` (Code Simplification / Modularization)
 
-## Describe alternatives you've considered
-A clear and concise description of any alternative solutions or features you've considered.
-
-## Additional context
-Add any other context or screenshots about the feature request here.
+## 🛑 Step-Gated Pre-Flight Check (Do Not Skip Steps!)
+- [ ] **Solo Maintainer Filter**: Can this be implemented in pure Python (no Node/npm, Rust, Go) without adding new dependencies?
+- [ ] **Target Files**: Enumerate the specific files to be created or modified.
+- [ ] **Domain Boundaries**: Canine heart rate bounds [30, 250] BPM, Darwin Core schemas, and linguistic neutrality respected.
+- [ ] **Test Strategy**: What test case or Hypothesis boundary test will prove this works?
