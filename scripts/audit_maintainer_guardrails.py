@@ -148,7 +148,9 @@ class SoloMaintainerAudit:
                 ext = file_path.suffix.lower()
                 if ext in forbidden_extensions:
                     # Allow root index.html or minimal standalone demo if any
-                    found_foreign_files.append((str(rel_path), forbidden_extensions[ext]))
+                    found_foreign_files.append(
+                        (str(rel_path), forbidden_extensions[ext])
+                    )
 
         if found_foreign_configs:
             details = "Forbidden foreign package managers detected:\n" + "\n".join(
@@ -344,7 +346,9 @@ class SoloMaintainerAudit:
         }
 
         installed_skills = [
-            d.name for d in skills_dir.iterdir() if d.is_dir() and not d.name.startswith(".")
+            d.name
+            for d in skills_dir.iterdir()
+            if d.is_dir() and not d.name.startswith(".")
         ]
 
         detected_cloud_skills = [
@@ -452,7 +456,9 @@ class SoloMaintainerAudit:
                         p = Path(root_dir) / f
                         try:
                             line_count = len(
-                                p.read_text(encoding="utf-8", errors="replace").splitlines()
+                                p.read_text(
+                                    encoding="utf-8", errors="replace"
+                                ).splitlines()
                             )
                             if line_count > max_lines_per_file:
                                 rel = p.relative_to(self.root)
@@ -495,9 +501,7 @@ class SoloMaintainerAudit:
             ".isort.cfg",
             ".black",
         ]
-        found_conflicts = [
-            f for f in conflicting_tools if (self.root / f).exists()
-        ]
+        found_conflicts = [f for f in conflicting_tools if (self.root / f).exists()]
 
         if found_conflicts:
             self.record(
@@ -537,9 +541,15 @@ class SoloMaintainerAudit:
     # EXECUTION & REPORT GENERATION
     # -------------------------------------------------------------------------
     def run_all(self) -> bool:
-        print(f"\n{BOLD}{CYAN}════════════════════════════════════════════════════════════════{RESET}")
-        print(f"{BOLD}{CYAN}   EthoPipe Solo Maintainer Guardrails & Anti-Bloat Audit       {RESET}")
-        print(f"{BOLD}{CYAN}════════════════════════════════════════════════════════════════{RESET}\n")
+        print(
+            f"\n{BOLD}{CYAN}════════════════════════════════════════════════════════════════{RESET}"
+        )
+        print(
+            f"{BOLD}{CYAN}   EthoPipe Solo Maintainer Guardrails & Anti-Bloat Audit       {RESET}"
+        )
+        print(
+            f"{BOLD}{CYAN}════════════════════════════════════════════════════════════════{RESET}\n"
+        )
 
         self.audit_language_monoculture()
         self.audit_dependencies()
@@ -570,7 +580,9 @@ class SoloMaintainerAudit:
                         print(f"      {CYAN}Remediation:{RESET} {check['remediation']}")
             print()
 
-        print(f"{BOLD}════════════════════════════════════════════════════════════════{RESET}")
+        print(
+            f"{BOLD}════════════════════════════════════════════════════════════════{RESET}"
+        )
         if self.all_passed:
             if self.warnings_count > 0:
                 print(
@@ -587,7 +599,7 @@ class SoloMaintainerAudit:
 
     def _write_markdown_report(self) -> None:
         report_path = self.root / "docs" / "SOLO_MAINTAINER_AUDIT.md"
-        now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%SZ")
+        now = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d %H:%M:%SZ")
 
         status_badge = (
             "![Status](https://img.shields.io/badge/Solo_Maintainer_Audit-PASSING-brightgreen)"
@@ -614,16 +626,26 @@ class SoloMaintainerAudit:
         for cat, checks in self.results.items():
             passed_checks = sum(1 for c in checks if c["passed"])
             failed_checks = sum(1 for c in checks if not c["passed"])
-            cat_status = "✅ PASS" if failed_checks == 0 else "⚠️ WARN" if any(c["is_warning"] for c in checks if not c["passed"]) else "❌ FAIL"
-            md.append(f"| {cat} | {cat_status} | {passed_checks}/{len(checks)} | {failed_checks} |")
+            cat_status = (
+                "✅ PASS"
+                if failed_checks == 0
+                else "⚠️ WARN"
+                if any(c["is_warning"] for c in checks if not c["passed"])
+                else "❌ FAIL"
+            )
+            md.append(
+                f"| {cat} | {cat_status} | {passed_checks}/{len(checks)} | {failed_checks} |"
+            )
 
-        md.extend([
-            "",
-            "---",
-            "",
-            "## Detailed Check Breakdown",
-            "",
-        ])
+        md.extend(
+            [
+                "",
+                "---",
+                "",
+                "## Detailed Check Breakdown",
+                "",
+            ]
+        )
 
         for cat, checks in self.results.items():
             md.append(f"### {cat}")
@@ -637,17 +659,19 @@ class SoloMaintainerAudit:
                     md.append(f"**Action Required:** {c['remediation']}")
                 md.append("")
 
-        md.extend([
-            "---",
-            "",
-            "## The 5 Invariants of the Solo Maintainer Charter",
-            "",
-            "1. **Language Monoculture**: 100% Python (>= 3.11). Zero secondary compiled or JavaScript runtimes.",
-            "2. **Strict Dependency Budget**: Maximum 8 runtime packages in `pyproject.toml`. No heavy AI or broker daemons.",
-            "3. **Skill & Plugin Cleanliness**: Zero out-of-scope enterprise cloud skills (GCP, BigQuery, Airflow, Spark).",
-            "4. **Architectural Simplicity**: Pure modular Python. Files strictly bounded under 600 lines. Single Docker container.",
-            "5. **Unified Toolchain**: Exclusively `uv`, `ruff`, `mypy`, `pytest` with a single-command QA script (`run_qa.ps1`).",
-        ])
+        md.extend(
+            [
+                "---",
+                "",
+                "## The 5 Invariants of the Solo Maintainer Charter",
+                "",
+                "1. **Language Monoculture**: 100% Python (>= 3.11). Zero secondary compiled or JavaScript runtimes.",
+                "2. **Strict Dependency Budget**: Maximum 8 runtime packages in `pyproject.toml`. No heavy AI or broker daemons.",
+                "3. **Skill & Plugin Cleanliness**: Zero out-of-scope enterprise cloud skills (GCP, BigQuery, Airflow, Spark).",
+                "4. **Architectural Simplicity**: Pure modular Python. Files strictly bounded under 600 lines. Single Docker container.",
+                "5. **Unified Toolchain**: Exclusively `uv`, `ruff`, `mypy`, `pytest` with a single-command QA script (`run_qa.ps1`).",
+            ]
+        )
 
         report_path.write_text("\n".join(md), encoding="utf-8")
         print(f"{CYAN}[✓] Audit report written to: {report_path}{RESET}")
