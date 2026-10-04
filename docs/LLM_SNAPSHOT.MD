@@ -19,9 +19,9 @@ license = { text = "MIT" }
 
 
 dependencies = [
-  "fastapi==0.141.1",
+  "fastapi==0.142.2",
   "pydantic==2.13.5",
-  "pandas==3.0.3",
+  "pandas==3.0.6",
   "uvicorn==0.52.4",
   "pytest==9.0.3",
   "supabase>=2.31.0",
@@ -43,7 +43,7 @@ known-first-party = ["src"]
 
 [dependency-groups]
 dev = [
-    "ruff==0.16.6",
+    "ruff==0.16.9",
     "pre-commit>=4.6.0",
     "hypothesis>=6.112.0",
     "pytest-cov>=4.1.0",
@@ -75,18 +75,18 @@ omit = [
 ## File: `requirements.txt`
 
 ```text
-fastapi==0.141.1
+fastapi==0.142.2
 pydantic==2.13.5
-pandas==3.0.3
+pandas==3.0.6
 uvicorn==0.52.4
 pytest==9.0.3
 supabase==2.31.0
-ddtrace==4.15.2
+ddtrace==4.15.3
 pre-commit==4.6.0
-ruff==0.16.6
+ruff==0.16.9
 pytest-cov==7.1.0
 httpx==0.28.1
-hypothesis==6.156.6
+hypothesis==6.168.3
 mypy==2.2.0
 pandas-stubs==3.0.5.260914
 ```
@@ -889,14 +889,14 @@ def test_string_field_max_length(field_name: str) -> None:
     }
 
     # 255 chars - valid
-    valid_kwargs = dict(base_kwargs, **{field_name: "a" * 255})
-    obs = CanineObservation(**valid_kwargs)
+    valid_kwargs = {**base_kwargs, field_name: "a" * 255}
+    obs = CanineObservation.model_validate(valid_kwargs)
     assert getattr(obs, field_name) == "a" * 255
 
     # 256 chars - invalid
-    invalid_kwargs = dict(base_kwargs, **{field_name: "a" * 256})
+    invalid_kwargs = {**base_kwargs, field_name: "a" * 256}
     with pytest.raises(ValidationError):
-        CanineObservation(**invalid_kwargs)
+        CanineObservation.model_validate(invalid_kwargs)
 
 
 def test_canine_observation_strict_mode() -> None:
@@ -1283,3 +1283,4 @@ def test_narrative_injector_isolation(messy_text):
             ),
         )
 ```
+
