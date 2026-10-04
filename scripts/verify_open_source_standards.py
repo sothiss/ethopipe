@@ -359,8 +359,7 @@ class StandardsAudit:
                 if no_vulns
                 else f"{out}\n{err}"
             ),
-            "Update vulnerable dependencies via "
-            "`uv lock --upgrade-package <pkg>`.",
+            "Update vulnerable dependencies via `uv lock --upgrade-package <pkg>`.",
         )
 
     def run_all(self) -> bool:
@@ -402,8 +401,7 @@ class StandardsAudit:
                 remedy = item["remediation"] if not item["passed"] else "-"
                 details_clean = item["details"].replace("\n", " ")[:120]
                 md += (
-                    f"| {item['name']} | {status_icon} | "
-                    f"{details_clean} | {remedy} |\n"
+                    f"| {item['name']} | {status_icon} | {details_clean} | {remedy} |\n"
                 )
             md += "\n"
 
@@ -457,9 +455,7 @@ def main() -> None:
         print("\n🎉 SUCCESS: All code quality and open source standards passed!")
         sys.exit(0)
     else:
-        print(
-            "\n⚠️ WARNING: Standards check failed. See report for remediation."
-        )
+        print("\n⚠️ WARNING: Standards check failed. See report for remediation.")
         sys.exit(1)
 
 
