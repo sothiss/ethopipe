@@ -10,7 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  lint-and-typecheck:
+    name: Lint & Type Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,20 +22,24 @@ jobs:
           python-version: "3.12"
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
 
       - name: Install dependencies
         run: uv sync
 
       - name: Check code formatting with Ruff
-        run: |
-          uv run ruff format --check src tests
+        run: uv run ruff format --check src tests
 
       - name: Lint with Ruff
-        run: |
-          uv run ruff check src tests
+        run: uv run ruff check src tests
+
+      - name: Type check with Mypy
+        run: uv run mypy src
 
   tests:
+    name: Test Suite (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -45,19 +50,21 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: '${{ matrix.python-version }}'
+          python-version: ${{ matrix.python-version }}
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
 
       - name: Install dependencies
         run: uv sync
 
       - name: Test with pytest
-        run: |
-          uv run pytest tests/ --cov=src --cov-report=xml
+        run: uv run pytest tests/ --cov=src --cov-report=xml
 
-  schema-validation:
+  guardrails:
+    name: Solo Maintainer & Open Source Guardrails
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -68,11 +75,15 @@ jobs:
           python-version: "3.12"
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
 
       - name: Install dependencies
         run: uv sync
 
-      - name: Verify schemas
-        run: |
-          uv run pytest tests/test_models.py
+      - name: Verify Solo Maintainer Guardrails
+        run: uv run python scripts/audit_maintainer_guardrails.py
+
+      - name: Verify Open Source & Open Science Standards
+        run: uv run python scripts/verify_open_source_standards.py
