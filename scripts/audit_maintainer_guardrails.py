@@ -591,8 +591,8 @@ class SoloMaintainerAudit:
         md = [
             "# Solo Maintainer Guardrails & Anti-Bloat Audit Report",
             "",
-            f"**Generated:** `{now}`  ",
-            f"**Audit Mode:** `{'Strict' if self.strict else 'Standard'}`  ",
+            f"**Generated:** `{now}`",
+            f"**Audit Mode:** `{'Strict' if self.strict else 'Standard'}`",
             f"**Verdict:** {badge}",
             "",
             "## Executive Summary",
@@ -657,7 +657,7 @@ class SoloMaintainerAudit:
             ]
         )
 
-        report_path.write_text("\n".join(md), encoding="utf-8")
+        report_path.write_text("\n".join(md) + "\n", encoding="utf-8")
         print(f"{CYAN}[✓] Audit report written to: {report_path}{RESET}")
 
 
