@@ -252,13 +252,11 @@ class IdeaManager:
 
         print()
         if all_compliant:
-            print(
-                f"{GREEN}{BOLD}🎉 PASSED: Zero skipped steps across tracked ideas!{RESET}\n"
-            )
+            msg = "🎉 PASSED: Zero skipped steps across tracked ideas!"
+            print(f"{GREEN}{BOLD}{msg}{RESET}\n")
         else:
-            print(
-                f"{RED}{BOLD}❌ AUDIT FAILED: Unresolved gates in completed tasks!{RESET}\n"
-            )
+            msg = "❌ AUDIT FAILED: Unresolved gates in completed tasks!"
+            print(f"{RED}{BOLD}{msg}{RESET}\n")
 
         return all_compliant
 
@@ -307,8 +305,10 @@ def main() -> int:
         print("-" * 65)
         for i in ideas:
             checks = f"{i['completed_checks']}/{i['total_checks']}"
+            title_str = i["title"][:28]
             print(
-                f"{i['id']:<10} {i['track']:<10} {i['status']:<12} {checks:<8} {i['title']}"
+                f"{i['id']:<10} {i['track']:<10} {i['status']:<12} {checks:<8} "
+                f"{title_str}"
             )
         print()
         return 0
