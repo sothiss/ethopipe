@@ -28,3 +28,12 @@ When switching active development between AI models (Antigravity/Gemini, Anthrop
 2. **Review State**: Read `docs/AGENT_HANDOFF.md` for live telemetry, active branch status, and recent diffs.
 3. **Clipboard Prompt**: The formatted `<CONTEXT_HANDOFF>` prompt block is automatically copied to your clipboard to paste into the incoming model session.
 4. **Workflow Documentation**: See `docs/AGENT_HANDOFF_WORKFLOW.md` for complete cross-agent instructions.
+
+## Code Companions (Jules & Autonomous Agents)
+
+When delegating tasks to autonomous code companions (e.g., Google Labs Jules `@google-labs-jules[bot]`):
+
+1. **Generate Task Brief**: Run `.\scripts\handoff.ps1 -Jules -CompanionType bolt -Objective "<Objective>" -TargetFiles "<Files>"` (or `-CompanionType sentinel`).
+2. **Review Brief**: Inspect `docs/JULES_TASK.md` and paste the clipboard prompt into the GitHub Issue or companion prompt.
+3. **Journal Maintenance**: Ensure the companion updates `.jules/bolt.md` (for performance) or `.jules/sentinel.md` (for security).
+4. **Documentation**: See `docs/CODE_COMPANION_WORKFLOW.md` for full instructions.
