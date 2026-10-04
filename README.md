@@ -4,6 +4,7 @@
 [![CI/CD Pipeline](https://github.com/sothiss/ethopipe/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21211371-blue)](https://doi.org/10.5281/zenodo.21211371)
 [![ORCID iD](https://img.shields.io/badge/ORCID-0009--0003--0048--8982-green)](https://orcid.org/0009-0003-0048-8982)
+[![Docs: GitBook](https://img.shields.io/badge/docs-GitBook-3884FF.svg?logo=gitbook&logoColor=white)](https://thetransparencyproject.gitbook.io/ethopipe)
 
 An open-access biological informatics pipeline developed under **The Transparency Project** (`thetransparencyproject.me`).
 
