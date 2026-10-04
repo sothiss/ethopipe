@@ -616,13 +616,15 @@ class SoloMaintainerAudit:
                 cat_status = "❌ FAIL"
             md.append(f"| {cat} | {cat_status} | {passed}/{len(checks)} | {failed} |")
 
-        md.extend([
-            "",
-            "---",
-            "",
-            "## Detailed Check Breakdown",
-            "",
-        ])
+        md.extend(
+            [
+                "",
+                "---",
+                "",
+                "## Detailed Check Breakdown",
+                "",
+            ]
+        )
 
         for cat, checks in self.results.items():
             md.append(f"### {cat}")
@@ -636,22 +638,24 @@ class SoloMaintainerAudit:
                     md.append(f"**Action Required:** {c['remediation']}")
                 md.append("")
 
-        md.extend([
-            "---",
-            "",
-            "## The 5 Invariants of the Solo Maintainer Charter",
-            "",
-            "1. **Language Monoculture**: 100% Python (>= 3.11). Zero secondary "
-            "compiled or JavaScript runtimes.",
-            "2. **Strict Dependency Budget**: Maximum 8 runtime packages in "
-            "`pyproject.toml`. No heavy AI or broker daemons.",
-            "3. **Skill & Plugin Cleanliness**: Zero out-of-scope enterprise "
-            "cloud skills (GCP, BigQuery, Airflow, Spark).",
-            "4. **Architectural Simplicity**: Pure modular Python. Files bounded "
-            "under 600 lines. Single Docker container.",
-            "5. **Unified Toolchain**: Exclusively `uv`, `ruff`, `mypy`, `pytest` "
-            "with a single-command QA script (`run_qa.ps1`).",
-        ])
+        md.extend(
+            [
+                "---",
+                "",
+                "## The 5 Invariants of the Solo Maintainer Charter",
+                "",
+                "1. **Language Monoculture**: 100% Python (>= 3.11). Zero secondary "
+                "compiled or JavaScript runtimes.",
+                "2. **Strict Dependency Budget**: Maximum 8 runtime packages in "
+                "`pyproject.toml`. No heavy AI or broker daemons.",
+                "3. **Skill & Plugin Cleanliness**: Zero out-of-scope enterprise "
+                "cloud skills (GCP, BigQuery, Airflow, Spark).",
+                "4. **Architectural Simplicity**: Pure modular Python. Files bounded "
+                "under 600 lines. Single Docker container.",
+                "5. **Unified Toolchain**: Exclusively `uv`, `ruff`, `mypy`, `pytest` "
+                "with a single-command QA script (`run_qa.ps1`).",
+            ]
+        )
 
         report_path.write_text("\n".join(md), encoding="utf-8")
         print(f"{CYAN}[✓] Audit report written to: {report_path}{RESET}")
