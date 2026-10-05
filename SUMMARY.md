@@ -11,7 +11,7 @@
 * [AI Usage Disclosure & Governance](docs/ai-usage.md)
 * [Open Science Standards & Compliance](docs/OPEN_SOURCE_STANDARDS.md)
 * [Solo Maintainer Charter & Guardrails](docs/SOLO_MAINTAINER_AUDIT.md)
-* [Research Software Engineering Log (Journey)](JOURNEY.md)
+* [Research & Architecture Journal](JOURNEY.md)
 * [Contributor Code of Conduct](CODE_OF_CONDUCT.md)
 * [Contributing to EthoPipe](CONTRIBUTING.md)
 * [Security Policy](SECURITY.md)

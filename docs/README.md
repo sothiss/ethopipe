@@ -17,7 +17,7 @@ Welcome to the central documentation index for **EthoPipe**, a deterministic, op
 * **[AI Usage Disclosure](ai-usage.md)**: Mechanistic determinism, temperature clamping (`0.0`), and AI code governance.
 * **[Open Science Standards](OPEN_SOURCE_STANDARDS.md)**: JOSS, FAIR principles, and OSI licensing compliance.
 * **[Solo Maintainer Audit](SOLO_MAINTAINER_AUDIT.md)**: Anti-bloat guardrails, language monoculture (pure Python), and dependency budget (<= 8).
-* **[RSE Journey Log](../JOURNEY.md)**: Chronological architectural evolution and AI reasoning tracking since 2025.
+* **[Research & Architecture Journal](../JOURNEY.md)**: Chronological architectural evolution and AI reasoning tracking since 2025.
 
 ### 3. Engineering Workflows
 * **[Ideas & Task Board](IDEAS_BOARD.md)**: The 5-gate pipeline (Idea -> Spec -> Test -> Code -> Done) tracking active proposals.

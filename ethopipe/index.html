@@ -357,14 +357,14 @@
 
 <span class="text-citation-amber">class</span> <span class="text-telemetry-emerald">CanineObservationRecord</span>(BaseModel):
     model_config = ConfigDict(
-        strict=<span class="text-citation-amber">True</span>, 
+        strict=<span class="text-citation-amber">True</span>,
         extra=<span class="text-text-primary">'forbid'</span>
     )
 
     individual_id: <span class="text-secondary">str</span> = Field(..., pattern=<span class="text-text-primary">r"^CANIS-[A-Z0-9]{6}$"</span>)
     event_timestamp: <span class="text-secondary">datetime</span>
     ethogram_token: Literal[
-        <span class="text-text-primary">"play_bow"</span>, <span class="text-text-primary">"displacement_pant"</span>, 
+        <span class="text-text-primary">"play_bow"</span>, <span class="text-text-primary">"displacement_pant"</span>,
         <span class="text-text-primary">"lip_lick"</span>, <span class="text-text-primary">"direct_gaze"</span>, <span class="text-text-primary">"micro_freeze"</span>
     ]
     heart_rate_bpm: Optional[<span class="text-secondary">int</span>] = Field(<span class="text-citation-amber">None</span>, ge=<span class="text-secondary">30</span>, le=<span class="text-secondary">250</span>)
