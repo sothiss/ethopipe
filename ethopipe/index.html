@@ -520,6 +520,71 @@
 </div>
 </div>
 </section>
+<!-- Quickstart & Setup Execution Grid -->
+<section class="w-full bg-surface-base px-gutter pb-space-xl">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b border-border-subtle pb-space-md">
+<div>
+<span class="font-label-micro text-label-micro text-citation-amber uppercase tracking-wider">Quickstart &amp; Setup</span>
+<h3 class="font-headline-md text-headline-md text-text-primary mt-1">Deterministic Local Execution</h3>
+</div>
+<span class="font-label-code text-label-code text-text-muted">Zero-Drift Python Environment</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Step 1: uv sync -->
+<div class="bg-surface-raised border border-border-subtle p-space-md rounded flex flex-col justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-micro text-label-micro text-citation-amber uppercase font-mono">01 // Dependency Sync</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">download_for_offline</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Environment Lock</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">
+Synchronizes virtual environment dependencies strictly with <code class="font-label-code text-citation-amber">uv.lock</code>, enforcing the &le;8 runtime dependency budget.
+</p>
+</div>
+<div class="mt-space-md p-2 bg-surface-base rounded border border-border-subtle font-label-code text-label-code text-telemetry-emerald flex items-center justify-between">
+<code>uv sync</code>
+<span class="font-label-micro text-label-micro text-text-muted">FAST</span>
+</div>
+</div>
+<!-- Step 2: uvicorn server -->
+<div class="bg-surface-raised border border-border-subtle p-space-md rounded flex flex-col justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-micro text-label-micro text-citation-amber uppercase font-mono">02 // Ingestion Gate</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">play_circle</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">FastAPI Ingestion Web API</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">
+Spins up the continuous biotelemetry stream endpoint (<code class="font-label-code text-text-primary">src.pipeline.main:app</code>) consuming unformatted incident notes.
+</p>
+</div>
+<div class="mt-space-md p-2 bg-surface-base rounded border border-border-subtle font-label-code text-label-code text-text-primary flex items-center justify-between overflow-x-auto">
+<code class="text-xs truncate">uv run uvicorn src.pipeline.main:app --reload</code>
+<span class="font-label-micro text-label-micro text-telemetry-emerald shrink-0 ml-1">:8000</span>
+</div>
+</div>
+<!-- Step 3: run_qa.ps1 -->
+<div class="bg-surface-raised border border-border-subtle p-space-md rounded flex flex-col justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-micro text-label-micro text-citation-amber uppercase font-mono">03 // Verification Gate</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">task_alt</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Automated QA Pipeline</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">
+Executes Black (88 cols), Ruff, the 43-test passing Pytest multi-matrix, and the Solo Maintainer Guardrail auditor.
+</p>
+</div>
+<div class="mt-space-md p-2 bg-surface-base rounded border border-border-subtle font-label-code text-label-code text-citation-amber flex items-center justify-between">
+<code>.\scripts\run_qa.ps1</code>
+<span class="font-label-micro text-label-micro text-telemetry-emerald">43 PASS</span>
+</div>
+</div>
+</div>
+</div>
+</section>
 <!-- Section 4: Academic Grounding & Infrastructure Specifications Grid -->
 <section class="w-full bg-surface-raised border-t border-border-subtle px-gutter py-space-xl">
 <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
