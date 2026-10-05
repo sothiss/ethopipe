@@ -1,7 +1,24 @@
-# Research Software Engineering (RSE) Log: EthoPipe Journey
+# EthoPipe Research & Architecture Journal
+**Sub-Title / Focus:** Research Software Engineering (RSE) Log & Methodological Paradigm
 **Project Architecture:** EthoPipe (The Transparency Project 1.0)
 **Principal Investigator:** Alice Severi Gonçalves (ORCID: 0009-0003-0048-8982)
 **Methodological Paradigm:** Open Science, Computational Canine Ethology, and Deterministic Data Pipelines
+
+---
+
+## Preface: The 2025 Incubation — Why Architecture Must Replace Anecdote
+
+Before the first line of Python was committed to this repository, EthoPipe existed as an observational frustration.
+
+Throughout 2025, my work centered on documenting canine morphology, physical conditioning, and behavioral expression through visual studies, technical illustration, and applied ethology. During this period, the systemic pathology of the companion animal sector became unmistakable: the field is paralyzed by a profound replication crisis and an epistemic reliance on human storytelling. Vital behavioral records in shelters, veterinary clinics, and training yards are routinely flattened into subjective labels—observers project anthropomorphic emotional narratives like "stubborn," "dominant," or "spiteful" instead of logging observable physical motor sequences.
+
+Simultaneously, the public discourse around animal handling had devolved into polarized marketing silos. Confronting aversive handling practices on social media demonstrated that debating terminology in unmoderated forums is an exercise in futility. Human language is weaponized to preserve dogma; subjective narratives cannot be aggregated for epidemiological study, nor can they provide statutory animal protection laws with empirical teeth.
+
+Science does not need more philosophical debates—it requires unyielding digital gatekeepers.
+
+When I formally entered the Google Developers ecosystem and began prototyping in late 2025, early explorations with Firebase databases and generative models clarified the technical path forward. The objective could not be a conversational chatbot that "reasons" about dog emotions; generative models deployed colloquially simply amplify human cognitive bias. Instead, the solution required treating language models strictly as zero-temperature, deterministic text parsers bound to hardcoded veterinary bounds, strict Pydantic schemas, and global biodiversity informatics standards (Darwin Core).
+
+EthoPipe was born from the realization that you cannot clean bad science with good intentions. You clean it with deterministic pipelines, strict runtime type validation, and immutable data architecture.
 
 ---
 

@@ -531,13 +531,13 @@
 <!-- Grand Statement Display Typography -->
 <div class="max-w-[1180px]">
 <h1 class="font-headline-lg text-headline-lg lg:text-[68px] lg:leading-[76px] text-text-primary tracking-tight font-normal">
-          Overcoming the replication bottleneck in companion animal welfare, 
+          Overcoming the replication bottleneck in companion animal welfare,
           <span class="font-italic-accent text-citation-amber italic font-normal">
             born from restless curiosity and empirical rigor.
           </span>
 </h1>
 <p class="mt-space-md text-text-secondary font-body-lg text-body-lg max-w-[840px] leading-relaxed">
-          Ground-level canine clinical intakes and incident archives are shackled to moralizing human prose. 
+          Ground-level canine clinical intakes and incident archives are shackled to moralizing human prose.
           The Transparency Project establishes the algorithmic protocols required to convert qualitative narrative noise into immutable, type-strict biotelemetry.
         </p>
 </div>
@@ -1236,14 +1236,14 @@
 
 <span class="text-citation-amber">class</span> <span class="text-telemetry-emerald">CanineObservationRecord</span>(BaseModel):
     model_config = ConfigDict(
-        strict=<span class="text-citation-amber">True</span>, 
+        strict=<span class="text-citation-amber">True</span>,
         extra=<span class="text-text-primary">'forbid'</span>
     )
 
     individual_id: <span class="text-secondary">str</span> = Field(..., pattern=<span class="text-text-primary">r"^CANIS-[A-Z0-9]{6}$"</span>)
     event_timestamp: <span class="text-secondary">datetime</span>
     ethogram_token: Literal[
-        <span class="text-text-primary">"play_bow"</span>, <span class="text-text-primary">"displacement_pant"</span>, 
+        <span class="text-text-primary">"play_bow"</span>, <span class="text-text-primary">"displacement_pant"</span>,
         <span class="text-text-primary">"lip_lick"</span>, <span class="text-text-primary">"direct_gaze"</span>, <span class="text-text-primary">"micro_freeze"</span>
     ]
     heart_rate_bpm: Optional[<span class="text-secondary">int</span>] = Field(<span class="text-citation-amber">None</span>, ge=<span class="text-secondary">30</span>, le=<span class="text-secondary">250</span>)
