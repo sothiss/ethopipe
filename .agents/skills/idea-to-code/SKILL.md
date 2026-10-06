@@ -1,0 +1,84 @@
+---
+name: idea-to-code
+description: Enforces a deterministic 5-gate pipeline (Triage, Spec, Test First, Minimal Code, QA & Journal) to prevent step-skipping and ensure high software standards.
+---
+
+# EthoPipe Idea-to-Implementation Workflow (Anti-Step-Skipping System)
+
+## Role & Primary Objective
+You are the **EthoPipe Idea-to-Implementation Orchestrator**. As a solo developer or pair-programmer working with AI, the single greatest failure mode is **skipping steps**—jumping straight into coding without boundary specifications, failing to write tests first, or forgetting to verify the QA pipeline and record learnings.
+
+This workflow enforces a **deterministic 5-gate pipeline** where each step must be explicitly validated before advancing to the next.
+
+---
+
+## The 5 Non-Negotiable Development Gates
+
+```
+[Idea / Brainstorm] ──► [Gate 1: Triage] ──► [Gate 2: Spec] ──► [Gate 3: Test First] ──► [Gate 4: Code] ──► [Gate 5: QA & Journal] ──► [Done]
+```
+
+### 🛑 Gate 1: Triage & Solo Maintainer Veto
+**Objective:** Prevent cognitive overhead, polyglot sprawl, and dependency rot before any code is written.
+- [ ] **Track Assignment**: Classify the task:
+  - ⚡ `bolt`: Algorithmic optimization, caching, vectorization.
+  - 🛡️ `sentinel`: Security hardening, boundary defenses, input sanitization.
+  - 📦 `feat`: Schema addition, Darwin Core mapping, new motor posture parser.
+  - 🔧 `refactor`: Simplification, dead code elimination, modularization.
+- [ ] **Language Monoculture**: Verify this requires 100% pure Python (no Node, npm, Rust, Go).
+- [ ] **Dependency Budget**: Can this be done with Python stdlib or existing dependencies? Reject new packages unless strictly required.
+- [ ] **KISS / YAGNI**: Is this immediately needed, or speculative over-engineering?
+
+### 🛑 Gate 2: Boundary Specification (RFC)
+**Objective:** Define strict physical and biological boundaries.
+- [ ] **Target Files**: Enumerate the exact files allowed to be touched (e.g. `src/pipeline/models.py`). Modifying unauthorized files is prohibited.
+- [ ] **Domain Invariants**:
+  - Canine heart rate: Clamp to `[30, 250]` BPM (Toy: `80-200`, Giant: `40-110`).
+  - Darwin Core: Standardize on `MeasurementOrFact` (`individualID`, `eventDate`, `measurementType`, `measurementValue`, `basisOfRecord`).
+  - Linguistic de-biasing: Reject subjective anthropomorphic terms (`angry`, `stubborn`).
+- [ ] **Schema Determinism**: Pydantic v2 strict typing (`model_config = ConfigDict(strict=True)`).
+
+### 🛑 Gate 3: Adversarial Test First (TDD)
+**Objective:** Never write production logic without a failing or verifying test.
+- [ ] **Write Test Scaffolding**: Create or update a test in `tests/test_*.py` before modifying `src/`.
+- [ ] **Adversarial / Fuzzing**: For numerical or boundary inputs, write a Hypothesis property test in `tests/test_adversarial_boundaries.py`.
+- [ ] **Verify Test Fails**: Run `pytest tests/ -k <test_name>` to verify that the test fails as expected.
+
+### 🛑 Gate 4: Minimal Implementation (KISS)
+**Objective:** Write the minimal clean Python to make the test pass.
+- [ ] **File Size Boundary**: Ensure target file remains strictly under **600 lines**.
+- [ ] **No Dead Code**: Remove all debug print statements, temporary scripts, and unused imports.
+- [ ] **Type Safety**: Verify `mypy src` passes with zero diagnostics.
+
+### 🛑 Gate 5: QA Verification & Journal Closure
+**Objective:** Complete all institutional audits and record institutional knowledge.
+- [ ] **Full 8-Step QA**: Run `.\scripts\run_qa.ps1` from PowerShell (or `python scripts/audit_maintainer_guardrails.py` + `pytest`).
+- [ ] **All 22+ Baseline Tests Pass**: Zero regressions.
+- [ ] **Journal / Changelog Logging**:
+  - If `bolt`: Append learning to `.jules/bolt.md`.
+  - If `sentinel`: Append learning to `.jules/sentinel.md`.
+  - If `feat` / `refactor`: Append entry to `CHANGELOG.md`.
+
+---
+
+## Operational Commands
+
+### 1. Register a New Idea
+To capture an idea without skipping steps, create a step-gated card:
+```powershell
+.\scripts\idea.ps1 -New "Sanitize canine microchip ID format" -Track sentinel
+```
+This generates `docs/ideas/IDEA-00X_<slug>.md` with all 5 gates pre-formatted.
+
+### 2. View Active Board & Progress
+```powershell
+.\scripts\idea.ps1 -Board
+```
+Generates and views `docs/IDEAS_BOARD.md` showing completion percentages.
+
+### 3. Audit for Skipped Steps
+Before approving or merging, run the anti-skipping audit:
+```powershell
+.\scripts\idea.ps1 -Audit
+```
+If an idea is marked `done` while any gate check remains uncompleted, the audit will fail.

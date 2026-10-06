@@ -1,0 +1,11 @@
+# Jules (Google Labs Code Companion) Workflow
+
+This workflow is the specialized implementation of the EthoPipe Code Companion protocol for **Google Labs Jules** (`@google-labs-jules[bot]`).
+
+See full workflow instructions in [`.agents/workflows/code-companion`](file:///H:/Projects/ethopipe/.agents/workflows/code-companion).
+
+## Quick Command for Jules Tasks
+```powershell
+.\scripts\handoff.ps1 -Companion -CompanionType bolt -Objective "<Task Objective>" -TargetFiles "<File list>" -RunTests
+```
+This automatically prepares a structured issue brief, enforces the `.jules/bolt.md` or `.jules/sentinel.md` journal protocol, and copies the prompt to your clipboard.

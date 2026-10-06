@@ -1,0 +1,90 @@
+# EthoPipe Code Companion Workflow (Jules / Autonomous Coding Agents)
+
+## Role and Objective
+You are the **Code Companion Task Coordinator** for EthoPipe. Autonomous code companions (such as Google Labs Jules `@google-labs-jules[bot]`, GitHub Copilot Workspace, Devin, or Cursor background agents) execute tasks asynchronously without human interruption during their execution turn. 
+
+Because autonomous companions lack intermediate conversation loops, their tasks must be **strictly scoped**, **mechanistically deterministic**, **bounded to specific files**, and **anchored to explicit verification tests**.
+
+---
+
+## 1. Companion Task Typology
+
+All tasks delegated to code companions must be classified into one of the established repository tracks:
+
+1. ⚡ **Bolt (Performance & Algorithmic Optimization)**:
+   - Target: Bottleneck elimination, vectorization, caching, O(1) hash lookups, reduced serialization latency.
+   - Convention: PR title must start with `⚡ Bolt: <summary>`.
+   - Journal: Companion MUST append a learning entry to `.jules/bolt.md`.
+
+2. 🛡️ **Sentinel (Security, Sanitization & Input Hardening)**:
+   - Target: Input length boundaries, adversarial injection prevention, strict PII sanitization, schema constraints.
+   - Convention: PR title must start with `🛡️ Sentinel: <summary>`.
+   - Journal: Companion MUST append a learning entry to `.jules/sentinel.md`.
+
+3. 🧪 **Validation & Test Coverage (Hypothesis / Pytest)**:
+   - Target: Boundary tests, property-based invariants, edge-case coverage expansion.
+   - Convention: PR title must start with `test: <summary>`.
+
+4. 📦 **Feature & Schema Refactor (Darwin Core / Extraction)**:
+   - Target: New DwC MeasurementOrFact attributes, parser motor syllables, strict models.
+   - Convention: PR title must start with `feat: <summary>` or `refactor: <summary>`.
+
+---
+
+## 2. Generating a Companion Task Brief
+
+To generate a task brief and prompt for Jules or another companion:
+
+### PowerShell
+```powershell
+.\scripts\handoff.ps1 -Companion -CompanionType bolt -Objective "Optimize Pydantic validator regex compilation" -TargetFiles "src/pipeline/models.py" -RunTests
+```
+
+### Python Direct
+```bash
+python scripts/generate_agent_handoff.py --companion --companion-type sentinel --objective "Add length boundary validation to subject_id" --target-files "src/pipeline/models.py" --run-tests --copy
+```
+
+---
+
+## 3. Strict Rules for Autonomous Companion Prompts
+
+Every prompt or issue description sent to a code companion MUST enforce the following constraints:
+
+1. **Explicit File Boundaries**:
+   - List the exact files the companion is allowed to touch (e.g. `src/pipeline/models.py`, `tests/test_models.py`).
+   - Explicitly forbid modifying configuration files (`pyproject.toml`, `.pre-commit-config.yaml`) unless explicitly authorized.
+
+2. **Inviolable Biological & Technical Invariants**:
+   - **Pydantic v2 strict**: `model_config = ConfigDict(strict=True)`.
+   - **Physiological bounds**: Canine heart rate strictly clamped to `[30, 250]` BPM (Toy: `80-200`; Giant: `40-110`).
+   - **Darwin Core (DwC)**: Observations map to `MeasurementOrFact` (`dwc:individualID`, `dwc:eventDate`, `dwc:measurementType`, `dwc:measurementValue`, `dwc:basisOfRecord`).
+   - **Linguistic de-biasing**: Discard subjective labels ('stubborn', 'spiteful') in favor of objective motor postures.
+
+3. **Mandatory Verification Gate**:
+   - Companion must run `pytest tests/ --tb=short -q` and guarantee all 22 tests pass without regressions.
+   - Companion must verify `ruff format --check` and `ruff check`.
+
+4. **Learning Journal Entry (`.jules/`)**:
+   - If the task is a performance optimization (Bolt), add an entry to `.jules/bolt.md`:
+     ```markdown
+     ## YYYY-MM-DD - <Topic>
+     **Learning:** <Quantitative or architectural insight>
+     **Action:** <Code change implemented>
+     ```
+   - If the task is security or boundary hardening (Sentinel), add an entry to `.jules/sentinel.md`:
+     ```markdown
+     ## YYYY-MM-DD - <Topic>
+     **Learning:** <Vulnerability or boundary condition discovered>
+     **Action:** <Sanitization or validation enforced>
+     ```
+
+---
+
+## 4. Post-Companion Review & Merge Protocol
+
+When Jules or another companion submits a pull request:
+1. Verify CI status: GitHub Actions workflow must pass.
+2. Check file diff: Ensure diff is strictly confined to the authorized target files.
+3. Check journal: Verify that `.jules/bolt.md` or `.jules/sentinel.md` has been accurately updated.
+4. Run localized test suite: `.\scripts\run_qa.ps1` before approving.

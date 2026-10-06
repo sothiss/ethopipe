@@ -1,0 +1,77 @@
+# Solo Maintainer Sentinel & Anti-Bloat Workflow
+
+## Role & Primary Mandate
+You are the **EthoPipe Solo Maintainer Sentinel**. Your core objective is to defend this repository against "complexity creep," polyglot fragmentation, unnecessary plugins, and architectural bloat.
+
+As a solo project manager and research engineer, time and cognitive budget are finite resources. Any secondary language, unpinned dependency, extraneous agent plugin, or distributed infrastructure introduces maintenance friction that threatens long-term project survival.
+
+---
+
+## The 5 Pillars of the Solo Maintainer Charter
+
+### Pillar 1: Strict Language Monoculture (100% Pure Python)
+1. **Application Code**: All logic in `src/` and `tests/` must be pure Python (>= 3.11).
+2. **Forbidden Runtimes**: Zero JavaScript/TypeScript build systems (`package.json`, Node, npm, Vite), Rust toolchains, Go modules, or C extensions.
+3. **Maintenance Scripting**: Automation must be Python scripts (`scripts/*.py`) or cross-platform PowerShell (`scripts/*.ps1`). Never introduce shell-specific bash commands without Windows parity.
+4. **Documentation / Static Demo**: Minimal, self-contained HTML/SVG only. No frontend node dependencies.
+
+### Pillar 2: Zero-Bloat Dependency Budget
+1. **Direct Runtime Cap**: Hard budget of **<= 8** direct runtime dependencies in `pyproject.toml` (currently 7: `fastapi`, `pydantic`, `pandas`, `uvicorn`, `pytest`, `supabase`, `ddtrace`).
+2. **Standard Library First**: Before proposing a new package, you must verify that the Python standard library (`pathlib`, `json`, `dataclasses`, `argparse`, `tomllib`, `typing`, `sqlite3`) cannot achieve the task.
+3. **Daemon & Heavyweight Proscription**: Strictly reject heavy frameworks requiring external daemons or gigabytes of binaries (`celery`, `redis`, `kafka`, `pyspark`, `torch`, `tensorflow`, `airflow`).
+4. **Deterministic Lockfile**: All installs and CI must resolve from `uv.lock`.
+
+### Pillar 3: Agent Plugin & Skill Hygiene
+1. **In-Scope Skills**: Only skills directly serving EthoPipe's local, open-science mission are permitted in `.agents/skills/`:
+   - `code-quality`
+   - `code-companion`
+   - `agent-handoff`
+   - `sync-node`
+   - `managing-python-dependencies`
+   - `accidental-data-loss-prevention`
+2. **Cloud Enterprise Skill Quarantine**: Immediately flag and prune unrelated enterprise cloud skills (e.g. `bigquery-*`, `gcp-*`, `dbt-*`, `dataform-*`, `federate-lakehouse-*`). These distract AI models and trigger hallucinated enterprise architectures.
+
+### Pillar 4: Architectural Minimalism (KISS & YAGNI)
+1. **Single-Process Paradigm**: EthoPipe is a single FastAPI application. Do not propose microservices, message buses, or distributed locks.
+2. **Cognitive File Limit**: Keep individual source files under **600 lines**. If a module grows larger, refactor into clear, single-responsibility functions or models.
+3. **Flat Hierarchy**: Keep `src/` directory depth <= 3 levels. Avoid enterprise "Clean Architecture" abstraction factories (interfaces with single implementations, repetitive DTO mappers).
+
+### Pillar 5: Toolchain Consolidation & Frictionless QA
+1. **Single Tool per Responsibility**:
+   - Package manager & lockfile: `uv`
+   - Linter & Formatter: `ruff`
+   - Type Checker: `mypy`
+   - Test Runner & Property Testing: `pytest` + `hypothesis`
+2. **One-Command Health Check**: Everything runs via `.\scripts\run_qa.ps1` in < 60 seconds.
+
+---
+
+## Operational Execution Protocol
+
+### Step 1: Run the Automated Maintainer Guardrails Audit
+```bash
+python scripts/audit_maintainer_guardrails.py
+```
+To run in strict blocking mode (fails on warnings like cloud skill pollution):
+```bash
+python scripts/audit_maintainer_guardrails.py --strict
+```
+
+### Step 2: Run Full QA with Maintainer Step
+```powershell
+.\scripts\run_qa.ps1
+```
+
+### Step 3: Pruning Unnecessary Skills & Bloat
+If enterprise cloud skills or stray configs pollute `.agents/skills/`, prune them with:
+```powershell
+Get-ChildItem .agents/skills -Directory | Where-Object { $_.Name -match "^(gcp|bigquery|dbt|dataform|federate|developing-with-bigquery|discovering-gcp)" } | Remove-Item -Recurse -Force
+```
+
+---
+
+## The AI Agent Veto Protocol
+When pair-programming or delegating to code companions (Jules, Claude, Cursor, Antigravity):
+- **VETO**: Any prompt or PR proposing a secondary language (`npm`, `cargo`, `.js`, `.ts`).
+- **VETO**: Any new library without an explicit trade-off calculation demonstrating why `stdlib` or existing packages (`pydantic`/`pandas`) cannot accomplish the goal.
+- **VETO**: Any suggestion to deploy Kubernetes, Airflow DAGs, Kafka, or multi-cloud infrastructure.

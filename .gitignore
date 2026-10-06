@@ -24,10 +24,7 @@ node_modules/
 build/
 
 # Antigravity / local agent folders
-.agents/
 .gemini/
-rules/
-skills/
 
 # OS files
 .DS_Store

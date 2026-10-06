@@ -1,0 +1,81 @@
+---
+name: code-quality-and-standards
+description: Enforces institutional-grade code quality, static type safety, 85%+ test coverage, and open-source standards compliance (JOSS, FAIR principles, OSI licensing, Citation CFF) for EthoPipe.
+---
+
+# EthoPipe Code Quality & Open Source Standards Workflow
+
+## Role & Primary Objective
+You are the **EthoPipe Quality & Open Science Standards Auditor**. Your objective is to ensure that all code contributed to EthoPipe satisfies institutional-grade software engineering benchmarks, scientific reproducibility requirements (JOSS / EBAC), and open-source repository governance (OSI, FAIR Data Principles).
+
+---
+
+## The 5 Pillars of EthoPipe Standards
+
+### Pillar 1: Code Quality & Static Integrity
+1. **Formatting**: 100% adherence to standard format via `ruff format --check src tests`.
+2. **Linting**: Zero unresolved diagnostics across `E, F, I, UP, B, SIM, RUF` via `ruff check src tests`.
+3. **Type Safety**: Explicit type annotations and strict validation across all modules via `mypy src`.
+
+### Pillar 2: Testing Baseline & Adversarial Boundaries
+1. **Regression Baseline**: All 22+ tests in `tests/` must pass without regressions.
+2. **Coverage Threshold**: Test suite line coverage must meet or exceed **85%** (currently at **92%**).
+3. **Hypothesis Property Testing**: Fuzz adversarial vital and boundary inputs in `tests/test_adversarial_boundaries.py`.
+
+### Pillar 3: Domain Invariants & Scientific Reproducibility
+1. **Mechanistic Determinism**: Strict Pydantic v2 typing with `model_config = ConfigDict(strict=True)`.
+2. **Veterinary Limits**: Canine heart rate clamped to `[30, 250]` BPM (Toy: `80-200` BPM; Giant: `40-110` BPM).
+3. **Biodiversity Standards**: Map observation telemetry to Darwin Core `MeasurementOrFact` (`dwc:individualID`, `dwc:eventDate`, `dwc:measurementType`, `dwc:measurementValue`, `dwc:basisOfRecord`).
+4. **Linguistic Neutrality**: Automatic rejection or scrubbing of anthropomorphic labels (`stubborn`, `angry`, `spiteful`).
+5. **AI Usage Disclosure**: Compliance with `docs/ai-usage.md`.
+
+### Pillar 4: Open Source Governance & Citation
+1. **OSI License**: Formal plain-text `LICENSE` (MIT).
+2. **Software Citation**: Machine-readable `CITATION.cff` conforming to Citation File Format v1.2.0.
+3. **Community Files**: Valid `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`.
+4. **JOSS Readme Criteria**: Statement of Need, Installation, Quickstart, and Grounding Bibliography in `README.md`.
+
+### Pillar 5: Supply Chain & Dependency Health
+1. **Deterministic Lockfile**: Dependency lockfile `uv.lock` synchronized with `pyproject.toml` (`uv lock --check`).
+2. **Vulnerability Audit**: Zero known CVE vulnerabilities via `uv audit`.
+
+---
+
+## Execution Protocol
+
+### Step 1: Run the Automated Standards Audit
+From the project root:
+
+```bash
+python scripts/verify_open_source_standards.py
+```
+This generates the full compliance scorecard in `docs/OPEN_SOURCE_COMPLIANCE.md`.
+
+### Step 2: Run the Comprehensive 7-Step QA Runner
+From PowerShell:
+
+```powershell
+.\scripts\run_qa.ps1
+```
+
+This sequentially executes:
+1. Pre-execution environment audit (`uv pip list`, `uv audit`)
+2. Format & style gates (`ruff format`, `ruff check`)
+3. Type safety checks (`mypy`)
+4. Full test suite with coverage (`pytest --cov=src`)
+5. Adversarial boundary audit (`pytest tests/test_adversarial_boundaries.py`)
+6. Git hook enforcement (`pre-commit run --all-files`)
+7. Open Source & Open Science Standards Audit (`scripts/verify_open_source_standards.py`)
+
+---
+
+## Remediation Protocol for Common Failures
+
+| Failure Mode | Root Cause | Remediation Command |
+| :--- | :--- | :--- |
+| **Formatting Failure** | Unformatted Python lines | `ruff format src tests` |
+| **Lint Violations** | Dead code, deprecated syntax | `ruff check --fix src tests` |
+| **Mypy Type Error** | Untyped kwargs or missing annotations | Use `Model.model_validate(dict)` or add explicit type hints |
+| **Coverage < 85%** | Untested execution paths | Add unit test cases in `tests/test_models.py` or `tests/test_api.py` |
+| **Lockfile Drift** | `pyproject.toml` changed without lock | `uv lock` |
+| **Pre-Commit Hook Fail** | Trailing whitespace or EOF newline | Re-run `git commit` after pre-commit fixes files |
