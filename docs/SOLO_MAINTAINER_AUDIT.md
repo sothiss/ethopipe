@@ -1,6 +1,6 @@
 # Solo Maintainer Guardrails & Anti-Bloat Audit Report
 
-**Generated:** `2026-10-06 20:18:15Z`
+**Generated:** `2026-10-10 19:34:56Z`
 **Audit Mode:** `Standard`
 **Verdict:** ![Status](https://img.shields.io/badge/Solo_Maintainer_Audit-PASSING-brightgreen)
 
@@ -42,7 +42,7 @@ Codebase adheres to 100% Python monoculture (no polyglot sprawl).
 
 **Details:**
 ```text
-Active runtime dependencies: 7/8 (within budget).
+Active runtime dependencies: 8/8 (within budget).
 ```
 
 #### ✅ Heavyweight / Daemon Proscription
@@ -56,7 +56,7 @@ Zero heavyweight (PyTorch/Spark) or broker (Celery/Kafka) deps.
 
 **Details:**
 ```text
-uv.lock is present and non-empty (432 KB).
+uv.lock is present and non-empty (433 KB).
 ```
 
 ### Agent Plugin & Skill Hygiene

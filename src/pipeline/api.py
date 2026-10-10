@@ -1,16 +1,42 @@
 import logging
 import os
 import secrets
-from typing import Annotated
+from typing import Annotated, Any
 
+import sentry_sdk
+import sentry_sdk.ai
 from fastapi import Depends, FastAPI, HTTPException, Request, Response, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from pydantic import BaseModel
 
+from src.pipeline.agent import run_ethopipe_agent
 from src.pipeline.models import CanineObservation
+
+# Initialize Sentry with Agent Tracing, Full Tracing, and Prompt PII capture
+SENTRY_DSN = os.getenv(
+    "SENTRY_DSN",
+    "https://90d85028235d5b5f06f950aa8a641af4@o4511706250084352.ingest.us.sentry.io/4512046640136192",
+)
+
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    traces_sample_rate=1.0,
+    send_default_pii=True,
+    environment=os.getenv("SENTRY_ENVIRONMENT", "production"),
+)
 
 app = FastAPI(title="EthoPipe API")
 security = HTTPBasic()
 logger = logging.getLogger(__name__)
+
+
+@app.middleware("http")
+async def conversation_tracking_middleware(request: Request, call_next) -> Response:
+    """Extracts X-Conversation-ID header to group requests in Conversations."""
+    conv_id = request.headers.get("X-Conversation-ID")
+    if conv_id:
+        sentry_sdk.ai.set_conversation_id(conv_id)
+    return await call_next(request)
 
 
 @app.middleware("http")
@@ -59,7 +85,15 @@ def get_current_username(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Basic"},
         )
+    # Set user context in Sentry
+    sentry_sdk.set_user({"username": credentials.username})
     return credentials.username
+
+
+class AgentRunRequest(BaseModel):
+    prompt: str
+    incident_data: dict[str, Any] | None = None
+    conversation_id: str | None = None
 
 
 @app.get("/")
@@ -76,3 +110,26 @@ def ingest_incident(
         "status": "valid",
         "incident": data.model_dump(by_alias=True),
     }
+
+
+@app.post("/agent/run")
+def run_agent(
+    payload: AgentRunRequest,
+    username: Annotated[str, Depends(get_current_username)],
+) -> dict:
+    """Executes agent run with Sentry Agent Tracing and conversation tracking."""
+    return run_ethopipe_agent(
+        prompt=payload.prompt,
+        incident_data=payload.incident_data,
+        conversation_id=payload.conversation_id,
+        user_id=username,
+    )
+
+
+@app.get("/debug-sentry")
+def trigger_sentry_test_error(
+    username: Annotated[str, Depends(get_current_username)],
+    message: str = "verification-test",
+):
+    """Deliberate endpoint for verifying real end-to-end Sentry error ingestion."""
+    raise RuntimeError(f"Deliberate Sentry test error: {message}")

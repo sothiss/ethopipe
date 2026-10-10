@@ -19,6 +19,7 @@ dependencies = [
   "pytest==9.1.1",
   "supabase>=2.31.0",
   "ddtrace>=4.11.0",
+  "sentry-sdk>=2.20.0",
 ]
 
 [tool.pytest.ini_options]
