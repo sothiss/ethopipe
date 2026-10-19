@@ -12,8 +12,8 @@ license = { text = "MIT" }
 
 
 dependencies = [
-  "fastapi==0.143.0",
-  "pydantic==2.14.0",
+  "fastapi==0.143.2",
+  "pydantic==2.14.1",
   "pandas==3.0.6",
   "uvicorn==0.54.0",
   "pytest==9.1.1",
