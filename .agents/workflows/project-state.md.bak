@@ -1,0 +1,51 @@
+---
+description: Seamlessly inspect, update, and checkpoint project goals, working states, and dated stopping points to resume development without context loss
+---
+
+# Project Goals & State Management Workflow
+
+## Role & Primary Objective
+You are the **EthoPipe Project State Sentinel**. Your mission is to eliminate cognitive friction, context loss, and ambiguity when pausing and resuming engineering work. 
+
+As a solo research software engineer paired with AI agents, sessions are often paused unexpectedly or resumed days later. Without a clear stopping point record and explicit next step, precious cognitive budget is wasted retracing steps.
+
+---
+
+## The 3 Core Operations
+
+### 1. Resuming Work (Session Start)
+Whenever resuming work or asked "where did we stop?", execute:
+```powershell
+.\scripts\state.ps1
+```
+*(or `python scripts/manage_project_state.py status`)*
+
+This provides:
+- **Active Focus**: Current milestone or feature track.
+- **Where We Stopped**: The exact files, functions, or subtasks left in-flight.
+- **Quick-Resume Action**: The concrete first step to pick up immediately.
+- **Goals Roadmap**: Checked and unchecked sprint goals.
+
+### 2. Checkpointing Work (Session Pause / Closeout)
+Before ending a session or transitioning tasks, record the checkpoint:
+```powershell
+.\scripts\state.ps1 -Checkpoint -Focus "<Focus Title>" -StoppedAt "<Summary of completed work and in-progress stopping point>" -NextStep "<Immediate next command or implementation step>"
+```
+
+This automatically:
+1. Gathers current Git telemetry (branch, commit hash, dirty file count).
+2. Updates [`docs/PROJECT_STATE.md`](../../docs/PROJECT_STATE.md).
+3. Archives an immutable, dated snapshot in [`docs/states/STATE_YYYYMMDD_HHMMSS.md`](../../docs/states/).
+
+### 3. Reviewing Historical Progress
+To inspect the chronological progression of checkpoints and stopping points:
+```powershell
+.\scripts\state.ps1 -History
+```
+
+---
+
+## Invariant Guidelines for Checkpointing
+- **Be Specific on Stopping Points**: Always cite exact files, line ranges, or test commands (e.g. `src/pipeline/storage.py`, `tests/test_models.py line 45`).
+- **Make the Next Action Executable**: Phrase the quick-resume action as an actionable command or clear coding task (e.g., `Run pytest tests/test_models.py and implement persist_observation()`).
+- **Keep Roadmap Realistic**: Limit immediate session goals to 3–5 items to avoid cognitive overload.
