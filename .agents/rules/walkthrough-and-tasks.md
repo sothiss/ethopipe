@@ -41,4 +41,4 @@ Every completed unit of work or session closeout MUST include a structured **Wal
 
 ## 3. End-of-Session Journey Protocol
 
-When closing out a work session, the agent should assist the PI in logging the session into [`JOURNEY.md`](file:///H:/Projects/ethopipe/JOURNEY.md) using `.\scripts\journey.ps1` or `python scripts/manage_journey.py` to ensure long-term historical tracking of AI evolution and engineering decisions.
+When closing out a work session, the agent should assist the PI in logging the session into [`JOURNEY.md`](../../JOURNEY.md) using `.\scripts\journey.ps1` or `python scripts/manage_journey.py` to ensure long-term historical tracking of AI evolution and engineering decisions.

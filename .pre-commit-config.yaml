@@ -7,14 +7,14 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.21
+    rev: v0.17.3
     hooks:
       - id: ruff
         args: [ --fix ]
       - id: ruff-format
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.18.2
+    rev: v2.4.1
     hooks:
       - id: mypy
         additional_dependencies: [pydantic, pandas-stubs]
@@ -28,7 +28,7 @@ repos:
       # Run `python -m src.utils.validate_prompts` against prompt files
       - id: validate-prompts
         name: Prompt Structure Validator
-        entry: python -m src.utils.validate_prompts
+        entry: uv run python -m src.utils.validate_prompts
         language: system
         files: src/pipeline/prompts\.py|src/pipeline/models\.py
         types: [file]
@@ -37,7 +37,7 @@ repos:
       # Validate Darwin Core mapping consistency for core schemas
       - id: validate-dwc-mapping
         name: DwC Schema Validator
-        entry: python -m src.utils.validate_dwc_mapping
+        entry: uv run python -m src.utils.validate_dwc_mapping
         language: system
         files: src/pipeline/models\.py
         types: [file]
@@ -46,7 +46,7 @@ repos:
       # Detect non-deterministic prompts (Temperature > 0)
       - id: detect-temp-in-prompts
         name: Temperature Check (Non-Determinism Detector)
-        entry: python src/utils/detect_temp.py
+        entry: uv run python src/utils/detect_temp.py
         language: system
         files: src/pipeline/prompts\.py
         types: [file]
@@ -55,7 +55,7 @@ repos:
       # Ensure log level is set to CRITICAL for production
       - id: detect-debug-logs
         name: Production Log Level Check
-        entry: python src/utils/detect_debug_logs.py
+        entry: uv run python src/utils/detect_debug_logs.py
         language: system
         files: src/pipeline/main\.py|src/pipeline/api\.py
         types: [file]

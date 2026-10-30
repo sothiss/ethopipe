@@ -7,7 +7,7 @@ description: Specialized implementation of the EthoPipe Code Companion protocol 
 
 This skill is the specialized implementation of the EthoPipe Code Companion protocol for **Google Labs Jules** (`@google-labs-jules[bot]`).
 
-See full instructions in [`.agents/skills/code-companion`](file:///H:/Projects/ethopipe/.agents/skills/code-companion/SKILL.md).
+See full instructions in [`.agents/skills/code-companion`](../code-companion/SKILL.md).
 
 ## Quick Command for Jules Tasks
 ```powershell

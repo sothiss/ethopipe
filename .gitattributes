@@ -1,0 +1,11 @@
+# Normalize text files to LF across Linux/WSL/macOS/Windows while preserving PowerShell/Batch CRLF
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.pdf binary
+

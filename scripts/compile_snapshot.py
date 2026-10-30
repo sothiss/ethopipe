@@ -14,10 +14,13 @@ def compile_snapshot():
         "src/pipeline/main.py",
         "src/pipeline/models.py",
         "src/pipeline/parser.py",
+        "src/pipeline/agent.py",
         "src/pipeline/api.py",
         "tests/__init__.py",
+        "tests/conftest.py",
         "tests/test_models.py",
         "tests/test_api.py",
+        "tests/test_sentry_agent.py",
         "tests/test_adversarial_boundaries.py",
     ]
 

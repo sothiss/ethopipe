@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -85,46 +86,64 @@ def get_test_telemetry(project_root: Path, run_tests: bool = False) -> str:
     """Check pytest status if requested, or report verified baseline."""
     if not run_tests:
         return (
-            "Not re-executed (Baseline: 22 tests passing with strict "
+            "Not re-executed (Baseline: 27 tests passing with strict "
             "Pydantic v2 / Hypothesis boundary validations)."
         )
 
-    pytest_bin = project_root / ".venv" / "Scripts" / "pytest.exe"
-    if not pytest_bin.exists():
-        pytest_bin = Path("pytest")
+    candidates = [
+        project_root / ".venv" / "bin" / "pytest",
+        project_root / ".venv" / "Scripts" / "pytest.exe",
+    ]
+    pytest_cmd = next(
+        (str(p) for p in candidates if p.exists()),
+        shutil.which("pytest") or "pytest",
+    )
 
-    code, out, err = run_cmd([str(pytest_bin), "--tb=short", "-q"], cwd=project_root)
+    code, out, err = run_cmd([pytest_cmd, "--tb=short", "-q"], cwd=project_root)
     combined = (out + "\n" + err).strip()
     status_str = "PASSED" if code == 0 else f"FAILED (exit code {code})"
     return f"{status_str}\n{combined}"
 
 
 def copy_to_clipboard(text: str) -> bool:
-    """Attempt to copy text to Windows clipboard."""
-    try:
-        proc = subprocess.Popen(
-            ["clip.exe"],
-            stdin=subprocess.PIPE,
-            text=True,
-            encoding="utf-8",
-        )
-        proc.communicate(input=text)
-        return proc.returncode == 0
-    except Exception:
-        pass
+    """Attempt to copy text to system clipboard across WSL, Linux, macOS, and Windows."""
+    clipboard_cmds = [
+        ["clip.exe"],
+        ["wl-copy"],
+        ["xclip", "-selection", "clipboard"],
+        ["xsel", "--clipboard", "--input"],
+        ["pbcopy"],
+    ]
+    for cmd in clipboard_cmds:
+        if not shutil.which(cmd[0]):
+            continue
+        try:
+            proc = subprocess.Popen(
+                cmd,
+                stdin=subprocess.PIPE,
+                text=True,
+                encoding="utf-8",
+            )
+            proc.communicate(input=text)
+            if proc.returncode == 0:
+                return True
+        except Exception:
+            pass
 
-    try:
-        run_cmd(
-            [
-                "powershell",
-                "-NoProfile",
-                "-Command",
-                f"Set-Clipboard -Value @'\n{text}\n'@",
-            ]
-        )
-        return True
-    except Exception:
-        return False
+    if shutil.which("powershell"):
+        try:
+            code, _, _ = run_cmd(
+                [
+                    "powershell",
+                    "-NoProfile",
+                    "-Command",
+                    f"Set-Clipboard -Value @'\n{text}\n'@",
+                ]
+            )
+            return code == 0
+        except Exception:
+            pass
+    return False
 
 
 CORE_ARCHITECTURAL_INVARIANTS = """

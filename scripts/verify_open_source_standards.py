@@ -16,6 +16,7 @@ import argparse
 import datetime
 import json
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -202,16 +203,28 @@ class StandardsAudit:
                 "Ensure models in src/pipeline/models.py adhere to DwC schema.",
             )
 
+    def _resolve_tool(self, name: str) -> str:
+        """Resolve CLI tool across POSIX (.venv/bin), Windows (.venv/Scripts), and PATH."""
+        candidates = [
+            self.root / ".venv" / "bin" / name,
+            self.root / ".venv" / "Scripts" / f"{name}.exe",
+            Path.home() / ".local" / "bin" / name,
+        ]
+        for candidate in candidates:
+            if candidate.exists():
+                return str(candidate)
+        found = shutil.which(name)
+        return found if found else name
+
     def audit_code_quality(self) -> None:
         cat = "Code Quality & Static Integrity"
-        venv_bin = self.root / ".venv" / "Scripts"
-        ruff_exe = venv_bin / "ruff.exe"
-        mypy_exe = venv_bin / "mypy.exe"
+        ruff_cmd = self._resolve_tool("ruff")
+        mypy_cmd = self._resolve_tool("mypy")
 
         # Ruff format check
         code, out, err = run_cmd(
             [
-                str(ruff_exe if ruff_exe.exists() else "ruff"),
+                ruff_cmd,
                 "format",
                 "--check",
                 "src",
@@ -234,7 +247,7 @@ class StandardsAudit:
         # Ruff linter check
         code, out, err = run_cmd(
             [
-                str(ruff_exe if ruff_exe.exists() else "ruff"),
+                ruff_cmd,
                 "check",
                 "src",
                 "tests",
@@ -255,7 +268,7 @@ class StandardsAudit:
 
         # Mypy type safety check
         code, out, err = run_cmd(
-            [str(mypy_exe if mypy_exe.exists() else "mypy"), "src"],
+            [mypy_cmd, "src"],
             self.root,
         )
         self.record(
@@ -272,13 +285,12 @@ class StandardsAudit:
 
     def audit_testing_baseline(self) -> None:
         cat = "Testing & Determinism Baseline"
-        venv_bin = self.root / ".venv" / "Scripts"
-        pytest_exe = venv_bin / "pytest.exe"
+        pytest_cmd = self._resolve_tool("pytest")
 
         # Pytest coverage run
         code, out, _ = run_cmd(
             [
-                str(pytest_exe if pytest_exe.exists() else "pytest"),
+                pytest_cmd,
                 "tests/",
                 "--cov=src",
                 "--cov-report=term",
@@ -309,7 +321,7 @@ class StandardsAudit:
         if adv_test.exists():
             code, out, _ = run_cmd(
                 [
-                    str(pytest_exe if pytest_exe.exists() else "pytest"),
+                    pytest_cmd,
                     str(adv_test),
                     "-q",
                 ],
@@ -330,8 +342,9 @@ class StandardsAudit:
 
     def audit_supply_chain(self) -> None:
         cat = "Supply Chain & Security"
+        uv_cmd = self._resolve_tool("uv")
         # uv lock check
-        code, out, err = run_cmd(["uv", "lock", "--check"], self.root)
+        code, out, err = run_cmd([uv_cmd, "lock", "--check"], self.root)
         self.record(
             cat,
             "Deterministic Lockfile Consistency (uv.lock)",
@@ -346,7 +359,7 @@ class StandardsAudit:
 
         # uv audit
         code, out, err = run_cmd(
-            ["uv", "audit", "--preview-features", "audit-command"],
+            [uv_cmd, "audit", "--preview-features", "audit-command"],
             self.root,
         )
         no_vulns = code == 0 and "no known vulnerabilities" in (out + err).lower()
