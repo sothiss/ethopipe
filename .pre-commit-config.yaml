@@ -28,7 +28,7 @@ repos:
       # Run `python -m src.utils.validate_prompts` against prompt files
       - id: validate-prompts
         name: Prompt Structure Validator
-        entry: uv run python -m src.utils.validate_prompts
+        entry: uv run --no-sync python -m src.utils.validate_prompts
         language: system
         files: src/pipeline/prompts\.py|src/pipeline/models\.py
         types: [file]
@@ -37,7 +37,7 @@ repos:
       # Validate Darwin Core mapping consistency for core schemas
       - id: validate-dwc-mapping
         name: DwC Schema Validator
-        entry: uv run python -m src.utils.validate_dwc_mapping
+        entry: uv run --no-sync python -m src.utils.validate_dwc_mapping
         language: system
         files: src/pipeline/models\.py
         types: [file]
@@ -46,7 +46,7 @@ repos:
       # Detect non-deterministic prompts (Temperature > 0)
       - id: detect-temp-in-prompts
         name: Temperature Check (Non-Determinism Detector)
-        entry: uv run python src/utils/detect_temp.py
+        entry: uv run --no-sync python src/utils/detect_temp.py
         language: system
         files: src/pipeline/prompts\.py
         types: [file]
@@ -55,7 +55,7 @@ repos:
       # Ensure log level is set to CRITICAL for production
       - id: detect-debug-logs
         name: Production Log Level Check
-        entry: uv run python src/utils/detect_debug_logs.py
+        entry: uv run --no-sync python src/utils/detect_debug_logs.py
         language: system
         files: src/pipeline/main\.py|src/pipeline/api\.py
         types: [file]
@@ -74,11 +74,11 @@ repos:
         stages: [pre-commit, pre-push]
         pass_filenames: false
 
-      # Run `uv check` for dependency health
+      # Run `uv pip check` for dependency health
       - id: uv-check
         name: UV Dependency Health Check
         entry: uv
-        args: ["check", "--preview-features", "check-command"]
+        args: ["pip", "check"]
         language: system
         types: [file]
         stages: [pre-commit, pre-push]
