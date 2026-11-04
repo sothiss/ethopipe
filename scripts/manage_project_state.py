@@ -155,7 +155,7 @@ class ProjectStateManager:
 
         for cp in checkpoints:
             text = cp.read_text(encoding="utf-8")
-            date_m = re.search(r"\*\*Updated:\*\*\s*`([^`]+)`", text)
+            date_m = re.search(r"\*\*(?:Last )?Updated:\*\*\s*`([^`]+)`", text)
             focus_m = re.search(r"\*\*Active Focus:\*\*\s*([^\n]+)", text)
             stopped_m = re.search(r"### 📍 Where We Stopped\n([^\n]+)", text)
 
@@ -266,7 +266,7 @@ class ProjectStateManager:
                 "- **Prohibited Daemons**: Zero external brokers (Redis, Celery).",
                 "- **Biological Bounds**: Canine HR clamped [30, 250] BPM.",
                 "- **Biodiversity Interop**: Darwin Core (`MeasurementOrFact`).",
-                "- **Test Baseline**: 27 tests passing with >= 90% coverage.",
+                "- **Test Baseline**: 43+ tests passing with >= 85% coverage.",
                 "",
                 "---",
                 (

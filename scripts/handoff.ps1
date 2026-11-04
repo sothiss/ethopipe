@@ -1,12 +1,12 @@
 <#
 .SYNOPSIS
-    EthoPipe Cross-Model Agent Handoff & Code Companion Task Runner
+    EthoPipe Cross-Model Agent Handoff & Autonomous Companion Task Runner
 
 .DESCRIPTION
     Runs the agent handoff generator, compiles telemetry, updates snapshots if needed,
     writes structured Markdown reports, and copies the catch-up prompt or companion brief
-    to your clipboard. Supports interactive models (Claude, OpenAI, Cursor) and autonomous
-    companions (Google Labs Jules, Copilot Workspace, Devin).
+    to your clipboard. Supports interactive models (Antigravity, Claude, OpenAI, Cursor)
+    and autonomous background agents / subagents.
 
 .PARAMETER Objective
     Immediate micro-objective or goal for the incoming agent.
@@ -27,13 +27,10 @@
     Special instructions or directives for the incoming agent.
 
 .PARAMETER TargetAgent
-    Target model family (e.g. "Claude Code / Opus", "OpenAI o1 / GPT-4o", "Cursor", "Antigravity").
+    Target model family (e.g. "Antigravity", "Claude Code / Opus", "OpenAI", "Cursor").
 
 .PARAMETER Companion
-    Generate a task brief specifically for an autonomous code companion (e.g. Jules).
-
-.PARAMETER Jules
-    Alias for -Companion targeting Google Labs Jules.
+    Generate a scoped task brief specifically for an autonomous coding agent or subagent.
 
 .PARAMETER CompanionType
     Companion task track: "bolt" (optimization), "sentinel" (security), "test", "feature", "refactor". Default: "bolt".
@@ -54,7 +51,7 @@
     .\scripts\handoff.ps1
 
 .EXAMPLE
-    .\scripts\handoff.ps1 -Jules -CompanionType bolt -Objective "Optimize Pydantic validator O(1) lookups" -TargetFiles "src/pipeline/models.py" -RunTests
+    .\scripts\handoff.ps1 -Companion -CompanionType bolt -Objective "Optimize Pydantic validator O(1) lookups" -TargetFiles "src/pipeline/models.py" -RunTests
 #>
 
 [CmdletBinding()]
@@ -65,9 +62,8 @@ param(
     [string]$NextSteps,
     [string]$Blockers,
     [string]$Notes,
-    [string]$TargetAgent = "Any (Claude / OpenAI / Cursor / Antigravity)",
+    [string]$TargetAgent = "Any (Antigravity / Claude / OpenAI / Cursor)",
     [switch]$Companion,
-    [switch]$Jules,
     [ValidateSet("bolt", "sentinel", "test", "feature", "refactor")]
     [string]$CompanionType = "bolt",
     [string]$TargetFiles,
@@ -96,7 +92,7 @@ if ($NextSteps) { $cmdArgs += "--next-steps", $NextSteps }
 if ($Blockers) { $cmdArgs += "--blockers", $Blockers }
 if ($Notes) { $cmdArgs += "--notes", $Notes }
 if ($TargetAgent) { $cmdArgs += "--target-agent", $TargetAgent }
-if ($Companion -or $Jules) {
+if ($Companion) {
     $cmdArgs += "--companion"
     $cmdArgs += "--companion-type", $CompanionType
 }

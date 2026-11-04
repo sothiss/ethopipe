@@ -204,7 +204,7 @@ class StandardsAudit:
             )
 
     def _resolve_tool(self, name: str) -> str:
-        """Resolve CLI tool across POSIX (.venv/bin), Windows (.venv/Scripts), and PATH."""
+        """Resolve CLI tool in POSIX (.venv/bin), Windows (.venv/Scripts), or PATH."""
         candidates = [
             self.root / ".venv" / "bin" / name,
             self.root / ".venv" / "Scripts" / f"{name}.exe",

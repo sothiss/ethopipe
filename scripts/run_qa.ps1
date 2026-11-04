@@ -6,7 +6,8 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path | Split-Path -Parent
 Set-Location $root
 
-$venv = ".\.venv\Scripts"
+$venv = if (Test-Path ".\.venv\Scripts\python.exe") { ".\.venv\Scripts" } else { "./.venv/bin" }
+$ext = if (Test-Path ".\.venv\Scripts\python.exe") { ".exe" } else { "" }
 $failures = @()
 
 function Step($n, $title) {
@@ -27,8 +28,10 @@ function Run($cmd) {
 # Step 1: Environment Audit
 Step 1 "Pre-Execution Environment Audits"
 try {
+    Run "uv sync --locked"
     Run "uv pip list"
-    Run "uv audit"
+    Run "uv pip check"
+    Run "uv audit --preview-features audit-command"
 } catch {
     Write-Warning "Step 1 failed: $_"
     $failures += "Step 1: Environment Audit"
@@ -37,8 +40,8 @@ try {
 # Step 2: Format & Style Gates
 Step 2 "Format & Style Gates"
 try {
-    Run "$venv\ruff.exe format --check src tests"
-    Run "$venv\ruff.exe check src tests"
+    Run "$venv/ruff$ext format --check src tests scripts"
+    Run "$venv/ruff$ext check src tests scripts"
 } catch {
     Write-Warning "Step 2 failed: $_"
     $failures += "Step 2: Format & Style"
@@ -47,7 +50,7 @@ try {
 # Step 3: Type Safety (Mypy)
 Step 3 "Type Safety Checks (Mypy)"
 try {
-    Run "$venv\mypy.exe src"
+    Run "$venv/mypy$ext src"
 } catch {
     Write-Warning "Step 3 failed (mypy may need installing: uv pip install mypy pandas-stubs): $_"
     $failures += "Step 3: Type Safety"
@@ -56,7 +59,7 @@ try {
 # Step 4: Full Test Suite
 Step 4 "Full Test Suite with Coverage"
 try {
-    Run "$venv\pytest.exe tests/ --cov=src --cov-report=term-missing"
+    Run "$venv/pytest$ext tests/ --cov=src --cov-report=term-missing"
 } catch {
     Write-Warning "Step 4 failed: $_"
     $failures += "Step 4: Test Suite"
@@ -65,7 +68,7 @@ try {
 # Step 5: Adversarial Boundary Audit
 Step 5 "Adversarial Boundary Audit (Hypothesis)"
 try {
-    Run "$venv\pytest.exe tests/test_adversarial_boundaries.py -v"
+    Run "$venv/pytest$ext tests/test_adversarial_boundaries.py -v"
 } catch {
     Write-Warning "Step 5 failed: $_"
     $failures += "Step 5: Adversarial Boundaries"
@@ -78,7 +81,7 @@ try {
     if ($LASTEXITCODE -ne 0) {
         throw "git not found on PATH. Run pre-commit from a terminal where 'git --version' works."
     }
-    Run "$venv\pre-commit.exe run --all-files"
+    Run "$venv/pre-commit$ext run --all-files"
 } catch {
     Write-Warning "Step 6 failed: $_"
     $failures += "Step 6: Pre-Commit Hooks"
@@ -87,7 +90,7 @@ try {
 # Step 7: Open Source & Open Science Standards Audit
 Step 7 "Open Source & Open Science Standards Audit (JOSS / FAIR)"
 try {
-    Run "$venv\python.exe scripts/verify_open_source_standards.py"
+    Run "$venv/python$ext scripts/verify_open_source_standards.py"
 } catch {
     Write-Warning "Step 7 failed: $_"
     $failures += "Step 7: Open Source Standards"
@@ -96,7 +99,7 @@ try {
 # Step 8: Solo Maintainer Guardrails & Anti-Bloat Audit
 Step 8 "Solo Maintainer Guardrails & Anti-Bloat Audit"
 try {
-    Run "$venv\python.exe scripts/audit_maintainer_guardrails.py"
+    Run "$venv/python$ext scripts/audit_maintainer_guardrails.py"
 } catch {
     Write-Warning "Step 8 failed: $_"
     $failures += "Step 8: Solo Maintainer Guardrails"

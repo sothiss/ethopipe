@@ -4,7 +4,7 @@ EthoPipe Agent Handoff & Code Companion Task Generator
 
 Generates state reports, telemetry summaries, and tailored prompts for:
 1. Interactive Cross-Model Handoffs (Claude, OpenAI o1/4o, Cursor, Antigravity)
-2. Autonomous Code Companions (Google Labs Jules, GitHub Copilot Workspace, Devin)
+2. Autonomous Coding Agents & Subagents (Antigravity subagents, Copilot, Claude Code)
 """
 
 from __future__ import annotations
@@ -106,7 +106,7 @@ def get_test_telemetry(project_root: Path, run_tests: bool = False) -> str:
 
 
 def copy_to_clipboard(text: str) -> bool:
-    """Attempt to copy text to system clipboard across WSL, Linux, macOS, and Windows."""
+    """Copy text to system clipboard across WSL, Linux, macOS, and Windows."""
     clipboard_cmds = [
         ["clip.exe"],
         ["wl-copy"],
@@ -358,15 +358,15 @@ def build_companion_brief(
     telemetry: dict[str, str],
     test_status: str,
 ) -> str:
-    """Build a deterministic brief strictly tailored for companions like Jules."""
+    """Build a deterministic brief tailored for autonomous coding agents."""
     pr_prefix_map = {
-        "bolt": "⚡ Bolt",
-        "sentinel": "🛡️ Sentinel",
-        "test": "test",
-        "feature": "feat",
-        "refactor": "refactor",
+        "bolt": "perf(pipeline)",
+        "sentinel": "fix(pipeline)",
+        "test": "test(pipeline)",
+        "feature": "feat(pipeline)",
+        "refactor": "refactor(pipeline)",
     }
-    pr_prefix = pr_prefix_map.get(companion_type.lower(), "feat")
+    pr_prefix = pr_prefix_map.get(companion_type.lower(), "feat(pipeline)")
     pr_title = f"{pr_prefix}: {objective}"
 
     allowed_files_formatted = (
@@ -376,37 +376,21 @@ def build_companion_brief(
     )
 
     journal_instruction = ""
-    if companion_type.lower() == "bolt":
+    if companion_type.lower() in {"bolt", "sentinel"}:
         journal_instruction = """
-### Mandatory Learning Journal Update (.jules/bolt.md)
-Upon completing this optimization, you MUST append a learning entry to
-`.jules/bolt.md`:
-```markdown
-## YYYY-MM-DD - <Topic>
-**Learning:** <Quantitative profiling or architectural discovery>
-**Action:** <Code change implemented (e.g. O(1) hash lookup, caching)>
-```
-"""
-    elif companion_type.lower() == "sentinel":
-        journal_instruction = """
-### Mandatory Learning Journal Update (.jules/sentinel.md)
-Upon completing this security hardening, you MUST append a learning entry to
-`.jules/sentinel.md`:
-```markdown
-## YYYY-MM-DD - <Topic>
-**Learning:** <Vulnerability, input length boundary, or DoS vector resolved>
-**Action:** <Pydantic validation or sanitization rule enforced>
-```
+### Milestone & Chronicle Update
+Record any significant performance or security boundary discovery in `JOURNEY.md`
+or `CHANGELOG.md` during PR review.
 """
 
     sep = "=" * 80
     return f"""{sep}
-CODE COMPANION (JULES) TASK BRIEF (PASTE INTO GITHUB ISSUE / COMPANION PROMPT)
+AUTONOMOUS AGENT TASK BRIEF (PASTE INTO GITHUB ISSUE / SUBAGENT PROMPT)
 {sep}
 
 # Task Brief: {pr_title}
 
-**Target Companion:** Google Labs Jules (`@google-labs-jules[bot]`) / Companion
+**Target Agent:** Autonomous Coding Agent / Subagent
 **Task Track:** `{companion_type.upper()}`
 **Target Branch:** `{telemetry["branch"]}`
 **Recommended PR Title:** `{pr_title}`
@@ -442,7 +426,7 @@ Do NOT modify project configuration files (`pyproject.toml`,
    `dwc:measurementValue`, `dwc:basisOfRecord`).
 4. **Linguistic De-biasing**: Discard subjective labels ('stubborn', 'spiteful')
    in favor of objective motor postures.
-5. **Zero Test Regressions**: Current baseline has 22 passing tests.
+5. **Zero Test Regressions**: Maintain the 43+ passing test baseline.
 
 ---
 
@@ -467,7 +451,7 @@ ruff check src tests
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Generate EthoPipe Agent Handoff and Code Companion Task Briefs."
+        description="Generate EthoPipe Agent Handoff and Autonomous Agent Briefs."
     )
     parser.add_argument(
         "--objective",
@@ -476,7 +460,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--completed",
-        default="- Verified pytest test baseline (22 passing tests)\n"
+        default="- Verified pytest test baseline (43+ passing tests)\n"
         "- Established workspace telemetry verification gates",
         help="Summary of work completed in the current session",
     )
@@ -499,18 +483,18 @@ def main() -> None:
     )
     parser.add_argument(
         "--notes",
-        default="Targeting seamless cross-agent switching between paid models.",
+        default="Targeting seamless cross-agent switching between models.",
         help="Additional instructions or directives",
     )
     parser.add_argument(
         "--target-agent",
-        default="Any (Claude Code / OpenAI o1/4o / Cursor / Antigravity)",
-        help="Designated incoming model/agent family (e.g. 'jules', 'claude')",
+        default="Any (Antigravity / Claude Code / OpenAI / Cursor)",
+        help="Designated incoming model/agent family (e.g. 'claude', 'antigravity')",
     )
     parser.add_argument(
         "--companion",
         action="store_true",
-        help="Generate a specialized autonomous task brief for Jules / code companions",
+        help="Generate a scoped autonomous task brief for background agents/subagents",
     )
     parser.add_argument(
         "--companion-type",
@@ -561,9 +545,9 @@ def main() -> None:
     file_timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
     is_companion = args.companion or args.target_agent.lower() in [
-        "jules",
         "companion",
         "code-companion",
+        "subagent",
     ]
 
     target_file_list = [f.strip() for f in args.target_files.split(",") if f.strip()]
@@ -577,7 +561,7 @@ def main() -> None:
         next_steps=args.next_steps,
         blockers=args.blockers,
         notes=args.notes,
-        target_agent="Google Labs Jules" if is_companion else args.target_agent,
+        target_agent="Autonomous Coding Agent" if is_companion else args.target_agent,
         telemetry=telemetry,
         test_status=test_status,
     )
@@ -615,12 +599,12 @@ def main() -> None:
         f.write(report_md)
     print(f"[✓] Primary Handoff Report written to: {handoff_path}")
 
-    # If companion, save to docs/JULES_TASK.md
+    # If companion, save to docs/COMPANION_TASK.md
     if is_companion:
-        jules_task_path = docs_dir / "JULES_TASK.md"
-        with open(jules_task_path, "w", encoding="utf-8") as f:
+        companion_task_path = docs_dir / "COMPANION_TASK.md"
+        with open(companion_task_path, "w", encoding="utf-8") as f:
             f.write(prompt_text)
-        print(f"[✓] Code Companion Task Brief written to: {jules_task_path}")
+        print(f"[✓] Autonomous Agent Task Brief written to: {companion_task_path}")
 
     # Save historical archive to docs/handoffs/HANDOFF_<timestamp>.md
     archive_dir = docs_dir / "handoffs"

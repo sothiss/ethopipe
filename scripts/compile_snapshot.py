@@ -27,19 +27,17 @@ def compile_snapshot():
     with open(snapshot_path, "w", encoding="utf-8") as out:
         out.write("# EthoPipe Codebase Snapshot\n\n")
         out.write(
-            "This file is auto-generated on git push. It aggregates all "
-            "configuration and first-party Python source files into a single "
-            "context file.\n\n"
+            "This file is generated locally via `scripts/compile_snapshot.py`. "
+            "It aggregates configuration and first-party Python source files into "
+            "a single context file.\n\n"
         )
 
+        blocks: list[str] = []
         for relative_path in files_to_include:
             full_path = os.path.join(project_root, relative_path)
             if not os.path.exists(full_path):
                 continue
 
-            out.write(f"## File: `{relative_path}`\n\n")
-
-            # Determine syntax highlighting language
             ext = os.path.splitext(relative_path)[1]
             lang = "python"
             if ext == ".toml":
@@ -49,21 +47,14 @@ def compile_snapshot():
             elif ext == ".txt":
                 lang = "text"
 
-            out.write(f"```{lang}\n")
             with open(full_path, encoding="utf-8") as f:
-                out.write(f.read())
-            if not file_ends_with_newline(full_path):
-                out.write("\n")
-            out.write("```\n\n")
+                body = f.read()
+            if not body.endswith("\n"):
+                body += "\n"
 
+            blocks.append(f"## File: `{relative_path}`\n\n```{lang}\n{body}```\n")
 
-def file_ends_with_newline(filepath):
-    try:
-        with open(filepath, "rb") as f:
-            f.seek(-1, os.SEEK_END)
-            return f.read(1) == b"\n"
-    except Exception:
-        return True
+        out.write("\n".join(blocks))
 
 
 if __name__ == "__main__":
