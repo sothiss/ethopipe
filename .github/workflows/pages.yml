@@ -3,6 +3,14 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: ["main"]
+    paths:
+      - "index.html"
+      - "CNAME"
+      - "logo*.svg"
+      - "assets/**"
+      - "the-project/**"
+      - "ethopipe/**"
+      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:

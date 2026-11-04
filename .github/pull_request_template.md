@@ -37,8 +37,6 @@ uv run python scripts/verify_open_source_standards.py
 - [ ] **Test Coverage**: Unit tests or Hypothesis property-based boundary tests added/updated; repository coverage remains >= 85%.
 - [ ] **Cognitive Complexity**: No Python file in `src/` exceeds 600 lines.
 - [ ] **Local QA**: `.\scripts\run_qa.ps1` (or local equivalent) executed with all steps passing.
-- [ ] **Journal & Documentation**:
-  - [ ] Recorded in `.jules/bolt.md` (if performance/vectorization)
-  - [ ] Recorded in `.jules/sentinel.md` (if security/hardening)
-  - [ ] Recorded in `CHANGELOG.md` (if user-facing feature/fix)
-  - [ ] Recorded in `JOURNEY.md` (if session milestone/architectural decision)
+- [ ] **Chronicle & Documentation**:
+  - [ ] Recorded in `CHANGELOG.md` (if user-facing feature, fix, or security update)
+  - [ ] Recorded in `JOURNEY.md` (if session milestone, optimization, or architectural decision)

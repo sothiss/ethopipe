@@ -24,7 +24,7 @@ body:
         - "Dependency Maintenance"
         - "Code Refactoring / Cognitive Budget"
         - "Documentation & Standards"
-        - "Code Companion Delegation (Jules / Autonomous Agent)"
+        - "Autonomous Agent / Subagent Task"
     validations:
       required: true
   - type: textarea
