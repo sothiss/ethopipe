@@ -55,8 +55,8 @@ This workflow enforces a **deterministic 5-gate pipeline** where each step must 
 - [ ] **Full 8-Step QA**: Run `.\scripts\run_qa.ps1` from PowerShell (or `python scripts/audit_maintainer_guardrails.py` + `pytest`).
 - [ ] **All 22+ Baseline Tests Pass**: Zero regressions.
 - [ ] **Journal / Changelog Logging**:
-  - If `bolt`: Append learning to `.jules/bolt.md`.
-  - If `sentinel`: Append learning to `.jules/sentinel.md`.
+  - If `bolt`: Record optimization milestone in `JOURNEY.md`.
+  - If `sentinel`: Record security hardening milestone in `JOURNEY.md`.
   - If `feat` / `refactor`: Append entry to `CHANGELOG.md`.
 
 ---

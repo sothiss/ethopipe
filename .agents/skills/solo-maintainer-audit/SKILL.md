@@ -32,8 +32,10 @@ As a solo project manager and research engineer, time and cognitive budget are f
    - `code-companion`
    - `agent-handoff`
    - `sync-node`
-   - `managing-python-dependencies`
-   - `accidental-data-loss-prevention`
+   - `idea-to-code`
+   - `project-state`
+   - `release-governance`
+   - `solo-maintainer-audit`
 2. **Cloud Enterprise Skill Quarantine**: Immediately flag and prune unrelated enterprise cloud skills (e.g. `bigquery-*`, `gcp-*`, `dbt-*`, `dataform-*`, `federate-lakehouse-*`). These distract AI models and trigger hallucinated enterprise architectures.
 
 ### Pillar 4: Architectural Minimalism (KISS & YAGNI)
@@ -76,7 +78,7 @@ Get-ChildItem .agents/skills -Directory | Where-Object { $_.Name -match "^(gcp|b
 ---
 
 ## The AI Agent Veto Protocol
-When pair-programming or delegating to code companions (Jules, Claude, Cursor, Antigravity):
+When pair-programming or delegating to AI agents (Antigravity, Claude, Cursor, Copilot):
 - **VETO**: Any prompt or PR proposing a secondary language (`npm`, `cargo`, `.js`, `.ts`).
 - **VETO**: Any new library without an explicit trade-off calculation demonstrating why `stdlib` or existing packages (`pydantic`/`pandas`) cannot accomplish the goal.
 - **VETO**: Any suggestion to deploy Kubernetes, Airflow DAGs, Kafka, or multi-cloud infrastructure.

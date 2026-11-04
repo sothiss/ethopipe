@@ -4,7 +4,7 @@ trigger: always_on
 
 # Solo Maintainer Guardrails & Anti-Bloat Invariants
 
-EthoPipe is maintained by a solo research software engineer. To ensure long-term sustainability, reliability, and low cognitive friction, all AI agents, code companions (Jules), and contributors MUST adhere to these non-negotiable guardrails:
+EthoPipe is maintained by a solo research software engineer. To ensure long-term sustainability, reliability, and low cognitive friction, all AI agents, autonomous code companions, and contributors MUST adhere to these non-negotiable guardrails:
 
 ## 1. Absolute Language Monoculture
 - **100% Python**: Core application code, data extraction, and pipelines must be written in Python (>= 3.11).
@@ -18,7 +18,7 @@ EthoPipe is maintained by a solo research software engineer. To ensure long-term
 
 ## 3. Skill & Plugin Hygiene
 - Do NOT install or copy enterprise cloud data platform skills (GCP Composer, BigQuery DTS, Dataproc Spark, Dataform, Lakehouse) into this repository's `.agents/skills`.
-- Workspace skills are strictly limited to core engineering quality (`code-quality`, `code-companion`, `agent-handoff`, `sync-node`, `managing-python-dependencies`).
+- Workspace skills are strictly limited to core engineering & solo-governance workflows (`agent-handoff`, `code-companion`, `code-quality`, `idea-to-code`, `project-state`, `release-governance`, `solo-maintainer-audit`, `sync-node`).
 
 ## 4. Architectural Simplicity (KISS & YAGNI)
 - Keep EthoPipe as a single modular Python service (FastAPI + Supabase).

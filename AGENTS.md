@@ -29,13 +29,13 @@ When switching active development between AI models (Antigravity/Gemini, Anthrop
 3. **Clipboard Prompt**: The formatted `<CONTEXT_HANDOFF>` prompt block is automatically copied to your clipboard to paste into the incoming model session.
 4. **Workflow Documentation**: See `docs/AGENT_HANDOFF_WORKFLOW.md` for complete cross-agent instructions.
 
-## Code Companions (Jules & Autonomous Agents)
+## Autonomous Code Companions & Subagents
 
-When delegating tasks to autonomous code companions (e.g., Google Labs Jules `@google-labs-jules[bot]`):
+When delegating scoped tasks to background coding agents or subagents (e.g., Antigravity subagents, GitHub Copilot coding agent, Claude Code):
 
-1. **Generate Task Brief**: Run `.\scripts\handoff.ps1 -Jules -CompanionType bolt -Objective "<Objective>" -TargetFiles "<Files>"` (or `-CompanionType sentinel`).
-2. **Review Brief**: Inspect `docs/JULES_TASK.md` and paste the clipboard prompt into the GitHub Issue or companion prompt.
-3. **Journal Maintenance**: Ensure the companion updates `.jules/bolt.md` (for performance) or `.jules/sentinel.md` (for security).
+1. **Generate Task Brief**: Run `.\scripts\handoff.ps1 -Companion -CompanionType bolt -Objective "<Objective>" -TargetFiles "<Files>"` (or `-CompanionType sentinel`).
+2. **Review Brief**: Inspect `docs/COMPANION_TASK.md` and paste the clipboard prompt into the GitHub Issue or agent prompt.
+3. **Chronicle Maintenance**: Record verified performance or security learnings in `JOURNEY.md` or `CHANGELOG.md`.
 4. **Documentation**: See `docs/CODE_COMPANION_WORKFLOW.md` for full instructions.
 
 ## Solo Maintainer Guardrails & Anti-Bloat Policy
@@ -67,7 +67,8 @@ Every AI coding assistant (Gemini, Claude, GPT, Cursor) working in EthoPipe MUST
    - Exact files changed with clickable links (`file:///...`).
    - Architectural thinking and AI cognitive journey (key decisions, trade-offs, constraints).
    - Verification proof (executed test commands and passing assertions).
-3. **Rule Definition**: See `.agents/rules/walkthrough-and-tasks.md`.
+3. **In-Repo Persistence**: Archive completed session tasks and walkthroughs to `docs/walkthroughs/` via `.\scripts\journey.ps1 -Archive ...` (because IDE `brain/` artifacts are machine-local and untracked by Git).
+4. **Rule Definition**: See `.agents/rules/walkthrough-and-tasks.md`.
 
 ## Session Journey Logging (AI Evolution & Architectural Decisions)
 
