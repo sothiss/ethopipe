@@ -1,9 +1,9 @@
 # DESIGN.md — The Transparency Project & EthoPipe Design System
 
-> **Canonical Web Domain:** https://thetransparencyproject.me/  
-> **Documentation Portal:** https://docs.thetransparencyproject.me  
-> **System Version:** `v0.2.0` · **Appearance Mode:** Strict Dark (`class="dark"`)  
-> **Principal Systems Architect:** Alice Severi Gonçalves ([ORCID: 0009-0003-0048-8982](https://orcid.org/0009-0003-0048-8982))  
+> **Canonical Web Domain:** https://thetransparencyproject.me/
+> **Documentation Portal:** https://docs.thetransparencyproject.me
+> **System Version:** `v0.2.0` · **Appearance Mode:** Strict Dark (`class="dark"`)
+> **Principal Systems Architect:** Alice Severi Gonçalves ([ORCID: 0009-0003-0048-8982](https://orcid.org/0009-0003-0048-8982))
 > **Permanent Software Deposit:** [DOI: 10.5281/zenodo.21211371](https://doi.org/10.5281/zenodo.21211371)
 
 ---

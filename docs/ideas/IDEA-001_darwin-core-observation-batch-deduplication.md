@@ -36,8 +36,8 @@
 ### Gate 5: QA & Journal Verification
 - [ ] **All 8 Steps Pass**: Run `.\scripts\run_qa.ps1` with 0 failures.
 - [ ] **Journal Updated**:
-  - If `bolt`: Append learning entry to `.jules/bolt.md`.
-  - If `sentinel`: Append defensive entry to `.jules/sentinel.md`.
+  - If `bolt`: Record optimization milestone in `JOURNEY.md`.
+  - If `sentinel`: Record defensive hardening milestone in `JOURNEY.md`.
   - If `feat` / `refactor`: Update `CHANGELOG.md`.
 
 ---

@@ -18,11 +18,12 @@ Welcome to the central documentation index for **EthoPipe**, a deterministic, op
 * **[Open Science Standards](OPEN_SOURCE_STANDARDS.md)**: JOSS, FAIR principles, and OSI licensing compliance.
 * **[Solo Maintainer Audit](SOLO_MAINTAINER_AUDIT.md)**: Anti-bloat guardrails, language monoculture (pure Python), and dependency budget (<= 8).
 * **[Research & Architecture Journal](../JOURNEY.md)**: Chronological architectural evolution and AI reasoning tracking since 2025.
+* **[AI Task & Walkthrough Archive](walkthroughs/README.md)**: Version-controlled session task checklists and walkthrough snapshots tracking Gemini & Antigravity evolution.
 
 ### 3. Engineering Workflows
 * **[Ideas & Task Board](IDEAS_BOARD.md)**: The 5-gate pipeline (Idea -> Spec -> Test -> Code -> Done) tracking active proposals.
 * **[Cross-Model Agent Handoff](AGENT_HANDOFF_WORKFLOW.md)**: Lossless telemetry and state synchronization across AI models.
-* **[Code Companion Workflow](CODE_COMPANION_WORKFLOW.md)**: Delegation guidelines and journal maintenance for autonomous bots (Jules).
+* **[Code Companion Workflow](CODE_COMPANION_WORKFLOW.md)**: Scoped task briefs and invariant guardrails for autonomous coding agents and subagents.
 
 ### 4. Releases
 * **[Releases Directory](releases/README.md)**: Versioned changelogs and release notes.

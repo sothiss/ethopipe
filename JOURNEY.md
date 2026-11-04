@@ -210,6 +210,21 @@ To ensure frictionless tracking at the end of every engineering session, use thi
 
 ---
 
+### Entry 013: Solo-Maintainer Git Policy, Jules Sunset, Orthogonal CI & Walkthrough Archiving
+* **Date & Model:** 2026-11-04 | Gemini 4 (Medium) | Human PI: Alice Severi Gonçalves
+* **Hurdle Type & Problem Space:** Solo-Owner CI/Branching Friction, Bot Deprecation & Ephemeral IDE Artifacts
+* **The Technical Challenge:** Multi-maintainer PR/branch rules and overlapping GitHub Actions wasted CI minutes and solo cognitive bandwidth; Google Labs Jules required sunsetting across skills/scripts; and Antigravity IDE stored task/walkthrough artifacts only in machine-local AppData outside Git.
+* **AI Architectural Reasoning & Cognitive Evolution:**
+  Evaluated every workflow and rule against the Solo Maintainer Charter: replaced rigid branch-only commits with a trunk-friendly solo policy (direct-to-main for routine verified commits, branches for high-risk src/ refactors and autonomous subagents), made CI/Pages triggers orthogonal via path filters, consolidated redundant journals into JOURNEY.md, and extended manage_journey.py to persist portable walkthrough snapshots in docs/walkthroughs/ without adding extra scripts.
+* **The Architectural Pivot & Implemented Solution:**
+  Added .agents/rules/git-commit-pr.md, removed all Jules/.jules artifacts and redundant GitHub workflows (label.yml, compile-context.yml, CODEOWNERS, .github/agents/), halved CI VM jobs with paths-ignore, fixed state history date parsing, enabled always_on on walkthrough-and-tasks.md, and added docs/walkthroughs/ archiving.
+* **Quantitative & Invariant Milestones:** 0 active Jules references; Ruff, Mypy, YAML, Idea Audit, and Strict Solo Maintainer Guardrails 100% passing; Entry 013 cross-linked to permanent walkthrough archive.
+* **Gemini / AI Evolutionary Note:**
+  Demonstrates Gemini 4 inside Google Antigravity IDE bridging ephemeral IDE-local brain/ artifacts into reproducible, version-controlled scientific provenance while actively pruning workflow bloat.
+* **Session Task & Walkthrough Archive:** [WALKTHROUGH_20261104_180142_solo-governance-jules-sunset-walkthrough-archivi.md](docs/walkthroughs/WALKTHROUGH_20261104_180142_solo-governance-jules-sunset-walkthrough-archivi.md)
+
+---
+
 ## 🚀 Active Trajectory & Next Micro-Tasks
 - [x] Establish Solo Maintainer Anti-Bloat Charter and automated guardrail auditor (`audit_maintainer_guardrails.py`).
 - [x] Implement 5-Gate Idea-to-Code pipeline and automated Kanban board generator (`manage_ideas.py`, `idea.ps1`).
