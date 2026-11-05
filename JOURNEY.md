@@ -240,6 +240,21 @@ To ensure frictionless tracking at the end of every engineering session, use thi
 
 ---
 
+### Entry 015: Nocturne Ethology Brand Logo, Emblem & Icon Asset Synchronization
+* **Date & Model:** 2026-11-05 | Gemini | Human PI: Alice Severi Gonçalves
+* **Hurdle Type & Problem Space:** Legacy Brand Asset Replacement & Vector Decomposition
+* **The Technical Challenge:** Existing assets/brand-mark.svg, logo.svg, logo_transparent.svg, and assets/ PNGs still contained legacy 3-pane circuit-board visuals, while the new Stitch Nocturne Ethology export packaged the canine medallion and wordmark in a combined 2752x1536 vector SVG alongside raster icons.
+* **AI Architectural Reasoning & Cognitive Evolution:**
+  Parsed the 76 SVG paths by coordinate bounding boxes to cleanly isolate the 25 canine medallion paths (xmax < 1050) from the 50 wordmark paths (xmin > 1113) and background rect, backing the medallion with an exact obsidian ellipse so standalone emblems have a 100% transparent exterior.
+* **The Architectural Pivot & Implemented Solution:**
+  Updated assets/brand-mark.svg, assets/portal-logo.svg, logo.svg, logo_transparent.svg, and assets/brand-logo-lockup.svg; added favicon.png, apple-touch-icon.png, brand-logo-lockup.png, and brand-logo-horizontal.png; deleted 7 obsolete circuit-board files; and wired all 4 HTML routes and DESIGN.md.
+* **Quantitative & Invariant Milestones:** 27/27 Pytest tests passing; Solo Maintainer Guardrails Audit 100% passing; 7 obsolete legacy assets purged; 100% of web views and favicons unified on the Nocturne Ethology canine medallion.
+* **Gemini / AI Evolutionary Note:**
+  Illustrates algorithmic SVG path bounding-box segmentation in pure Python to extract transparent vector emblems without external graphics dependencies.
+* **Session Task & Walkthrough Archive:** [WALKTHROUGH_20261105_194233_nocturne-ethology-brand-logo-emblem-icon-asset-s.md](docs/walkthroughs/WALKTHROUGH_20261105_194233_nocturne-ethology-brand-logo-emblem-icon-asset-s.md)
+
+---
+
 ## 🚀 Active Trajectory & Next Micro-Tasks
 - [x] Establish Solo Maintainer Anti-Bloat Charter and automated guardrail auditor (`audit_maintainer_guardrails.py`).
 - [x] Implement 5-Gate Idea-to-Code pipeline and automated Kanban board generator (`manage_ideas.py`, `idea.ps1`).

@@ -193,9 +193,9 @@ flowchart LR
 ## 6. Component Specifications & Brand Assets
 
 ### 6.1 Brand Marks & Lockups
-- **Primary Portal Vector (`/assets/portal-logo.svg`):** `160×40` SVG lockup featuring an outer dashed telemetry orbit (`r="14"`, `stroke="#e6e2d8"`, `stroke-dasharray="2 3"`, `opacity=".4"`), solid inner ring (`r="8"`), upper kinematic arc, solid core node (`r="2.5"`), and uppercase `THE TRANSPARENCY PROJECT` wordmark (`#f5f2eb`, `letter-spacing: 0.08em`).
-- **Studio Hub Minimal Beacon:** `32×32px` (`w-8 h-8`) circle (`rounded-full border border-white/10 bg-surface-raised`) housing an `8×8px` (`w-2 h-2`) `bg-citation-amber` core dot; border transitions to `citation-amber/40` on hover.
-- **Sculptural Emblem (`/assets/brand-mark.svg`):** Detailed warm bronze, parchment, and umber vector emblem reserved for high-resolution brand lockups.
+- **Canine Medallion Emblem (`/assets/brand-mark.svg`, `/assets/portal-logo.svg`):** Standalone circular vector medallion featuring the warm ivory canine profile (`#eae0d7`), biotelemetry harness, dark charcoal field (`#2b2a30`), and slate outer ring (`#56555b`). Embedded in all navigation headers (`32×32px` / `w-8 h-8 rounded-full`) and global footers (`28×28px` / `w-7 h-7`).
+- **Full Brand Lockups (`/logo.svg`, `/logo_transparent.svg`, `/assets/brand-logo-lockup.svg`, `/assets/brand-logo-lockup.png`, `/assets/brand-logo-horizontal.png`):** Official Nocturne Ethology medallion and editorial `Newsreader` wordmark lockups (`The Transparency Project · ETHOLOGY CORE`) for repository branding and OpenGraph social cards (`og:image`).
+- **App Favicon & iOS Web Clip Icons (`/assets/favicon.png`, `/assets/apple-touch-icon.png`):** High-resolution `1024×1024` raster icons paired with `/assets/brand-mark.svg` vector favicon.
 
 ### 6.2 Navigation Patterns
 - **Studio Hub Floating Pill:** Centered `bg-surface-raised/85 backdrop-blur-xl border border-white/10 px-6 py-2 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.6)]`. Links use `11px` `Inter` uppercase with `tracking-ultra` (`0.22em`), transitioning from `text-muted` to `text-primary` (and `citation-amber` for external Zenodo Archive).
